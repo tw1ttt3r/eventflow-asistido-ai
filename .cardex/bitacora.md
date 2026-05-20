@@ -32,9 +32,9 @@ Registro de metadata por prompt ejecutado con el agente.
 | Criterio | Detalle |
 |----------|---------|
 | Archivos afectados | ~40+ creados o modificados |
-| Objetivo | Scaffold Angular 21 en raíz con pnpm, Vite/esbuild, PWA y secrets |
+| Objetivo | Scaffold Angular 21 en raíz con pnpm, Vite/esbuild, PWA y secretos |
 | Impacto al proyecto | **Total** — de repo casi vacío a aplicación Angular completa |
-| Funcionalidad afectada | Build, dev server (Vite), tests (Vitest), PWA, environments, secrets (`NG_APP_*`) |
+| Funcionalidad afectada | Build, dev server (Vite), tests (Vitest), PWA, entornos, secretos (`NG_APP_*`) |
 
 ### Desglose de tiempo (comandos)
 
@@ -53,8 +53,8 @@ Registro de metadata por prompt ejecutado con el agente.
 - Angular **21.2.x** estable, **pnpm**, código fuente en **raíz**
 - Builder `@angular/build:application` (esbuild + dev server **Vite**)
 - **PWA**: `@angular/pwa`, `ngsw-config.json`, `manifest.webmanifest`, iconos
-- **Secrets**: `.env.example`, `scripts/with-env.mjs`, `APP_CONFIG`, variables `NG_APP_*`
-- **Environments**: `src/environments/` + `fileReplacements` en `angular.json`
+- **Secretos**: `.env.example`, `scripts/with-env.mjs`, `APP_CONFIG`, variables `NG_APP_*`
+- **Entornos**: `src/environments/` + `fileReplacements` en `angular.json`
 - Build y tests verificados en el mismo turno
 
 ### Ajustes requeridos
@@ -93,7 +93,7 @@ Registro de metadata por prompt ejecutado con el agente.
 
 - Regla `.cursor/rules/bitacora.mdc` con `alwaysApply: true`
 - Nota de persistencia en encabezado de `bitacora.md`
-- Instrucciones: commitear `.cardex/` y `.cursor/rules/` para historial en otros equipos
+- Instrucciones: hacer commit de `.cardex/` y `.cursor/rules/` para historial en otros equipos
 
 ### Ajustes requeridos
 
@@ -135,9 +135,317 @@ Registro de metadata por prompt ejecutado con el agente.
 ### Ajustes requeridos
 
 - [ ] En cada equipo: seleccionar **GPT-5.3 Codex** en el selector del Agent (Cursor no fija modelo solo con reglas)
-- [ ] Commitear `AGENTS.md` y `.cursor/rules/agent-model.mdc`
+- [ ] Hacer commit de `AGENTS.md` y `.cursor/rules/agent-model.mdc`
 - [ ] Opcional: modelo por defecto en [Cloud Agents dashboard](https://cursor.com/dashboard/cloud-agents) para agentes en la nube
 
 ---
 
-*Última actualización del archivo: 2026-05-20 02:23:39 CST*
+## Entrada #004 — Tailwind CSS v4
+
+| Campo | Valor |
+|-------|--------|
+| **Fecha de ejecución** | 2026-05-20 |
+| **Hora de ejecución** | 10:06:50 CST (inicio) — 10:07:29 CST (build OK) |
+| **Tiempo total de ejecución** | ~39 s |
+| **Modelo de agente** | `gpt-5.3-codex` |
+| **Nivel de complejidad** | **Media** |
+
+### Prompt
+
+> Configura tailwind v4 en el proyecto
+
+### Criterios de complejidad
+
+| Criterio | Detalle |
+|----------|---------|
+| Archivos afectados | 5 (`package.json`, `pnpm-lock.yaml`, `.postcssrc.json`, `src/styles.scss`, `README.md`) |
+| Objetivo | Integrar Tailwind CSS 4.x con PostCSS en Angular 21 |
+| Impacto al proyecto | Pipeline de estilos global; utilidades disponibles en plantillas |
+| Funcionalidad afectada | Build CSS, estilos de componentes y plantillas |
+
+### Entregables
+
+- `tailwindcss@4.3.0`, `@tailwindcss/postcss@4.3.0`, `postcss@8.5.15`
+- `.postcssrc.json` con plugin PostCSS
+- `src/styles.scss` con `@use 'tailwindcss'` y `@source` para Angular
+- `pnpm build` verificado (bundle `styles-*.css` ~4.6 kB)
+
+### Ajustes requeridos
+
+- [ ] Usar clases Tailwind en componentes y retirar estilos placeholder del scaffold si ya no se necesitan
+- [ ] Hacer commit de cambios de dependencias y configuración
+
+---
+
+## Entrada #005 — Refactor Tailwind v4 sin PostCSS
+
+| Campo | Valor |
+|-------|--------|
+| **Fecha de ejecución** | 2026-05-20 |
+| **Hora de ejecución** | 10:11:54 – 10:12:55 CST |
+| **Tiempo total de ejecución** | ~70 s |
+| **Modelo de agente** | `gpt-5.3-codex` |
+| **Nivel de complejidad** | **Media** |
+
+### Prompt
+
+> Validar si PostCSS es necesario con Tailwind v4; refactorizar configuración si no lo es
+
+### Criterios de complejidad
+
+| Criterio | Detalle |
+|----------|---------|
+| Archivos afectados | 4 (`package.json`, `pnpm-lock.yaml`, `src/styles.scss`, `README.md`) + eliminado `.postcssrc.json` |
+| Objetivo | Simplificar stack eliminando PostCSS explícito |
+| Impacto al proyecto | Pipeline CSS; solo `tailwindcss` como dependencia directa |
+| Funcionalidad afectada | Build y estilos globales |
+
+### Hallazgos
+
+- Con `@use 'tailwindcss'`, Angular 21 procesa Tailwind v4 **sin** `.postcssrc.json`
+- Eliminados `@tailwindcss/postcss` y `postcss` del proyecto; build y tests OK
+- `@tailwindcss/vite` no aplica a `ng build` (esbuild); PostCSS era opcional, no obligatorio
+
+### Entregables
+
+- Eliminado `.postcssrc.json`
+- `devDependencies`: solo `tailwindcss@4.3.0`
+- `src/styles.scss`: `@use 'tailwindcss'` + `@source`
+
+### Ajustes requeridos
+
+- [ ] Si el CSS global crece mucho, valorar volver a `@tailwindcss/postcss` para tree-shaking más agresivo (~4 kB vs ~21 kB en prueba local)
+
+---
+
+## Entrada #006 — Pantalla “en desarrollo” con Tailwind
+
+| Campo | Valor |
+|-------|--------|
+| **Fecha de ejecución** | 2026-05-20 |
+| **Hora de ejecución** | 10:16:46 CST |
+| **Tiempo total de ejecución** | ~12 s |
+| **Modelo de agente** | `gpt-5.3-codex` |
+| **Nivel de complejidad** | **Media** |
+
+### Prompt
+
+> Modificar app component para mostrar información de aplicación en desarrollo, usando Tailwind
+
+### Criterios de complejidad
+
+| Criterio | Detalle |
+|----------|---------|
+| Archivos afectados | 3 (`app.ts`, `app.html`, `app.spec.ts`); eliminado `app.scss` |
+| Objetivo | Reemplazar placeholder del scaffold por UI de estado en desarrollo |
+| Impacto al proyecto | Componente raíz y primera experiencia visual |
+| Funcionalidad afectada | App shell, integración `APP_CONFIG`, estilos Tailwind |
+
+### Entregables
+
+- UI con badge “En desarrollo”, nombre de app, URL de API, estado de secretos, stack técnico
+- Estilos 100 % Tailwind (sin CSS custom en componente)
+- `OnPush`, `inject(APP_CONFIG)`, control flow nativo `@if` / `@for`
+- Tests actualizados; build y Vitest OK
+
+### Ajustes requeridos
+
+- Ninguno
+
+---
+
+## Entrada #007 — Pipeline SemVer automático
+
+| Campo | Valor |
+|-------|--------|
+| **Fecha de ejecución** | 2026-05-20 |
+| **Hora de ejecución** | 10:23:53 CST |
+| **Tiempo total de ejecución** | ~90 s |
+| **Modelo de agente** | `gpt-5.3-codex` |
+| **Nivel de complejidad** | **Alta** |
+
+### Prompt
+
+> Semantic Versioning 2.0.0: patch por commit, minor por rama, major manual al cerrar módulo; pipeline automático
+
+### Criterios de complejidad
+
+| Criterio | Detalle |
+|----------|---------|
+| Archivos afectados | ~15 (scripts, husky, version state, environments, app, README, package.json) |
+| Objetivo | Automatizar versionado según reglas custom SemVer |
+| Impacto al proyecto | Flujo Git, package.json, UI, builds |
+| Funcionalidad afectada | Commits, releases, pantalla dev |
+
+### Entregables
+
+- `scripts/version-bump.mjs` + hook `.husky/pre-commit`
+- `.cardex/version.json` (estado) y `.cardex/VERSIONING.md` (docs)
+- Comandos: `version:major`, `version:dry-run`, `version:bump`
+- Sincronización: `package.json`, `src/version.ts`, entornos, badge en app
+- Husky 9 en `prepare`
+
+### Ajustes requeridos
+
+- [ ] Ejecutar `pnpm install` en cada equipo para activar hooks
+- [ ] Al cerrar módulo: `pnpm version:major -- --module=nombre-del-modulo` y commit
+
+---
+
+## Entrada #008 — Fix Tailwind: utilidades sin estilos
+
+| Campo | Valor |
+|-------|--------|
+| **Fecha de ejecución** | 2026-05-20 |
+| **Hora de ejecución** | 10:30:54 CST |
+| **Tiempo total de ejecución** | ~25 s |
+| **Modelo de agente** | `gpt-5.3-codex` |
+| **Nivel de complejidad** | **Media** |
+
+### Prompt
+
+> No veo los estilos aplicados
+
+### Causa
+
+Sin `@tailwindcss/postcss`, Angular solo compilaba tema/base de Tailwind; **no generaba utilidades** (`.min-h-screen`, `.bg-slate-950`, etc.).
+
+### Entregables
+
+- Restaurado `.postcssrc.json` + `@tailwindcss/postcss` + `postcss`
+- `@source` en `styles.scss` apuntando a `./**/*.{html,ts}`
+- Verificado: utilidades presentes en `styles.css` del build
+
+### Ajustes requeridos
+
+- [ ] Reiniciar `pnpm start` (Ctrl+C y volver a ejecutar)
+
+---
+
+## Entrada #009 — Versión en manifest PWA
+
+| Campo | Valor |
+|-------|--------|
+| **Fecha de ejecución** | 2026-05-20 |
+| **Hora de ejecución** | 10:33:24 CST |
+| **Tiempo total de ejecución** | ~8 s |
+| **Modelo de agente** | `gpt-5.3-codex` |
+| **Nivel de complejidad** | **Baja** |
+
+### Prompt
+
+> La versión debe verse igual en el manifest (PWA)
+
+### Entregables
+
+- `syncManifest()` en `scripts/version-bump.mjs`
+- `public/manifest.webmanifest`: `version`, `name`, `description`, colores PWA
+- Manifest incluido en `git add` del hook pre-commit
+
+---
+
+## Entrada #010 — Plantilla y estilos en línea en `@Component`
+
+| Campo | Valor |
+|-------|--------|
+| **Fecha de ejecución** | 2026-05-20 |
+| **Hora de ejecución** | 10:44:24 CST |
+| **Tiempo total de ejecución** | ~15 s |
+| **Modelo de agente** | `gpt-5.3-codex` |
+| **Nivel de complejidad** | **Baja** |
+
+### Prompt
+
+> El template y los styles (si se generarán) deben vivir dentro del decorador del componente; esto debe ser una regla.
+
+### Entregables
+
+- Regla `.cursor/rules/component-inline.mdc` (`alwaysApply: true`)
+- Schematics en `angular.json`: `inlineTemplate` + `inlineStyle` por defecto
+- `src/app/app.ts`: plantilla en línea; eliminado `src/app/app.html`
+- `AGENTS.md`: convención documentada
+- Tests (2) y `pnpm build:dev` OK
+
+### Ajustes requeridos
+
+- Ninguno
+
+---
+
+## Entrada #011 — Idioma consistente en documentación
+
+| Campo | Valor |
+|-------|--------|
+| **Fecha de ejecución** | 2026-05-20 |
+| **Hora de ejecución** | ~10:50 CST |
+| **Tiempo total de ejecución** | ~20 s |
+| **Modelo de agente** | `gpt-5.3-codex` |
+| **Nivel de complejidad** | **Baja** |
+
+### Prompt
+
+> Ser concisos en el idioma de los archivos md: español completo o inglés completo; evitar spanglish.
+
+### Entregables
+
+- `README.md`, `AGENTS.md`, `.cardex/VERSIONING.md`, `.cardex/bitacora.md`: español unificado
+- `.cursor/rules/component-inline.mdc`, `bitacora.mdc`: español
+- `.cursor/rules/cursor.mdc`: sección de plantillas en inglés (archivo en inglés)
+- Convención de idioma en `AGENTS.md`
+
+### Ajustes requeridos
+
+- Ninguno
+
+---
+
+## Entrada #012 — Jerga técnica en inglés
+
+| Campo | Valor |
+|-------|--------|
+| **Fecha de ejecución** | 2026-05-20 |
+| **Hora de ejecución** | ~10:52 CST |
+| **Tiempo total de ejecución** | ~10 s |
+| **Modelo de agente** | `gpt-5.3-codex` |
+| **Nivel de complejidad** | **Baja** |
+
+### Prompt
+
+> Algunos términos pueden quedarse en inglés por ser jerga del área (runtime, scaffold, etc.).
+
+### Entregables
+
+- Convención ampliada en `AGENTS.md` (lista de jerga permitida)
+- Revertidos términos forzados al español en `README.md`, `.cardex/bitacora.md`, `VERSIONING.md`, `bitacora.mdc`
+
+### Ajustes requeridos
+
+- Ninguno
+
+---
+
+## Entrada #013 — Husky: quitar líneas deprecadas en pre-commit
+
+| Campo | Valor |
+|-------|--------|
+| **Fecha de ejecución** | 2026-05-20 |
+| **Hora de ejecución** | 11:30:04 CST |
+| **Tiempo total de ejecución** | ~5 s |
+| **Modelo de agente** | `gpt-5.3-codex` |
+| **Nivel de complejidad** | **Baja** |
+
+### Prompt
+
+> Aviso husky DEPRECATED: quitar `#!/usr/bin/env sh` y `. "$(dirname -- "$0")/_/husky.sh"` de `.husky/pre-commit` (fallará en v10).
+
+### Entregables
+
+- `.husky/pre-commit` reducido a `node scripts/version-bump.mjs` (formato Husky 9+)
+
+### Ajustes requeridos
+
+- [ ] Hacer commit del cambio en `.husky/pre-commit` (el commit del workflow ya pasó con el aviso)
+
+---
+
+*Última actualización del archivo: 2026-05-20 11:30:04 CST*
