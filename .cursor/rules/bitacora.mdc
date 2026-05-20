@@ -45,4 +45,4 @@ Cierra la respuesta con la sección **## Reporte de ejecución** (misma metadata
 
 ## Persistencia entre equipos
 
-`.cardex/bitacora.md` y esta regla viven en el **repositorio Git**. Tras `git clone` o `git pull` en otro equipo, el bitacoreo continúa automáticamente. **Commitea** `.cardex/` y `.cursor/rules/bitacora.mdc` para no perder historial.
+`.cardex/bitacora.md` y esta regla viven en el **repositorio Git**. Tras `git clone` o `git pull` en otro equipo, el bitacoreo continúa automáticamente. Haz commit de `.cardex/` y `.cursor/rules/bitacora.mdc` para no perder historial.

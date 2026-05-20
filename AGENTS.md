@@ -8,10 +8,12 @@ En Cursor: abre el selector de modelo del Agent y elige **GPT-5.3 Codex** antes 
 
 ## Stack
 
-- Angular 21, pnpm, Vite (dev server), PWA, secrets vía `NG_APP_*`
+- Angular 21, pnpm, Vite (dev server), PWA, secretos vía `NG_APP_*`
 - Bitácora: `.cardex/bitacora.md` (actualizar al finalizar cada prompt con trabajo)
 
 ## Convenciones
 
 - Reglas detalladas en `.cursor/rules/`
-- No commitear `.env`; usar `.env.example` como plantilla
+- **Idioma:** redacción en español; sin spanglish en la misma frase. Se mantienen en inglés la jerga habitual (p. ej. `runtime`, `scaffold`, `build`, `bump`, `stack`, `dev server`, `metadata`, `dry-run`, `commit`, `hook`). Nombres de API, CLI y productos en su forma original. Archivos en inglés (`cursor.mdc`) íntegramente en inglés.
+- **Plantilla y `styles` siempre en línea** en `@Component` (`template` / `styles`). Prohibido `templateUrl` y `styleUrl`. Ver `.cursor/rules/component-inline.mdc`.
+- No hagas commit de `.env`; usa `.env.example` como plantilla

@@ -1,0 +1,52 @@
+---
+description: Plantilla y estilos obligatoriamente en línea en el decorador @Component
+alwaysApply: true
+---
+
+# Componentes — plantilla y estilos en línea
+
+## Regla obligatoria
+
+La **plantilla** y los **estilos** del componente deben vivir **dentro del decorador** `@Component`, no en archivos externos.
+
+### Permitido
+
+```typescript
+@Component({
+  selector: 'app-example',
+  template: `
+    <section class="p-4">...</section>
+  `,
+  styles: `
+    :host { display: block; }
+  `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+export class Example {}
+```
+
+- Usar la propiedad `template` (nunca `templateUrl`).
+- Usar la propiedad `styles` solo si hace falta CSS/SCSS propio del componente (nunca `styleUrl` / `styleUrls`).
+- Si el proyecto usa Tailwind, priorizar clases en la plantilla (`template`) y omitir `styles` cuando no haya estilos específicos del host.
+
+### Prohibido
+
+- `templateUrl: './foo.html'`
+- `styleUrl: './foo.scss'`
+- `styleUrls: [...]`
+- Crear `foo.html`, `foo.scss` o `foo.css` junto al componente para la plantilla o los estilos
+
+### Generación con Angular CLI
+
+Al generar componentes, usar siempre plantilla y estilos en línea:
+
+```bash
+ng generate component nombre --inline-template --inline-style
+```
+
+El `angular.json` del proyecto ya define `inlineTemplate` e `inlineStyle` por defecto en schematics.
+
+### Excepciones
+
+- `src/styles.scss` global (Tailwind / estilos de aplicación).
+- Librerías o assets que no sean plantilla de un `@Component`.
