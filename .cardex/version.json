@@ -1,0 +1,127 @@
+{
+  "major": 0,
+  "minor": 0,
+  "patch": 13,
+  "knownBranches": [
+    "tailwind"
+  ],
+  "history": [
+    {
+      "at": "2026-05-20T16:23:31.817Z",
+      "from": "0.0.0",
+      "to": "0.0.1",
+      "branch": "tailwind",
+      "reason": "patch",
+      "detail": "primera rama registrada (tailwind)",
+      "sha": "c51ba08"
+    },
+    {
+      "at": "2026-05-20T16:55:10.736Z",
+      "from": "0.0.1",
+      "to": "0.0.2",
+      "branch": "tailwind",
+      "reason": "patch",
+      "detail": "commit en rama (tailwind)",
+      "sha": "c51ba08"
+    },
+    {
+      "at": "2026-05-20T16:57:48.928Z",
+      "from": "0.0.2",
+      "to": "0.0.3",
+      "branch": "tailwind",
+      "reason": "patch",
+      "detail": "commit en rama (tailwind)",
+      "sha": "720d3cf"
+    },
+    {
+      "at": "2026-05-20T16:59:18.405Z",
+      "from": "0.0.3",
+      "to": "0.0.4",
+      "branch": "tailwind",
+      "reason": "patch",
+      "detail": "commit en rama (tailwind)",
+      "sha": "ba0f59f"
+    },
+    {
+      "at": "2026-05-20T16:59:38.674Z",
+      "from": "0.0.4",
+      "to": "0.0.5",
+      "branch": "tailwind",
+      "reason": "patch",
+      "detail": "commit en rama (tailwind)",
+      "sha": "8e596dc"
+    },
+    {
+      "at": "2026-05-20T17:00:02.914Z",
+      "from": "0.0.5",
+      "to": "0.0.6",
+      "branch": "tailwind",
+      "reason": "patch",
+      "detail": "commit en rama (tailwind)",
+      "sha": "7ef6c4b"
+    },
+    {
+      "at": "2026-05-20T17:00:25.150Z",
+      "from": "0.0.6",
+      "to": "0.0.7",
+      "branch": "tailwind",
+      "reason": "patch",
+      "detail": "commit en rama (tailwind)",
+      "sha": "ba3ffa7"
+    },
+    {
+      "at": "2026-05-20T17:01:53.193Z",
+      "from": "0.0.7",
+      "to": "0.0.8",
+      "branch": "tailwind",
+      "reason": "patch",
+      "detail": "commit en rama (tailwind)",
+      "sha": "30d8173"
+    },
+    {
+      "at": "2026-05-20T17:02:11.930Z",
+      "from": "0.0.8",
+      "to": "0.0.9",
+      "branch": "tailwind",
+      "reason": "patch",
+      "detail": "commit en rama (tailwind)",
+      "sha": "414c3f7"
+    },
+    {
+      "at": "2026-05-20T17:02:43.325Z",
+      "from": "0.0.9",
+      "to": "0.0.10",
+      "branch": "tailwind",
+      "reason": "patch",
+      "detail": "commit en rama (tailwind)",
+      "sha": "0d7b59c"
+    },
+    {
+      "at": "2026-05-20T17:28:08.468Z",
+      "from": "0.0.10",
+      "to": "0.0.11",
+      "branch": "tailwind",
+      "reason": "patch",
+      "detail": "commit en rama (tailwind)",
+      "sha": "8ac2014"
+    },
+    {
+      "at": "2026-05-20T17:35:10.008Z",
+      "from": "0.0.11",
+      "to": "0.0.12",
+      "branch": "tailwind",
+      "reason": "patch",
+      "detail": "commit en rama (tailwind)",
+      "sha": "2634489"
+    },
+    {
+      "at": "2026-05-20T17:35:27.691Z",
+      "from": "0.0.12",
+      "to": "0.0.13",
+      "branch": "tailwind",
+      "reason": "patch",
+      "detail": "commit en rama (tailwind)",
+      "sha": "9d25846"
+    }
+  ]
+}
