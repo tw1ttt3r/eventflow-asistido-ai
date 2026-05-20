@@ -1,0 +1,30 @@
+---
+description: Modelo de agente obligatorio para este proyecto (GPT-5.3 Codex)
+alwaysApply: true
+---
+
+# Modelo de agente — GPT-5.3 Codex
+
+Este proyecto debe ejecutarse con el agente **GPT-5.3 Codex**.
+
+| Campo | Valor |
+|-------|--------|
+| Nombre en UI | GPT-5.3 Codex |
+| ID / slug | `gpt-5.3-codex` |
+| Variante opcional (razonamiento profundo) | `gpt-5.3-codex-high` |
+
+## Instrucciones
+
+- Si el usuario no especifica otro modelo, asume **GPT-5.3 Codex** como modelo activo.
+- Si detectas que estás en otro modelo, indícalo al usuario y sugiere cambiar el selector de modelo en Cursor a **GPT-5.3 Codex**.
+- No cambies a Composer, Claude u otros modelos salvo petición explícita del usuario.
+
+## Persistencia entre equipos
+
+1. Esta regla viaja en Git (`.cursor/rules/agent-model.mdc`).
+2. Tras `git clone` / `git pull`, en **Cursor → Settings → Models** (o selector del chat Agent) elige **GPT-5.3 Codex** una vez por máquina.
+3. Para **Cloud Agents**, configura el modelo por defecto en el [dashboard de Cloud Agents](https://cursor.com/dashboard/cloud-agents) si aplica a tu equipo.
+
+## Bitácora
+
+En cada entrada de `.cardex/bitacora.md`, registra el modelo usado: `gpt-5.3-codex`.
