@@ -1,7 +1,7 @@
 {
   "major": 0,
   "minor": 0,
-  "patch": 8,
+  "patch": 9,
   "knownBranches": [
     "tailwind"
   ],
@@ -77,6 +77,15 @@
       "reason": "patch",
       "detail": "commit en rama (tailwind)",
       "sha": "30d8173"
+    },
+    {
+      "at": "2026-05-20T17:02:11.930Z",
+      "from": "0.0.8",
+      "to": "0.0.9",
+      "branch": "tailwind",
+      "reason": "patch",
+      "detail": "commit en rama (tailwind)",
+      "sha": "414c3f7"
     }
   ]
 }
