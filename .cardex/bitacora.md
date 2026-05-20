@@ -424,4 +424,28 @@ Sin `@tailwindcss/postcss`, Angular solo compilaba tema/base de Tailwind; **no g
 
 ---
 
-*Última actualización del archivo: 2026-05-20 10:52:00 CST*
+## Entrada #013 — Husky: quitar líneas deprecadas en pre-commit
+
+| Campo | Valor |
+|-------|--------|
+| **Fecha de ejecución** | 2026-05-20 |
+| **Hora de ejecución** | 11:30:04 CST |
+| **Tiempo total de ejecución** | ~5 s |
+| **Modelo de agente** | `gpt-5.3-codex` |
+| **Nivel de complejidad** | **Baja** |
+
+### Prompt
+
+> Aviso husky DEPRECATED: quitar `#!/usr/bin/env sh` y `. "$(dirname -- "$0")/_/husky.sh"` de `.husky/pre-commit` (fallará en v10).
+
+### Entregables
+
+- `.husky/pre-commit` reducido a `node scripts/version-bump.mjs` (formato Husky 9+)
+
+### Ajustes requeridos
+
+- [ ] Hacer commit del cambio en `.husky/pre-commit` (el commit del workflow ya pasó con el aviso)
+
+---
+
+*Última actualización del archivo: 2026-05-20 11:30:04 CST*
