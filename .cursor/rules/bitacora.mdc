@@ -1,0 +1,48 @@
+---
+description: Bitacoreo obligatorio en .cardex/bitacora.md al finalizar cada prompt con trabajo realizado
+alwaysApply: true
+---
+
+# Bitacoreo (.cardex)
+
+Al **finalizar cada prompt** en el que hayas realizado trabajo (código, config, docs, comandos, investigación con cambios), debes:
+
+## 1. Actualizar `.cardex/bitacora.md`
+
+- Añade una **nueva entrada** al final (no sobrescribas entradas anteriores).
+- Numera secuencialmente: `#002`, `#003`, etc. (la siguiente al último número existente).
+- Obtén fecha y hora con `date '+%Y-%m-%d %H:%M:%S %Z'` al **inicio** y al **cierre** del turno cuando sea posible.
+- Calcula **tiempo total en segundos** (diferencia entre inicio y cierre, o suma de comandos si no hay marcas).
+
+### Campos obligatorios por entrada
+
+| Campo | Contenido |
+|-------|-----------|
+| Fecha de ejecución | `YYYY-MM-DD` |
+| Hora de ejecución | Inicio y/o fin local |
+| Tiempo total | Segundos (número o rango estimado con nota) |
+| Modelo de agente | `gpt-5.3-codex` (o el usado si el usuario indicó otro) |
+| Nivel de complejidad | **Baja** / **Media** / **Alta** |
+| Prompt | Cita breve o resumen del pedido del usuario |
+| Criterios de complejidad | Archivos afectados, objetivo, impacto, funcionalidad afectada |
+| Entregables | Lista de lo hecho |
+| Ajustes requeridos | Checklist `- [ ]` / `- [x]` |
+
+### Complejidad (guía)
+
+- **Baja**: 0–3 archivos, sin cambio de arquitectura, impacto local.
+- **Media**: 4–15 archivos o cambio en un módulo/feature.
+- **Alta**: 16+ archivos, scaffold, migraciones, build/CI/PWA/auth, impacto transversal.
+
+## 2. Reporte al usuario
+
+Cierra la respuesta con la sección **## Reporte de ejecución** (misma metadata resumida en tabla).
+
+## Excepciones
+
+- Preguntas puramente informativas sin cambios: no edites `bitacora.md`; indícalo en el reporte (complejidad baja, 0 archivos).
+- Si el usuario pide explícitamente no registrar, obedece solo ese turno.
+
+## Persistencia entre equipos
+
+`.cardex/bitacora.md` y esta regla viven en el **repositorio Git**. Tras `git clone` o `git pull` en otro equipo, el bitacoreo continúa automáticamente. **Commitea** `.cardex/` y `.cursor/rules/bitacora.mdc` para no perder historial.
