@@ -1,9 +1,10 @@
 {
   "major": 0,
-  "minor": 0,
-  "patch": 13,
+  "minor": 1,
+  "patch": 0,
   "knownBranches": [
-    "tailwind"
+    "tailwind",
+    "feat/sonarqube"
   ],
   "history": [
     {
@@ -122,6 +123,15 @@
       "reason": "patch",
       "detail": "commit en rama (tailwind)",
       "sha": "9d25846"
+    },
+    {
+      "at": "2026-06-09T05:48:06.207Z",
+      "from": "0.0.13",
+      "to": "0.1.0",
+      "branch": "feat/sonarqube",
+      "reason": "minor",
+      "detail": "nueva rama (feat/sonarqube)",
+      "sha": "310bbdd"
     }
   ]
 }
