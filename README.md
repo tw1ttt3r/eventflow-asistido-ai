@@ -110,7 +110,74 @@ pnpm start          # dev server (Vite) + .env
 pnpm build          # producción + service worker
 pnpm build:dev      # desarrollo
 pnpm test           # Vitest
+pnpm quality        # pipeline local: cobertura + Sonar (ver sección siguiente)
 ```
+
+## Calidad de código (local)
+
+Flujo para ejecutar tests con cobertura y subir el análisis a SonarCloud o SonarQube desde tu máquina.
+
+### Prerrequisitos
+
+- Dependencias instaladas: `pnpm install`
+- Proyecto creado en [SonarCloud](https://sonarcloud.io) (o tu instancia SonarQube) con `sonar.projectKey` igual al de `sonar-project.properties` (`eventflow-asistido-ai`)
+- Token de análisis (SonarCloud: **My Account → Security → Generate Token**)
+
+### Configuración (una vez)
+
+1. Copia el ejemplo de variables:
+
+```bash
+cp .env.example .env
+```
+
+2. Edita `.env` y define al menos:
+
+```env
+SONAR_HOST_URL=https://sonarcloud.io
+SONAR_TOKEN=<tu-token>
+```
+
+3. Si usas SonarCloud y tu organización no está en `sonar-project.properties`, descomenta y define:
+
+```env
+SONAR_ORGANIZATION=<org-key>
+```
+
+### Ejecutar el pipeline
+
+```bash
+pnpm quality
+```
+
+El script `scripts/quality.mjs` hace lo siguiente:
+
+| Paso | Comando interno | Resultado |
+|------|-----------------|-----------|
+| 1 | `pnpm test:coverage` | Tests Vitest + reporte `coverage/eventflow-asistido-ai/lcov.info` |
+| 2 | `pnpm sonar` | Análisis con `@sonar/scan` usando `sonar-project.properties` |
+
+La versión enviada a Sonar se toma de `package.json` (`$npm_package_version`).
+
+### Comandos por separado
+
+```bash
+pnpm quality:coverage   # solo tests + lcov (sin Sonar)
+pnpm sonar              # solo análisis (requiere lcov generado antes)
+```
+
+### Ver resultados
+
+Tras `pnpm quality`, abre tu proyecto en SonarCloud/SonarQube y revisa issues, duplicación y cobertura.
+
+### Solución de problemas
+
+| Error | Qué revisar |
+|-------|-------------|
+| `Falta SONAR_TOKEN` | `.env` existe y tiene `SONAR_TOKEN` |
+| Cobertura en 0 % en Sonar | Ejecuta primero `pnpm quality:coverage`; verifica `coverage/eventflow-asistido-ai/lcov.info` |
+| Proyecto no encontrado | `sonar.projectKey` en SonarCloud coincide con `sonar-project.properties` |
+| Umbrales de cobertura fallan | `angular.json` exige 80 %; añade tests o ajusta `coverageThresholds` |
 
 ## Angular CLI
 
