@@ -7,4 +7,5 @@ export const environment: Environment = {
   appName: 'Eventflow Asistido (dev)',
   version: APP_VERSION,
 
+
 };
