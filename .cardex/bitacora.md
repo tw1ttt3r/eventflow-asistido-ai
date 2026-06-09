@@ -448,4 +448,66 @@ Sin `@tailwindcss/postcss`, Angular solo compilaba tema/base de Tailwind; **no g
 
 ---
 
-*Última actualización del archivo: 2026-05-20 11:30:04 CST*
+## Entrada #014 — Validación configuración SonarQube
+
+| Campo | Valor |
+|-------|--------|
+| **Fecha de ejecución** | 2026-06-08 |
+| **Hora de ejecución** | 22:06:12 CST |
+| **Tiempo total de ejecución** | ~45 s |
+| **Modelo de agente** | `gpt-5.3-codex` |
+| **Nivel de complejidad** | **Baja** |
+
+### Prompt
+
+> Validar configuraciones de Sonar y ajustar si es necesario.
+
+### Hallazgos
+
+- Nombre de archivo incorrecto: `sonar-projects.properties` → debe ser `sonar-project.properties`
+- Ruta lcov incorrecta: Angular genera `coverage/eventflow-asistido-ai/lcov.info`
+- Typo en `projectName` (AO → AI); `projectVersion` fija desactualizada
+- `tsconfig.json` vacío (project references) → mejor `tsconfig.app.json`
+
+### Entregables
+
+- `sonar-project.properties` corregido
+- Script `sonar` con versión desde `$npm_package_version`
+- README: sección Sonar + comandos `test:coverage` / `quality`
+- `@vitest/coverage-v8` alineado a `^4.1.6`
+
+### Ajustes requeridos
+
+- [ ] Verificar `SONAR_TOKEN` y `sonar.projectKey` en SonarCloud
+- [ ] Commitear cambios en rama `feat/sonarqube`
+
+---
+
+## Entrada #015 — Pipeline local `pnpm quality`
+
+| Campo | Valor |
+|-------|--------|
+| **Fecha de ejecución** | 2026-06-08 |
+| **Hora de ejecución** | 22:15:48 CST |
+| **Tiempo total de ejecución** | ~15 s |
+| **Modelo de agente** | `gpt-5.3-codex` |
+| **Nivel de complejidad** | **Baja** |
+
+### Prompt
+
+> Crear flujo para correr `pnpm quality` desde local e instrucciones en README.
+
+### Entregables
+
+- `scripts/quality.mjs`: carga `.env`, valida `SONAR_TOKEN`, ejecuta coverage + sonar
+- `package.json`: `quality` → script; `quality:coverage` para solo tests
+- `.env.example`: variables `SONAR_HOST_URL`, `SONAR_TOKEN`, `SONAR_ORGANIZATION`
+- `README.md`: sección **Calidad de código (local)** con prerrequisitos, setup y troubleshooting
+
+### Ajustes requeridos
+
+- [ ] Añadir `SONAR_TOKEN` real en `.env` local si aún no está
+
+---
+
+*Última actualización del archivo: 2026-06-08 22:15:48 CST*
