@@ -19,7 +19,7 @@ if (!process.env['SONAR_TOKEN']) {
     [
       'Falta SONAR_TOKEN.',
       '1. Copia .env.example → .env',
-      '2. Genera un token en SonarCloud (My Account → Security) o en tu instancia SonarQube.',
+    '2. Genera un token en SonarQube (My Account → Security) o en tu instancia SonarQube.',
       '3. Define SONAR_HOST_URL y SONAR_TOKEN en .env',
     ].join('\n'),
   );
@@ -27,8 +27,8 @@ if (!process.env['SONAR_TOKEN']) {
 }
 
 if (!process.env['SONAR_HOST_URL']) {
-  process.env['SONAR_HOST_URL'] = 'https://sonarcloud.io';
-  console.log('SONAR_HOST_URL no definido; usando https://sonarcloud.io');
+  process.env['SONAR_HOST_URL'] = 'https://sonar.orb.local/';
+  console.log('SONAR_HOST_URL no definido; usando https://sonar.orb.local/');
 }
 
 function run(command, args, label) {
