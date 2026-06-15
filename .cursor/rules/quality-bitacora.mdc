@@ -1,0 +1,72 @@
+---
+description: Bitácora obligatoria en .quality/bitacora.md tras cada ejecución de pnpm sonar
+alwaysApply: true
+---
+
+# Bitácora de calidad (.quality)
+
+Cada ejecución de **`pnpm sonar`** (directa o vía **`pnpm quality`**) debe quedar registrada en **`.quality/bitacora.md`**.
+
+## Comportamiento automático
+
+El script `scripts/sonar.mjs` invoca `scripts/sonar-bitacora.mjs` al finalizar el scan y **append** una entrada con:
+
+| Campo | Origen |
+|-------|--------|
+| Fecha y hora de ejecución | Timestamp local al cerrar el scan |
+| Rama | `git rev-parse --abbrev-ref HEAD` |
+| Resumen del scan | Exit code del CLI + estado del Quality Gate (API Sonar) |
+| Status del scan | `OK` / `WARN` / `ERROR` |
+| Métricas overall | Tabla vía `/api/measures/component` |
+| Detalle de archivos | Issues + inventario por archivo (API Sonar) |
+| Análisis | Interpretación automática según cobertura, bugs, gate, etc. |
+
+## Detalle de archivos (obligatorio)
+
+Cada entrada debe incluir la sección **### Detalle de archivos** con:
+
+1. **Resumen** — conteo de archivos analizados, limpios, con hallazgos e issues abiertos.
+2. **Hallazgos abiertos** — tabla por issue vía `/api/issues/search`:
+
+| Columna | Significado |
+|---------|-------------|
+| Ruta | Path relativo al repo (`src/...`) |
+| Nivel | Severidad Sonar: Bloqueante, Crítico, Mayor, Menor, Info |
+| Tipo | Bug, Vulnerabilidad, Code smell, Security hotspot |
+| Status | Abierto, Confirmado, Reabierto, etc. |
+| Línea | Línea del hallazgo |
+| Regla | ID de regla Sonar |
+| Mensaje | Descripción breve del issue |
+
+3. **Inventario por archivo** — tabla vía `/api/measures/component_tree` (`qualifiers=FIL`):
+
+| Columna | Significado |
+|---------|-------------|
+| Ruta | Archivo analizado |
+| Nivel máx. | Severidad más alta entre sus hallazgos |
+| Tipos | Tipos de issue presentes en el archivo |
+| Status | `OK`, `Con hallazgos` o `Crítico` |
+| ncloc / Bugs / Vuln. / Smells / Cobertura % | Métricas por archivo |
+| Hallazgos | Cantidad de issues abiertos en ese archivo |
+
+## Instrucciones para agentes
+
+1. **No desactives** la escritura de bitácora ni el detalle de archivos al modificar `scripts/sonar.mjs`, `scripts/sonar-bitacora.mjs` o el pipeline de calidad.
+2. Si ejecutas `pnpm sonar` o `pnpm quality` en un prompt, **verifica** que `.quality/bitacora.md` tenga una entrada nueva con **Detalle de archivos** completo.
+3. Si la API de Sonar no responde, la entrada igual se crea con el status del CLI y nota del error; no borres entradas previas.
+4. Al cambiar columnas o fuentes de datos del detalle, actualiza también esta regla y el encabezado de `.quality/bitacora.md`.
+5. Puedes **enriquecer** la sección «Análisis» de la última entrada solo si el usuario lo pide explícitamente; por defecto confía en el resumen automático.
+6. **Commitea** `.quality/` y `.cursor/rules/quality-bitacora.mdc` para que otro equipo conserve el historial tras `git clone` / `git pull`.
+
+## Relación con `.cardex/bitacora.md`
+
+| Bitácora | Qué registra |
+|----------|----------------|
+| `.cardex/bitacora.md` | Trabajo del agente por prompt (metadata del IDE) |
+| `.quality/bitacora.md` | Resultados de análisis Sonar por ejecución del script |
+
+Ambas son independientes y deben mantenerse según sus reglas respectivas.
+
+## Persistencia entre equipos
+
+`.quality/bitacora.md` y esta regla viven en **Git**. Tras cambiar de máquina, el registro de scans continúa sin configuración extra en Cursor.
