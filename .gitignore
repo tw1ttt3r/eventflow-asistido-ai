@@ -51,5 +51,7 @@ Thumbs.db
 #pnpm
 .pnpm-store/*
 
-
 .vscode/
+
+#sonar
+.scannerwork/

@@ -1,6 +1,6 @@
 {
   "name": "eventflow-asistido-ai",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "scripts": {
     "ng": "ng",
     "start": "node scripts/with-env.mjs serve",
@@ -13,7 +13,7 @@
     "version:major": "node scripts/version-bump.mjs --major",
     "version:dry-run": "node scripts/version-bump.mjs --dry-run",
     "test:coverage": "ng test --coverage --watch=false",
-    "sonar": "sonar -Dsonar.projectVersion=$npm_package_version",
+    "sonar": "node scripts/sonar.mjs",
     "quality": "node scripts/quality.mjs",
     "quality:coverage": "pnpm test:coverage"
   },
