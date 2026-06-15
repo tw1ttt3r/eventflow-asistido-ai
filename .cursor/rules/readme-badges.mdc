@@ -1,0 +1,74 @@
+---
+description: Mantener badges shields.io y tabla de tecnologías en README al cambiar el stack
+alwaysApply: true
+---
+
+# Badges de tecnologías (README)
+
+El README raíz incluye la sección **## Tecnologías** con badges [shields.io](https://shields.io) y una tabla de objetivos. Debe mantenerse al día cuando el stack cambie.
+
+## Cuándo actualizar
+
+Actualiza `README.md` en el **mismo turno** en que introduzcas o retires una tecnología **relevante**, por ejemplo:
+
+- Nueva dependencia en `package.json` (framework, BaaS, ORM, auth, UI kit, test runner, linter, CI)
+- Integración de servicio externo (Appwrite, Firebase, Supabase, Sentry, etc.)
+- Cambio de versión mayor visible (Angular 21 → 22, Tailwind 4 → 5)
+- Nuevo agente o modelo obligatorio del proyecto
+- Herramienta de calidad, deploy o observabilidad adoptada por el repo
+
+**No** añadas badge por utilidades menores, polyfills internos o dependencias transitivas sin impacto arquitectónico.
+
+## Dónde editar
+
+Solo dentro de los marcadores en `README.md`:
+
+```markdown
+<!-- readme-badges:start ... -->
+... badges aquí ...
+<!-- readme-badges:end -->
+```
+
+Y la tabla **inmediatamente debajo** (filas `| Tecnología | Objetivo en el proyecto |`).
+
+## Formato del badge
+
+Plantilla shields.io (for-the-badge + logo cuando exista en Simple Icons):
+
+```markdown
+[![Nombre](https://img.shields.io/badge/Etiqueta-Valor-COLOR?style=for-the-badge&logo=slug&logoColor=white)](https://url-oficial)
+```
+
+| Campo | Regla |
+|-------|--------|
+| `Etiqueta-Valor` | Nombre corto y versión si aplica; espacios → `%20`, guiones internos → `--` |
+| `COLOR` | Hex de la marca sin `#` (p. ej. Angular `DD0031`) |
+| `logo` | Slug de [Simple Icons](https://simpleicons.org/) si existe; omitir si no hay logo |
+| Enlace | Documentación o sitio oficial del producto |
+
+Ejemplo Appwrite (cuando se integre):
+
+```markdown
+[![Appwrite](https://img.shields.io/badge/Appwrite-BaaS-F02E65?style=for-the-badge&logo=appwrite&logoColor=white)](https://appwrite.io/)
+```
+
+## Formato de la fila en tabla
+
+```markdown
+| **Nombre versión** | Una frase: qué problema resuelve en *este* repo, no marketing genérico. |
+```
+
+- Español, tono técnico breve.
+- Si retiras una tecnología, elimina badge **y** fila de la tabla.
+
+## Checklist del agente
+
+- [ ] Badge añadido/actualizado/eliminado entre los marcadores `readme-badges`
+- [ ] Fila correspondiente en la tabla de objetivos
+- [ ] Versión alineada con `package.json` o config real del repo
+- [ ] No duplicar tecnologías ya listadas
+- [ ] Commitear `README.md` y esta regla junto con el cambio de stack
+
+## Persistencia entre equipos
+
+Esta regla y la sección del README viven en **Git**. Tras `git clone` / `git pull`, cualquier agente debe seguir manteniendo los badges al detectar cambios de stack.

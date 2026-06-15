@@ -9,7 +9,9 @@ En Cursor: abre el selector de modelo del Agent y elige **GPT-5.3 Codex** antes 
 ## Stack
 
 - Angular 21, pnpm, Vite (dev server), PWA, secretos vía `NG_APP_*`
-- Bitácora: `.cardex/bitacora.md` (actualizar al finalizar cada prompt con trabajo)
+- Bitácora agente: `.cardex/bitacora.md` (actualizar al finalizar cada prompt con trabajo)
+- Bitácora calidad: `.quality/bitacora.md` (automática en cada `pnpm sonar`; ver `.cursor/rules/quality-bitacora.mdc`)
+- Badges README: actualizar sección **Tecnologías** al cambiar stack (ver `.cursor/rules/readme-badges.mdc`)
 
 ## Convenciones
 
