@@ -448,4 +448,154 @@ Sin `@tailwindcss/postcss`, Angular solo compilaba tema/base de Tailwind; **no g
 
 ---
 
-*Última actualización del archivo: 2026-05-20 11:30:04 CST*
+## Entrada #014 — Validación configuración SonarQube
+
+| Campo | Valor |
+|-------|--------|
+| **Fecha de ejecución** | 2026-06-08 |
+| **Hora de ejecución** | 22:06:12 CST |
+| **Tiempo total de ejecución** | ~45 s |
+| **Modelo de agente** | `gpt-5.3-codex` |
+| **Nivel de complejidad** | **Baja** |
+
+### Prompt
+
+> Validar configuraciones de Sonar y ajustar si es necesario.
+
+### Hallazgos
+
+- Nombre de archivo incorrecto: `sonar-projects.properties` → debe ser `sonar-project.properties`
+- Ruta lcov incorrecta: Angular genera `coverage/eventflow-asistido-ai/lcov.info`
+- Typo en `projectName` (AO → AI); `projectVersion` fija desactualizada
+- `tsconfig.json` vacío (project references) → mejor `tsconfig.app.json`
+
+### Entregables
+
+- `sonar-project.properties` corregido
+- Script `sonar` con versión desde `$npm_package_version`
+- README: sección Sonar + comandos `test:coverage` / `quality`
+- `@vitest/coverage-v8` alineado a `^4.1.6`
+
+### Ajustes requeridos
+
+- [ ] Verificar `SONAR_TOKEN` y `sonar.projectKey` en SonarCloud
+- [ ] Commitear cambios en rama `feat/sonarqube`
+
+---
+
+## Entrada #015 — Pipeline local `pnpm quality`
+
+| Campo | Valor |
+|-------|--------|
+| **Fecha de ejecución** | 2026-06-08 |
+| **Hora de ejecución** | 22:15:48 CST |
+| **Tiempo total de ejecución** | ~15 s |
+| **Modelo de agente** | `gpt-5.3-codex` |
+| **Nivel de complejidad** | **Baja** |
+
+### Prompt
+
+> Crear flujo para correr `pnpm quality` desde local e instrucciones en README.
+
+### Entregables
+
+- `scripts/quality.mjs`: carga `.env`, valida `SONAR_TOKEN`, ejecuta coverage + sonar
+- `package.json`: `quality` → script; `quality:coverage` para solo tests
+- `.env.example`: variables `SONAR_HOST_URL`, `SONAR_TOKEN`, `SONAR_ORGANIZATION`
+- `README.md`: sección **Calidad de código (local)** con prerrequisitos, setup y troubleshooting
+
+### Ajustes requeridos
+
+- [ ] Añadir `SONAR_TOKEN` real en `.env` local si aún no está
+
+---
+
+## Entrada #016 — Bitácora `.quality` para scans Sonar
+
+| Campo | Valor |
+|-------|--------|
+| **Fecha de ejecución** | 2026-06-14 |
+| **Hora de ejecución** | 18:44:34 CST |
+| **Tiempo total de ejecución** | ~120 s |
+| **Modelo de agente** | `gpt-5.3-codex` |
+| **Nivel de complejidad** | **Media** |
+
+### Prompt
+
+> Registrar resumen de cada `pnpm sonar` en `.quality/bitacora.md`, regla de agente persistente y sección en README.
+
+### Entregables
+
+- `scripts/sonar-bitacora.mjs`: consulta API Sonar, tabla de métricas, análisis automático, append a bitácora
+- `scripts/sonar.mjs`: invoca bitácora al finalizar el scan
+- `.quality/bitacora.md`: plantilla inicial del historial
+- `.cursor/rules/quality-bitacora.mdc`: regla core `alwaysApply`
+- `README.md` y `AGENTS.md`: documentación de la bitácora de calidad
+
+### Ajustes requeridos
+
+- [x] Append automático tras cada scan
+- [x] Regla persistente en `.cursor/rules/`
+- [x] README con utilidad de `.quality`
+- [ ] Ejecutar `pnpm sonar` localmente para validar entrada real con API
+
+---
+
+## Entrada #017 — Badges shields.io y regla README
+
+| Campo | Valor |
+|-------|--------|
+| **Fecha de ejecución** | 2026-06-14 |
+| **Hora de ejecución** | 18:54:32 CST |
+| **Tiempo total de ejecución** | ~60 s |
+| **Modelo de agente** | `gpt-5.3-codex` |
+| **Nivel de complejidad** | **Baja** |
+
+### Prompt
+
+> Añadir badges shields.io de tecnologías clave en README, descripción de objetivo, regla de agente para nuevas tecnologías.
+
+### Entregables
+
+- `README.md`: sección **Tecnologías** con badges for-the-badge y tabla de objetivos (reemplaza tabla Stack)
+- `.cursor/rules/readme-badges.mdc`: regla `alwaysApply` para mantener badges al cambiar stack
+- `AGENTS.md`: referencia a la regla de badges
+
+### Ajustes requeridos
+
+- [x] Badges de stack actual (Angular, TS, Sonar, Cursor/GPT-5.3 Codex, etc.)
+- [x] Regla con ejemplo Appwrite para integraciones futuras
+- [ ] Añadir badge Appwrite cuando se integre en el proyecto
+
+---
+
+## Entrada #018 — Detalle de archivos en bitácora `.quality`
+
+| Campo | Valor |
+|-------|--------|
+| **Fecha de ejecución** | 2026-06-14 |
+| **Hora de ejecución** | 19:05:00 CST (estimado) |
+| **Tiempo total de ejecución** | ~90 s |
+| **Modelo de agente** | `gpt-5.3-codex` |
+| **Nivel de complejidad** | **Media** |
+
+### Prompt
+
+> Complementar bitácora `.quality` con detalle de archivos (ruta, nivel, tipo, status) y regla de agente.
+
+### Entregables
+
+- `scripts/sonar-bitacora.mjs`: fetch issues + component_tree, tablas de hallazgos e inventario por archivo
+- `.cursor/rules/quality-bitacora.mdc`: especificación de columnas y secciones obligatorias
+- `README.md` y `.quality/bitacora.md`: documentación del nuevo detalle
+
+### Ajustes requeridos
+
+- [x] Tabla de hallazgos abiertos por issue
+- [x] Inventario por archivo con status y métricas
+- [x] Regla de agente actualizada
+- [ ] Re-ejecutar `pnpm sonar` para regenerar entrada #001 con detalle completo
+
+---
+
+*Última actualización del archivo: 2026-06-14 19:05:00 CST*

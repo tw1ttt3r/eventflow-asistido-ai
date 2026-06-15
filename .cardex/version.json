@@ -1,9 +1,10 @@
 {
   "major": 0,
-  "minor": 0,
-  "patch": 13,
+  "minor": 1,
+  "patch": 8,
   "knownBranches": [
-    "tailwind"
+    "tailwind",
+    "feat/sonarqube"
   ],
   "history": [
     {
@@ -122,6 +123,87 @@
       "reason": "patch",
       "detail": "commit en rama (tailwind)",
       "sha": "9d25846"
+    },
+    {
+      "at": "2026-06-09T05:48:06.207Z",
+      "from": "0.0.13",
+      "to": "0.1.0",
+      "branch": "feat/sonarqube",
+      "reason": "minor",
+      "detail": "nueva rama (feat/sonarqube)",
+      "sha": "310bbdd"
+    },
+    {
+      "at": "2026-06-09T05:48:47.502Z",
+      "from": "0.1.0",
+      "to": "0.1.1",
+      "branch": "feat/sonarqube",
+      "reason": "patch",
+      "detail": "commit en rama (feat/sonarqube)",
+      "sha": "839b234"
+    },
+    {
+      "at": "2026-06-09T05:49:22.050Z",
+      "from": "0.1.1",
+      "to": "0.1.2",
+      "branch": "feat/sonarqube",
+      "reason": "patch",
+      "detail": "commit en rama (feat/sonarqube)",
+      "sha": "2169998"
+    },
+    {
+      "at": "2026-06-09T05:49:43.255Z",
+      "from": "0.1.2",
+      "to": "0.1.3",
+      "branch": "feat/sonarqube",
+      "reason": "patch",
+      "detail": "commit en rama (feat/sonarqube)",
+      "sha": "ae93de7"
+    },
+    {
+      "at": "2026-06-09T05:50:12.558Z",
+      "from": "0.1.3",
+      "to": "0.1.4",
+      "branch": "feat/sonarqube",
+      "reason": "patch",
+      "detail": "commit en rama (feat/sonarqube)",
+      "sha": "b411d67"
+    },
+    {
+      "at": "2026-06-15T04:42:26.491Z",
+      "from": "0.1.4",
+      "to": "0.1.5",
+      "branch": "feat/sonarqube",
+      "reason": "patch",
+      "detail": "commit en rama (feat/sonarqube)",
+      "sha": "f860950"
+    },
+    {
+      "at": "2026-06-15T04:45:05.225Z",
+      "from": "0.1.5",
+      "to": "0.1.6",
+      "branch": "feat/sonarqube",
+      "reason": "patch",
+      "detail": "commit en rama (feat/sonarqube)",
+      "sha": "82fb28d"
+    },
+    {
+      "at": "2026-06-15T05:16:27.218Z",
+      "from": "0.1.6",
+      "to": "0.1.7",
+      "branch": "feat/sonarqube",
+      "reason": "patch",
+      "detail": "commit en rama (feat/sonarqube)",
+      "sha": "4463fa1"
+    },
+    {
+      "at": "2026-06-15T05:22:20.144Z",
+      "from": "0.1.7",
+      "to": "0.1.8",
+      "branch": "feat/sonarqube",
+      "reason": "patch",
+      "detail": "commit en rama (feat/sonarqube)",
+      "sha": "3755413"
     }
   ]
 }
