@@ -1,10 +1,11 @@
 {
   "major": 0,
-  "minor": 1,
-  "patch": 8,
+  "minor": 2,
+  "patch": 0,
   "knownBranches": [
     "tailwind",
-    "feat/sonarqube"
+    "feat/sonarqube",
+    "feat/check-status-infra"
   ],
   "history": [
     {
@@ -204,6 +205,15 @@
       "reason": "patch",
       "detail": "commit en rama (feat/sonarqube)",
       "sha": "3755413"
+    },
+    {
+      "at": "2026-06-18T18:12:37.888Z",
+      "from": "0.1.8",
+      "to": "0.2.0",
+      "branch": "feat/check-status-infra",
+      "reason": "minor",
+      "detail": "nueva rama (feat/check-status-infra)",
+      "sha": "d400fe4"
     }
   ]
 }
