@@ -8,6 +8,7 @@ export const environment: Environment = {
   version: APP_VERSION,
 
 
+
   apiKey: '',
 
   appwrite: {
