@@ -16,6 +16,7 @@ Proyecto Angular 21 generado con asistencia de agente en el IDE.
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind-4-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)](https://tailwindcss.com/)
 [![PWA](https://img.shields.io/badge/PWA-service%20worker-5A0FC8?style=for-the-badge&logo=pwa&logoColor=white)](https://web.dev/progressive-web-apps/)
 [![SonarQube](https://img.shields.io/badge/Sonar-análisis-4E9BCD?style=for-the-badge&logo=sonarqube&logoColor=white)](https://www.sonarsource.com/products/sonarqube/)
+[![Appwrite](https://img.shields.io/badge/Appwrite-BaaS-F02E65?style=for-the-badge&logo=appwrite&logoColor=white)](https://appwrite.io/)
 [![RxJS](https://img.shields.io/badge/RxJS-7.8-B7178C?style=for-the-badge&logo=reactivex&logoColor=white)](https://rxjs.dev/)
 [![Husky](https://img.shields.io/badge/Husky-git%20hooks-000000?style=for-the-badge)](https://typicode.github.io/husky/)
 [![Cursor](https://img.shields.io/badge/Cursor-IDE-000000?style=for-the-badge&logo=cursor&logoColor=white)](https://cursor.com/)
@@ -36,6 +37,7 @@ Proyecto Angular 21 generado con asistencia de agente en el IDE.
 | **Tailwind CSS v4** | Estilos utilitarios en plantillas; PostCSS genera clases en build. |
 | **PWA** | Service worker, manifest e instalabilidad offline en producción. |
 | **SonarQube / SonarCloud** | Análisis estático, Quality Gate e historial en `.quality/bitacora.md`. |
+| **Appwrite** | BaaS: auth, base de datos, storage y functions; cliente vía `AppwriteService`. |
 | **RxJS** | Flujos reactivos y composición asíncrona en servicios y componentes. |
 | **Husky** | Hooks Git (`pre-commit`) para versionado SemVer automático. |
 | **dotenv + `NG_APP_*`** | Secretos locales en `.env` inyectados en build/serve sin commitear credenciales. |
@@ -77,12 +79,55 @@ pnpm exec ng generate environments
 ### Secretos (variables de build)
 
 1. Copia `.env.example` → `.env`
-2. Define variables con prefijo `NG_APP_` (por ejemplo `NG_APP_API_KEY`)
+2. Define variables con prefijo `NG_APP_` (por ejemplo `NG_APP_API_URL`, `NG_APP_APPWRITE_PROJECT_ID`)
 3. Los scripts `start` / `build` usan `scripts/with-env.mjs` para cargar `.env` e inyectarlas con `--define`
+
+Los archivos `src/environments/environment*.ts` **no** guardan URLs ni IDs: solo cadenas vacías, `production` y `version`. Los valores reales viven en `.env`, se mapean vía `env.registry.ts` y quedan en campos directos de `Environment` (`apiUrl`, `appwrite.endpoint`, etc.).
+
+| Paso | Acción |
+|------|--------|
+| Nueva `NG_APP_*` | Registrar en `env.registry.ts` + campo en `environment.model.ts` |
+| Sincronizar plantilla | `pnpm env:sync` |
+| En código | `inject(APP_CONFIG).apiUrl` o `injectEnvVar('NG_APP_API_URL')` |
+
+Ver [`.cursor/rules/env-vars.mdc`](.cursor/rules/env-vars.mdc).
 
 En código, accede vía `APP_CONFIG` (`src/app/core/config/app-config.ts`).
 
 **Importante:** no hagas commit de `.env`. En CI/CD usa secretos del proveedor y exporta `NG_APP_*` antes del build.
+
+## Appwrite (BaaS)
+
+Backend as a Service vía [Appwrite](https://appwrite.io/). El cliente vive en `src/app/core/appwrite/` y se registra en `app.config.ts`.
+
+### Configuración (una vez)
+
+1. Crea un proyecto en [Appwrite Console](https://cloud.appwrite.io) (o tu instancia self-hosted).
+2. **Add platform → Web** con hostname `localhost` (dev) y tu dominio de producción.
+3. Copia `.env.example` → `.env` y define:
+
+```env
+NG_APP_APPWRITE_ENDPOINT=https://<REGION>.cloud.appwrite.io/v1
+NG_APP_APPWRITE_PROJECT_ID=<tu-project-id>
+NG_APP_APPWRITE_PROJECT_NAME=Eventflow Asistido
+```
+
+4. Reinicia `pnpm start`. En la pantalla inicial usa **Probar conexión Appwrite** (llama a `client.ping()`).
+
+Todos los valores de integración deben estar en `.env`; `environment*.ts` permanece sin datos sensibles.
+
+### Uso en código
+
+```typescript
+import { inject } from '@angular/core';
+import { AppwriteService } from './core/appwrite/appwrite.service';
+
+const appwrite = inject(AppwriteService);
+await appwrite.ping();
+// appwrite.account → módulo Account del SDK
+```
+
+Referencia: [starter Angular de Appwrite](https://github.com/appwrite/starter-for-angular) y [docs Angular](https://appwrite.io/docs/quick-starts/angular).
 
 ## Tailwind CSS v4
 

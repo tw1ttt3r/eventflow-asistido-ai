@@ -522,7 +522,18 @@ Sin `@tailwindcss/postcss`, Angular solo compilaba tema/base de Tailwind; **no g
 
 ### Prompt
 
-> Registrar resumen de cada `pnpm sonar` en `.quality/bitacora.md`, regla de agente persistente y sección en README.
+> oye, necesito que cada vez que corra mi script "sonar" se guarde un resumen de ese scan, así que necesito que generes un nuevo directorio llamado .quality, dentro tendremos un archivo llamado bitacora.md, guardaremos por registro la siguiente informaciòn
+>
+> fecha y hora de ejecución  
+> Rama  
+> Resumen del scan  
+> Status del scan  
+>
+> Si es posible, dame las estadisticas delñ overall code en una tabla  
+>
+> y además un pequeño resumen generado por ti, del porque se obtuvieron esas estadisticas  
+>
+> no olvidemos que esto debe ser una instrucción core a nivel de agente, es decir, que si cambio de equipo, siga esta orde, agrega además en el README general una sección donde expliques a grandes reasgos la utilidad de la bitacorá .quality
 
 ### Entregables
 
@@ -553,7 +564,7 @@ Sin `@tailwindcss/postcss`, Angular solo compilaba tema/base de Tailwind; **no g
 
 ### Prompt
 
-> Añadir badges shields.io de tecnologías clave en README, descripción de objetivo, regla de agente para nuevas tecnologías.
+> oye, necesito que agregues en el README general una lista de las tecnologías más importantes (typescript, js, sonar, appwrite, que agente estamos ocupando, framework, etc) que estan inmersas en el proyecto, para que se vea más estilizado ocupa badges shields.io, haz una regla a nivel de agente que al detectar una nueva tecnología importante nueva, agregue su badge correspondiente, y además agrega una pequeña descripción de sju objetivo en el proyecto
 
 ### Entregables
 
@@ -581,7 +592,7 @@ Sin `@tailwindcss/postcss`, Angular solo compilaba tema/base de Tailwind; **no g
 
 ### Prompt
 
-> Complementar bitácora `.quality` con detalle de archivos (ruta, nivel, tipo, status) y regla de agente.
+> oye, complementa la bitacora de .quality, enlista el detalle de todo, principalmente los archivos (ruta, nivel, tipo, status), recuerda agregar este complemento a nivel agente
 
 ### Entregables
 
@@ -598,4 +609,246 @@ Sin `@tailwindcss/postcss`, Angular solo compilaba tema/base de Tailwind; **no g
 
 ---
 
-*Última actualización del archivo: 2026-06-14 19:05:00 CST*
+## Entrada #019 — Análisis integración Appwrite (BaaS)
+
+| Campo | Valor |
+|-------|--------|
+| **Fecha de ejecución** | 2026-06-18 |
+| **Hora de ejecución** | ~sesión Appwrite (sin marca exacta) |
+| **Tiempo total de ejecución** | ~180 s |
+| **Modelo de agente** | `gpt-5.3-codex` |
+| **Nivel de complejidad** | **Baja** |
+
+### Prompt
+
+> oye, ocuparemos appwrite como BaSS, existe un repo starter https://github.com/appwrite/starter-for-angular , necesito que analices que dependencias nos hacen falta, y que configuraciones necesitamos para poder hacer la integración de manera correcta y optima
+
+### Criterios de complejidad
+
+| Criterio | Detalle |
+|----------|---------|
+| Archivos afectados | 0 (solo análisis) |
+| Objetivo | Comparar starter Appwrite vs stack Eventflow y plan de integración |
+| Impacto | Documental — sin cambios en código en este turno |
+
+### Entregables
+
+- Análisis de dependencia `appwrite`, configuración Console, `NG_APP_*`, servicio DI, PWA y plan de implementación
+
+### Ajustes requeridos
+
+- [x] Respuesta con mapa starter vs proyecto actual
+- [ ] Implementar scaffold (siguiente prompt)
+
+---
+
+## Entrada #020 — Scaffold Appwrite
+
+| Campo | Valor |
+|-------|--------|
+| **Fecha de ejecución** | 2026-06-18 |
+| **Hora de ejecución** | ~sesión Appwrite (sin marca exacta) |
+| **Tiempo total de ejecución** | ~300 s |
+| **Modelo de agente** | `gpt-5.3-codex` |
+| **Nivel de complejidad** | **Media** |
+
+### Prompt
+
+> hazlo
+
+### Criterios de complejidad
+
+| Criterio | Detalle |
+|----------|---------|
+| Archivos afectados | ~12 |
+| Objetivo | Implementar integración Appwrite según análisis previo (#019) |
+| Impacto | Módulo `core/appwrite`, environments, README badge, `.env.example` |
+
+### Entregables
+
+- `pnpm add appwrite`, `core/appwrite/*`, providers en `app.config.ts`, UI ping en `app.ts`, tests, badge README
+
+### Ajustes requeridos
+
+- [x] Scaffold Appwrite
+- [ ] Configurar `.env` local con project ID real
+
+---
+
+## Entrada #021 — Fix tipo `ping()` Appwrite
+
+| Campo | Valor |
+|-------|--------|
+| **Fecha de ejecución** | 2026-06-18 |
+| **Hora de ejecución** | ~sesión Appwrite (sin marca exacta) |
+| **Tiempo total de ejecución** | ~30 s |
+| **Modelo de agente** | `gpt-5.3-codex` |
+| **Nivel de complejidad** | **Baja** |
+
+### Prompt
+
+> tenemos el siguiente error  
+> Type 'unknown' is not assignable to type 'object'.ts(2322)  
+>
+> en el archivo src/app/core/appwrite/appwrite.service.ts
+
+### Entregables
+
+- `appwrite.service.ts`: retorno de `ping()` cambiado a `Promise<unknown>` (alineado con SDK 26)
+
+### Ajustes requeridos
+
+- [x] Error TS resuelto
+
+---
+
+## Entrada #022 — Environment sin datos; valores solo en `.env`
+
+| Campo | Valor |
+|-------|--------|
+| **Fecha de ejecución** | 2026-06-18 |
+| **Hora de ejecución** | 08:11:55 CST |
+| **Tiempo total de ejecución** | ~90 s |
+| **Modelo de agente** | `gpt-5.3-codex` |
+| **Nivel de complejidad** | **Media** |
+
+### Prompt
+
+> oye, el uso de datos en Environment (cualquier ambiente) es inseguro, así que necesito que los datos se extraigan del .env, y que los Environments actuales solo tengan cadenas vacias
+
+### Entregables
+
+- `resolve-environment.ts` + `env-vars.ts`: resolución centralizada de `NG_APP_*`
+- `environment.ts` / `environment.development.ts`: `apiUrl`, `appName`, `appwrite.*` en `''`
+- `env.d.ts`, `.env.example`: `NG_APP_API_URL`, `NG_APP_APP_NAME`, `NG_APP_APPWRITE_*`
+- `appwrite.config.ts` simplificado (lee env ya resuelto)
+- README y AGENTS.md actualizados
+
+### Ajustes requeridos
+
+- [x] Sin URLs/IDs en archivos commiteados de environment
+- [ ] Migrar valores del antiguo `environment*.ts` al `.env` local del usuario
+
+---
+
+## Entrada #023 — Registro automático `NG_APP_*` → Environment
+
+| Campo | Valor |
+|-------|--------|
+| **Fecha de ejecución** | 2026-06-18 |
+| **Hora de ejecución** | 08:31:45 CST |
+| **Tiempo total de ejecución** | ~120 s |
+| **Modelo de agente** | `gpt-5.3-codex` |
+| **Nivel de complejidad** | **Media** |
+
+### Prompt
+
+> ahora necesito que las variables que tienen los valores del .env se ocupen en los Environments, y cada que se registre una nueva variable de entorno en el .env, se pueda ocupar dentro del aplicativo
+
+### Entregables
+
+- `NG_APP_VARS` JSON único inyectado por `with-env.mjs`
+- `env.registry.ts`: mapa a campos tipados de `Environment`
+- `environment.vars`: todas las `NG_APP_*` disponibles en runtime
+- `env-access.ts`, `pnpm env:sync`, regla `.cursor/rules/env-vars.mdc`
+
+### Ajustes requeridos
+
+- [x] Flujo documentado para variables nuevas
+- [ ] Ejecutar `pnpm env:sync` tras cambios al registro
+
+---
+
+## Entrada #024 — Explicación flujo variables de entorno
+
+| Campo | Valor |
+|-------|--------|
+| **Fecha de ejecución** | 2026-06-18 |
+| **Hora de ejecución** | ~sesión env (sin marca exacta) |
+| **Tiempo total de ejecución** | ~60 s |
+| **Modelo de agente** | `gpt-5.3-codex` |
+| **Nivel de complejidad** | **Baja** |
+
+### Prompt
+
+> puedes explicarme un poco del flujo de las variables de entorno que creaste
+
+### Criterios de complejidad
+
+| Criterio | Detalle |
+|----------|---------|
+| Archivos afectados | 0 |
+| Objetivo | Documentar en respuesta el flujo `.env` → `with-env.mjs` → `Environment` |
+| Impacto | Ninguno en código |
+
+### Entregables
+
+- Explicación con diagrama del flujo `NG_APP_*`, `resolveEnvironment`, `APP_CONFIG` y registro
+
+### Ajustes requeridos
+
+- [x] Respuesta informativa entregada
+- [x] Entrada añadida a bitácora (corrección retrospectiva en #026)
+
+---
+
+## Entrada #025 — Environment directo sin `vars`
+
+| Campo | Valor |
+|-------|--------|
+| **Fecha de ejecución** | 2026-06-18 |
+| **Hora de ejecución** | 08:45:12 CST |
+| **Modelo de agente** | `gpt-5.3-codex` |
+| **Nivel de complejidad** | **Media** |
+
+### Prompt
+
+> puedes simplificar el proceso para que en lugar de que vivan en vars, vivan directo en el objeto Environment
+
+### Entregables
+
+- Eliminado `environment.vars` y `secrets.ts`
+- `APP_CONFIG` expone `Environment` resuelto directamente
+- `apiKey` integrado en `Environment` vía registro
+- Docs y regla `env-vars.mdc` actualizados
+
+---
+
+## Entrada #026 — Corrección de prompts en bitácora `.cardex`
+
+| Campo | Valor |
+|-------|--------|
+| **Fecha de ejecución** | 2026-06-18 |
+| **Hora de ejecución** | 08:55:35 CST |
+| **Tiempo total de ejecución** | ~90 s |
+| **Modelo de agente** | `gpt-5.3-codex` |
+| **Nivel de complejidad** | **Baja** |
+
+### Prompt
+
+> oye, estoy revisando la bitacora de .cardex, y no encuentro la entrada del prompt donde te pido que me expliques el flujo de las variables de entorno, y además veo que algunos prompts no son los que te estoy proporcionando, si no como un resumen o parafraseo de tu parte
+
+### Criterios de complejidad
+
+| Criterio | Detalle |
+|----------|---------|
+| Archivos afectados | 2 (`.cardex/bitacora.md`, `.cursor/rules/bitacora.mdc`) |
+| Objetivo | Fidelidad del campo **Prompt** al texto del usuario; entradas faltantes |
+| Impacto | Mejora de trazabilidad del historial del proyecto |
+
+### Entregables
+
+- Entradas #019–#025: prompts reemplazados por citas literales del usuario
+- Entradas añadidas: #019 Appwrite análisis, #020 scaffold, #021 fix TS, #024 explicación flujo
+- Renumeración #022–#025 (antes #019–#021)
+- Regla `bitacora.mdc`: exigir cita textual del prompt, no parafraseo
+
+### Ajustes requeridos
+
+- [x] Corregir entradas existentes
+- [x] Añadir sesiones omitidas
+- [x] Actualizar regla de agente
+
+---
+
+*Última actualización del archivo: 2026-06-18 08:55:35 CST*
