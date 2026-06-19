@@ -1,5 +1,5 @@
 import { spawnSync } from 'node:child_process';
-import { existsSync } from 'node:fs';
+import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 
 import { config } from 'dotenv';
@@ -11,13 +11,15 @@ if (existsSync(resolve(root, envFile))) {
   config({ path: resolve(root, envFile) });
 }
 
-const defineArgs = [];
+const ngAppVars = {};
 for (const [key, value] of Object.entries(process.env)) {
   if (!key.startsWith('NG_APP_') || value === undefined) {
     continue;
   }
-  defineArgs.push('--define', `${key}=${JSON.stringify(value)}`);
+  ngAppVars[key] = value;
 }
+
+const defineArgs = [`--define`, `NG_APP_VARS=${JSON.stringify(ngAppVars)}`];
 
 const ngArgs = process.argv.slice(2);
 if (ngArgs.length === 0) {

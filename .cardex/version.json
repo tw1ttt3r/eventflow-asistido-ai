@@ -1,7 +1,7 @@
 {
   "major": 0,
   "minor": 2,
-  "patch": 0,
+  "patch": 2,
   "knownBranches": [
     "tailwind",
     "feat/sonarqube",
@@ -214,6 +214,24 @@
       "reason": "minor",
       "detail": "nueva rama (feat/check-status-infra)",
       "sha": "d400fe4"
+    },
+    {
+      "at": "2026-06-19T04:28:36.764Z",
+      "from": "0.2.0",
+      "to": "0.2.1",
+      "branch": "feat/check-status-infra",
+      "reason": "patch",
+      "detail": "commit en rama (feat/check-status-infra)",
+      "sha": "a4faccf"
+    },
+    {
+      "at": "2026-06-19T04:29:49.705Z",
+      "from": "0.2.1",
+      "to": "0.2.2",
+      "branch": "feat/check-status-infra",
+      "reason": "patch",
+      "detail": "commit en rama (feat/check-status-infra)",
+      "sha": "a4faccf"
     }
   ]
 }
