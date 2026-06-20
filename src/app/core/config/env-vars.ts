@@ -3,7 +3,7 @@
 export type NgAppVars = Readonly<Record<string, string>>;
 
 export function readNgAppVars(): NgAppVars {
-  return typeof NG_APP_VARS !== 'undefined' ? NG_APP_VARS : {};
+  return typeof NG_APP_VARS == 'undefined' ? {} : NG_APP_VARS;
 }
 
 export function readNgAppVar(value: string | undefined, fallback = ''): string {
