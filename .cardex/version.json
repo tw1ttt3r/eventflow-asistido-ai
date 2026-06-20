@@ -1,7 +1,7 @@
 {
   "major": 0,
   "minor": 3,
-  "patch": 0,
+  "patch": 1,
   "knownBranches": [
     "tailwind",
     "feat/sonarqube",
@@ -368,6 +368,15 @@
       "reason": "minor",
       "detail": "nueva rama (feat/refactor-appwrite)",
       "sha": "2927d7c"
+    },
+    {
+      "at": "2026-06-20T16:01:05.748Z",
+      "from": "0.3.0",
+      "to": "0.3.1",
+      "branch": "feat/refactor-appwrite",
+      "reason": "patch",
+      "detail": "commit en rama (feat/refactor-appwrite)",
+      "sha": "57a542d"
     }
   ]
 }
