@@ -679,3 +679,113 @@ La cobertura (82.2 %) alcanza el umbral del 80 % definido en `angular.json`, lo 
 
 ---
 
+
+## Entrada #017 — Scan Sonar
+
+| Campo | Valor |
+|-------|-------|
+| **Fecha y hora de ejecución** | 2026-06-20 09:54:42 UTC-06:00 |
+| **Inicio** | 2026-06-20 09:54:29 UTC-06:00 |
+| **Rama** | `feat/refactor-appwrite` |
+| **Proyecto** | Eventflow Asistido AI (`eventflow-asistido-ai`) |
+| **Status del scan** | **OK** |
+| **Exit code scanner** | 0 |
+
+### Resumen del scan
+
+Análisis subido correctamente a SonarQube/SonarCloud. Quality Gate **OK** — todas las condiciones cumplidas.
+
+### Métricas overall (código)
+
+| Métrica | Valor |
+|---------|-------|
+| Quality Gate | ✅ OK |
+| Bugs | 0 |
+| Vulnerabilidades | 0 |
+| Code smells | 1 |
+| Security hotspots | 0 |
+| Cobertura (%) | 83.7 |
+| Duplicación (%) | 0.0 |
+| Líneas de código (ncloc) | 414 |
+| Deuda técnica (min) | 2 |
+| Rating fiabilidad | A (1.0) |
+| Rating seguridad | A (1.0) |
+| Rating mantenibilidad | A (1.0) |
+
+### Detalle de archivos
+
+**Archivos analizados:** 1 · **Sin hallazgos:** 0 · **Con hallazgos:** 1 · **Issues abiertos:** 1
+
+**Por nivel:** Menor: 1
+
+**Por tipo:** Code smell: 1
+
+#### Hallazgos abiertos
+
+| Ruta | Nivel | Tipo | Status | Línea | Regla | Mensaje |
+|------|-------|------|--------|-------|-------|---------|
+| `src/app/core/config/env-vars.ts` | Menor | Code smell | Abierto | 6 | `typescript:S7735` | Unexpected negated condition. |
+
+#### Inventario por archivo
+
+| Ruta | Nivel máx. | Tipos | Status | ncloc | Bugs | Vuln. | Smells | Cobertura % | Hallazgos |
+|------|------------|-------|--------|-------|------|-------|--------|-------------|-----------|
+| `src/app/core/config/env-vars.ts` | Menor | Code smell | ⚠️ Con hallazgos | — | 0 | 0 | 0 | — | 1 |
+
+### Análisis
+
+La cobertura (83.7 %) alcanza el umbral del 80 % definido en `angular.json`, lo que indica tests suficientes para el código analizado. 1 code smell(s): deuda de mantenibilidad acumulada; no bloquean por sí solos pero elevan el costo de cambio. El Quality Gate pasó: las métricas cumplen los umbrales configurados en el servidor Sonar. 1 hallazgo(s) abierto(s) en 1 archivo(s); revisa la tabla de detalle en esta entrada.
+
+---
+
+
+## Entrada #018 — Scan Sonar
+
+| Campo | Valor |
+|-------|-------|
+| **Fecha y hora de ejecución** | 2026-06-20 09:57:47 UTC-06:00 |
+| **Inicio** | 2026-06-20 09:57:34 UTC-06:00 |
+| **Rama** | `feat/refactor-appwrite` |
+| **Proyecto** | Eventflow Asistido AI (`eventflow-asistido-ai`) |
+| **Status del scan** | **OK** |
+| **Exit code scanner** | 0 |
+
+### Resumen del scan
+
+Análisis subido correctamente a SonarQube/SonarCloud. Quality Gate **OK** — todas las condiciones cumplidas.
+
+### Métricas overall (código)
+
+| Métrica | Valor |
+|---------|-------|
+| Quality Gate | ✅ OK |
+| Bugs | 0 |
+| Vulnerabilidades | 0 |
+| Code smells | 0 |
+| Security hotspots | 0 |
+| Cobertura (%) | 83.7 |
+| Duplicación (%) | 0.0 |
+| Líneas de código (ncloc) | 414 |
+| Deuda técnica (min) | 0 |
+| Rating fiabilidad | A (1.0) |
+| Rating seguridad | A (1.0) |
+| Rating mantenibilidad | A (1.0) |
+
+### Detalle de archivos
+
+**Archivos analizados:** 0 · **Sin hallazgos:** 0 · **Con hallazgos:** 0 · **Issues abiertos:** 0
+
+#### Hallazgos abiertos
+
+_Sin hallazgos abiertos en esta ejecución._
+
+#### Inventario por archivo
+
+_Inventario de archivos no disponible._
+
+### Análisis
+
+La cobertura (83.7 %) alcanza el umbral del 80 % definido en `angular.json`, lo que indica tests suficientes para el código analizado. El Quality Gate pasó: las métricas cumplen los umbrales configurados en el servidor Sonar.
+
+---
+
