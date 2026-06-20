@@ -82,7 +82,7 @@ pnpm exec ng generate environments
 2. Define variables con prefijo `NG_APP_` (por ejemplo `NG_APP_API_URL`, `NG_APP_APPWRITE_PROJECT_ID`)
 3. Los scripts `start` / `build` usan `scripts/with-env.mjs` para cargar `.env` e inyectarlas con `--define`
 
-Los archivos `src/environments/environment*.ts` **no** guardan URLs ni IDs: solo cadenas vacías, `production` y `version`. Los valores reales viven en `.env`, se mapean vía `env.registry.ts` y quedan en campos directos de `Environment` (`apiUrl`, `appwrite.endpoint`, etc.).
+Los archivos `src/environments/environment*.ts` **no** guardan URLs ni IDs: solo cadenas vacías, `production: false` (placeholder) y `version`. Los valores reales viven en `.env`, se mapean vía `env.registry.ts` y quedan en campos de `Environment`. `production` **no** va en `.env`: `with-env.mjs` inyecta `APP_PRODUCTION` (`false` en `pnpm start`, `true` en `pnpm build`).
 
 | Paso | Acción |
 |------|--------|
@@ -211,7 +211,10 @@ cp .env.example .env
 ```env
 SONAR_HOST_URL=https://sonar.orb.local/
 SONAR_TOKEN=<tu-token>
+SONAR_PROJECT_KEY=eventflow-asistido-ai
 ```
+
+`SONAR_PROJECT_KEY` override el `sonar.projectKey` de `sonar-project.properties` en `pnpm sonar`. También alimenta `environment.sonar.projectKey` en la app.
 
 3. Si usas SonarCloud y tu organización no está en `sonar-project.properties`, descomenta y define:
 
