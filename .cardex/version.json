@@ -1,7 +1,7 @@
 {
   "major": 0,
   "minor": 2,
-  "patch": 8,
+  "patch": 10,
   "knownBranches": [
     "tailwind",
     "feat/sonarqube",
@@ -286,6 +286,24 @@
       "reason": "patch",
       "detail": "commit en rama (feat/check-status-infra)",
       "sha": "945ace8"
+    },
+    {
+      "at": "2026-06-20T15:14:05.934Z",
+      "from": "0.2.8",
+      "to": "0.2.9",
+      "branch": "feat/check-status-infra",
+      "reason": "patch",
+      "detail": "commit en rama (feat/check-status-infra)",
+      "sha": "1be931d"
+    },
+    {
+      "at": "2026-06-20T15:14:26.098Z",
+      "from": "0.2.9",
+      "to": "0.2.10",
+      "branch": "feat/check-status-infra",
+      "reason": "patch",
+      "detail": "commit en rama (feat/check-status-infra)",
+      "sha": "1be931d"
     }
   ]
 }

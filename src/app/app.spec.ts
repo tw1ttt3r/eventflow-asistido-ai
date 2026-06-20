@@ -17,6 +17,10 @@ const mockEnv = {
     projectId: 'test-project',
     projectName: 'Eventflow Asistido (dev)',
   },
+  sonar: {
+    hostUrl: 'http://localhost:9000',
+    projectKey: 'eventflow-asistido-ai',
+  },
 };
 
 describe('App', () => {

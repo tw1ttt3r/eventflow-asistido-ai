@@ -9,4 +9,9 @@ export interface Environment {
     projectId: string;
     projectName: string;
   };
+  /** Solo desarrollo: Sonar no aplica en producción. */
+  sonar?: {
+    hostUrl: string;
+    projectKey: string;
+  };
 }
