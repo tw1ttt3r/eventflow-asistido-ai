@@ -56,6 +56,11 @@ const STATUS_LABELS = {
 const FILE_METRIC_KEYS = ['ncloc', 'bugs', 'vulnerabilities', 'code_smells', 'coverage', 'duplicated_lines_density'];
 
 export function readProjectKey() {
+  const fromEnv = process.env.SONAR_PROJECT_KEY?.trim();
+  if (fromEnv) {
+    return fromEnv;
+  }
+
   const content = readFileSync(sonarPropsPath, 'utf8');
   const match = content.match(/^sonar\.projectKey=(.+)$/m);
   return match?.[1]?.trim() ?? 'eventflow-asistido-ai';
@@ -175,7 +180,7 @@ export async function fetchSonarIssues(hostUrl, token, projectKey) {
 export async function fetchSonarFileMetrics(hostUrl, token, projectKey) {
   const base = hostUrl.replace(/\/$/, '');
   const metricKeys = FILE_METRIC_KEYS.join(',');
-  const url = `${base}/api/measures/component_tree?component=${encodeURIComponent(projectKey)}&metricKeys=${metricKeys}&qualifiers=FIL`;
+  const url = `${base}/api/measures/component?component=${encodeURIComponent(projectKey)}&metricKeys=${metricKeys}&qualifiers=FIL`;
   const components = await fetchAllPages(url, token);
 
   return components.map((component) => ({

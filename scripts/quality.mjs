@@ -27,8 +27,8 @@ if (!process.env['SONAR_TOKEN']) {
 }
 
 if (!process.env['SONAR_HOST_URL']) {
-  process.env['SONAR_HOST_URL'] = 'https://sonar.orb.local/';
-  console.log('SONAR_HOST_URL no definido; usando https://sonar.orb.local/');
+  process.env['SONAR_HOST_URL'] = 'http://localhost:9000/';
+  console.log('SONAR_HOST_URL no definido; usando http://localhost:9000/');
 }
 
 function run(command, args, label) {
