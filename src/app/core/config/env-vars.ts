@@ -10,6 +10,23 @@ export function readNgAppVar(value: string | undefined, fallback = ''): string {
   return value !== undefined && value !== '' ? value : fallback;
 }
 
+/** Interpreta `true` / `false` (y variantes) desde variables de entorno. */
+export function parseEnvBoolean(value: string | undefined, fallback: boolean): boolean {
+  if (value === undefined || value === '') {
+    return fallback;
+  }
+
+  const normalized = value.trim().toLowerCase();
+  if (['true', '1', 'yes', 'on'].includes(normalized)) {
+    return true;
+  }
+  if (['false', '0', 'no', 'off'].includes(normalized)) {
+    return false;
+  }
+
+  return fallback;
+}
+
 export function getNgAppVar(key: string, fallback = ''): string {
   const vars = readNgAppVars();
   return readNgAppVar(vars[key], fallback);

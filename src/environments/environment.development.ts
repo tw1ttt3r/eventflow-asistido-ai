@@ -7,16 +7,15 @@ export const environment: Environment = {
   appName: '',
   version: APP_VERSION,
 
-
-
-
-
-
   apiKey: '',
 
   appwrite: {
     endpoint: '',
     projectId: '',
     projectName: '',
+  },
+  sonar: {
+    hostUrl: '',
+    projectKey: '',
   },
 };

@@ -2,15 +2,10 @@ import type { Environment } from './environment.model';
 import { APP_VERSION } from '../version';
 
 export const environment: Environment = {
-  production: true,
+  production: false,
   apiUrl: '',
   appName: '',
   version: APP_VERSION,
-
-
-
-
-
 
   apiKey: '',
 

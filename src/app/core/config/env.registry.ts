@@ -27,6 +27,14 @@ export const ENV_FIELD_REGISTRY = {
     path: 'appwrite.projectName',
     description: 'Nombre del proyecto en Appwrite',
   },
+  NG_APP_SONAR_HOST_URL: {
+    path: 'sonar.hostUrl',
+    description: 'URL del servidor SonarQube/SonarCloud (solo desarrollo)',
+  },
+  NG_APP_SONAR_PROJECT_KEY: {
+    path: 'sonar.projectKey',
+    description: 'Project key de Sonar (solo desarrollo)',
+  },
 } as const satisfies Record<string, { path: string; description: string }>;
 
 export type RegistryEnvKey = keyof typeof ENV_FIELD_REGISTRY;
