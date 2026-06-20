@@ -282,3 +282,400 @@ Sin datos suficientes para un análisis detallado; verifica conectividad con la 
 
 ---
 
+
+## Entrada #008 — Scan Sonar
+
+| Campo | Valor |
+|-------|-------|
+| **Fecha y hora de ejecución** | 2026-06-18 23:11:02 UTC-06:00 |
+| **Inicio** | 2026-06-18 23:10:44 UTC-06:00 |
+| **Rama** | `feat/check-status-infra` |
+| **Proyecto** | Eventflow Asistido AI (`eventflow-asistido-ai`) |
+| **Status del scan** | **OK** |
+| **Exit code scanner** | 0 |
+
+### Resumen del scan
+
+Análisis subido correctamente a SonarQube/SonarCloud. No se pudieron consultar métricas vía API: 403 : {"errors":[{"msg":"Insufficient privileges"}]}
+
+### Métricas overall (código)
+
+_Métricas no disponibles (403 : {"errors":[{"msg":"Insufficient privileges"}]})._
+
+### Detalle de archivos
+
+_Detalle de archivos no disponible (403 : {"errors":[{"msg":"Insufficient privileges"}]})._
+
+#### Hallazgos abiertos
+
+_Hallazgos no disponibles (403 : {"errors":[{"msg":"Insufficient privileges"}]})._
+
+#### Inventario por archivo
+
+_Inventario no disponible (403 : {"errors":[{"msg":"Insufficient privileges"}]})._
+
+### Análisis
+
+Sin datos suficientes para un análisis detallado; verifica conectividad con la API de Sonar.
+
+---
+
+
+## Entrada #009 — Scan Sonar
+
+| Campo | Valor |
+|-------|-------|
+| **Fecha y hora de ejecución** | 2026-06-19 23:42:16 UTC-06:00 |
+| **Inicio** | 2026-06-19 23:42:01 UTC-06:00 |
+| **Rama** | `feat/check-status-infra` |
+| **Proyecto** | Eventflow Asistido AI (`eventflow-asistido-ai`) |
+| **Status del scan** | **ERROR** |
+| **Exit code scanner** | 1 |
+
+### Resumen del scan
+
+El scanner `@sonar/scan` terminó con código distinto de cero. No se pudieron consultar métricas vía API: 404 : {"errors":[{"msg":"Project \u0027eventflow-asistido-ai\u0027 not found"}]}
+
+### Métricas overall (código)
+
+_Métricas no disponibles (404 : {"errors":[{"msg":"Project \u0027eventflow-asistido-ai\u0027 not found"}]})._
+
+### Detalle de archivos
+
+_Detalle de archivos no disponible (404 : {"errors":[{"msg":"Project \u0027eventflow-asistido-ai\u0027 not found"}]})._
+
+#### Hallazgos abiertos
+
+_Hallazgos no disponibles (404 : {"errors":[{"msg":"Project \u0027eventflow-asistido-ai\u0027 not found"}]})._
+
+#### Inventario por archivo
+
+_Inventario no disponible (404 : {"errors":[{"msg":"Project \u0027eventflow-asistido-ai\u0027 not found"}]})._
+
+### Análisis
+
+El scan falló antes de completar el análisis. Revisa la salida de consola, el token (`SONAR_TOKEN`), la URL (`SONAR_HOST_URL`) y que el proyecto exista en el servidor Sonar con el `projectKey` configurado.
+
+---
+
+
+## Entrada #010 — Scan Sonar
+
+| Campo | Valor |
+|-------|-------|
+| **Fecha y hora de ejecución** | 2026-06-19 23:44:58 UTC-06:00 |
+| **Inicio** | 2026-06-19 23:44:41 UTC-06:00 |
+| **Rama** | `feat/check-status-infra` |
+| **Proyecto** | Eventflow Asistido AI (`eventflow-asistido-ai`) |
+| **Status del scan** | **ERROR** |
+| **Exit code scanner** | 1 |
+
+### Resumen del scan
+
+El scanner `@sonar/scan` terminó con código distinto de cero. No se pudieron consultar métricas vía API: 404 : {"errors":[{"msg":"Component key \u0027eventflow-asistido-ai\u0027 not found"}]}
+
+### Métricas overall (código)
+
+_Métricas no disponibles (404 : {"errors":[{"msg":"Component key \u0027eventflow-asistido-ai\u0027 not found"}]})._
+
+### Detalle de archivos
+
+_Detalle de archivos no disponible (404 : {"errors":[{"msg":"Component key \u0027eventflow-asistido-ai\u0027 not found"}]})._
+
+#### Hallazgos abiertos
+
+_Hallazgos no disponibles (404 : {"errors":[{"msg":"Component key \u0027eventflow-asistido-ai\u0027 not found"}]})._
+
+#### Inventario por archivo
+
+_Inventario no disponible (404 : {"errors":[{"msg":"Component key \u0027eventflow-asistido-ai\u0027 not found"}]})._
+
+### Análisis
+
+El scan falló antes de completar el análisis. Revisa la salida de consola, el token (`SONAR_TOKEN`), la URL (`SONAR_HOST_URL`) y que el proyecto exista en el servidor Sonar con el `projectKey` configurado.
+
+---
+
+
+## Entrada #011 — Scan Sonar
+
+| Campo | Valor |
+|-------|-------|
+| **Fecha y hora de ejecución** | 2026-06-20 07:56:18 UTC-06:00 |
+| **Inicio** | 2026-06-20 07:56:18 UTC-06:00 |
+| **Rama** | `feat/check-status-infra` |
+| **Proyecto** | Eventflow Asistido AI (`eventflow-asistido-ai`) |
+| **Status del scan** | **ERROR** |
+| **Exit code scanner** | 1 |
+
+### Resumen del scan
+
+El scanner `@sonar/scan` terminó con código distinto de cero. No se pudieron consultar métricas vía API: fetch failed
+
+### Métricas overall (código)
+
+_Métricas no disponibles (fetch failed)._
+
+### Detalle de archivos
+
+_Detalle de archivos no disponible (fetch failed)._
+
+#### Hallazgos abiertos
+
+_Hallazgos no disponibles (fetch failed)._
+
+#### Inventario por archivo
+
+_Inventario no disponible (fetch failed)._
+
+### Análisis
+
+El scan falló antes de completar el análisis. Revisa la salida de consola, el token (`SONAR_TOKEN`), la URL (`SONAR_HOST_URL`) y que el proyecto exista en el servidor Sonar con el `projectKey` configurado.
+
+---
+
+
+## Entrada #012 — Scan Sonar
+
+| Campo | Valor |
+|-------|-------|
+| **Fecha y hora de ejecución** | 2026-06-20 07:58:44 UTC-06:00 |
+| **Inicio** | 2026-06-20 07:58:30 UTC-06:00 |
+| **Rama** | `feat/check-status-infra` |
+| **Proyecto** | Eventflow Asistido AI (`eventflow-asistido-ai`) |
+| **Status del scan** | **ERROR** |
+| **Exit code scanner** | 1 |
+
+### Resumen del scan
+
+El scanner `@sonar/scan` terminó con código distinto de cero. No se pudieron consultar métricas vía API: 404 : {"errors":[{"msg":"Component key \u0027eventflow-asistido-ai\u0027 not found"}]}
+
+### Métricas overall (código)
+
+_Métricas no disponibles (404 : {"errors":[{"msg":"Component key \u0027eventflow-asistido-ai\u0027 not found"}]})._
+
+### Detalle de archivos
+
+_Detalle de archivos no disponible (404 : {"errors":[{"msg":"Component key \u0027eventflow-asistido-ai\u0027 not found"}]})._
+
+#### Hallazgos abiertos
+
+_Hallazgos no disponibles (404 : {"errors":[{"msg":"Component key \u0027eventflow-asistido-ai\u0027 not found"}]})._
+
+#### Inventario por archivo
+
+_Inventario no disponible (404 : {"errors":[{"msg":"Component key \u0027eventflow-asistido-ai\u0027 not found"}]})._
+
+### Análisis
+
+El scan falló antes de completar el análisis. Revisa la salida de consola, el token (`SONAR_TOKEN`), la URL (`SONAR_HOST_URL`) y que el proyecto exista en el servidor Sonar con el `projectKey` configurado.
+
+---
+
+
+## Entrada #013 — Scan Sonar
+
+| Campo | Valor |
+|-------|-------|
+| **Fecha y hora de ejecución** | 2026-06-20 08:02:14 UTC-06:00 |
+| **Inicio** | 2026-06-20 08:02:00 UTC-06:00 |
+| **Rama** | `feat/check-status-infra` |
+| **Proyecto** | Eventflow Asistido AI (`eventflow-asistido-ai`) |
+| **Status del scan** | **ERROR** |
+| **Exit code scanner** | 1 |
+
+### Resumen del scan
+
+El scanner `@sonar/scan` terminó con código distinto de cero. No se pudieron consultar métricas vía API: 404 : {"errors":[{"msg":"Component key \u0027eventflow-asistido-ai\u0027 not found"}]}
+
+### Métricas overall (código)
+
+_Métricas no disponibles (404 : {"errors":[{"msg":"Component key \u0027eventflow-asistido-ai\u0027 not found"}]})._
+
+### Detalle de archivos
+
+_Detalle de archivos no disponible (404 : {"errors":[{"msg":"Component key \u0027eventflow-asistido-ai\u0027 not found"}]})._
+
+#### Hallazgos abiertos
+
+_Hallazgos no disponibles (404 : {"errors":[{"msg":"Component key \u0027eventflow-asistido-ai\u0027 not found"}]})._
+
+#### Inventario por archivo
+
+_Inventario no disponible (404 : {"errors":[{"msg":"Component key \u0027eventflow-asistido-ai\u0027 not found"}]})._
+
+### Análisis
+
+El scan falló antes de completar el análisis. Revisa la salida de consola, el token (`SONAR_TOKEN`), la URL (`SONAR_HOST_URL`) y que el proyecto exista en el servidor Sonar con el `projectKey` configurado.
+
+---
+
+
+## Entrada #014 — Scan Sonar
+
+| Campo | Valor |
+|-------|-------|
+| **Fecha y hora de ejecución** | 2026-06-20 08:03:34 UTC-06:00 |
+| **Inicio** | 2026-06-20 08:03:18 UTC-06:00 |
+| **Rama** | `feat/check-status-infra` |
+| **Proyecto** | Eventflow Asistido AI (`eventflow-asistido-ai`) |
+| **Status del scan** | **OK** |
+| **Exit code scanner** | 0 |
+
+### Resumen del scan
+
+Análisis subido correctamente a SonarQube/SonarCloud. Quality Gate **NONE** — todas las condiciones cumplidas.
+
+### Métricas overall (código)
+
+| Métrica | Valor |
+|---------|-------|
+| Quality Gate | — |
+| Bugs | — |
+| Vulnerabilidades | — |
+| Code smells | — |
+| Security hotspots | — |
+| Cobertura (%) | — |
+| Duplicación (%) | — |
+| Líneas de código (ncloc) | — |
+| Deuda técnica (min) | — |
+| Rating fiabilidad | — |
+| Rating seguridad | — |
+| Rating mantenibilidad | — |
+
+### Detalle de archivos
+
+**Archivos analizados:** 0 · **Sin hallazgos:** 0 · **Con hallazgos:** 0 · **Issues abiertos:** 0
+
+#### Hallazgos abiertos
+
+_Sin hallazgos abiertos en esta ejecución._
+
+#### Inventario por archivo
+
+_Inventario de archivos no disponible._
+
+### Análisis
+
+Sin datos suficientes para un análisis detallado; verifica conectividad con la API de Sonar.
+
+---
+
+
+## Entrada #015 — Scan Sonar
+
+| Campo | Valor |
+|-------|-------|
+| **Fecha y hora de ejecución** | 2026-06-20 08:20:33 UTC-06:00 |
+| **Inicio** | 2026-06-20 08:20:19 UTC-06:00 |
+| **Rama** | `feat/check-status-infra` |
+| **Proyecto** | Eventflow Asistido AI (`eventflow-asistido-ai`) |
+| **Status del scan** | **OK** |
+| **Exit code scanner** | 0 |
+
+### Resumen del scan
+
+Análisis subido correctamente a SonarQube/SonarCloud. Quality Gate **OK** — todas las condiciones cumplidas.
+
+### Métricas overall (código)
+
+| Métrica | Valor |
+|---------|-------|
+| Quality Gate | ✅ OK |
+| Bugs | 0 |
+| Vulnerabilidades | 0 |
+| Code smells | 1 |
+| Security hotspots | 0 |
+| Cobertura (%) | 82.2 |
+| Duplicación (%) | 0.0 |
+| Líneas de código (ncloc) | 364 |
+| Deuda técnica (min) | 2 |
+| Rating fiabilidad | A (1.0) |
+| Rating seguridad | A (1.0) |
+| Rating mantenibilidad | A (1.0) |
+
+### Detalle de archivos
+
+**Archivos analizados:** 1 · **Sin hallazgos:** 0 · **Con hallazgos:** 1 · **Issues abiertos:** 1
+
+**Por nivel:** Menor: 1
+
+**Por tipo:** Code smell: 1
+
+#### Hallazgos abiertos
+
+| Ruta | Nivel | Tipo | Status | Línea | Regla | Mensaje |
+|------|-------|------|--------|-------|-------|---------|
+| `src/app/core/config/env-vars.ts` | Menor | Code smell | Abierto | 6 | `typescript:S7735` | Unexpected negated condition. |
+
+#### Inventario por archivo
+
+| Ruta | Nivel máx. | Tipos | Status | ncloc | Bugs | Vuln. | Smells | Cobertura % | Hallazgos |
+|------|------------|-------|--------|-------|------|-------|--------|-------------|-----------|
+| `src/app/core/config/env-vars.ts` | Menor | Code smell | ⚠️ Con hallazgos | — | 0 | 0 | 0 | — | 1 |
+
+### Análisis
+
+La cobertura (82.2 %) alcanza el umbral del 80 % definido en `angular.json`, lo que indica tests suficientes para el código analizado. 1 code smell(s): deuda de mantenibilidad acumulada; no bloquean por sí solos pero elevan el costo de cambio. El Quality Gate pasó: las métricas cumplen los umbrales configurados en el servidor Sonar. 1 hallazgo(s) abierto(s) en 1 archivo(s); revisa la tabla de detalle en esta entrada.
+
+---
+
+
+## Entrada #016 — Scan Sonar
+
+| Campo | Valor |
+|-------|-------|
+| **Fecha y hora de ejecución** | 2026-06-20 09:11:11 UTC-06:00 |
+| **Inicio** | 2026-06-20 09:10:59 UTC-06:00 |
+| **Rama** | `feat/check-status-infra` |
+| **Proyecto** | Eventflow Asistido AI (`eventflow-asistido-ai`) |
+| **Status del scan** | **OK** |
+| **Exit code scanner** | 0 |
+
+### Resumen del scan
+
+Análisis subido correctamente a SonarQube/SonarCloud. Quality Gate **OK** — todas las condiciones cumplidas.
+
+### Métricas overall (código)
+
+| Métrica | Valor |
+|---------|-------|
+| Quality Gate | ✅ OK |
+| Bugs | 0 |
+| Vulnerabilidades | 0 |
+| Code smells | 1 |
+| Security hotspots | 0 |
+| Cobertura (%) | 82.2 |
+| Duplicación (%) | 0.0 |
+| Líneas de código (ncloc) | 364 |
+| Deuda técnica (min) | 2 |
+| Rating fiabilidad | A (1.0) |
+| Rating seguridad | A (1.0) |
+| Rating mantenibilidad | A (1.0) |
+
+### Detalle de archivos
+
+**Archivos analizados:** 1 · **Sin hallazgos:** 0 · **Con hallazgos:** 1 · **Issues abiertos:** 1
+
+**Por nivel:** Menor: 1
+
+**Por tipo:** Code smell: 1
+
+#### Hallazgos abiertos
+
+| Ruta | Nivel | Tipo | Status | Línea | Regla | Mensaje |
+|------|-------|------|--------|-------|-------|---------|
+| `src/app/core/config/env-vars.ts` | Menor | Code smell | Abierto | 6 | `typescript:S7735` | Unexpected negated condition. |
+
+#### Inventario por archivo
+
+| Ruta | Nivel máx. | Tipos | Status | ncloc | Bugs | Vuln. | Smells | Cobertura % | Hallazgos |
+|------|------------|-------|--------|-------|------|-------|--------|-------------|-----------|
+| `src/app/core/config/env-vars.ts` | Menor | Code smell | ⚠️ Con hallazgos | — | 0 | 0 | 0 | — | 1 |
+
+### Análisis
+
+La cobertura (82.2 %) alcanza el umbral del 80 % definido en `angular.json`, lo que indica tests suficientes para el código analizado. 1 code smell(s): deuda de mantenibilidad acumulada; no bloquean por sí solos pero elevan el costo de cambio. El Quality Gate pasó: las métricas cumplen los umbrales configurados en el servidor Sonar. 1 hallazgo(s) abierto(s) en 1 archivo(s); revisa la tabla de detalle en esta entrada.
+
+---
+

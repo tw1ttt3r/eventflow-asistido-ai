@@ -15,6 +15,7 @@ if (existsSync(envPath)) {
 
 const sonarHostUrl = process.env.SONAR_HOST_URL ?? 'http://localhost:9000';
 const sonarToken = process.env.SONAR_TOKEN;
+const sonarProjectKey = process.env.SONAR_PROJECT_KEY?.trim();
 
 if (!sonarToken) {
   console.error('Falta SONAR_TOKEN en .env');
@@ -23,15 +24,18 @@ if (!sonarToken) {
 
 const startedAt = formatTimestamp();
 
-const result = spawnSync(
-  'sonar',
-  [
-    `-Dsonar.host.url=${sonarHostUrl}`,
-    `-Dsonar.token=${sonarToken}`,
-    '-Dproject.settings=sonar-project.properties',
-    `-Dsonar.projectVersion=${process.env.npm_package_version ?? '0.0.0'}`,
-  ],
-  {
+const sonarArgs = [
+  `-Dsonar.host.url=${sonarHostUrl}`,
+  `-Dsonar.token=${sonarToken}`,
+  '-Dproject.settings=sonar-project.properties',
+  `-Dsonar.projectVersion=${process.env.npm_package_version ?? '0.0.0'}`,
+];
+
+if (sonarProjectKey) {
+  sonarArgs.push(`-Dsonar.projectKey=${sonarProjectKey}`);
+}
+
+const result = spawnSync('sonar', sonarArgs, {
     cwd: root,
     stdio: 'inherit',
     env: {

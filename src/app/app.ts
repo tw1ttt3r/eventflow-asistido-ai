@@ -1,6 +1,7 @@
-import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
+import { AppwriteService } from './core/appwrite/appwrite.service';
 import { APP_CONFIG } from './core/config/app-config';
 
 @Component({
@@ -63,7 +64,45 @@ import { APP_CONFIG } from './core/config/app-config';
                 }
               </dd>
             </div>
+            <div class="rounded-xl border border-slate-800 bg-slate-950/60 p-4 sm:col-span-2">
+              <dt class="text-xs font-medium uppercase tracking-wide text-slate-500">Appwrite</dt>
+              <dd class="mt-1 space-y-1 text-sm text-slate-300">
+                <p class="break-all font-mono text-indigo-300">{{ appwriteEndpoint() }}</p>
+                <p>
+                  @if (isAppwriteConfigured()) {
+                    <span class="text-emerald-400">Proyecto configurado</span>
+                    <span class="text-slate-500"> · </span>
+                  } @else {
+                    <span class="text-amber-300">Define variables NG_APP_* en .env</span>
+                  }
+                </p>
+                @if (appwritePingStatus(); as status) {
+                  <p
+                    [class]="
+                      status === 'ok'
+                        ? 'text-emerald-400'
+                        : status === 'error'
+                          ? 'text-rose-400'
+                          : 'text-slate-400'
+                    "
+                  >
+                    Ping: {{ appwritePingMessage() }}
+                  </p>
+                }
+              </dd>
+            </div>
           </dl>
+
+          <div class="mt-6 flex flex-wrap gap-3">
+            <button
+              type="button"
+              class="rounded-lg bg-fuchsia-600 px-4 py-2 text-sm font-medium text-white transition hover:bg-fuchsia-500 disabled:cursor-not-allowed disabled:opacity-50"
+              [disabled]="!isAppwriteConfigured() || appwritePingStatus() === 'loading'"
+              (click)="runAppwritePing()"
+            >
+              Probar conexión Appwrite
+            </button>
+          </div>
 
           <div class="mt-8">
             <h2 class="text-xs font-semibold uppercase tracking-wide text-slate-500">Stack</h2>
@@ -90,18 +129,42 @@ import { APP_CONFIG } from './core/config/app-config';
 })
 export class App {
   private readonly config = inject(APP_CONFIG);
+  private readonly appwrite = inject(AppwriteService);
 
-  protected readonly appName = computed(() => this.config.env.appName);
-  protected readonly version = computed(() => this.config.env.version);
-  protected readonly apiUrl = computed(() => this.config.env.apiUrl);
-  protected readonly isProduction = computed(() => this.config.env.production);
-  protected readonly hasApiKey = computed(() => this.config.secrets.apiKey !== null);
+  protected readonly appName = computed(() => this.config.appName);
+  protected readonly version = computed(() => this.config.version);
+  protected readonly apiUrl = computed(() => this.config.apiUrl);
+  protected readonly isProduction = computed(() => this.config.production);
+  protected readonly hasApiKey = computed(() => this.config.apiKey !== '');
+  protected readonly appwriteEndpoint = computed(() => this.appwrite.configuration.endpoint);
+  protected readonly appwriteProjectId = computed(() => this.appwrite.configuration.projectId);
+  protected readonly isAppwriteConfigured = computed(() => this.appwrite.isConfigured());
+
+  protected readonly appwritePingStatus = signal<'idle' | 'loading' | 'ok' | 'error'>('idle');
+  protected readonly appwritePingMessage = signal('');
 
   protected readonly stack = [
     'Angular 21',
+    'Appwrite',
     'Tailwind CSS v4',
     'PWA',
     'pnpm',
     'Vite (dev server)',
   ] as const;
+
+  protected async runAppwritePing(): Promise<void> {
+    this.appwritePingStatus.set('loading');
+    this.appwritePingMessage.set('conectando…');
+
+    try {
+      await this.appwrite.ping();
+      this.appwritePingStatus.set('ok');
+      this.appwritePingMessage.set('conexión correcta');
+    } catch (error) {
+      this.appwritePingStatus.set('error');
+      this.appwritePingMessage.set(
+        error instanceof Error ? error.message : 'Error al conectar con Appwrite',
+      );
+    }
+  }
 }

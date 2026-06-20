@@ -2,9 +2,9 @@ import type { Environment } from './environment.model';
 import { APP_VERSION } from '../version';
 
 export const environment: Environment = {
-  production: true,
-  apiUrl: 'https://api.eventflow.example',
-  appName: 'Eventflow Asistido',
+  production: false,
+  apiUrl: '',
+  appName: '',
   version: APP_VERSION,
 
 
@@ -15,16 +15,11 @@ export const environment: Environment = {
 
 
 
+  apiKey: '',
 
-
-
-
-
-
-
-
-
-
-
-
+  appwrite: {
+    endpoint: '',
+    projectId: '',
+    projectName: '',
+  },
 };
