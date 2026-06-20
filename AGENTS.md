@@ -13,7 +13,7 @@ En Cursor: abre el selector de modelo del Agent y elige **GPT-5.3 Codex** antes 
 - Bitácora calidad: `.quality/bitacora.md` (automática en cada `pnpm sonar`; ver `.cursor/rules/quality-bitacora.mdc`)
 - Badges README: actualizar sección **Tecnologías** al cambiar stack (ver `.cursor/rules/readme-badges.mdc`)
 - Appwrite: `src/app/core/appwrite/` — BaaS; valores solo en `NG_APP_*` (`.env`), `environment*.ts` con cadenas vacías
-- Variables `NG_APP_*`: registro en `env.registry.ts` → campos directos de `Environment`; `pnpm env:sync` (ver `.cursor/rules/env-vars.mdc`)
+- Variables `NG_APP_*`: registro en `env.registry.ts` → campos de `Environment`; Sonar solo en dev; `pnpm env:sync` (ver `.cursor/rules/env-vars.mdc`)
 
 ## Convenciones
 
