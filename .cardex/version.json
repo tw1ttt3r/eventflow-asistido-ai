@@ -1,11 +1,12 @@
 {
   "major": 0,
-  "minor": 2,
-  "patch": 16,
+  "minor": 3,
+  "patch": 0,
   "knownBranches": [
     "tailwind",
     "feat/sonarqube",
-    "feat/check-status-infra"
+    "feat/check-status-infra",
+    "feat/refactor-appwrite"
   ],
   "history": [
     {
@@ -358,6 +359,15 @@
       "reason": "patch",
       "detail": "commit en rama (feat/check-status-infra)",
       "sha": "9debb23"
+    },
+    {
+      "at": "2026-06-20T16:00:56.831Z",
+      "from": "0.2.16",
+      "to": "0.3.0",
+      "branch": "feat/refactor-appwrite",
+      "reason": "minor",
+      "detail": "nueva rama (feat/refactor-appwrite)",
+      "sha": "2927d7c"
     }
   ]
 }
