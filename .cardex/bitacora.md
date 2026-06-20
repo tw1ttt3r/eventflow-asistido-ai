@@ -851,4 +851,131 @@ Sin `@tailwindcss/postcss`, Angular solo compilaba tema/base de Tailwind; **no g
 
 ---
 
-*Última actualización del archivo: 2026-06-18 08:55:35 CST*
+## Entrada #027 — Bloque `sonar` en Environment + `SONAR_PROJECT_KEY`
+
+| Campo | Valor |
+|-------|--------|
+| **Fecha de ejecución** | 2026-06-20 |
+| **Hora de ejecución** | 07:36:35 CST |
+| **Tiempo total de ejecución** | ~90 s |
+| **Modelo de agente** | `gpt-5.3-codex` |
+| **Nivel de complejidad** | **Media** |
+
+### Prompt
+
+> oye, necesito que modifique sla estructura de los environments, para que las props de sonar vivan juntas (como las de appwrite), además añadí una nueva env SONAR_PROJECT_KEY, haz los cambios y añade de igual manera esta env
+
+### Criterios de complejidad
+
+| Criterio | Detalle |
+|----------|---------|
+| Archivos afectados | ~12 |
+| Objetivo | Agrupar Sonar en `environment.sonar`; integrar `SONAR_PROJECT_KEY` en app y scripts |
+| Impacto | Modelo Environment, registro env, alias `with-env`, `sonar.mjs`, bitácora Sonar |
+
+### Entregables
+
+- `environment.sonar`: `{ hostUrl, projectKey }`
+- `env.registry.ts`: `NG_APP_SONAR_HOST_URL`, `NG_APP_SONAR_PROJECT_KEY`
+- `scripts/env-aliases.mjs`: alias `SONAR_*` → `NG_APP_SONAR_*` para Angular
+- `sonar.mjs` / `sonar-bitacora.mjs`: usan `SONAR_PROJECT_KEY` del `.env`
+- `.env.example`, README, tests actualizados
+
+### Ajustes requeridos
+
+- [x] Bloque sonar en Environment
+- [x] Alias automático desde `SONAR_HOST_URL` / `SONAR_PROJECT_KEY`
+- [ ] Verificar `pnpm sonar` con `SONAR_PROJECT_KEY=Eventflow-Asistido-dev` local
+
+---
+
+## Entrada #028 — Sonar excluido del Environment de producción
+
+| Campo | Valor |
+|-------|--------|
+| **Fecha de ejecución** | 2026-06-20 |
+| **Hora de ejecución** | 07:45:00 CST (estimado) |
+| **Modelo de agente** | `gpt-5.3-codex` |
+| **Nivel de complejidad** | **Baja** |
+
+### Prompt
+
+> algo más, para el Environment de prod, necesito que las env de sonar no se listen, ya que en prod no serán necesarias
+
+### Entregables
+
+- `environment.ts` (prod): sin bloque `sonar`
+- `sonar?` opcional en `environment.model.ts`
+- `resolve-environment.ts`: omite mapeo Sonar si `production: true`
+- `with-env.mjs`: excluye `NG_APP_SONAR_*` del bundle en `pnpm build`
+- Test y docs actualizados
+
+### Ajustes requeridos
+
+- [x] Prod sin `environment.sonar`
+- [x] Dev conserva `sonar` en `environment.development.ts`
+
+---
+
+## Entrada #029 — `production` vía `NG_APP_PRODUCTION`
+
+| Campo | Valor |
+|-------|--------|
+| **Fecha de ejecución** | 2026-06-20 |
+| **Hora de ejecución** | 08:50:00 CST (estimado) |
+| **Modelo de agente** | `gpt-5.3-codex` |
+| **Nivel de complejidad** | **Baja** |
+
+### Prompt
+
+> oye y algo más, la prop production manejemosla como env var
+
+### Entregables
+
+- `NG_APP_PRODUCTION` en registro y `.env.example`
+- `parseEnvBoolean` + resolución en `resolveEnvironment`
+- `with-env.mjs`: default `false` en serve, `true` en build si no está en `.env`
+- `environment.ts`: `production: false` como placeholder
+
+### Ajustes requeridos
+
+- [x] Producción controlada por env
+- [x] ~~Añadir `NG_APP_PRODUCTION=false` al `.env` local~~ (revertido en #030: `production` ya no es variable de usuario)
+
+---
+
+## Entrada #030 — `production` derivada del comando (sin `NG_APP_*`)
+
+| Campo | Valor |
+|-------|--------|
+| **Fecha de ejecución** | 2026-06-20 |
+| **Hora de ejecución** | 09:07:38 – 09:08:08 CST |
+| **Tiempo total** | ~30 s |
+| **Modelo de agente** | `gpt-5.3-codex` |
+| **Nivel de complejidad** | **Baja** |
+
+### Prompt
+
+> hazlo
+
+### Criterios de complejidad
+
+- 8 archivos; refactor local del flujo env; sin cambio de arquitectura; impacto en scripts y `resolve-environment`.
+
+### Entregables
+
+- Eliminado `NG_APP_PRODUCTION` de `env.registry.ts` y `.env.example`
+- `with-env.mjs`: ignora `NG_APP_PRODUCTION` en `.env`; inyecta `APP_PRODUCTION` vía `--define` según serve/build
+- `resolve-environment.ts`: lee `APP_PRODUCTION`; opción `production` solo para tests
+- `sync-env.mjs` + `env.d.ts`: declaración de `APP_PRODUCTION`
+- README y `env-vars.mdc` actualizados
+- Tests 13/13 OK
+
+### Ajustes requeridos
+
+- [x] `production` no configurable en `.env`
+- [x] Quitar `NG_APP_PRODUCTION` del `.env` local si existía
+
+---
+
+*Última actualización del archivo: 2026-06-20 09:08:08 CST*
