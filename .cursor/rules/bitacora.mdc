@@ -11,6 +11,7 @@ Al **finalizar cada prompt** en el que hayas realizado trabajo (código, config,
 
 - Añade una **nueva entrada** al final (no sobrescribas entradas anteriores).
 - Numera secuencialmente: `#002`, `#003`, etc. (la siguiente al último número existente).
+- **Una entrada por prompt del usuario**, incluidos turnos informativos (complejidad baja, 0 archivos) y turnos de una sola palabra si hubo trabajo (`hazlo`, fix puntual, etc.).
 - Obtén fecha y hora con `date '+%Y-%m-%d %H:%M:%S %Z'` al **inicio** y al **cierre** del turno cuando sea posible.
 - Calcula **tiempo total en segundos** (diferencia entre inicio y cierre, o suma de comandos si no hay marcas).
 
@@ -23,7 +24,7 @@ Al **finalizar cada prompt** en el que hayas realizado trabajo (código, config,
 | Tiempo total | Segundos (número o rango estimado con nota) |
 | Modelo de agente | `gpt-5.3-codex` (o el usado si el usuario indicó otro) |
 | Nivel de complejidad | **Baja** / **Media** / **Alta** |
-| Prompt | Cita breve o resumen del pedido del usuario |
+| Prompt | **Cita textual** del mensaje del usuario (blockquote `>`); no parafrasear ni resumir salvo que el usuario pidió solo una frase muy larga — en ese caso cita las frases clave entre comillas y marca `[…]` si omites tramo |
 | Criterios de complejidad | Archivos afectados, objetivo, impacto, funcionalidad afectada |
 | Entregables | Lista de lo hecho |
 | Ajustes requeridos | Checklist `- [ ]` / `- [x]` |
@@ -40,7 +41,7 @@ Cierra la respuesta con la sección **## Reporte de ejecución** (misma metadata
 
 ## Excepciones
 
-- Preguntas puramente informativas sin cambios: no edites `bitacora.md`; indícalo en el reporte (complejidad baja, 0 archivos).
+- Preguntas puramente informativas **sin cambios en repo**: registra entrada con complejidad baja y 0 archivos (no omitas el turno).
 - Si el usuario pide explícitamente no registrar, obedece solo ese turno.
 
 ## Persistencia entre equipos

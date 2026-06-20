@@ -1,10 +1,11 @@
 {
   "major": 0,
-  "minor": 1,
-  "patch": 8,
+  "minor": 2,
+  "patch": 16,
   "knownBranches": [
     "tailwind",
-    "feat/sonarqube"
+    "feat/sonarqube",
+    "feat/check-status-infra"
   ],
   "history": [
     {
@@ -204,6 +205,159 @@
       "reason": "patch",
       "detail": "commit en rama (feat/sonarqube)",
       "sha": "3755413"
+    },
+    {
+      "at": "2026-06-18T18:12:37.888Z",
+      "from": "0.1.8",
+      "to": "0.2.0",
+      "branch": "feat/check-status-infra",
+      "reason": "minor",
+      "detail": "nueva rama (feat/check-status-infra)",
+      "sha": "d400fe4"
+    },
+    {
+      "at": "2026-06-19T04:28:36.764Z",
+      "from": "0.2.0",
+      "to": "0.2.1",
+      "branch": "feat/check-status-infra",
+      "reason": "patch",
+      "detail": "commit en rama (feat/check-status-infra)",
+      "sha": "a4faccf"
+    },
+    {
+      "at": "2026-06-19T04:29:49.705Z",
+      "from": "0.2.1",
+      "to": "0.2.2",
+      "branch": "feat/check-status-infra",
+      "reason": "patch",
+      "detail": "commit en rama (feat/check-status-infra)",
+      "sha": "a4faccf"
+    },
+    {
+      "at": "2026-06-19T04:30:15.439Z",
+      "from": "0.2.2",
+      "to": "0.2.3",
+      "branch": "feat/check-status-infra",
+      "reason": "patch",
+      "detail": "commit en rama (feat/check-status-infra)",
+      "sha": "a08a409"
+    },
+    {
+      "at": "2026-06-19T04:34:09.266Z",
+      "from": "0.2.3",
+      "to": "0.2.4",
+      "branch": "feat/check-status-infra",
+      "reason": "patch",
+      "detail": "commit en rama (feat/check-status-infra)",
+      "sha": "a5467ba"
+    },
+    {
+      "at": "2026-06-19T04:36:06.814Z",
+      "from": "0.2.4",
+      "to": "0.2.5",
+      "branch": "feat/check-status-infra",
+      "reason": "patch",
+      "detail": "commit en rama (feat/check-status-infra)",
+      "sha": "ccc42a4"
+    },
+    {
+      "at": "2026-06-19T04:38:30.545Z",
+      "from": "0.2.5",
+      "to": "0.2.6",
+      "branch": "feat/check-status-infra",
+      "reason": "patch",
+      "detail": "commit en rama (feat/check-status-infra)",
+      "sha": "6be6d58"
+    },
+    {
+      "at": "2026-06-20T15:12:23.618Z",
+      "from": "0.2.6",
+      "to": "0.2.7",
+      "branch": "feat/check-status-infra",
+      "reason": "patch",
+      "detail": "commit en rama (feat/check-status-infra)",
+      "sha": "945ace8"
+    },
+    {
+      "at": "2026-06-20T15:13:36.738Z",
+      "from": "0.2.7",
+      "to": "0.2.8",
+      "branch": "feat/check-status-infra",
+      "reason": "patch",
+      "detail": "commit en rama (feat/check-status-infra)",
+      "sha": "945ace8"
+    },
+    {
+      "at": "2026-06-20T15:14:05.934Z",
+      "from": "0.2.8",
+      "to": "0.2.9",
+      "branch": "feat/check-status-infra",
+      "reason": "patch",
+      "detail": "commit en rama (feat/check-status-infra)",
+      "sha": "1be931d"
+    },
+    {
+      "at": "2026-06-20T15:14:26.098Z",
+      "from": "0.2.9",
+      "to": "0.2.10",
+      "branch": "feat/check-status-infra",
+      "reason": "patch",
+      "detail": "commit en rama (feat/check-status-infra)",
+      "sha": "1be931d"
+    },
+    {
+      "at": "2026-06-20T15:14:43.321Z",
+      "from": "0.2.10",
+      "to": "0.2.11",
+      "branch": "feat/check-status-infra",
+      "reason": "patch",
+      "detail": "commit en rama (feat/check-status-infra)",
+      "sha": "ad06e85"
+    },
+    {
+      "at": "2026-06-20T15:14:55.602Z",
+      "from": "0.2.11",
+      "to": "0.2.12",
+      "branch": "feat/check-status-infra",
+      "reason": "patch",
+      "detail": "commit en rama (feat/check-status-infra)",
+      "sha": "79b0665"
+    },
+    {
+      "at": "2026-06-20T15:15:09.769Z",
+      "from": "0.2.12",
+      "to": "0.2.13",
+      "branch": "feat/check-status-infra",
+      "reason": "patch",
+      "detail": "commit en rama (feat/check-status-infra)",
+      "sha": "97a522c"
+    },
+    {
+      "at": "2026-06-20T15:15:25.467Z",
+      "from": "0.2.13",
+      "to": "0.2.14",
+      "branch": "feat/check-status-infra",
+      "reason": "patch",
+      "detail": "commit en rama (feat/check-status-infra)",
+      "sha": "816496e"
+    },
+    {
+      "at": "2026-06-20T15:15:44.989Z",
+      "from": "0.2.14",
+      "to": "0.2.15",
+      "branch": "feat/check-status-infra",
+      "reason": "patch",
+      "detail": "commit en rama (feat/check-status-infra)",
+      "sha": "d8d0463"
+    },
+    {
+      "at": "2026-06-20T15:16:01.140Z",
+      "from": "0.2.15",
+      "to": "0.2.16",
+      "branch": "feat/check-status-infra",
+      "reason": "patch",
+      "detail": "commit en rama (feat/check-status-infra)",
+      "sha": "9debb23"
     }
   ]
 }

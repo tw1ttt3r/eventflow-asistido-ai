@@ -1,0 +1,46 @@
+---
+description: Registrar variables NG_APP_* en env.registry.ts y mapearlas a campos de Environment
+alwaysApply: true
+---
+
+# Variables de entorno (`NG_APP_*`)
+
+Todas las variables de `.env` con prefijo **`NG_APP_`** se inyectan en build/serve como `NG_APP_VARS` (JSON) vía `scripts/with-env.mjs` y se mapean **directamente** a campos de `Environment`.
+
+## Cómo añadir una variable nueva
+
+1. Añade la clave en `.env` y `.env.example`.
+2. Regístrala en **`src/app/core/config/env.registry.ts`** con el `path` al campo de `Environment`.
+3. Extiende **`src/environments/environment.model.ts`** y deja `''` en `environment.development.ts` (en `environment.ts` de prod no declares bloques solo-dev como `sonar`).
+4. Ejecuta **`pnpm env:sync`**.
+5. Úsala en la app:
+
+```typescript
+const env = inject(APP_CONFIG);
+env.apiUrl;                    // acceso directo tipado
+injectEnvVar('NG_APP_API_URL'); // por clave del registro
+```
+
+## Archivos del flujo
+
+| Archivo | Rol |
+|---------|-----|
+| `.env` / `.env.example` | Valores locales y plantilla |
+| `scripts/with-env.mjs` | Carga `.env` → `--define NG_APP_VARS={...}` y `APP_PRODUCTION` (serve/build) |
+| `env.registry.ts` | Mapa `NG_APP_*` → campo de `Environment` |
+| `resolve-environment.ts` | Aplica el registro sobre el environment base |
+| `APP_CONFIG` | Token que expone el `Environment` resuelto |
+| `pnpm env:sync` | Sincroniza `env.d.ts` y claves faltantes en `.env.example` |
+
+## Reglas para agentes
+
+- **No** pongas URLs, IDs ni secretos en `environment*.ts`; solo `''`, `production: false` (placeholder) y `version`.
+- **`production`** no es `NG_APP_*`: la define `with-env.mjs` según serve vs build (`APP_PRODUCTION`).
+- Toda `NG_APP_*` usada en la app **debe** estar en `env.registry.ts`.
+- Variables **Sonar** (`NG_APP_SONAR_*`): solo desarrollo; no se mapean ni empaquetan en `pnpm build` (prod).
+- Tras cambiar el registro, ejecuta `pnpm env:sync`.
+- Commitea `env.registry.ts`, `.env.example` y esta regla.
+
+## Persistencia entre equipos
+
+El registro y las reglas viven en Git. Tras `git pull`, `pnpm env:sync` y copiar `.env.example` → `.env`.
