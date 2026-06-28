@@ -7,6 +7,9 @@ alwaysApply: true
 
 Cada ejecución de **`pnpm test`**, **`pnpm test:coverage`** o **`pnpm test:all`** (directa o vía **`pnpm quality`**) debe quedar registrada en **`.quality/tests.md`**.
 
+- **`pnpm test`**: sin cobertura ni umbral (desarrollo).
+- **`pnpm test:coverage`**: configuración `coverage` en `angular.json` (lcov + umbral 80 %).
+
 ## Comportamiento automático
 
 El script `scripts/test.mjs` envuelve `ng test`, captura la salida y **append** una entrada con:
