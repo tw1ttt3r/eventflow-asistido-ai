@@ -29,6 +29,8 @@ const sonarArgs = [
   `-Dsonar.token=${sonarToken}`,
   '-Dproject.settings=sonar-project.properties',
   `-Dsonar.projectVersion=${process.env.npm_package_version ?? '0.0.0'}`,
+  '-Dsonar.qualitygate.wait=true',
+  '-Dsonar.qualitygate.timeout=300',
 ];
 
 if (sonarProjectKey) {

@@ -45,6 +45,6 @@ describe('FallbackRedirectPage', () => {
     fixture.detectChanges();
     await fixture.whenStable();
 
-    expect(navigateSpy).toHaveBeenCalledWith(['/session']);
+    expect(navigateSpy).toHaveBeenCalledWith(['/events']);
   });
 });

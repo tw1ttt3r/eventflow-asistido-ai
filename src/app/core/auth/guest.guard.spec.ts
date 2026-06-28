@@ -38,6 +38,6 @@ describe('guestGuard', () => {
     const router = TestBed.inject(Router);
     const result = await TestBed.runInInjectionContext(() => guestGuard({} as never, {} as never));
 
-    expect(result?.toString()).toBe(router.createUrlTree(['/session'], { queryParams: { flow: 'login' } }).toString());
+    expect(result?.toString()).toBe(router.createUrlTree(['/events']).toString());
   });
 });
