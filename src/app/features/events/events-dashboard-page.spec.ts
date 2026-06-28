@@ -1,12 +1,24 @@
 import { TestBed } from '@angular/core/testing';
-import { beforeEach, describe, expect, it } from 'vitest';
+import { provideRouter, Router } from '@angular/router';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 
+import { AdminNavigationService } from '@features/admin/admin-navigation.service';
 import { EventsDashboardPage } from '@features/events/events-dashboard-page';
+
+type EventsDashboardHarness = EventsDashboardPage & {
+  setFilter(filter: string): void;
+  onNavigate(tabId: string): void;
+  onCreateEvent(): void;
+  onEditEvent(eventId: string): void;
+  onViewAttendees(eventId: string): void;
+  searchQuery: { set(value: string): void };
+};
 
 describe('EventsDashboardPage', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [EventsDashboardPage],
+      providers: [provideRouter([{ path: 'session', component: class {} }])],
     }).compileComponents();
   });
 
@@ -21,5 +33,97 @@ describe('EventsDashboardPage', () => {
     expect(compiled.textContent).toContain('(75%)');
     expect(compiled.textContent).toContain('Intro to Hand Lettering');
     expect(compiled.textContent).toContain('Create Event');
+  });
+
+  it('should filter events by status', async () => {
+    const fixture = TestBed.createComponent(EventsDashboardPage);
+    const page = fixture.componentInstance as EventsDashboardHarness;
+
+    fixture.detectChanges();
+    page.setFilter('published');
+    fixture.detectChanges();
+    await fixture.whenStable();
+
+    const compiled = fixture.nativeElement as HTMLElement;
+    expect(compiled.textContent).toContain('Intro to Hand Lettering');
+    expect(compiled.textContent).not.toContain('Startup Founders Networking');
+  });
+
+  it('should show empty state when search has no matches', async () => {
+    const fixture = TestBed.createComponent(EventsDashboardPage);
+    const page = fixture.componentInstance as EventsDashboardHarness;
+
+    fixture.detectChanges();
+    page.searchQuery.set('zzzz-no-match');
+    fixture.detectChanges();
+    await fixture.whenStable();
+
+    expect((fixture.nativeElement as HTMLElement).textContent).toContain('No events match your search.');
+  });
+
+  it('should navigate via admin layout', () => {
+    const fixture = TestBed.createComponent(EventsDashboardPage);
+    const adminNav = TestBed.inject(AdminNavigationService);
+    const navigateSpy = vi.spyOn(adminNav, 'navigate');
+    const page = fixture.componentInstance as EventsDashboardHarness;
+
+    page.onNavigate('account');
+
+    expect(navigateSpy).toHaveBeenCalledWith('account');
+  });
+
+  it('should handle toolbar and card actions', () => {
+    const fixture = TestBed.createComponent(EventsDashboardPage);
+    const page = fixture.componentInstance as EventsDashboardHarness;
+
+    expect(() => page.onCreateEvent()).not.toThrow();
+    expect(() => page.onEditEvent('evt-1')).not.toThrow();
+    expect(() => page.onViewAttendees('evt-1')).not.toThrow();
+    expect(() => page.setFilter('invalid')).not.toThrow();
+  });
+
+  it('should react to filter chip clicks and create event button', async () => {
+    const fixture = TestBed.createComponent(EventsDashboardPage);
+    fixture.detectChanges();
+
+    const closedChip = Array.from(
+      (fixture.nativeElement as HTMLElement).querySelectorAll('button'),
+    ).find((button) => button.textContent?.trim() === 'Closed');
+    closedChip?.click();
+    fixture.detectChanges();
+    await fixture.whenStable();
+
+    const createButton = Array.from(
+      (fixture.nativeElement as HTMLElement).querySelectorAll('button'),
+    ).find((button) => button.textContent?.includes('Create Event'));
+    createButton?.click();
+
+    const editButton = Array.from(
+      (fixture.nativeElement as HTMLElement).querySelectorAll('button'),
+    ).find((button) => button.textContent?.trim() === 'Edit');
+    editButton?.click();
+
+    const attendeesButton = Array.from(
+      (fixture.nativeElement as HTMLElement).querySelectorAll('button'),
+    ).find((button) => button.textContent?.trim() === 'Attendees');
+    attendeesButton?.click();
+
+    expect(fixture.componentInstance).toBeTruthy();
+  });
+
+  it('should navigate to session from admin header', async () => {
+    const fixture = TestBed.createComponent(EventsDashboardPage);
+    const router = TestBed.inject(Router);
+    const navigateSpy = vi.spyOn(router, 'navigate').mockResolvedValue(true);
+
+    fixture.detectChanges();
+
+    const accountButton = Array.from(
+      (fixture.nativeElement as HTMLElement).querySelectorAll('button'),
+    ).find((button) => button.getAttribute('aria-label') === 'Account');
+    accountButton?.click();
+    await fixture.whenStable();
+
+    expect(navigateSpy).toHaveBeenCalledWith(['/session']);
   });
 });

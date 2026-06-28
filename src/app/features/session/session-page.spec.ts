@@ -3,6 +3,7 @@ import { provideRouter, Router } from '@angular/router';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { AppwriteAuthService } from '@core/appwrite/appwrite-auth.service';
+import { AdminNavigationService } from '@features/admin/admin-navigation.service';
 import { SessionPage } from '@features/session/session-page';
 
 describe('SessionPage (profile)', () => {
@@ -70,5 +71,22 @@ describe('SessionPage (profile)', () => {
 
     expect(authMock.logout).toHaveBeenCalledOnce();
     expect(navigateSpy).toHaveBeenCalledWith(['/auth']);
+  });
+
+  it('should navigate via admin layout', async () => {
+    const fixture = TestBed.createComponent(SessionPage);
+    const adminNav = TestBed.inject(AdminNavigationService);
+    const navigateSpy = vi.spyOn(adminNav, 'navigate');
+
+    fixture.detectChanges();
+    await fixture.whenStable();
+    fixture.detectChanges();
+
+    const eventsButton = Array.from(
+      (fixture.nativeElement as HTMLElement).querySelectorAll('button'),
+    ).find((button) => button.textContent?.trim() === 'Events');
+    eventsButton?.click();
+
+    expect(navigateSpy).toHaveBeenCalledWith('events');
   });
 });
