@@ -79,7 +79,7 @@ export class AuthPage {
         password: value.password,
       });
 
-      await this.router.navigate(['/session'], { queryParams: { flow: 'register' } });
+      await this.router.navigate(['/events']);
     } catch (error) {
       this.authError.set(toAuthErrorMessage(error));
     } finally {
@@ -104,7 +104,7 @@ export class AuthPage {
         password: value.password,
       });
 
-      await this.router.navigate(['/session'], { queryParams: { flow: 'login' } });
+      await this.router.navigate(['/events']);
     } catch (error) {
       this.authError.set(toAuthErrorMessage(error));
     } finally {

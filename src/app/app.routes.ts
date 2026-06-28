@@ -15,9 +15,16 @@ export const routes: Routes = [
     loadComponent: () => import('./features/auth/auth-page').then((m) => m.AuthPage),
   },
   {
+    path: 'events',
+    canActivate: [authGuard],
+    loadComponent: () =>
+      import('./features/events/events-dashboard-page').then((m) => m.EventsDashboardPage),
+  },
+  {
     path: 'session',
     canActivate: [authGuard],
     loadComponent: () => import('./features/session/session-page').then((m) => m.SessionPage),
+    data: { profile: true },
   },
   {
     path: '**',
