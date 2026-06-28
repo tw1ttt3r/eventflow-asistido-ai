@@ -1,14 +1,15 @@
 {
   "major": 0,
-  "minor": 5,
-  "patch": 4,
+  "minor": 6,
+  "patch": 0,
   "knownBranches": [
     "tailwind",
     "feat/sonarqube",
     "feat/check-status-infra",
     "feat/refactor-appwrite",
     "feat/auth",
-    "fix/refactor-auth"
+    "fix/refactor-auth",
+    "feat/event-list"
   ],
   "history": [
     {
@@ -550,6 +551,15 @@
       "reason": "patch",
       "detail": "commit en rama (fix/refactor-auth)",
       "sha": "68b7d16"
+    },
+    {
+      "at": "2026-06-28T19:27:15.157Z",
+      "from": "0.5.4",
+      "to": "0.6.0",
+      "branch": "feat/event-list",
+      "reason": "minor",
+      "detail": "nueva rama (feat/event-list)",
+      "sha": "9c81156"
     }
   ]
 }
