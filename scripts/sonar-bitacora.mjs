@@ -106,6 +106,10 @@ function parseMeasuresPayload(data) {
   return measures;
 }
 
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
 async function fetchJson(url, token) {
   const response = await fetch(url, {
     headers: { Authorization: `Bearer ${token}` },
@@ -117,6 +121,46 @@ async function fetchJson(url, token) {
   }
 
   return response.json();
+}
+
+const CE_ACTIVE_STATUSES = new Set(['PENDING', 'IN_PROGRESS']);
+
+/**
+ * Espera a que SonarQube termine de procesar el análisis recién subido.
+ * Sin esta espera, la API devuelve el snapshot del scan anterior (race condition).
+ */
+export async function waitForSonarProcessing(hostUrl, token, projectKey, options = {}) {
+  const maxWaitMs = options.maxWaitMs ?? 180_000;
+  const pollIntervalMs = options.pollIntervalMs ?? 3_000;
+  const base = hostUrl.replace(/\/$/, '');
+  const url = `${base}/api/ce/component?component=${encodeURIComponent(projectKey)}`;
+  const deadline = Date.now() + maxWaitMs;
+  let lastStatus = 'desconocido';
+
+  while (Date.now() < deadline) {
+    const data = await fetchJson(url, token);
+    const currentStatus = data?.current?.status;
+    const queueStatus = data?.queue?.status;
+    const isActive =
+      CE_ACTIVE_STATUSES.has(currentStatus) || CE_ACTIVE_STATUSES.has(queueStatus);
+
+    if (isActive) {
+      lastStatus = currentStatus ?? queueStatus ?? 'PENDING';
+      console.log(`⏳ Sonar Compute Engine en curso (${lastStatus})…`);
+      await sleep(pollIntervalMs);
+      continue;
+    }
+
+    if (currentStatus === 'FAILED' || currentStatus === 'CANCELED') {
+      throw new Error(`Compute Engine terminó con status ${currentStatus}`);
+    }
+
+    return;
+  }
+
+  throw new Error(
+    `Timeout (${maxWaitMs} ms) esperando procesamiento Sonar CE (último status: ${lastStatus})`,
+  );
 }
 
 async function fetchAllPages(baseUrl, token, pageSize = 500) {
@@ -180,7 +224,7 @@ export async function fetchSonarIssues(hostUrl, token, projectKey) {
 export async function fetchSonarFileMetrics(hostUrl, token, projectKey) {
   const base = hostUrl.replace(/\/$/, '');
   const metricKeys = FILE_METRIC_KEYS.join(',');
-  const url = `${base}/api/measures/component?component=${encodeURIComponent(projectKey)}&metricKeys=${metricKeys}&qualifiers=FIL`;
+  const url = `${base}/api/measures/component_tree?component=${encodeURIComponent(projectKey)}&metricKeys=${metricKeys}&qualifiers=FIL`;
   const components = await fetchAllPages(url, token);
 
   return components.map((component) => ({
@@ -340,7 +384,13 @@ export function buildScanSummary(scanExitCode, snapshotError, qualityGate) {
   const parts = [];
 
   if (scanExitCode !== 0) {
-    parts.push('El scanner `@sonar/scan` terminó con código distinto de cero.');
+    if (qualityGate?.status === 'ERROR' || qualityGate?.status === 'WARN') {
+      parts.push(
+        'Análisis procesado en SonarQube; exit code 1 porque el Quality Gate no pasó (`sonar.qualitygate.wait=true`).',
+      );
+    } else {
+      parts.push('El scanner `@sonar/scan` terminó con código distinto de cero.');
+    }
   } else {
     parts.push('Análisis subido correctamente a SonarQube/SonarCloud.');
   }
@@ -354,8 +404,11 @@ export function buildScanSummary(scanExitCode, snapshotError, qualityGate) {
   return parts.join(' ');
 }
 
-export function buildAnalysis(measures, qualityGate, scanExitCode, issues = []) {
-  if (scanExitCode !== 0) {
+export function buildAnalysis(measures, qualityGate, scanExitCode, issues = [], snapshotError = null) {
+  const hasSnapshot =
+    !snapshotError && (qualityGate != null || Object.keys(measures).length > 0);
+
+  if (scanExitCode !== 0 && !hasSnapshot) {
     return 'El scan falló antes de completar el análisis. Revisa la salida de consola, el token (`SONAR_TOKEN`), la URL (`SONAR_HOST_URL`) y que el proyecto exista en el servidor Sonar con el `projectKey` configurado.';
   }
 
@@ -498,6 +551,19 @@ export async function appendBitacoraEntry({
 
   if (token && hostUrl) {
     try {
+      if (scanExitCode === 0) {
+        try {
+          await waitForSonarProcessing(hostUrl, token, projectKey);
+        } catch (waitError) {
+          const waitMessage =
+            waitError instanceof Error ? waitError.message : String(waitError);
+          console.warn(
+            `Advertencia: no se confirmó el fin del procesamiento CE (${waitMessage}). ` +
+              'El snapshot podría corresponder al análisis anterior.',
+          );
+        }
+      }
+
       const snapshot = await fetchSonarSnapshot(hostUrl, token, projectKey);
       measures = snapshot.measures;
       qualityGate = snapshot.qualityGate;
@@ -512,7 +578,7 @@ export async function appendBitacoraEntry({
 
   const scanStatus = resolveScanStatus(scanExitCode, qualityGate);
   const summary = buildScanSummary(scanExitCode, snapshotError, qualityGate);
-  const analysis = buildAnalysis(measures, qualityGate, scanExitCode, issues);
+  const analysis = buildAnalysis(measures, qualityGate, scanExitCode, issues, snapshotError);
   const metricsTable = snapshotError
     ? `_Métricas no disponibles (${snapshotError})._`
     : buildMetricsTable(measures);

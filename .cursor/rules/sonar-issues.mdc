@@ -1,0 +1,35 @@
+---
+description: No corregir issues de Sonar salvo petición explícita del usuario
+alwaysApply: true
+---
+
+# Issues de Sonar — alcance del agente
+
+## Regla obligatoria
+
+**No corrijas issues de Sonar** (code smells, bugs, vulnerabilidades, hotspots) **a menos que el usuario lo pida explícitamente**.
+
+### Permitido sin petición explícita
+
+- Explicar por qué falló un scan o el Quality Gate.
+- Mejorar scripts, bitácora (`.quality/bitacora.md`), pipeline (`pnpm sonar`, `pnpm quality`) o configuración Sonar.
+- Diagnosticar: qué regla, archivo y condición del QG están involucrados.
+- Ejecutar `pnpm sonar` / `pnpm quality` si el prompt lo requiere para validar el trabajo en curso.
+
+### Prohibido sin petición explícita
+
+- Editar código de la app solo para cerrar un issue de Sonar.
+- Refactors “de regalía” motivados por métricas o hallazgos del dashboard.
+- Asumir que un QG FAILED implica que debes arreglar el código en el mismo turno.
+
+## Cuando el scope lo exija
+
+Si resolver el trabajo actual **depende** de corregir un issue Sonar, o si conviene hacerlo pero **no** formaba parte del pedido:
+
+1. **Indícalo al usuario** (archivo, regla, impacto en QG).
+2. **Pregunta** si quiere que lo corrijas o lo dejas pendiente.
+3. No mezcles el fix con otros cambios sin confirmación.
+
+## Persistencia entre equipos
+
+Esta regla vive en Git. Tras `git clone` / `git pull`, commitea `.cursor/rules/sonar-issues.mdc` y `AGENTS.md` para que el equipo la conserve.

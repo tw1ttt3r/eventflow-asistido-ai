@@ -1255,4 +1255,258 @@ Sin `@tailwindcss/postcss`, Angular solo compilaba tema/base de Tailwind; **no g
 
 ---
 
-*Última actualización del archivo: 2026-06-28 10:08:37 CST*
+## Entrada #041 — Events Dashboard (Admin)
+
+| Campo | Valor |
+|-------|--------|
+| **Fecha de ejecución** | 2026-06-28 |
+| **Hora de ejecución** | 12:55:21 CST |
+| **Tiempo total** | ~180 s |
+| **Modelo de agente** | `gpt-5.3-codex` |
+| **Nivel de complejidad** | **Alta** |
+
+### Prompt
+
+> ahora desarrolla la siguiente vista
+
+### Entregables
+
+- **Átomos:** `ef-badge`, `ef-icon-button`; `ef-button` extendido (outline, soft, sm)
+- **Moléculas:** `ef-filter-chips`, `ef-sparkline-chart`
+- **Organismos:** `ef-admin-header`, `ef-events-stats-card`, `ef-events-toolbar`, `ef-event-card`, `ef-bottom-nav`
+- **Plantilla:** `ef-admin-layout`
+- **Página:** `/events` con mock data, búsqueda y filtros
+- Post-login redirect → `/events`; guards actualizados
+- Tests 29/29 OK
+
+### Ajustes requeridos
+
+- [x] Vista implementada según mockup
+- [ ] Conectar eventos reales (Appwrite)
+- [ ] Acciones Create / Edit / Attendees
+
+---
+
+## Entrada #042 — Mock data en `src/mock/`
+
+| Campo | Valor |
+|-------|--------|
+| **Fecha de ejecución** | 2026-06-28 |
+| **Hora de ejecución** | 13:00:08 CST |
+| **Tiempo total** | ~20 s |
+| **Modelo de agente** | `gpt-5.3-codex` |
+| **Nivel de complejidad** | **Baja** |
+
+### Prompt
+
+> todo lo referente a mock data aislalo en un directorio dentro de src
+
+### Entregables
+
+- `src/mock/events.mock.ts` — `MOCK_EVENTS`, `MOCK_EVENTS_SUMMARY`
+- `src/mock/index.ts` — reexport
+- `events.model.ts` — solo tipos y `filterEvents`
+
+### Ajustes requeridos
+
+- [x] Mock aislado de modelos de dominio
+
+---
+
+## Entrada #043 — Regla `mock-data.mdc`
+
+| Campo | Valor |
+|-------|--------|
+| **Fecha de ejecución** | 2026-06-28 |
+| **Hora de ejecución** | 13:02:00 CST (estimado) |
+| **Tiempo total** | ~15 s |
+| **Modelo de agente** | `gpt-5.3-codex` |
+| **Nivel de complejidad** | **Baja** |
+
+### Prompt
+
+> deja una regla para demás vistas para que todo lo referente a mock viva en ese directorio
+
+### Entregables
+
+- `.cursor/rules/mock-data.mdc` (`alwaysApply: true`)
+- Referencia en `AGENTS.md`
+
+### Ajustes requeridos
+
+- [x] Regla mock centralizado creada
+
+---
+
+## Entrada #044 — Sparkline sincronizada con `MOCK_EVENTS`
+
+| Campo | Valor |
+|-------|--------|
+| **Fecha de ejecución** | 2026-06-28 |
+| **Hora de ejecución** | 13:05:00 CST (estimado) |
+| **Tiempo total** | ~40 s |
+| **Modelo de agente** | `gpt-5.3-codex` |
+| **Nivel de complejidad** | **Baja** |
+
+### Prompt
+
+> sobre el mock data de la gráfica, sincroniza los con los datos reales a nivel de mock
+
+### Entregables
+
+- `summarizeEvents` y `buildEventsSparkline` en `events.model.ts`
+- `MOCK_EVENTS_SUMMARY` y `MOCK_EVENTS_SPARKLINE` derivados de `MOCK_EVENTS`
+- `ef-sparkline-chart` recibe puntos dinámicos
+- Stats: 4 total, 3 published (75%)
+
+### Ajustes requeridos
+
+- [x] Gráfica y métricas alineadas al mock
+
+---
+
+## Entrada #045 — `/session` como vista Profile
+
+| Campo | Valor |
+|-------|--------|
+| **Fecha de ejecución** | 2026-06-28 |
+| **Hora de ejecución** | 13:10:00 CST (estimado) |
+| **Tiempo total** | ~60 s |
+| **Modelo de agente** | `gpt-5.3-codex` |
+| **Nivel de complejidad** | **Media** |
+
+### Prompt
+
+> recuerdas la ruta session, necesito que por el momento se ocupe como vista profile
+
+### Entregables
+
+- `SessionPage` → vista **Account/Profile** con `AdminLayout`
+- Avatar con iniciales, datos Appwrite, cerrar sesión
+- `AdminNavigationService`: bottom nav + icono account → `/session`
+- Navegación conectada en `/events` y `/session`
+
+### Ajustes requeridos
+
+- [x] `/session` como profile temporal
+- [ ] Renombrar ruta a `/profile` cuando se estabilice
+
+---
+
+## Entrada #046 — Resumen desactualizado en `pnpm sonar`
+
+| Campo | Valor |
+|-------|--------|
+| **Fecha de ejecución** | 2026-06-28 |
+| **Hora de ejecución** | 13:15:53 CST |
+| **Tiempo total** | ~120 s (estimado) |
+| **Modelo de agente** | `gpt-5.3-codex` |
+| **Nivel de complejidad** | **Media** |
+
+### Prompt
+
+> oye he notado algo al ejecutar el script `pnpm sonar`, no me esta entregando el resumen correcto, parece que me entrega un resumen anterior, por ejemplo en sonar me dice que tenemos 1 issue, pero en bitacora menciona que todo bien, estoy seguro que si ejecuto de nuevo `pnpm sonar` de nueva cuenta me dará el resumen actual que se encuentra en sonar, por que sucede esto? (necesito que la respuesta de esta pregunta se guarde en la entrada de la @.cardex/bitacora.md de cardex, y que hagas las adecuaciones necesarias para solventar lo que te expongo
+
+### Criterios de complejidad
+
+| Criterio | Detalle |
+|----------|---------|
+| Archivos afectados | 4 (`sonar.mjs`, `sonar-bitacora.mjs`, `quality-bitacora.mdc`, `bitacora.md`) |
+| Objetivo | Explicar y corregir snapshot obsoleto en `.quality/bitacora.md` |
+| Impacto | Pipeline de calidad / fidelidad del resumen Sonar |
+
+### Por qué sucede (respuesta)
+
+1. **Condición de carrera con el Compute Engine (CE).** `@sonar/scan` sube el reporte y puede terminar (exit 0) **antes** de que el servidor SonarQube termine de integrar ese análisis. El script consultaba la API **inmediatamente** después del CLI.
+2. **La API devolvía el scan anterior.** Métricas, Quality Gate e issues en `/api/measures/component`, `/api/qualitygates/project_status` y `/api/issues/search` seguían siendo los del análisis previo (p. ej. 0 code smells, “todo OK”).
+3. **La segunda ejecución parecía “arreglarlo”.** Al volver a correr `pnpm sonar` sin cambios, el CE ya había procesado el primer scan; la API ya exponía el estado que la UI mostraba (p. ej. 1 issue). No era caché del script: era **latencia de procesamiento** en el servidor.
+4. **Detalle de archivos vacío (bug adicional).** `fetchSonarFileMetrics` usaba `/api/measures/component` con `qualifiers=FIL`; el endpoint correcto para hijos es `/api/measures/component_tree`, por eso muchas entradas mostraban “Archivos analizados: 0”.
+
+### Entregables
+
+- `sonar.mjs`: `sonar.qualitygate.wait=true` + timeout 300 s (el CLI espera CE + Quality Gate).
+- `sonar-bitacora.mjs`: `waitForSonarProcessing()` vía `/api/ce/component` antes del snapshot.
+- `fetchSonarFileMetrics`: corregido a `component_tree`.
+- Regla `quality-bitacora.mdc`: documentada la espera CE.
+
+### Ajustes requeridos
+
+- [x] Explicación guardada en `.cardex/bitacora.md`
+- [x] Espera CE + qualitygate.wait en pipeline
+- [x] API `component_tree` para inventario por archivo
+- [ ] Validar con `pnpm sonar` local que la nueva entrada refleja issues al primer intento
+
+---
+
+## Entrada #047 — Quality Gate FAILED (`new_violations`)
+
+| Campo | Valor |
+|-------|--------|
+| **Fecha de ejecución** | 2026-06-28 |
+| **Hora de ejecución** | 13:21:29 CST |
+| **Tiempo total** | ~90 s (estimado) |
+| **Modelo de agente** | `gpt-5.3-codex` |
+| **Nivel de complejidad** | **Baja** |
+
+### Prompt
+
+> al ejecutar `pnpm sonar` arrojo lo siguiente … QUALITY GATE STATUS: FAILED
+
+### Criterios de complejidad
+
+| Criterio | Detalle |
+|----------|---------|
+| Archivos afectados | 2 (`events-toolbar.ts`, `sonar-bitacora.mjs`) |
+| Objetivo | Explicar el fallo y restaurar QG |
+| Impacto | Pipeline de calidad |
+
+### Diagnóstico
+
+El análisis **sí se completó** (gracias a `sonar.qualitygate.wait=true`). El exit code 1 es **esperado** cuando el Quality Gate no pasa: no indica fallo del upload ni del CE.
+
+Condición incumplida: **`new_violations: 1`** (umbral 0) — 1 issue nuevo respecto al scan anterior.
+
+| Archivo | Regla | Issue |
+|---------|-------|-------|
+| `events-toolbar.ts:1` | `typescript:S1128` | Import no usado de `input` |
+
+### Entregables
+
+- Eliminado import `input` en `events-toolbar.ts`.
+- `buildScanSummary` / `buildAnalysis`: distinguen fallo de QG vs fallo real del scanner.
+
+### Ajustes requeridos
+
+- [x] Fix S1128 en events-toolbar
+- [x] Mensajes de bitácora más precisos con exit code 1 + QG ERROR
+- [x] Re-ejecutar `pnpm sonar` para confirmar QG OK (entrada #026 — PASSED)
+
+---
+
+## Entrada #048 — No corregir issues Sonar sin petición
+
+| Campo | Valor |
+|-------|--------|
+| **Fecha de ejecución** | 2026-06-28 |
+| **Hora de ejecución** | 13:24:15 CST |
+| **Tiempo total** | ~30 s |
+| **Modelo de agente** | `gpt-5.3-codex` |
+| **Nivel de complejidad** | **Baja** |
+
+### Prompt
+
+> algo importante, no requiero que arregles issues de sonar, hasta que te lo indique, solo centremonos en solucionar lo que se nos presenta, si es requerido una solución extra fuera de lo que se esta trabajando, indicamelo
+
+### Entregables
+
+- Regla `.cursor/rules/sonar-issues.mdc` (`alwaysApply: true`)
+- Referencia en `AGENTS.md` y `quality-bitacora.mdc`
+
+### Ajustes requeridos
+
+- [x] Política documentada para agentes
+- [x] Diagnosticar / informar issues; no corregir código sin pedido explícito
+
+---
+
+*Última actualización del archivo: 2026-06-28 13:24:15 CST*

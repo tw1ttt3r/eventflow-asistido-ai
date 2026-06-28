@@ -11,6 +11,9 @@ Cada ejecución de **`pnpm sonar`** (directa o vía **`pnpm quality`**) debe que
 
 El script `scripts/sonar.mjs` invoca `scripts/sonar-bitacora.mjs` al finalizar el scan y **append** una entrada con:
 
+**Importante:** SonarQube procesa cada análisis de forma asíncrona (Compute Engine). Antes de consultar la API, `sonar-bitacora.mjs` espera a que CE termine (`/api/ce/component`) y el scanner usa `sonar.qualitygate.wait=true`. Sin esa espera, la bitácora reflejaría el scan **anterior** (p. ej. 0 issues cuando la UI ya muestra 1).
+
+
 | Campo | Origen |
 |-------|--------|
 | Fecha y hora de ejecución | Timestamp local al cerrar el scan |
@@ -56,7 +59,8 @@ Cada entrada debe incluir la sección **### Detalle de archivos** con:
 3. Si la API de Sonar no responde, la entrada igual se crea con el status del CLI y nota del error; no borres entradas previas.
 4. Al cambiar columnas o fuentes de datos del detalle, actualiza también esta regla y el encabezado de `.quality/bitacora.md`.
 5. Puedes **enriquecer** la sección «Análisis» de la última entrada solo si el usuario lo pide explícitamente; por defecto confía en el resumen automático.
-6. **Commitea** `.quality/` y `.cursor/rules/quality-bitacora.mdc` para que otro equipo conserve el historial tras `git clone` / `git pull`.
+6. **No corrijas issues de Sonar en código** salvo petición explícita; ver `.cursor/rules/sonar-issues.mdc`.
+7. **Commitea** `.quality/` y `.cursor/rules/quality-bitacora.mdc` para que otro equipo conserve el historial tras `git clone` / `git pull`.
 
 ## Relación con `.cardex/bitacora.md`
 
