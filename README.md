@@ -184,7 +184,9 @@ Detalle: [`.cardex/VERSIONING.md`](.cardex/VERSIONING.md)
 pnpm start          # dev server (Vite) + .env
 pnpm build          # producción + service worker
 pnpm build:dev      # desarrollo
-pnpm test           # Vitest
+pnpm test           # Vitest (sin cobertura ni umbral — desarrollo)
+pnpm test:coverage  # Vitest + lcov + umbral 80 % (CI / calidad)
+pnpm test:all       # test + test:coverage en secuencia
 pnpm quality        # pipeline local: cobertura + Sonar (ver sección siguiente)
 ```
 
@@ -275,7 +277,7 @@ Cada **`pnpm test`** / **`pnpm test:coverage`** / **`pnpm test:all`** appendea *
 | `Falta SONAR_TOKEN` | `.env` existe y tiene `SONAR_TOKEN` |
 | Cobertura en 0 % en Sonar | Ejecuta primero `pnpm quality:coverage`; verifica `coverage/eventflow-asistido-ai/lcov.info` |
 | Proyecto no encontrado | `sonar.projectKey` en SonarCloud coincide con `sonar-project.properties` |
-| Umbrales de cobertura fallan | `angular.json` exige 80 %; añade tests o ajusta `coverageThresholds` |
+| Umbrales de cobertura fallan | Solo aplica en `pnpm test:coverage` / `pnpm quality`; añade tests o ajusta `coverageThresholds` en `angular.json` → `test.configurations.coverage` |
 
 ## Angular CLI
 
