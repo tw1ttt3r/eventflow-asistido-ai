@@ -1,0 +1,38 @@
+---
+description: Datos mock centralizados en src/mock/ para vistas y features
+alwaysApply: true
+---
+
+# Mock data (`src/mock/`)
+
+Todo dato **mock**, **fake**, **demo** o **placeholder** de vistas/features vive en **`src/mock/`**, no en modelos, componentes ni páginas.
+
+## Estructura
+
+```
+src/mock/
+├── index.ts              # reexport de mocks públicos
+├── events.mock.ts        # MOCK_EVENTS, MOCK_EVENTS_SUMMARY
+└── <feature>.mock.ts     # un archivo por dominio/vista
+```
+
+## Convenciones
+
+- **Archivo:** `src/mock/<feature>.mock.ts` (kebab-case del feature).
+- **Exports:** prefijo `MOCK_` (ej. `MOCK_EVENTS`, `MOCK_USERS`). Métricas y gráficas derivadas del mismo mock (ej. `MOCK_EVENTS_SUMMARY = summarizeEvents(MOCK_EVENTS)`).
+- **Tipos:** en el dominio del feature (`src/app/features/<feature>/*.model.ts`); el mock solo importa tipos, no los define.
+- **Lógica:** filtros, mappers y reglas de negocio **fuera** de `src/mock/` (p. ej. `filterEvents` en el model del feature).
+- **Páginas/componentes:** importar mocks desde `src/mock/` o `src/mock/<feature>.mock`; nunca arrays/objetos demo inline en `@Component`.
+- **Tests:** reutilizar los mismos mocks de `src/mock/` cuando haga falta data de prueba estática.
+
+## Al añadir una vista nueva
+
+1. Define tipos en `features/<feature>/`.
+2. Crea `src/mock/<feature>.mock.ts` con constantes `MOCK_*`.
+3. Exporta en `src/mock/index.ts`.
+4. La página consume mock hasta existir API real; entonces sustituye el import por servicio y **elimina** el mock obsoleto.
+
+## Prohibido
+
+- `MOCK_*` dentro de `*.model.ts`, organismos o páginas.
+- Duplicar el mismo mock en specs y en runtime.
