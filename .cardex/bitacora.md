@@ -1718,4 +1718,94 @@ El commit `41cf1dc` (`fix: removed imports relatives`) **no eliminó** el import
 
 ---
 
-*Última actualización del archivo: 2026-06-28 17:21:14 CST*
+## Entrada #056 — Alinear vitest y @vitest/coverage-v8
+
+| Campo | Valor |
+|-------|--------|
+| **Fecha de ejecución** | 2026-06-28 |
+| **Hora de ejecución** | 17:37:02 CST |
+| **Tiempo total** | ~30 s |
+| **Modelo de agente** | `gpt-5.3-codex` |
+| **Nivel de complejidad** | **Baja** |
+
+### Prompt
+
+> al correr los tests arroja lo siguiente … Running mixed versions is not supported … vitest@4.1.6 and @vitest/coverage-v8@4.1.8
+
+### Causa
+
+`vitest` quedó en **4.1.6** y `@vitest/coverage-v8` con `^4.1.6` resolvió a **4.1.8**. Vitest exige la misma versión exacta en el ecosistema.
+
+### Solución
+
+- Pin `vitest` y `@vitest/coverage-v8` a **4.1.8** (sin caret).
+- `pnpm install` + tests: sin warning de mixed versions; 32/32 OK.
+
+### Ajustes requeridos
+
+- [x] Versiones alineadas en `package.json` / lockfile
+- [ ] Commitear `package.json` + `pnpm-lock.yaml`
+
+---
+
+## Entrada #057 — Separar test dev vs test:coverage (umbral 80 %)
+
+| Campo | Valor |
+|-------|--------|
+| **Fecha de ejecución** | 2026-06-28 |
+| **Hora de ejecución** | 17:40:42 CST |
+| **Tiempo total** | ~45 s |
+| **Modelo de agente** | `gpt-5.3-codex` |
+| **Nivel de complejidad** | **Media** |
+
+### Prompt
+
+> hazlo (separar `pnpm test` sin gate vs `pnpm test:coverage` con umbral 80 %)
+
+### Entregables
+
+- `angular.json`: `test.options` sin cobertura; `test.configurations.coverage` con lcov + umbral 80 %
+- `test.mjs`: mapeo `--coverage` → `--configuration=coverage`
+- `package.json`, README, AGENTS, `quality-tests.mdc` actualizados
+- Validado: `pnpm test` → exit 0; `pnpm test:coverage` → exit 1 por functions 57 % (gate activo)
+
+### Ajustes requeridos
+
+- [x] Separación dev / calidad
+- [ ] Subir cobertura de functions progresivamente (fuera de este cambio)
+
+---
+
+## Entrada #058 — Cobertura de functions ≥ 80 %
+
+| Campo | Valor |
+|-------|--------|
+| **Fecha de ejecución** | 2026-06-28 |
+| **Hora de ejecución** | 17:46:34 CST |
+| **Tiempo total** | ~120 s |
+| **Modelo de agente** | `gpt-5.3-codex` |
+| **Nivel de complejidad** | **Media** |
+
+### Prompt
+
+> Mejora el coverage de funciones para cumplir con el porcentaje (umbral global 80 %).
+
+### Criterios de complejidad
+
+- 10 archivos de spec nuevos o ampliados; sin cambios de arquitectura.
+- Objetivo: pasar gate de `pnpm test:coverage` (functions 57 % → ≥ 80 %).
+
+### Entregables
+
+- Nuevos specs: `appwrite-auth-error`, `admin-navigation.service`, `auth-login-form`, `auth-sign-up-form`
+- Ampliados: `auth-page`, `events-dashboard-page`, `appwrite-auth.service`, `session-page`, `resolve-environment`
+- Validado: **123/149 functions (82.55 %)**; `pnpm test:coverage` exit 0; 63 tests OK
+
+### Ajustes requeridos
+
+- [x] Specs auth, dashboard, navegación admin y errores Appwrite
+- [x] Umbral 80 % de functions cumplido
+
+---
+
+*Última actualización del archivo: 2026-06-28 17:46:34 CST*
