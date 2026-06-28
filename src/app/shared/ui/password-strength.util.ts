@@ -12,10 +12,10 @@ export function computePasswordStrength(password: string): PasswordStrengthLevel
   if (/[A-Z]/.test(password)) {
     score++;
   }
-  if (/[0-9]/.test(password)) {
+  if (/\d/.test(password)) {
     score++;
   }
-  if (/[^A-Za-z0-9]/.test(password)) {
+  if (/[^A-Za-z\d]/.test(password)) {
     score++;
   }
 

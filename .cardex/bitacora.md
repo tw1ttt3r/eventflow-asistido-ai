@@ -1204,4 +1204,55 @@ Sin `@tailwindcss/postcss`, Angular solo compilaba tema/base de Tailwind; **no g
 
 ---
 
-*Última actualización del archivo: 2026-06-28 09:34:48 CST*
+## Entrada #039 — Fix Sonar S6353 en `password-strength.util.ts`
+
+| Campo | Valor |
+|-------|--------|
+| **Fecha de ejecución** | 2026-06-28 |
+| **Hora de ejecución** | 09:54:05 CST |
+| **Tiempo total** | ~10 s |
+| **Modelo de agente** | `gpt-5.3-codex` |
+| **Nivel de complejidad** | **Baja** |
+
+### Prompt
+
+> tenemos el siguiente codesmell … Use concise character class syntax '\d' instead of '[0-9]'
+
+### Entregables
+
+- `[0-9]` → `\d` en regex de dígitos y clase negada
+
+### Ajustes requeridos
+
+- [x] Code smell S6353 resuelto
+
+---
+
+## Entrada #040 — Fix Sonar S5725: fuentes self-hosted
+
+| Campo | Valor |
+|-------|--------|
+| **Fecha de ejecución** | 2026-06-28 |
+| **Hora de ejecución** | 10:08:37 CST |
+| **Tiempo total** | ~45 s |
+| **Modelo de agente** | `gpt-5.3-codex` |
+| **Nivel de complejidad** | **Baja** |
+
+### Prompt
+
+> ahora tenemos el siguiente codesmell … Remote artifacts should not be used without integrity checks Web:S5725
+
+### Entregables
+
+- Eliminados `<link>` a Google Fonts en `index.html`
+- `@fontsource/dm-sans` y `@fontsource/playfair-display` en dependencias
+- Imports en `styles.scss` (bundle local, sin CDN)
+
+### Ajustes requeridos
+
+- [x] S5725 resuelto
+- [x] Build dev OK
+
+---
+
+*Última actualización del archivo: 2026-06-28 10:08:37 CST*
