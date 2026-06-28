@@ -1,7 +1,7 @@
 {
   "major": 0,
   "minor": 7,
-  "patch": 7,
+  "patch": 8,
   "knownBranches": [
     "tailwind",
     "feat/sonarqube",
@@ -741,6 +741,15 @@
       "reason": "patch",
       "detail": "commit en rama (refactor-custom-paths)",
       "sha": "c36462f"
+    },
+    {
+      "at": "2026-06-28T22:58:28.569Z",
+      "from": "0.7.7",
+      "to": "0.7.8",
+      "branch": "refactor-custom-paths",
+      "reason": "patch",
+      "detail": "commit en rama (refactor-custom-paths)",
+      "sha": "000458f"
     }
   ]
 }
