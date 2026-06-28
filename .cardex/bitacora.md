@@ -978,4 +978,230 @@ Sin `@tailwindcss/postcss`, Angular solo compilaba tema/base de Tailwind; **no g
 
 ---
 
-*Última actualización del archivo: 2026-06-20 09:08:08 CST*
+## Entrada #031 — Análisis mockup Auth + regla atomic design
+
+| Campo | Valor |
+|-------|--------|
+| **Fecha de ejecución** | 2026-06-20 |
+| **Hora de ejecución** | 22:26:56 – 22:28:00 CST (estimado) |
+| **Tiempo total** | ~65 s |
+| **Modelo de agente** | `gpt-5.3-codex` |
+| **Nivel de complejidad** | **Baja** |
+
+### Prompt
+
+> muy bien, vamos a comenzar a desarrollar vistas, así que te voy a compartir el mockup de la vista ha desarrollar, necesito que primero analices el mockup y enlista los componentes a desarrollar, lo que queremos es tener componentes atomicos o moleculares para reutilizar, así que añade una regla al agente que cuando trabajemos con mockups se haga este proceso de analisis del mockup enfocado a atomic design
+
+### Entregables
+
+- Inventario atomic design del mockup **EventFlow Authentication** (Sign Up / Login)
+- Regla `.cursor/rules/mockup-atomic-design.mdc` (`alwaysApply: true`)
+- Referencia en `AGENTS.md`
+
+### Ajustes requeridos
+
+- [x] Análisis entregado al usuario
+- [x] Regla de mockups creada
+- [ ] Confirmar inventario antes de implementar componentes
+
+---
+
+## Entrada #032 — Componentes UI Auth (atomic design)
+
+| Campo | Valor |
+|-------|--------|
+| **Fecha de ejecución** | 2026-06-20 |
+| **Hora de ejecución** | 22:26:56 – 22:36:32 CST |
+| **Tiempo total** | ~580 s |
+| **Modelo de agente** | `gpt-5.3-codex` |
+| **Nivel de complejidad** | **Alta** |
+
+### Prompt
+
+> muy bien, ahora genera los componentes que detectaste
+
+### Entregables
+
+- **11 átomos** (`ef-logo-mark`, `ef-brand-name`, `ef-heading`, `ef-subheading`, `ef-label`, `ef-input`, `ef-button`, `ef-link`, `ef-checkbox`, `ef-toggle`, `ef-text`)
+- **6 moléculas** (`ef-form-field`, `ef-segmented-control`, `ef-password-field` + strength, `ef-checkbox-field`, `ef-inline-link-row`, `ef-auth-actions-row`)
+- **6 organismos** (`ef-app-header`, `ef-auth-card`, `ef-auth-sign-up-form`, `ef-auth-login-form`, `ef-auth-illustration`, `ef-auth-footer`)
+- **Plantilla** `ef-auth-layout` + **página** `auth-page` en `/auth`
+- Tema Tailwind (`ef-purple`, `ef-blue`, fuentes Playfair + DM Sans)
+- `app.ts` reducido a shell con `router-outlet`
+- Tests: `auth-page.spec.ts`, `password-strength.util.spec.ts`; `app.spec.ts` simplificado
+
+### Ajustes requeridos
+
+- [x] Inventario implementado
+- [x] Ruta `/auth` como default
+- [ ] Ejecutar `pnpm install && pnpm test` localmente (node_modules corrupto en sesión del agente)
+- [x] Integrar submit con Appwrite Auth
+
+---
+
+## Entrada #033 — Auth Appwrite (registro + login)
+
+| Campo | Valor |
+|-------|--------|
+| **Fecha de ejecución** | 2026-06-20 |
+| **Hora de ejecución** | 23:21:06 – 23:21:20 CST |
+| **Tiempo total** | ~75 s |
+| **Modelo de agente** | `gpt-5.3-codex` |
+| **Nivel de complejidad** | **Media** |
+
+### Prompt
+
+> nop, aun no, lo que necesito es que conectes el registro y logeo de usuarios a appwrite
+
+### Entregables
+
+- `AppwriteAuthService`: `registerWithEmail`, `loginWithEmail`, `getCurrentUser`, `logout`
+- `appwrite-auth-error.ts`: mensajes en español para errores comunes
+- `auth-page`: validación local, loading, feedback éxito/error
+- Formularios: estado `submitting` en botones
+- Tests: `appwrite-auth.service.spec.ts` (19/19 OK; cobertura global sigue bajo 80%)
+
+### Ajustes requeridos
+
+- [x] Registro → `account.create` + sesión automática
+- [x] Login → `createEmailPasswordSession`
+- [ ] Habilitar Email/Password en consola Appwrite del proyecto
+- [ ] Recuperación de contraseña (`Forgot?`) en otro paso
+
+---
+
+## Entrada #034 — Vista temporal `/session` post-auth
+
+| Campo | Valor |
+|-------|--------|
+| **Fecha de ejecución** | 2026-06-20 |
+| **Hora de ejecución** | 23:32:20 – 23:32:50 CST |
+| **Tiempo total** | ~90 s |
+| **Modelo de agente** | `gpt-5.3-codex` |
+| **Nivel de complejidad** | **Media** |
+
+### Prompt
+
+> oye veo que al momento de crear la cuenta se incia sesión, puedes crear una vista temporal que nos permita informarle al usuario cuando inicio sesión, y redireccionar ahi con al momenot de crear la cuenta o hacer login
+
+### Entregables
+
+- `session-page` en `/session?flow=register|login`
+- Redirección desde auth tras registro o login exitoso
+- Muestra nombre, correo, ID; botones volver a auth y cerrar sesión
+- Sin sesión → redirect a `/auth`
+- Tests 21/21 OK
+
+### Ajustes requeridos
+
+- [x] Vista temporal creada
+- [x] Redirect post-auth
+- [ ] Reemplazar `/session` por dashboard real
+
+---
+
+## Entrada #035 — `guestGuard`: `/auth` → `/session` con sesión activa
+
+| Campo | Valor |
+|-------|--------|
+| **Fecha de ejecución** | 2026-06-28 |
+| **Hora de ejecución** | 09:25:51 CST |
+| **Tiempo total** | ~45 s |
+| **Modelo de agente** | `gpt-5.3-codex` |
+| **Nivel de complejidad** | **Baja** |
+
+### Prompt
+
+> ahora mientras haya sesión iniciada la ruta auth debe redirigir session
+
+### Entregables
+
+- `guestGuard` en `core/auth/guest.guard.ts`
+- `canActivate` en ruta `/auth`
+- Tests del guard (23/23 OK)
+
+### Ajustes requeridos
+
+- [x] Redirect automático si hay sesión
+
+---
+
+## Entrada #036 — `authGuard`: rutas protegidas → `/auth` sin sesión
+
+| Campo | Valor |
+|-------|--------|
+| **Fecha de ejecución** | 2026-06-28 |
+| **Hora de ejecución** | 09:28:06 CST |
+| **Tiempo total** | ~40 s |
+| **Modelo de agente** | `gpt-5.3-codex` |
+| **Nivel de complejidad** | **Baja** |
+
+### Prompt
+
+> y mientras no haya sesión iniciada cualquier ruta debe redirigir a auth
+
+### Entregables
+
+- `authGuard`: protege `/session` (sin sesión → `/auth`)
+- `fallbackGuard`: rutas `**` (sin sesión → `/auth`; con sesión → `/session`)
+- `session-page`: sin chequeo duplicado de sesión
+- Tests 26/26 OK
+
+### Ajustes requeridos
+
+- [x] Rutas protegidas con guard
+- [x] Wildcard para rutas desconocidas
+
+---
+
+## Entrada #037 — Fix ruta `**` (NG04014)
+
+| Campo | Valor |
+|-------|--------|
+| **Fecha de ejecución** | 2026-06-28 |
+| **Hora de ejecución** | 09:31:27 CST |
+| **Tiempo total** | ~15 s |
+| **Modelo de agente** | `gpt-5.3-codex` |
+| **Nivel de complejidad** | **Baja** |
+
+### Prompt
+
+> se obtuvieron estos errores … NG04014: Invalid configuration of route '**'
+
+### Entregables
+
+- `redirectTo: 'auth'` en ruta `**` (Angular exige destino; `fallbackGuard` sigue decidiendo `/auth` vs `/session`)
+
+### Ajustes requeridos
+
+- [x] Error NG04014 resuelto
+
+---
+
+## Entrada #038 — Fix `**`: componente fallback (sin `redirectTo` + guard)
+
+| Campo | Valor |
+|-------|--------|
+| **Fecha de ejecución** | 2026-06-28 |
+| **Hora de ejecución** | 09:34:48 CST |
+| **Tiempo total** | ~30 s |
+| **Modelo de agente** | `gpt-5.3-codex` |
+| **Nivel de complejidad** | **Baja** |
+
+### Prompt
+
+> seguimos obtiendo este error … redirectTo and canActivate cannot be used together
+
+### Entregables
+
+- `FallbackRedirectPage`: redirige a `/auth` o `/session` según sesión
+- Ruta `**` con `loadComponent` (sin `redirectTo` ni guard)
+- Eliminado `fallbackGuard`
+
+### Ajustes requeridos
+
+- [x] NG04014 resuelto definitivamente
+
+---
+
+*Última actualización del archivo: 2026-06-28 09:34:48 CST*
