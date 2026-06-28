@@ -1509,4 +1509,91 @@ Condición incumplida: **`new_violations: 1`** (umbral 0) — 1 issue nuevo resp
 
 ---
 
-*Última actualización del archivo: 2026-06-28 13:24:15 CST*
+## Entrada #049 — TypeScript path aliases obligatorios
+
+| Campo | Valor |
+|-------|--------|
+| **Fecha de ejecución** | 2026-06-28 |
+| **Hora de ejecución** | 14:08:27 CST |
+| **Tiempo total** | ~120 s (estimado) |
+| **Modelo de agente** | `gpt-5.3-codex` |
+| **Nivel de complejidad** | **Media** |
+
+### Prompt
+
+> oye vamos a reemplazar el uso de relative paths por absolute pathe mediante TypeScript Path Aliases, haz las adecuaciones necesarias y coloca como regla el uso de path aliases como obligatorio
+
+### Entregables
+
+- `tsconfig.json`: `baseUrl` + aliases `@app`, `@core`, `@shared`, `@features`, `@env`, `@mock`, `@version`
+- ~49 archivos en `src/` migrados de imports relativos a aliases
+- Lazy routes en `app.routes.ts` con `@features/*`
+- Regla `.cursor/rules/path-aliases.mdc` (`alwaysApply: true`)
+- `AGENTS.md`, `mock-data.mdc` actualizados
+
+### Ajustes requeridos
+
+- [x] Aliases configurados y código migrado
+- [x] Regla de agente obligatoria
+- [ ] Validar localmente `pnpm test` y `pnpm build`
+
+---
+
+## Entrada #050 — Bitácora `.quality/tests.md`
+
+| Campo | Valor |
+|-------|--------|
+| **Fecha de ejecución** | 2026-06-28 |
+| **Hora de ejecución** | 14:16:16 CST |
+| **Tiempo total** | ~90 s |
+| **Modelo de agente** | `gpt-5.3-codex` |
+| **Nivel de complejidad** | **Media** |
+
+### Prompt
+
+> oye agrega una regla para que cada vez que se corran los tests se guarde una entrada dentro del directorio .quality, y el archivo tests.md, guarda informaxión de la fecha y hora, quien ejecuta (agente o developer), rama, razón de ejecución, guarda todo el resumen de la ejecución, y dame un resumen breve de la ejecución
+
+### Entregables
+
+- `scripts/test.mjs` + `scripts/test-bitacora.mjs`
+- `pnpm test` / `pnpm test:coverage` envueltos con logging
+- `.quality/tests.md` + regla `quality-tests.mdc`
+- `AGENTS.md`, `README.md`, `quality.mjs` (QUALITY_PIPELINE)
+
+### Ajustes requeridos
+
+- [x] Bitácora automática en cada test run
+- [x] Primera ejecución validada (entrada #002)
+
+---
+
+## Entrada #051 — `pnpm test:all` + script detonador en bitácora
+
+| Campo | Valor |
+|-------|--------|
+| **Fecha de ejecución** | 2026-06-28 |
+| **Hora de ejecución** | 14:20:44 CST |
+| **Tiempo total** | ~60 s |
+| **Modelo de agente** | `gpt-5.3-codex` |
+| **Nivel de complejidad** | **Media** |
+
+### Prompt
+
+> genera un script extra que corra test y test:coverage, y que de igual manera se guarde en bitacora, agrega dentro de la entrada que script detono los tests
+
+### Entregables
+
+- `scripts/test-all.mjs` + `pnpm test:all`
+- Campo **Script detonador** en `.quality/tests.md`
+- `TEST_TRIGGER_SCRIPT` (inferido vía `npm_lifecycle_event` o explícito)
+- `quality.mjs` marca detonador `pnpm quality`
+
+### Ajustes requeridos
+
+- [x] Suite test + test:coverage
+- [x] Bitácora con script detonador
+- [x] Validado (entradas #003–#004)
+
+---
+
+*Última actualización del archivo: 2026-06-28 14:20:44 CST*
