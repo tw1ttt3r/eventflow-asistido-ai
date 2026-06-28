@@ -61,8 +61,12 @@ export function resolveReason(args) {
   if (process.env.QUALITY_PIPELINE === '1') {
     return 'Paso 1/2 del pipeline `pnpm quality` (cobertura + lcov)';
   }
-  if (args.includes('--coverage')) {
-    return 'Tests con cobertura (`pnpm test:coverage` o `--coverage`)';
+  if (
+    args.includes('--coverage') ||
+    args.includes('--configuration=coverage') ||
+    args.includes('coverage')
+  ) {
+    return 'Tests con cobertura y umbral 80 % (`pnpm test:coverage` / `--configuration=coverage`)';
   }
   if (args.includes('--watch=false') || process.env.CI === 'true' || process.env.CI === '1') {
     return 'Ejecución única (`--watch=false` o CI)';

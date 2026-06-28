@@ -12,7 +12,21 @@ import {
 } from './test-bitacora.mjs';
 
 const root = resolve(import.meta.dirname, '..');
-const userArgs = process.argv.slice(2).filter((arg) => arg !== '--');
+const rawArgs = process.argv.slice(2).filter((arg) => arg !== '--');
+
+/** Mapea --coverage legacy → configuración coverage de angular.json */
+function normalizeTestArgs(args) {
+  if (args.includes('--coverage')) {
+    const withoutCoverage = args.filter((arg) => arg !== '--coverage');
+    if (!withoutCoverage.some((arg) => arg === '--configuration=coverage' || arg === 'coverage')) {
+      withoutCoverage.push('--configuration=coverage');
+    }
+    return withoutCoverage;
+  }
+  return args;
+}
+
+const userArgs = normalizeTestArgs(rawArgs);
 
 const startedAt = formatTimestamp();
 

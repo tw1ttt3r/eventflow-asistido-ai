@@ -1,8 +1,8 @@
 {
-  "name": "Eventflow Asistido v0.7.19",
+  "name": "Eventflow Asistido v0.7.20",
   "short_name": "Eventflow",
-  "description": "Eventflow Asistido AI — versión 0.7.19",
-  "version": "0.7.19",
+  "description": "Eventflow Asistido AI — versión 0.7.20",
+  "version": "0.7.20",
   "display": "standalone",
   "scope": "./",
   "start_url": "./",
