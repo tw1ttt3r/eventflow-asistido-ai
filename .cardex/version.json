@@ -1,7 +1,7 @@
 {
   "major": 0,
   "minor": 4,
-  "patch": 6,
+  "patch": 7,
   "knownBranches": [
     "tailwind",
     "feat/sonarqube",
@@ -450,6 +450,15 @@
       "reason": "patch",
       "detail": "commit en rama (feat/auth)",
       "sha": "518463e"
+    },
+    {
+      "at": "2026-06-28T15:43:28.737Z",
+      "from": "0.4.6",
+      "to": "0.4.7",
+      "branch": "feat/auth",
+      "reason": "patch",
+      "detail": "commit en rama (feat/auth)",
+      "sha": "71438a1"
     }
   ]
 }
