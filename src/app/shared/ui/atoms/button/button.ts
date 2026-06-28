@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
 
-export type EfButtonVariant = 'purple' | 'blue';
+export type EfButtonVariant = 'purple' | 'blue' | 'outline' | 'soft';
 
 @Component({
   selector: 'ef-button',
@@ -9,9 +9,20 @@ export type EfButtonVariant = 'purple' | 'blue';
     <button
       [type]="type()"
       [disabled]="disabled()"
-      class="w-full rounded-full px-6 py-3.5 text-sm font-bold text-white transition hover:opacity-95 disabled:cursor-not-allowed disabled:opacity-60"
+      class="rounded-full px-6 py-3.5 text-sm font-bold transition hover:opacity-95 disabled:cursor-not-allowed disabled:opacity-60"
+      [class.w-full]="fullWidth()"
       [class.bg-ef-purple]="variant() === 'purple'"
+      [class.text-white]="variant() === 'purple' || variant() === 'blue'"
       [class.bg-ef-blue]="variant() === 'blue'"
+      [class.border]="variant() === 'outline'"
+      [class.border-ef-blue/30]="variant() === 'outline'"
+      [class.bg-white]="variant() === 'outline'"
+      [class.text-ef-blue]="variant() === 'outline'"
+      [class.bg-ef-lavender]="variant() === 'soft'"
+      [class.text-ef-purple]="variant() === 'soft'"
+      [class.px-4]="size() === 'sm'"
+      [class.py-2]="size() === 'sm'"
+      [class.text-xs]="size() === 'sm'"
       (click)="pressed.emit()"
     >
       <ng-content />
@@ -22,6 +33,8 @@ export class EfButton {
   readonly variant = input<EfButtonVariant>('purple');
   readonly type = input<'button' | 'submit'>('button');
   readonly disabled = input(false);
+  readonly fullWidth = input(true);
+  readonly size = input<'md' | 'sm'>('md');
 
   readonly pressed = output<void>();
 }
