@@ -260,7 +260,7 @@ Cada vez que corre `pnpm sonar` (solo o dentro de `pnpm quality`), el script act
 | Detalle de archivos | Por hallazgo: ruta, nivel, tipo, status, línea, regla; inventario por archivo con métricas |
 | Análisis interpretativo | Por qué las métricas están en ese estado (p. ej. cobertura 0 % sin `lcov`) |
 
-La bitácora se genera automáticamente consultando la API de Sonar tras el upload. Si el servidor no responde, igual queda constancia del exit code del scanner.
+La bitácora se genera automáticamente consultando la API de Sonar **después** de que el Compute Engine termine el análisis (`sonar.qualitygate.wait` + polling `/api/ce/component`). Sin esa espera, la API puede devolver el snapshot del scan anterior. Si el servidor no responde, igual queda constancia del exit code del scanner.
 
 **Persistencia:** commitea `.quality/` y [`.cursor/rules/quality-bitacora.mdc`](.cursor/rules/quality-bitacora.mdc). En otro equipo, tras `git pull`, cada `pnpm sonar` sigue añadiendo entradas sin configuración extra.
 
