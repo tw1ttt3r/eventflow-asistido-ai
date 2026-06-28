@@ -11,6 +11,8 @@ En Cursor: abre el selector de modelo del Agent y elige **GPT-5.3 Codex** antes 
 - Angular 21, pnpm, Vite (dev server), PWA, secretos vía `NG_APP_*`
 - Bitácora agente: `.cardex/bitacora.md` (actualizar al finalizar cada prompt con trabajo)
 - Bitácora calidad: `.quality/bitacora.md` (automática en cada `pnpm sonar`; ver `.cursor/rules/quality-bitacora.mdc`)
+- Bitácora tests: `.quality/tests.md` (automática en cada `pnpm test`; ver `.cursor/rules/quality-tests.mdc`)
+- Suite tests: `pnpm test:all` ejecuta `test` + `test:coverage` con bitácora por fase
 - **Sonar issues:** no corregir hallazgos salvo petición explícita; diagnosticar e informar (ver `.cursor/rules/sonar-issues.mdc`)
 - Badges README: actualizar sección **Tecnologías** al cambiar stack (ver `.cursor/rules/readme-badges.mdc`)
 - Appwrite: `src/app/core/appwrite/` — BaaS; valores solo en `NG_APP_*` (`.env`), `environment*.ts` con cadenas vacías
@@ -23,4 +25,5 @@ En Cursor: abre el selector de modelo del Agent y elige **GPT-5.3 Codex** antes 
 - **Plantilla y `styles` siempre en línea** en `@Component` (`template` / `styles`). Prohibido `templateUrl` y `styleUrl`. Ver `.cursor/rules/component-inline.mdc`.
 - **Mockups:** analizar con atomic design antes de implementar. Ver `.cursor/rules/mockup-atomic-design.mdc`.
 - **Mock data:** centralizar en `src/mock/`; ver `.cursor/rules/mock-data.mdc`.
+- **Path aliases:** imports internos solo con `@core`, `@shared`, `@features`, `@app`, `@env`, `@mock`, `@version`; ver `.cursor/rules/path-aliases.mdc`.
 - No hagas commit de `.env`; usa `.env.example` como plantilla
