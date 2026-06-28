@@ -22,8 +22,8 @@ src/mock/
 - **Exports:** prefijo `MOCK_` (ej. `MOCK_EVENTS`, `MOCK_USERS`). Métricas y gráficas derivadas del mismo mock (ej. `MOCK_EVENTS_SUMMARY = summarizeEvents(MOCK_EVENTS)`).
 - **Tipos:** en el dominio del feature (`src/app/features/<feature>/*.model.ts`); el mock solo importa tipos, no los define.
 - **Lógica:** filtros, mappers y reglas de negocio **fuera** de `src/mock/` (p. ej. `filterEvents` en el model del feature).
-- **Páginas/componentes:** importar mocks desde `src/mock/` o `src/mock/<feature>.mock`; nunca arrays/objetos demo inline en `@Component`.
-- **Tests:** reutilizar los mismos mocks de `src/mock/` cuando haga falta data de prueba estática.
+- **Páginas/componentes:** importar mocks vía `@mock/` (ej. `@mock/events.mock`); nunca arrays/objetos demo inline en `@Component`.
+- **Tests:** reutilizar los mismos mocks de `@mock/` cuando haga falta data de prueba estática.
 
 ## Al añadir una vista nueva
 

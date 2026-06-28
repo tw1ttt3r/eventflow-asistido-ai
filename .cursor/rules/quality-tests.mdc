@@ -1,0 +1,55 @@
+---
+description: Bitácora obligatoria en .quality/tests.md tras cada ejecución de pnpm test
+alwaysApply: true
+---
+
+# Bitácora de tests (.quality/tests.md)
+
+Cada ejecución de **`pnpm test`**, **`pnpm test:coverage`** o **`pnpm test:all`** (directa o vía **`pnpm quality`**) debe quedar registrada en **`.quality/tests.md`**.
+
+## Comportamiento automático
+
+El script `scripts/test.mjs` envuelve `ng test`, captura la salida y **append** una entrada con:
+
+| Campo | Origen |
+|-------|--------|
+| Fecha y hora | Timestamps al inicio y cierre |
+| Ejecutor | `TEST_EXECUTOR` o detección (`agent` / `developer`) |
+| Rama | `git rev-parse --abbrev-ref HEAD` |
+| Razón | `TEST_REASON` o inferida (cobertura, CI, pipeline quality, etc.) |
+| Script detonador | `TEST_TRIGGER_SCRIPT` o `pnpm <lifecycle>` (`pnpm test`, `pnpm test:all`, `pnpm quality`, …) |
+| Comando | Argumentos pasados a `ng test` |
+| Status | `OK` / `WARN` / `ERROR` según exit code y umbrales de cobertura |
+| Resumen breve | Líneas parseadas de Vitest (Test Files, Tests, Duration) |
+| Salida completa | stdout + stderr en bloque `text` |
+
+## Variables opcionales
+
+| Variable | Uso |
+|----------|-----|
+| `TEST_EXECUTOR=agent` | Marcar ejecución del Cursor Agent |
+| `TEST_EXECUTOR=developer` | Marcar ejecución humana (default) |
+| `TEST_REASON="..."` | Motivo explícito (ej. validación de un feature) |
+| `TEST_TRIGGER_SCRIPT="pnpm ..."` | Script detonador explícito (por defecto: lifecycle npm) |
+| `TEST_SKIP_LOG=1` | Solo uso interno; evita doble registro |
+
+## Instrucciones para agentes
+
+1. Al ejecutar tests en un prompt, usa **`pnpm test`** o **`pnpm test:coverage`** (no `ng test` directo).
+2. Define **`TEST_EXECUTOR=agent`** y **`TEST_REASON="..."`** con el motivo del prompt.
+3. Para suite completa usa **`pnpm test:all`** (test + test:coverage); cada fase genera su entrada con script detonador `pnpm test:all`.
+3. **Verifica** que `.quality/tests.md` tenga una entrada nueva con resumen y salida completa.
+4. **No desactives** la escritura de bitácora al modificar `scripts/test.mjs` o `scripts/test-bitacora.mjs`.
+5. **Commitea** `.quality/tests.md` y esta regla para historial en el equipo.
+
+## Relación con otras bitácoras
+
+| Bitácora | Qué registra |
+|----------|----------------|
+| `.cardex/bitacora.md` | Trabajo del agente por prompt |
+| `.quality/bitacora.md` | Scans Sonar (`pnpm sonar`) |
+| `.quality/tests.md` | Ejecuciones de tests |
+
+## Persistencia entre equipos
+
+`.quality/tests.md` y esta regla viven en **Git**. Tras `git clone` / `git pull`, cada `pnpm test` sigue appendiendo entradas.

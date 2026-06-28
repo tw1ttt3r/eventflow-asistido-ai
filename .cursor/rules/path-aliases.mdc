@@ -1,0 +1,54 @@
+---
+description: Imports internos obligatorios vía TypeScript path aliases (@core, @shared, etc.)
+alwaysApply: true
+---
+
+# Path aliases — imports obligatorios
+
+## Regla
+
+En código bajo `src/`, **prohibido** importar con rutas relativas (`./`, `../`, `../../`, etc.) hacia otros módulos del proyecto.
+
+Usa **siempre** los aliases definidos en `tsconfig.json`:
+
+| Alias | Resuelve a |
+|-------|------------|
+| `@app/*` | `src/app/*` (p. ej. `@app/app.config`, `@app/app.routes`) |
+| `@core/*` | `src/app/core/*` |
+| `@shared/*` | `src/app/shared/*` |
+| `@features/*` | `src/app/features/*` |
+| `@env/*` | `src/environments/*` |
+| `@mock/*` | `src/mock/*` |
+| `@version` | `src/version.ts` |
+
+### Ejemplos
+
+```typescript
+// ✅ Correcto
+import { AppwriteAuthService } from '@core/appwrite/appwrite-auth.service';
+import { EfButton } from '@shared/ui/atoms/button/button';
+import { AuthPage } from '@features/auth/auth-page';
+import { MOCK_EVENTS } from '@mock/events.mock';
+import type { Environment } from '@env/environment.model';
+
+// Lazy routes
+loadComponent: () => import('@features/auth/auth-page').then((m) => m.AuthPage),
+
+// ❌ Prohibido
+import { AppwriteAuthService } from '../../core/appwrite/appwrite-auth.service';
+import { EfButton } from '../button/button';
+```
+
+## Excepciones
+
+- Paquetes npm (`@angular/*`, `rxjs`, `appwrite`, etc.).
+- No aplica fuera de `src/` (scripts en `scripts/`, configs en raíz).
+
+## Al crear código nuevo
+
+- Angular CLI / schematics: generar imports con alias, no relativos.
+- Al mover archivos, actualizar imports al alias correspondiente (no recalcular `../`).
+
+## Persistencia entre equipos
+
+Commitea `tsconfig.json` y esta regla. Tras `git clone` / `git pull`, los aliases funcionan sin configuración extra en el IDE (Cursor/VS Code lee `tsconfig`).
