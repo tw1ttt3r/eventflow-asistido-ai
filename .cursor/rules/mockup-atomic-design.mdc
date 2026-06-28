@@ -1,0 +1,56 @@
+---
+description: Analizar mockups con atomic design antes de implementar vistas
+alwaysApply: true
+---
+
+# Mockups → atomic design
+
+Cuando el usuario comparta un **mockup** o pida desarrollar una **vista/pantalla**, **no implementes de inmediato**. Primero entrega un inventario atomic design y espera confirmación (o ajustes) antes de crear componentes.
+
+## Flujo obligatorio
+
+1. **Observar** el mockup: layout, estados, variantes, responsive, interacciones.
+2. **Clasificar** en átomos → moléculas → organismos → plantillas → páginas.
+3. **Listar** cada ítem con: nombre sugerido (`ef-*`), responsabilidad, inputs/outputs, reutilización.
+4. **Proponer** estructura de carpetas y orden de implementación (átomos primero).
+5. **Implementar** solo tras el análisis (salvo que el usuario pida saltarlo).
+
+## Convenciones del proyecto
+
+- Selectores: `ef-<nombre>` (EventFlow).
+- Ubicación:
+  - `src/app/shared/ui/atoms/`
+  - `src/app/shared/ui/molecules/`
+  - `src/app/shared/ui/organisms/`
+  - `src/app/features/<feature>/` — páginas y lógica de feature
+- Plantilla y estilos **en línea** en `@Component` (ver `component-inline.mdc`).
+- Tailwind en `template`; `styles` solo para `:host` u otros casos puntuales.
+- Generar con: `ng generate component ... --inline-template --inline-style`.
+
+## Formato de entrega del análisis
+
+```markdown
+## Mockup: [nombre]
+### Átomos
+- `ef-button` — ...
+### Moléculas
+- `ef-form-field` — ...
+### Organismos
+- `ef-auth-sign-up-form` — ...
+### Plantillas / páginas
+- `auth-page` — ...
+### Orden sugerido
+1. ...
+### Notas / dudas
+- ...
+```
+
+## Criterios de diseño atómico
+
+- **Átomo**: un solo propósito visual (input, botón, label, link, checkbox, toggle).
+- **Molécula**: combina átomos sin lógica de negocio compleja (campo label+input, tab segmentado).
+- **Organismo**: sección autocontenida reutilizable (formulario completo, header de auth).
+- **Plantilla**: layout sin datos reales (centrado de card, slots para organismos).
+- **Página**: ruta + composición + estado (tab activo, submit, navegación).
+
+Prioriza reutilización: si un bloque aparece ≥2 veces o en otros mockups, sube el nivel (átomo/molécula compartida).

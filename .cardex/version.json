@@ -1,12 +1,13 @@
 {
   "major": 0,
-  "minor": 3,
-  "patch": 2,
+  "minor": 4,
+  "patch": 12,
   "knownBranches": [
     "tailwind",
     "feat/sonarqube",
     "feat/check-status-infra",
-    "feat/refactor-appwrite"
+    "feat/refactor-appwrite",
+    "feat/auth"
   ],
   "history": [
     {
@@ -386,6 +387,123 @@
       "reason": "patch",
       "detail": "commit en rama (feat/refactor-appwrite)",
       "sha": "3d443fc"
+    },
+    {
+      "at": "2026-06-28T15:41:02.861Z",
+      "from": "0.3.2",
+      "to": "0.4.0",
+      "branch": "feat/auth",
+      "reason": "minor",
+      "detail": "nueva rama (feat/auth)",
+      "sha": "823971d"
+    },
+    {
+      "at": "2026-06-28T15:41:28.777Z",
+      "from": "0.4.0",
+      "to": "0.4.1",
+      "branch": "feat/auth",
+      "reason": "patch",
+      "detail": "commit en rama (feat/auth)",
+      "sha": "99c2259"
+    },
+    {
+      "at": "2026-06-28T15:41:50.185Z",
+      "from": "0.4.1",
+      "to": "0.4.2",
+      "branch": "feat/auth",
+      "reason": "patch",
+      "detail": "commit en rama (feat/auth)",
+      "sha": "f1ccc52"
+    },
+    {
+      "at": "2026-06-28T15:42:11.344Z",
+      "from": "0.4.2",
+      "to": "0.4.3",
+      "branch": "feat/auth",
+      "reason": "patch",
+      "detail": "commit en rama (feat/auth)",
+      "sha": "0591108"
+    },
+    {
+      "at": "2026-06-28T15:42:27.019Z",
+      "from": "0.4.3",
+      "to": "0.4.4",
+      "branch": "feat/auth",
+      "reason": "patch",
+      "detail": "commit en rama (feat/auth)",
+      "sha": "f3f6bde"
+    },
+    {
+      "at": "2026-06-28T15:42:47.476Z",
+      "from": "0.4.4",
+      "to": "0.4.5",
+      "branch": "feat/auth",
+      "reason": "patch",
+      "detail": "commit en rama (feat/auth)",
+      "sha": "cc6a719"
+    },
+    {
+      "at": "2026-06-28T15:43:10.373Z",
+      "from": "0.4.5",
+      "to": "0.4.6",
+      "branch": "feat/auth",
+      "reason": "patch",
+      "detail": "commit en rama (feat/auth)",
+      "sha": "518463e"
+    },
+    {
+      "at": "2026-06-28T15:43:28.737Z",
+      "from": "0.4.6",
+      "to": "0.4.7",
+      "branch": "feat/auth",
+      "reason": "patch",
+      "detail": "commit en rama (feat/auth)",
+      "sha": "71438a1"
+    },
+    {
+      "at": "2026-06-28T15:43:46.620Z",
+      "from": "0.4.7",
+      "to": "0.4.8",
+      "branch": "feat/auth",
+      "reason": "patch",
+      "detail": "commit en rama (feat/auth)",
+      "sha": "e3ac8c2"
+    },
+    {
+      "at": "2026-06-28T15:44:06.583Z",
+      "from": "0.4.8",
+      "to": "0.4.9",
+      "branch": "feat/auth",
+      "reason": "patch",
+      "detail": "commit en rama (feat/auth)",
+      "sha": "b48b92a"
+    },
+    {
+      "at": "2026-06-28T15:45:05.137Z",
+      "from": "0.4.9",
+      "to": "0.4.10",
+      "branch": "feat/auth",
+      "reason": "patch",
+      "detail": "commit en rama (feat/auth)",
+      "sha": "0bd7595"
+    },
+    {
+      "at": "2026-06-28T15:45:17.287Z",
+      "from": "0.4.10",
+      "to": "0.4.11",
+      "branch": "feat/auth",
+      "reason": "patch",
+      "detail": "commit en rama (feat/auth)",
+      "sha": "4f1496b"
+    },
+    {
+      "at": "2026-06-28T15:45:31.559Z",
+      "from": "0.4.11",
+      "to": "0.4.12",
+      "branch": "feat/auth",
+      "reason": "patch",
+      "detail": "commit en rama (feat/auth)",
+      "sha": "cf84372"
     }
   ]
 }

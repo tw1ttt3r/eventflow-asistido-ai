@@ -20,4 +20,5 @@ En Cursor: abre el selector de modelo del Agent y elige **GPT-5.3 Codex** antes 
 - Reglas detalladas en `.cursor/rules/`
 - **Idioma:** redacción en español; sin spanglish en la misma frase. Se mantienen en inglés la jerga habitual (p. ej. `runtime`, `scaffold`, `build`, `bump`, `stack`, `dev server`, `metadata`, `dry-run`, `commit`, `hook`). Nombres de API, CLI y productos en su forma original. Archivos en inglés (`cursor.mdc`) íntegramente en inglés.
 - **Plantilla y `styles` siempre en línea** en `@Component` (`template` / `styles`). Prohibido `templateUrl` y `styleUrl`. Ver `.cursor/rules/component-inline.mdc`.
+- **Mockups:** analizar con atomic design antes de implementar. Ver `.cursor/rules/mockup-atomic-design.mdc`.
 - No hagas commit de `.env`; usa `.env.example` como plantilla
