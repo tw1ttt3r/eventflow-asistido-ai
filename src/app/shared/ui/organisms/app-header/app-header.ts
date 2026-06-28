@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
-import { BrandName } from '../../atoms/brand-name/brand-name';
-import { LogoMark } from '../../atoms/logo-mark/logo-mark';
+import { BrandName } from '@shared/ui/atoms/brand-name/brand-name';
+import { LogoMark } from '@shared/ui/atoms/logo-mark/logo-mark';
 
 @Component({
   selector: 'ef-app-header',

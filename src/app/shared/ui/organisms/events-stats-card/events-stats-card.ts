@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 
-import type { EventsSparkline } from '../../../../features/events/events.model';
-import { SparklineChart } from '../../molecules/sparkline-chart/sparkline-chart';
+import type { EventsSparkline } from '@features/events/events.model';
+import { SparklineChart } from '@shared/ui/molecules/sparkline-chart/sparkline-chart';
 
 @Component({
   selector: 'ef-events-stats-card',

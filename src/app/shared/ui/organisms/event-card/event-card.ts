@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
 
-import { EfBadge } from '../../atoms/badge/badge';
-import { EfButton } from '../../atoms/button/button';
-import type { EventItem } from '../../../../features/events/events.model';
+import { EfBadge } from '@shared/ui/atoms/badge/badge';
+import { EfButton } from '@shared/ui/atoms/button/button';
+import type { EventItem } from '@features/events/events.model';
 
 @Component({
   selector: 'ef-event-card',

@@ -1,8 +1,8 @@
 import { describe, expect, it } from 'vitest';
 
-import { readNgAppVar, parseEnvBoolean, setValueByPath, getValueByPath } from './env-vars';
-import { readEnvField, resolveEnvironment } from './resolve-environment';
-import type { Environment } from '../../../environments/environment.model';
+import { readNgAppVar, parseEnvBoolean, setValueByPath, getValueByPath } from '@core/config/env-vars';
+import { readEnvField, resolveEnvironment } from '@core/config/resolve-environment';
+import type { Environment } from '@env/environment.model';
 
 const emptyBase: Environment = {
   production: false,

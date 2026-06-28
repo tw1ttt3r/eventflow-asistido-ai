@@ -2,8 +2,8 @@ import { TestBed } from '@angular/core/testing';
 import { provideRouter, Router } from '@angular/router';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
-import { AppwriteAuthService } from '../../core/appwrite/appwrite-auth.service';
-import { SessionPage } from './session-page';
+import { AppwriteAuthService } from '@core/appwrite/appwrite-auth.service';
+import { SessionPage } from '@features/session/session-page';
 
 describe('SessionPage (profile)', () => {
   const authMock = {

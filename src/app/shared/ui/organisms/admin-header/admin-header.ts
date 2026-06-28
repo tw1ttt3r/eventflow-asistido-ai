@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 
-import { AdminNavigationService } from '../../../../features/admin/admin-navigation.service';
-import { BrandName } from '../../atoms/brand-name/brand-name';
-import { EfIconButton } from '../../atoms/icon-button/icon-button';
+import { AdminNavigationService } from '@features/admin/admin-navigation.service';
+import { BrandName } from '@shared/ui/atoms/brand-name/brand-name';
+import { EfIconButton } from '@shared/ui/atoms/icon-button/icon-button';
 
 @Component({
   selector: 'ef-admin-header',

@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, input, model } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
-import { EfCheckbox } from '../../atoms/checkbox/checkbox';
+import { EfCheckbox } from '@shared/ui/atoms/checkbox/checkbox';
 
 @Component({
   selector: 'ef-checkbox-field',

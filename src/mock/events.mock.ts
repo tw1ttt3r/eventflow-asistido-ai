@@ -1,5 +1,5 @@
-import type { EventItem, EventsSparkline, EventsSummary } from '../app/features/events/events.model';
-import { buildEventsSparkline, summarizeEvents } from '../app/features/events/events.model';
+import type { EventItem, EventsSparkline, EventsSummary } from '@features/events/events.model';
+import { buildEventsSparkline, summarizeEvents } from '@features/events/events.model';
 
 export const MOCK_EVENTS: EventItem[] = [
   {

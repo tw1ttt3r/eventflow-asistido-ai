@@ -2,8 +2,8 @@ import { TestBed } from '@angular/core/testing';
 import { Client } from 'appwrite';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
-import { APPWRITE_CLIENT, APPWRITE_CONFIG } from './appwrite.tokens';
-import { AppwriteService } from './appwrite.service';
+import { APPWRITE_CLIENT, APPWRITE_CONFIG } from '@core/appwrite/appwrite.tokens';
+import { AppwriteService } from '@core/appwrite/appwrite.service';
 
 describe('AppwriteService', () => {
   const mockConfig = {

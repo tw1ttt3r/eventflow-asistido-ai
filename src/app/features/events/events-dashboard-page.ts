@@ -1,13 +1,13 @@
 import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
 
-import { AdminNavigationService } from '../admin/admin-navigation.service';
-import { filterEvents, type EventFilter } from './events.model';
-import { MOCK_EVENTS, MOCK_EVENTS_SPARKLINE, MOCK_EVENTS_SUMMARY } from '../../../mock/events.mock';
-import { AdminLayout } from '../../shared/ui/templates/admin-layout/admin-layout';
-import { EventCard } from '../../shared/ui/organisms/event-card/event-card';
-import { EventsStatsCard } from '../../shared/ui/organisms/events-stats-card/events-stats-card';
-import { EventsToolbar } from '../../shared/ui/organisms/events-toolbar/events-toolbar';
-import { FilterChips } from '../../shared/ui/molecules/filter-chips/filter-chips';
+import { AdminNavigationService } from '@features/admin/admin-navigation.service';
+import { filterEvents, type EventFilter } from '@features/events/events.model';
+import { MOCK_EVENTS, MOCK_EVENTS_SPARKLINE, MOCK_EVENTS_SUMMARY } from '@mock/events.mock';
+import { AdminLayout } from '@shared/ui/templates/admin-layout/admin-layout';
+import { EventCard } from '@shared/ui/organisms/event-card/event-card';
+import { EventsStatsCard } from '@shared/ui/organisms/events-stats-card/events-stats-card';
+import { EventsToolbar } from '@shared/ui/organisms/events-toolbar/events-toolbar';
+import { FilterChips } from '@shared/ui/molecules/filter-chips/filter-chips';
 
 const FILTER_OPTIONS = [
   { id: 'all', label: 'All' },

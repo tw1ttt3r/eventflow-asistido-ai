@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
-import { AppHeader } from '../../organisms/app-header/app-header';
-import { AuthFooter } from '../../organisms/auth-footer/auth-footer';
-import { AuthIllustration } from '../../organisms/auth-illustration/auth-illustration';
+import { AppHeader } from '@shared/ui/organisms/app-header/app-header';
+import { AuthFooter } from '@shared/ui/organisms/auth-footer/auth-footer';
+import { AuthIllustration } from '@shared/ui/organisms/auth-illustration/auth-illustration';
 
 @Component({
   selector: 'ef-auth-layout',

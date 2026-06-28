@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 
-import { buildEventsSparkline, filterEvents, summarizeEvents } from './events.model';
-import { MOCK_EVENTS } from '../../../mock/events.mock';
+import { buildEventsSparkline, filterEvents, summarizeEvents } from '@features/events/events.model';
+import { MOCK_EVENTS } from '@mock/events.mock';
 
 describe('summarizeEvents', () => {
   it('should derive totals from mock events', () => {

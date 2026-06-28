@@ -1,8 +1,8 @@
 import { TestBed } from '@angular/core/testing';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
-import { AppwriteAuthService } from '../../core/appwrite/appwrite-auth.service';
-import { AuthPage } from './auth-page';
+import { AppwriteAuthService } from '@core/appwrite/appwrite-auth.service';
+import { AuthPage } from '@features/auth/auth-page';
 
 describe('AuthPage', () => {
   const authMock = {

@@ -1,7 +1,7 @@
 import { inject } from '@angular/core';
 import { CanActivateFn, Router } from '@angular/router';
 
-import { AppwriteAuthService } from '../appwrite/appwrite-auth.service';
+import { AppwriteAuthService } from '@core/appwrite/appwrite-auth.service';
 
 /** Bloquea `/auth` si ya hay sesión activa → redirige a `/events`. */
 export const guestGuard: CanActivateFn = async () => {

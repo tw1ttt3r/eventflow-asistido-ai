@@ -1,9 +1,9 @@
 import { inject, Injectable } from '@angular/core';
 import { ID, type Models } from 'appwrite';
 
-import { isAppwriteConfigured } from './appwrite.config';
-import { APPWRITE_CONFIG } from './appwrite.tokens';
-import { AppwriteService } from './appwrite.service';
+import { isAppwriteConfigured } from '@core/appwrite/appwrite.config';
+import { APPWRITE_CONFIG } from '@core/appwrite/appwrite.tokens';
+import { AppwriteService } from '@core/appwrite/appwrite.service';
 
 export interface RegisterWithEmailParams {
   name: string;

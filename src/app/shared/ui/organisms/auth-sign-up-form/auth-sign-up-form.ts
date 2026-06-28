@@ -1,12 +1,12 @@
 import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
-import { EfButton } from '../../atoms/button/button';
-import { Heading } from '../../atoms/heading/heading';
-import { Subheading } from '../../atoms/subheading/subheading';
-import { FormField } from '../../molecules/form-field/form-field';
-import { InlineLinkRow } from '../../molecules/inline-link-row/inline-link-row';
-import { PasswordField } from '../../molecules/password-field/password-field';
+import { EfButton } from '@shared/ui/atoms/button/button';
+import { Heading } from '@shared/ui/atoms/heading/heading';
+import { Subheading } from '@shared/ui/atoms/subheading/subheading';
+import { FormField } from '@shared/ui/molecules/form-field/form-field';
+import { InlineLinkRow } from '@shared/ui/molecules/inline-link-row/inline-link-row';
+import { PasswordField } from '@shared/ui/molecules/password-field/password-field';
 
 export interface SignUpFormValue {
   fullName: string;

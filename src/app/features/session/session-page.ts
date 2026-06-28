@@ -1,12 +1,12 @@
 import { ChangeDetectionStrategy, Component, computed, inject, OnInit, signal } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { AdminNavigationService } from '../admin/admin-navigation.service';
-import { AppwriteAuthService } from '../../core/appwrite/appwrite-auth.service';
-import { EfButton } from '../../shared/ui/atoms/button/button';
-import { Heading } from '../../shared/ui/atoms/heading/heading';
-import { Subheading } from '../../shared/ui/atoms/subheading/subheading';
-import { AdminLayout } from '../../shared/ui/templates/admin-layout/admin-layout';
+import { AdminNavigationService } from '@features/admin/admin-navigation.service';
+import { AppwriteAuthService } from '@core/appwrite/appwrite-auth.service';
+import { EfButton } from '@shared/ui/atoms/button/button';
+import { Heading } from '@shared/ui/atoms/heading/heading';
+import { Subheading } from '@shared/ui/atoms/subheading/subheading';
+import { AdminLayout } from '@shared/ui/templates/admin-layout/admin-layout';
 
 @Component({
   selector: 'app-session-page',

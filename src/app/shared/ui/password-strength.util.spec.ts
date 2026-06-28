@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import { computePasswordStrength, passwordStrengthLabel } from './password-strength.util';
+import { computePasswordStrength, passwordStrengthLabel } from '@shared/ui/password-strength.util';
 
 describe('password-strength.util', () => {
   it('should return empty for blank password', () => {

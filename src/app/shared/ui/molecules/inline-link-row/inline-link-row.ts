@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
 
-import { EfLink } from '../../atoms/link/link';
+import { EfLink } from '@shared/ui/atoms/link/link';
 
 @Component({
   selector: 'ef-inline-link-row',
