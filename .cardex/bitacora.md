@@ -1596,4 +1596,126 @@ Condición incumplida: **`new_violations: 1`** (umbral 0) — 1 issue nuevo resp
 
 ---
 
-*Última actualización del archivo: 2026-06-28 14:20:44 CST*
+## Entrada #052 — Fix build Vercel: import duplicado `APP_VERSION`
+
+| Campo | Valor |
+|-------|--------|
+| **Fecha de ejecución** | 2026-06-28 |
+| **Hora de ejecución** | 17:09:11 CST |
+| **Tiempo total** | ~30 s |
+| **Modelo de agente** | `gpt-5.3-codex` |
+| **Nivel de complejidad** | **Baja** |
+
+### Prompt
+
+> el build de vercel reporta lo siguiente … Duplicate identifier 'APP_VERSION' … revisa el proyecto validando imports duplicados y corrige cualquier issue
+
+### Entregables
+
+- Eliminado import relativo duplicado en `environment.ts` y `environment.development.ts`
+- Solo `@version` según regla path aliases
+- `pnpm build` OK localmente
+
+### Ajustes requeridos
+
+- [x] Imports duplicados corregidos
+- [x] Build producción verificado
+
+---
+
+## Entrada #053 — Commit environments sin fix real de imports
+
+| Campo | Valor |
+|-------|--------|
+| **Fecha de ejecución** | 2026-06-28 |
+| **Hora de ejecución** | 17:12:40 CST |
+| **Tiempo total** | ~30 s |
+| **Modelo de agente** | `gpt-5.3-codex` |
+| **Nivel de complejidad** | **Baja** |
+
+### Prompt
+
+> hice commit de los cambios en environments pero los veo iguales, que paso?
+
+### Diagnóstico
+
+El commit `41cf1dc` (`fix: removed imports relatives`) **no eliminó** el import relativo: solo añadió líneas en blanco (hook de versión). Ambos archivos seguían con **dos imports** de `APP_VERSION` (`../version` + `@version`), de ahí el error en Vercel y que se vieran iguales en la parte superior.
+
+**Diferencia real** entre archivos: `environment.development.ts` incluye bloque `sonar`; `environment.ts` (prod) no.
+
+### Entregables
+
+- Eliminado `import … from '../version'` en ambos environments (solo `@version`)
+- `pnpm build` OK
+
+### Ajustes requeridos
+
+- [x] Fix aplicado en working tree
+- [ ] Usuario debe commitear el diff real en `src/environments/`
+
+---
+
+## Entrada #054 — Pre-commit reinyectaba import `../version`
+
+| Campo | Valor |
+|-------|--------|
+| **Fecha de ejecución** | 2026-06-28 |
+| **Hora de ejecución** | 17:18:02 CST |
+| **Tiempo total** | ~45 s |
+| **Modelo de agente** | `gpt-5.3-codex` |
+| **Nivel de complejidad** | **Baja** |
+
+### Prompt
+
+> sigo intentando borrar esos imports pero al momento de commitear regresan las lineas, que esta pasando y como se soluciona
+
+### Causa
+
+`.husky/pre-commit` ejecuta `scripts/version-bump.mjs`. En `syncEnvironments()` si no encontraba `from '../version'`, **añadía** ese import en cada commit — chocando con `@version` y duplicando `APP_VERSION`.
+
+### Solución
+
+- `version-bump.mjs`: usa solo `@version`; elimina import relativo legacy antes de sincronizar.
+- Environments corregidos de nuevo.
+
+### Ajustes requeridos
+
+- [x] Fix en `version-bump.mjs`
+- [x] Validado post-bump (un solo import, build OK)
+- [ ] Commitear `version-bump.mjs` + environments juntos
+
+---
+
+## Entrada #055 — Líneas vacías en environments (version-bump)
+
+| Campo | Valor |
+|-------|--------|
+| **Fecha de ejecución** | 2026-06-28 |
+| **Hora de ejecución** | 17:21:14 CST |
+| **Tiempo total** | ~40 s |
+| **Modelo de agente** | `gpt-5.3-codex` |
+| **Nivel de complejidad** | **Baja** |
+
+### Prompt
+
+> oye de igual manera he visto lineas vacias innecesarias en los archivos environments, por se estan agregando, y eliminalas por completo, que no se genere el archivo así
+
+### Causa
+
+`syncEnvironments()` editaba con regex (borrar/reinsertar `version:`) y en cada pre-commit se acumulaban líneas en blanco.
+
+### Solución
+
+- `renderEnvironmentFile()` genera el archivo completo sin huecos.
+- Environments limpiados (15 y 19 líneas vs ~75 antes).
+- Validado: post `version-bump` siguen compactos, build OK.
+
+### Ajustes requeridos
+
+- [x] Generación limpia en `version-bump.mjs`
+- [x] Archivos environments sin líneas vacías
+- [ ] Commitear cambios
+
+---
+
+*Última actualización del archivo: 2026-06-28 17:21:14 CST*
