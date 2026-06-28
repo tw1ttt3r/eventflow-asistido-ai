@@ -19,6 +19,6 @@ export class FallbackRedirectPage implements OnInit {
 
   private async redirect(): Promise<void> {
     const user = await this.auth.getCurrentUser();
-    await this.router.navigate(user ? ['/session'] : ['/auth']);
+    await this.router.navigate(user ? ['/events'] : ['/auth']);
   }
 }
