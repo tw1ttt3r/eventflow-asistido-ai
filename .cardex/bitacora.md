@@ -1808,4 +1808,139 @@ El commit `41cf1dc` (`fix: removed imports relatives`) **no eliminó** el import
 
 ---
 
-*Última actualización del archivo: 2026-06-28 17:46:34 CST*
+## Entrada #059 — Vista Registro de Evento
+
+| Campo | Valor |
+|-------|--------|
+| **Fecha de ejecución** | 2026-06-28 |
+| **Hora de ejecución** | 18:11:51 CST |
+| **Tiempo total** | ~180 s |
+| **Modelo de agente** | `gpt-5.3-codex` |
+| **Nivel de complejidad** | **Alta** |
+
+### Prompt
+
+> Desarrollar la vista **Registro de Evento** según mockup EventFlow (formulario, resumen, avisos, layout móvil).
+
+### Entregables
+
+- Ruta `/events/:id/register` con `EventRegistrationPage`
+- Modelo `event-registration.model.ts`, mock `event-registration.mock.ts`
+- UI: `registration-layout`, `registration-header`, `event-summary-card`, `event-registration-form`, `field-feedback`, `info-notice-row`, `registration-footer`
+- Extensión de `EfInput` (`tel`, estados success/error) y `EfBadge` (tone `spots`)
+- Navegación desde dashboard (botón Attendees → registro)
+- Specs: modelo, página, formulario; 75 tests OK, coverage ≥ 80 %
+
+### Ajustes requeridos
+
+- [x] Vista alineada al mockup
+- [x] Ruta y navegación conectadas
+- [x] Tests y cobertura
+
+---
+
+## Entrada #060 — Volver a eventos desde registro
+
+| Campo | Valor |
+|-------|--------|
+| **Fecha de ejecución** | 2026-06-28 |
+| **Hora de ejecución** | 20:42:20 CST |
+| **Tiempo total** | ~30 s |
+| **Modelo de agente** | `gpt-5.3-codex` |
+| **Nivel de complejidad** | **Baja** |
+
+### Prompt
+
+> Necesitamos regresar a la vista de eventos desde el detalle del evento.
+
+### Entregables
+
+- Botón atrás en `registration-header` (reemplaza avatar placeholder)
+- Evento `backPress` propagado por `registration-layout` → `EventRegistrationPage` → `/events`
+- Test de navegación desde header; 76 tests OK
+
+### Ajustes requeridos
+
+- [x] Navegación de regreso en header
+
+---
+
+## Entrada #061 — UI evento no disponible
+
+| Campo | Valor |
+|-------|--------|
+| **Fecha de ejecución** | 2026-06-28 |
+| **Hora de ejecución** | 20:45:54 CST |
+| **Tiempo total** | ~45 s |
+| **Modelo de agente** | `gpt-5.3-codex` |
+| **Nivel de complejidad** | **Baja** |
+
+### Prompt
+
+> Mejorar el UI de la vista de evento no disponible, hacerlo más vistoso.
+
+### Entregables
+
+- Nuevo organismo `event-unavailable-card` (gradiente, ilustración, avisos, CTAs)
+- Header sin badge `0 spots left` cuando el evento no existe
+- Textos en español; botones «Ver todos los eventos» y «Volver al inicio»
+- 77 tests OK
+
+### Ajustes requeridos
+
+- [x] Estado vacío mejorado
+
+---
+
+## Entrada #062 — Un solo CTA en evento no disponible
+
+| Campo | Valor |
+|-------|--------|
+| **Fecha de ejecución** | 2026-06-28 |
+| **Hora de ejecución** | 20:47:10 CST |
+| **Tiempo total** | ~10 s |
+| **Modelo de agente** | `gpt-5.3-codex` |
+| **Nivel de complejidad** | **Baja** |
+
+### Prompt
+
+> En la vista de evento no disponible sobra un accionable; ambos navegan a la misma ruta.
+
+### Entregables
+
+- Eliminado botón duplicado «Volver al inicio»; se mantiene «Ver todos los eventos» + flecha atrás en header
+
+### Ajustes requeridos
+
+- [x] CTA único hacia `/events`
+
+---
+
+## Entrada #063 — Edit solo en eventos propios
+
+| Campo | Valor |
+|-------|--------|
+| **Fecha de ejecución** | 2026-06-28 |
+| **Hora de ejecución** | 20:53:05 CST |
+| **Tiempo total** | ~60 s |
+| **Modelo de agente** | `gpt-5.3-codex` |
+| **Nivel de complejidad** | **Media** |
+
+### Prompt
+
+> En la lista de eventos, todas las cards tienen Edit; solo debería mostrarse en eventos creados por el usuario de la sesión activa.
+
+### Entregables
+
+- `EventItem.createdByUserId` + helper `isEventOwnedByUser`
+- Mock: `user-1` (Jane) es dueña de eventos `1` y `3`
+- `EventCard` con input `canEdit`; dashboard carga usuario vía `AppwriteAuthService`
+- Test: 2 botones Edit de 4 cards; 79 tests OK
+
+### Ajustes requeridos
+
+- [x] Visibilidad condicional de Edit por dueño
+
+---
+
+*Última actualización del archivo: 2026-06-28 20:53:05 CST*
