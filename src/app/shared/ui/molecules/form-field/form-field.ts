@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component, input, model } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
-import { EfInput, type EfInputType } from '../../atoms/input/input';
-import { Label } from '../../atoms/label/label';
+import { EfInput, type EfInputType } from '@shared/ui/atoms/input/input';
+import { Label } from '@shared/ui/atoms/label/label';
 
 @Component({
   selector: 'ef-form-field',

@@ -148,33 +148,45 @@ function syncPackageJson(version) {
   }
 }
 
-function syncEnvironments(version) {
-  for (const file of envFiles) {
+function renderEnvironmentFile({ includeSonar }) {
+  const sonarBlock = includeSonar
+    ? `
+  sonar: {
+    hostUrl: '',
+    projectKey: '',
+  },`
+    : '';
+
+  return `import type { Environment } from '@env/environment.model';
+import { APP_VERSION } from '@version';
+
+export const environment: Environment = {
+  production: false,
+  apiUrl: '',
+  appName: '',
+  version: APP_VERSION,
+  apiKey: '',
+  appwrite: {
+    endpoint: '',
+    projectId: '',
+    projectName: '',
+  },${sonarBlock}
+};
+`;
+}
+
+function syncEnvironments(_version) {
+  const targets = [
+    { file: envFiles[0], includeSonar: false },
+    { file: envFiles[1], includeSonar: true },
+  ];
+
+  for (const { file, includeSonar } of targets) {
     if (!existsSync(file)) {
       continue;
     }
-    let content = readFileSync(file, 'utf8');
 
-    if (!content.includes("from '../version'")) {
-      content = content.replace(
-        /^(import type \{ Environment \}[^\n]*\n)/,
-        `$1import { APP_VERSION } from '../version';\n`,
-      );
-    }
-
-    const versionLines = content.match(/^\s*version:\s*.+$/gm) ?? [];
-    if (versionLines.length > 0) {
-      content = content.replace(/^\s*version:\s*.+$/gm, '');
-      content = content.replace(
-        /(appName:\s*.+,\n)/,
-        `$1  version: APP_VERSION,\n`,
-      );
-    } else {
-      content = content.replace(
-        /(appName:\s*.+,\n)/,
-        `$1  version: APP_VERSION,\n`,
-      );
-    }
+    const content = renderEnvironmentFile({ includeSonar });
 
     if (!isDryRun) {
       writeFileSync(file, content);

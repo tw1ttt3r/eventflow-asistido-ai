@@ -1,8 +1,8 @@
 import { inject, Injectable } from '@angular/core';
 import { Account } from 'appwrite';
 
-import { isAppwriteConfigured, type AppwriteConfig } from './appwrite.config';
-import { APPWRITE_CLIENT, APPWRITE_CONFIG } from './appwrite.tokens';
+import { isAppwriteConfigured, type AppwriteConfig } from '@core/appwrite/appwrite.config';
+import { APPWRITE_CLIENT, APPWRITE_CONFIG } from '@core/appwrite/appwrite.tokens';
 
 @Injectable({ providedIn: 'root' })
 export class AppwriteService {

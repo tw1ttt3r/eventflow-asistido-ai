@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
 
-import { AdminHeader } from '../../organisms/admin-header/admin-header';
-import { BottomNav, type BottomNavItem } from '../../organisms/bottom-nav/bottom-nav';
+import { AdminHeader } from '@shared/ui/organisms/admin-header/admin-header';
+import { BottomNav, type BottomNavItem } from '@shared/ui/organisms/bottom-nav/bottom-nav';
 
 @Component({
   selector: 'ef-admin-layout',

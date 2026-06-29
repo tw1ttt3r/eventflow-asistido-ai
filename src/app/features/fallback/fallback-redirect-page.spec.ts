@@ -2,8 +2,8 @@ import { TestBed } from '@angular/core/testing';
 import { provideRouter, Router } from '@angular/router';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
-import { AppwriteAuthService } from '../../core/appwrite/appwrite-auth.service';
-import { FallbackRedirectPage } from './fallback-redirect-page';
+import { AppwriteAuthService } from '@core/appwrite/appwrite-auth.service';
+import { FallbackRedirectPage } from '@features/fallback/fallback-redirect-page';
 
 describe('FallbackRedirectPage', () => {
   const authMock = {

@@ -1,8 +1,8 @@
 import { ChangeDetectionStrategy, Component, model, output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
-import { EfButton } from '../../atoms/button/button';
-import { EfInput } from '../../atoms/input/input';
+import { EfButton } from '@shared/ui/atoms/button/button';
+import { EfInput } from '@shared/ui/atoms/input/input';
 
 @Component({
   selector: 'ef-events-toolbar',

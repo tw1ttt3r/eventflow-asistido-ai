@@ -1,9 +1,9 @@
 import { TestBed } from '@angular/core/testing';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
-import { APPWRITE_CONFIG } from './appwrite.tokens';
-import { AppwriteAuthService } from './appwrite-auth.service';
-import { AppwriteService } from './appwrite.service';
+import { APPWRITE_CONFIG } from '@core/appwrite/appwrite.tokens';
+import { AppwriteAuthService } from '@core/appwrite/appwrite-auth.service';
+import { AppwriteService } from '@core/appwrite/appwrite.service';
 
 describe('AppwriteAuthService', () => {
   const mockUser = {
@@ -23,6 +23,7 @@ describe('AppwriteAuthService', () => {
     mockAccount.create.mockClear();
     mockAccount.createEmailPasswordSession.mockClear();
     mockAccount.get.mockClear();
+    mockAccount.deleteSession.mockClear();
 
     TestBed.configureTestingModule({
       providers: [
@@ -67,6 +68,54 @@ describe('AppwriteAuthService', () => {
 
     expect(mockAccount.createEmailPasswordSession).toHaveBeenCalledOnce();
     expect(user.name).toBe('Jane Doe');
+  });
+
+  it('should return current user when session exists', async () => {
+    const service = TestBed.inject(AppwriteAuthService);
+
+    const user = await service.getCurrentUser();
+
+    expect(mockAccount.get).toHaveBeenCalledOnce();
+    expect(user?.email).toBe('jane@example.com');
+  });
+
+  it('should return null when get fails', async () => {
+    mockAccount.get.mockRejectedValueOnce(new Error('Unauthorized'));
+    const service = TestBed.inject(AppwriteAuthService);
+
+    await expect(service.getCurrentUser()).resolves.toBeNull();
+  });
+
+  it('should logout and delete current session', async () => {
+    const service = TestBed.inject(AppwriteAuthService);
+
+    await service.logout();
+
+    expect(mockAccount.deleteSession).toHaveBeenCalledWith({ sessionId: 'current' });
+  });
+
+  it('should skip logout when Appwrite is not configured', async () => {
+    TestBed.resetTestingModule();
+    TestBed.configureTestingModule({
+      providers: [
+        AppwriteAuthService,
+        {
+          provide: APPWRITE_CONFIG,
+          useValue: { endpoint: '', projectId: '', projectName: '' },
+        },
+        {
+          provide: AppwriteService,
+          useValue: { account: mockAccount },
+        },
+      ],
+    });
+
+    const service = TestBed.inject(AppwriteAuthService);
+
+    await service.logout();
+    expect(mockAccount.deleteSession).not.toHaveBeenCalled();
+    expect(await service.getCurrentUser()).toBeNull();
+    expect(service.isConfigured()).toBe(false);
   });
 
   it('should throw when Appwrite is not configured', async () => {

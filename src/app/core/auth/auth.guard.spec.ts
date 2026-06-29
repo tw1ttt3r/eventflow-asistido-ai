@@ -2,8 +2,8 @@ import { TestBed } from '@angular/core/testing';
 import { provideRouter, Router } from '@angular/router';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
-import { AppwriteAuthService } from '../appwrite/appwrite-auth.service';
-import { authGuard } from './auth.guard';
+import { AppwriteAuthService } from '@core/appwrite/appwrite-auth.service';
+import { authGuard } from '@core/auth/auth.guard';
 
 describe('authGuard', () => {
   const authMock = {

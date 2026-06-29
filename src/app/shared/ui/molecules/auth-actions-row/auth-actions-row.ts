@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, model, output } from '@angular/core';
 
-import { CheckboxField } from '../checkbox-field/checkbox-field';
-import { EfLink } from '../../atoms/link/link';
+import { CheckboxField } from '@shared/ui/molecules/checkbox-field/checkbox-field';
+import { EfLink } from '@shared/ui/atoms/link/link';
 
 @Component({
   selector: 'ef-auth-actions-row',

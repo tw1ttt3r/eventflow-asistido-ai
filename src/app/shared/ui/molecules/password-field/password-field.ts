@@ -1,14 +1,14 @@
 import { ChangeDetectionStrategy, Component, computed, input, model } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
-import { EfInput } from '../../atoms/input/input';
-import { Label } from '../../atoms/label/label';
-import { EfToggle } from '../../atoms/toggle/toggle';
+import { EfInput } from '@shared/ui/atoms/input/input';
+import { Label } from '@shared/ui/atoms/label/label';
+import { EfToggle } from '@shared/ui/atoms/toggle/toggle';
 import {
   computePasswordStrength,
   passwordStrengthLabel,
   type PasswordStrengthLevel,
-} from '../../password-strength.util';
+} from '@shared/ui/password-strength.util';
 
 @Component({
   selector: 'ef-password-strength',

@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
 
-import { SegmentedControl, type SegmentedOption } from '../../molecules/segmented-control/segmented-control';
+import { SegmentedControl, type SegmentedOption } from '@shared/ui/molecules/segmented-control/segmented-control';
 
 @Component({
   selector: 'ef-auth-card',

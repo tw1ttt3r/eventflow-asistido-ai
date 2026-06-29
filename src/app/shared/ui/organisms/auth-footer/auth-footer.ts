@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 
-import { EfText } from '../../atoms/text/text';
+import { EfText } from '@shared/ui/atoms/text/text';
 
 @Component({
   selector: 'ef-auth-footer',
