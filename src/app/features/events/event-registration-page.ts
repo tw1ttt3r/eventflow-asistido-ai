@@ -4,7 +4,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { map } from 'rxjs';
 
 import type {
-  EventRegistrationDetail,
   RegistrationFormValue,
 } from '@features/events/event-registration.model';
 import { findEventRegistration } from '@mock/event-registration.mock';
