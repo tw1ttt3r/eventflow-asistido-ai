@@ -1713,3 +1713,127 @@ La cobertura (93.1 %) alcanza el umbral del 80 % definido en `angular.json`, lo 
 
 ---
 
+
+## Entrada #030 — Scan Sonar
+
+| Campo | Valor |
+|-------|-------|
+| **Fecha y hora de ejecución** | 2026-06-29 08:40:30 UTC-06:00 |
+| **Inicio** | 2026-06-29 08:40:08 UTC-06:00 |
+| **Rama** | `feat/refactor-events` |
+| **Proyecto** | Eventflow Asistido AI (`eventflow-asistido-ai`) |
+| **Status del scan** | **OK** |
+| **Exit code scanner** | 0 |
+
+### Resumen del scan
+
+Análisis subido correctamente a SonarQube/SonarCloud. Quality Gate **OK** — todas las condiciones cumplidas.
+
+### Métricas overall (código)
+
+| Métrica | Valor |
+|---------|-------|
+| Quality Gate | ✅ OK |
+| Bugs | 0 |
+| Vulnerabilidades | 0 |
+| Code smells | 0 |
+| Security hotspots | 1 |
+| Cobertura (%) | 93.1 |
+| Duplicación (%) | 0.0 |
+| Líneas de código (ncloc) | 2770 |
+| Deuda técnica (min) | 0 |
+| Rating fiabilidad | A (1.0) |
+| Rating seguridad | A (1.0) |
+| Rating mantenibilidad | A (1.0) |
+
+### Detalle de archivos
+
+**Archivos analizados:** 72 · **Sin hallazgos:** 72 · **Con hallazgos:** 0 · **Issues abiertos:** 0
+
+#### Hallazgos abiertos
+
+_Sin hallazgos abiertos en esta ejecución._
+
+#### Inventario por archivo
+
+| Ruta | Nivel máx. | Tipos | Status | ncloc | Bugs | Vuln. | Smells | Cobertura % | Hallazgos |
+|------|------------|-------|--------|-------|------|-------|--------|-------------|-----------|
+| `src/app/app.config.ts` | — | — | ✅ OK | 29 | 0 | 0 | 0 | 0.0 | 0 |
+| `src/app/app.routes.ts` | — | — | ✅ OK | 38 | 0 | 0 | 0 | 0.0 | 0 |
+| `src/app/app.ts` | — | — | ✅ OK | 9 | 0 | 0 | 0 | 91.7 | 0 |
+| `src/app/core/appwrite/appwrite-auth-error.ts` | — | — | ✅ OK | 18 | 0 | 0 | 0 | 100.0 | 0 |
+| `src/app/core/appwrite/appwrite-auth.service.ts` | — | — | ✅ OK | 70 | 0 | 0 | 0 | 100.0 | 0 |
+| `src/app/core/appwrite/appwrite.client.ts` | — | — | ✅ OK | 5 | 0 | 0 | 0 | 0.0 | 0 |
+| `src/app/core/appwrite/appwrite.config.ts` | — | — | ✅ OK | 12 | 0 | 0 | 0 | 100.0 | 0 |
+| `src/app/core/appwrite/appwrite.service.ts` | — | — | ✅ OK | 24 | 0 | 0 | 0 | 100.0 | 0 |
+| `src/app/core/appwrite/appwrite.tokens.ts` | — | — | ✅ OK | 5 | 0 | 0 | 0 | 100.0 | 0 |
+| `src/app/core/auth/auth.guard.ts` | — | — | ✅ OK | 12 | 0 | 0 | 0 | 100.0 | 0 |
+| `src/app/core/auth/guest.guard.ts` | — | — | ✅ OK | 12 | 0 | 0 | 0 | 100.0 | 0 |
+| `src/app/core/config/app-config.ts` | — | — | ✅ OK | 8 | 0 | 0 | 0 | 0.0 | 0 |
+| `src/app/core/config/env-access.ts` | — | — | ✅ OK | 8 | 0 | 0 | 0 | 0.0 | 0 |
+| `src/app/core/config/env-vars.ts` | — | — | ✅ OK | 48 | 0 | 0 | 0 | 89.3 | 0 |
+| `src/app/core/config/env.registry.ts` | — | — | ✅ OK | 35 | 0 | 0 | 0 | 100.0 | 0 |
+| `src/app/core/config/resolve-environment.ts` | — | — | ✅ OK | 58 | 0 | 0 | 0 | 91.3 | 0 |
+| `src/app/features/admin/admin-navigation.service.ts` | — | — | ✅ OK | 17 | 0 | 0 | 0 | 100.0 | 0 |
+| `src/app/features/auth/auth-page.ts` | — | — | ✅ OK | 123 | 0 | 0 | 0 | 91.7 | 0 |
+| `src/app/features/events/event-registration-page.ts` | — | — | ✅ OK | 91 | 0 | 0 | 0 | 96.6 | 0 |
+| `src/app/features/events/event-registration.model.ts` | — | — | ✅ OK | 52 | 0 | 0 | 0 | 93.1 | 0 |
+| `src/app/features/events/events-dashboard-page.ts` | — | — | ✅ OK | 98 | 0 | 0 | 0 | 98.3 | 0 |
+| `src/app/features/events/events.model.ts` | — | — | ✅ OK | 77 | 0 | 0 | 0 | 95.9 | 0 |
+| `src/app/features/fallback/fallback-redirect-page.ts` | — | — | ✅ OK | 19 | 0 | 0 | 0 | 100.0 | 0 |
+| `src/app/features/session/session-page.ts` | — | — | ✅ OK | 92 | 0 | 0 | 0 | 88.5 | 0 |
+| `src/app/shared/ui/atoms/badge/badge.ts` | — | — | ✅ OK | 22 | 0 | 0 | 0 | 100.0 | 0 |
+| `src/app/shared/ui/atoms/brand-name/brand-name.ts` | — | — | ✅ OK | 9 | 0 | 0 | 0 | 100.0 | 0 |
+| `src/app/shared/ui/atoms/button/button.ts` | — | — | ✅ OK | 37 | 0 | 0 | 0 | 100.0 | 0 |
+| `src/app/shared/ui/atoms/checkbox/checkbox.ts` | — | — | ✅ OK | 19 | 0 | 0 | 0 | 90.0 | 0 |
+| `src/app/shared/ui/atoms/heading/heading.ts` | — | — | ✅ OK | 18 | 0 | 0 | 0 | 100.0 | 0 |
+| `src/app/shared/ui/atoms/icon-button/icon-button.ts` | — | — | ✅ OK | 19 | 0 | 0 | 0 | 100.0 | 0 |
+| `src/app/shared/ui/atoms/input/input.ts` | — | — | ✅ OK | 38 | 0 | 0 | 0 | 93.5 | 0 |
+| `src/app/shared/ui/atoms/label/label.ts` | — | — | ✅ OK | 18 | 0 | 0 | 0 | 100.0 | 0 |
+| `src/app/shared/ui/atoms/link/link.ts` | — | — | ✅ OK | 27 | 0 | 0 | 0 | 100.0 | 0 |
+| `src/app/shared/ui/atoms/logo-mark/logo-mark.ts` | — | — | ✅ OK | 23 | 0 | 0 | 0 | 100.0 | 0 |
+| `src/app/shared/ui/atoms/subheading/subheading.ts` | — | — | ✅ OK | 16 | 0 | 0 | 0 | 100.0 | 0 |
+| `src/app/shared/ui/atoms/text/text.ts` | — | — | ✅ OK | 27 | 0 | 0 | 0 | 100.0 | 0 |
+| `src/app/shared/ui/atoms/toggle/toggle.ts` | — | — | ✅ OK | 27 | 0 | 0 | 0 | 100.0 | 0 |
+| `src/app/shared/ui/molecules/auth-actions-row/auth-actions-row.ts` | — | — | ✅ OK | 18 | 0 | 0 | 0 | 89.5 | 0 |
+| `src/app/shared/ui/molecules/checkbox-field/checkbox-field.ts` | — | — | ✅ OK | 19 | 0 | 0 | 0 | 90.9 | 0 |
+| `src/app/shared/ui/molecules/field-feedback/field-feedback.ts` | — | — | ✅ OK | 59 | 0 | 0 | 0 | 86.1 | 0 |
+| `src/app/shared/ui/molecules/filter-chips/filter-chips.ts` | — | — | ✅ OK | 43 | 0 | 0 | 0 | 100.0 | 0 |
+| `src/app/shared/ui/molecules/form-field/form-field.ts` | — | — | ✅ OK | 34 | 0 | 0 | 0 | 93.3 | 0 |
+| `src/app/shared/ui/molecules/info-notice-row/info-notice-row.ts` | — | — | ✅ OK | 71 | 0 | 0 | 0 | 97.4 | 0 |
+| `src/app/shared/ui/molecules/inline-link-row/inline-link-row.ts` | — | — | ✅ OK | 18 | 0 | 0 | 0 | 100.0 | 0 |
+| `src/app/shared/ui/molecules/password-field/password-field.ts` | — | — | ✅ OK | 81 | 0 | 0 | 0 | 75.6 | 0 |
+| `src/app/shared/ui/molecules/segmented-control/segmented-control.ts` | — | — | ✅ OK | 39 | 0 | 0 | 0 | 100.0 | 0 |
+| `src/app/shared/ui/molecules/sparkline-chart/sparkline-chart.ts` | — | — | ✅ OK | 15 | 0 | 0 | 0 | 100.0 | 0 |
+| `src/app/shared/ui/organisms/admin-header/admin-header.ts` | — | — | ✅ OK | 42 | 0 | 0 | 0 | 96.3 | 0 |
+| `src/app/shared/ui/organisms/app-header/app-header.ts` | — | — | ✅ OK | 15 | 0 | 0 | 0 | 100.0 | 0 |
+| `src/app/shared/ui/organisms/auth-card/auth-card.ts` | — | — | ✅ OK | 35 | 0 | 0 | 0 | 100.0 | 0 |
+| `src/app/shared/ui/organisms/auth-footer/auth-footer.ts` | — | — | ✅ OK | 16 | 0 | 0 | 0 | 100.0 | 0 |
+| `src/app/shared/ui/organisms/auth-illustration/auth-illustration.ts` | — | — | ✅ OK | 23 | 0 | 0 | 0 | 100.0 | 0 |
+| `src/app/shared/ui/organisms/auth-login-form/auth-login-form.ts` | — | — | ✅ OK | 73 | 0 | 0 | 0 | 82.9 | 0 |
+| `src/app/shared/ui/organisms/auth-sign-up-form/auth-sign-up-form.ts` | — | — | ✅ OK | 97 | 0 | 0 | 0 | 81.6 | 0 |
+| `src/app/shared/ui/organisms/bottom-nav/bottom-nav.ts` | — | — | ✅ OK | 39 | 0 | 0 | 0 | 100.0 | 0 |
+| `src/app/shared/ui/organisms/event-card/event-card.ts` | — | — | ✅ OK | 56 | 0 | 0 | 0 | 100.0 | 0 |
+| `src/app/shared/ui/organisms/event-registration-form/event-registration-form.ts` | — | — | ✅ OK | 166 | 0 | 0 | 0 | 83.9 | 0 |
+| `src/app/shared/ui/organisms/event-summary-card/event-summary-card.ts` | — | — | ✅ OK | 58 | 0 | 0 | 0 | 100.0 | 0 |
+| `src/app/shared/ui/organisms/event-unavailable-card/event-unavailable-card.ts` | — | — | ✅ OK | 79 | 0 | 0 | 0 | 100.0 | 0 |
+| `src/app/shared/ui/organisms/events-stats-card/events-stats-card.ts` | — | — | ✅ OK | 35 | 0 | 0 | 0 | 100.0 | 0 |
+| `src/app/shared/ui/organisms/events-toolbar/events-toolbar.ts` | — | — | ✅ OK | 26 | 0 | 0 | 0 | 90.9 | 0 |
+| `src/app/shared/ui/organisms/registration-footer/registration-footer.ts` | — | — | ✅ OK | 17 | 0 | 0 | 0 | 100.0 | 0 |
+| `src/app/shared/ui/organisms/registration-header/registration-header.ts` | — | — | ✅ OK | 42 | 0 | 0 | 0 | 100.0 | 0 |
+| `src/app/shared/ui/password-strength.util.ts` | — | — | ✅ OK | 43 | 0 | 0 | 0 | 82.2 | 0 |
+| `src/app/shared/ui/templates/admin-layout/admin-layout.ts` | — | — | ✅ OK | 34 | 0 | 0 | 0 | 100.0 | 0 |
+| `src/app/shared/ui/templates/auth-layout/auth-layout.ts` | — | — | ✅ OK | 23 | 0 | 0 | 0 | 100.0 | 0 |
+| `src/app/shared/ui/templates/registration-layout/registration-layout.ts` | — | — | ✅ OK | 30 | 0 | 0 | 0 | 100.0 | 0 |
+| `src/index.html` | — | — | ✅ OK | 15 | 0 | 0 | 0 | — | 0 |
+| `src/mock/event-registration.mock.ts` | — | — | ✅ OK | 72 | 0 | 0 | 0 | 100.0 | 0 |
+| `src/mock/events.mock.ts` | — | — | ✅ OK | 51 | 0 | 0 | 0 | 100.0 | 0 |
+| `src/mock/index.ts` | — | — | ✅ OK | 5 | 0 | 0 | 0 | — | 0 |
+| `src/styles.scss` | — | — | ✅ OK | 21 | 0 | 0 | 0 | — | 0 |
+
+### Análisis
+
+La cobertura (93.1 %) alcanza el umbral del 80 % definido en `angular.json`, lo que indica tests suficientes para el código analizado. El Quality Gate pasó: las métricas cumplen los umbrales configurados en el servidor Sonar.
+
+---
+
