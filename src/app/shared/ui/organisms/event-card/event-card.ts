@@ -34,9 +34,11 @@ import type { EventItem } from '@features/events/events.model';
       </div>
 
       <div class="mt-4 flex justify-end gap-2">
-        <ef-button variant="soft" [fullWidth]="false" size="sm" (pressed)="editEvent.emit(event().id)">
-          Edit
-        </ef-button>
+        @if (canEdit()) {
+          <ef-button variant="soft" [fullWidth]="false" size="sm" (pressed)="editEvent.emit(event().id)">
+            Edit
+          </ef-button>
+        }
         <ef-button variant="blue" [fullWidth]="false" size="sm" (pressed)="viewAttendees.emit(event().id)">
           Attendees
         </ef-button>
@@ -46,6 +48,7 @@ import type { EventItem } from '@features/events/events.model';
 })
 export class EventCard {
   readonly event = input.required<EventItem>();
+  readonly canEdit = input(false);
 
   readonly editEvent = output<string>();
   readonly viewAttendees = output<string>();

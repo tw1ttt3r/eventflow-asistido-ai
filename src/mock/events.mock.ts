@@ -1,6 +1,9 @@
 import type { EventItem, EventsSparkline, EventsSummary } from '@features/events/events.model';
 import { buildEventsSparkline, summarizeEvents } from '@features/events/events.model';
 
+/** Usuario de sesión mock (alineado con Appwrite en tests y session page). */
+export const MOCK_SESSION_USER_ID = 'user-1';
+
 export const MOCK_EVENTS: EventItem[] = [
   {
     id: '1',
@@ -11,6 +14,7 @@ export const MOCK_EVENTS: EventItem[] = [
     status: 'published',
     ticketsLeft: 12,
     imageHue: 210,
+    createdByUserId: MOCK_SESSION_USER_ID,
   },
   {
     id: '2',
@@ -21,6 +25,7 @@ export const MOCK_EVENTS: EventItem[] = [
     status: 'closed',
     ticketsLeft: 0,
     imageHue: 260,
+    createdByUserId: 'user-2',
   },
   {
     id: '3',
@@ -31,6 +36,7 @@ export const MOCK_EVENTS: EventItem[] = [
     status: 'published',
     ticketsLeft: 6,
     imageHue: 30,
+    createdByUserId: MOCK_SESSION_USER_ID,
   },
   {
     id: '4',
@@ -41,6 +47,7 @@ export const MOCK_EVENTS: EventItem[] = [
     status: 'published',
     ticketsLeft: 20,
     imageHue: 160,
+    createdByUserId: 'user-3',
   },
 ];
 

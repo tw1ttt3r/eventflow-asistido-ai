@@ -1,7 +1,9 @@
-import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject, OnInit, signal } from '@angular/core';
+import { Router } from '@angular/router';
 
+import { AppwriteAuthService } from '@core/appwrite/appwrite-auth.service';
 import { AdminNavigationService } from '@features/admin/admin-navigation.service';
-import { filterEvents, type EventFilter } from '@features/events/events.model';
+import { filterEvents, isEventOwnedByUser, type EventFilter, type EventItem } from '@features/events/events.model';
 import { MOCK_EVENTS, MOCK_EVENTS_SPARKLINE, MOCK_EVENTS_SUMMARY } from '@mock/events.mock';
 import { AdminLayout } from '@shared/ui/templates/admin-layout/admin-layout';
 import { EventCard } from '@shared/ui/organisms/event-card/event-card';
@@ -45,6 +47,7 @@ const FILTER_OPTIONS = [
         @for (event of filteredEvents(); track event.id) {
           <ef-event-card
             [event]="event"
+            [canEdit]="canEditEvent(event)"
             (editEvent)="onEditEvent($event)"
             (viewAttendees)="onViewAttendees($event)"
           />
@@ -57,18 +60,34 @@ const FILTER_OPTIONS = [
     </ef-admin-layout>
   `,
 })
-export class EventsDashboardPage {
+export class EventsDashboardPage implements OnInit {
   private readonly adminNav = inject(AdminNavigationService);
+  private readonly router = inject(Router);
+  private readonly auth = inject(AppwriteAuthService);
 
   protected readonly summary = MOCK_EVENTS_SUMMARY;
   protected readonly sparkline = MOCK_EVENTS_SPARKLINE;
   protected readonly filterOptions = FILTER_OPTIONS.map((option) => ({ ...option }));
   protected readonly searchQuery = signal('');
   protected readonly activeFilter = signal<EventFilter>('all');
+  protected readonly currentUserId = signal<string | null>(null);
 
   protected readonly filteredEvents = computed(() =>
     filterEvents(MOCK_EVENTS, this.activeFilter(), this.searchQuery()),
   );
+
+  ngOnInit(): void {
+    void this.bootstrap();
+  }
+
+  private async bootstrap(): Promise<void> {
+    const user = await this.auth.getCurrentUser();
+    this.currentUserId.set(user?.$id ?? null);
+  }
+
+  protected canEditEvent(event: EventItem): boolean {
+    return isEventOwnedByUser(event, this.currentUserId());
+  }
 
   protected setFilter(filter: string): void {
     if (filter === 'all' || filter === 'published' || filter === 'closed') {
@@ -88,7 +107,7 @@ export class EventsDashboardPage {
     // Placeholder: edición de evento
   }
 
-  protected onViewAttendees(_eventId: string): void {
-    // Placeholder: vista de asistentes
+  protected onViewAttendees(eventId: string): void {
+    void this.router.navigate(['/events', eventId, 'register']);
   }
 }
