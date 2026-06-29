@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 
-export type EfBadgeTone = 'published' | 'closed';
+export type EfBadgeTone = 'published' | 'closed' | 'spots';
 
 @Component({
   selector: 'ef-badge',
@@ -12,6 +12,8 @@ export type EfBadgeTone = 'published' | 'closed';
       [class.text-ef-blue]="tone() === 'published'"
       [class.bg-slate-100]="tone() === 'closed'"
       [class.text-slate-500]="tone() === 'closed'"
+      [class.bg-ef-lavender]="tone() === 'spots'"
+      [class.text-ef-purple]="tone() === 'spots'"
     >
       <ng-content />
     </span>

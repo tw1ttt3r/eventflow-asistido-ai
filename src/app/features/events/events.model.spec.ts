@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 
-import { buildEventsSparkline, filterEvents, summarizeEvents } from '@features/events/events.model';
-import { MOCK_EVENTS } from '@mock/events.mock';
+import { buildEventsSparkline, filterEvents, isEventOwnedByUser, summarizeEvents } from '@features/events/events.model';
+import { MOCK_EVENTS, MOCK_SESSION_USER_ID } from '@mock/events.mock';
 
 describe('summarizeEvents', () => {
   it('should derive totals from mock events', () => {
@@ -34,5 +34,13 @@ describe('filterEvents', () => {
     const results = filterEvents(MOCK_EVENTS, 'all', 'yoga');
     expect(results).toHaveLength(1);
     expect(results[0]?.title).toContain('Yoga');
+  });
+});
+
+describe('isEventOwnedByUser', () => {
+  it('should match only events created by the active user', () => {
+    expect(isEventOwnedByUser(MOCK_EVENTS[0]!, MOCK_SESSION_USER_ID)).toBe(true);
+    expect(isEventOwnedByUser(MOCK_EVENTS[1]!, MOCK_SESSION_USER_ID)).toBe(false);
+    expect(isEventOwnedByUser(MOCK_EVENTS[0]!, null)).toBe(false);
   });
 });
