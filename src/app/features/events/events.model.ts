@@ -11,6 +11,7 @@ export interface EventItem {
   status: EventStatus;
   ticketsLeft: number;
   imageHue: number;
+  createdByUserId: string;
 }
 
 export interface EventsSummary {
@@ -85,4 +86,8 @@ export function filterEvents(events: EventItem[], filter: EventFilter, query: st
 
     return matchesFilter && matchesQuery;
   });
+}
+
+export function isEventOwnedByUser(event: EventItem, userId: string | null | undefined): boolean {
+  return Boolean(userId && event.createdByUserId === userId);
 }

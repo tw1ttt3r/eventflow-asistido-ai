@@ -3,7 +3,9 @@ import { provideRouter, Router } from '@angular/router';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { AdminNavigationService } from '@features/admin/admin-navigation.service';
+import { AppwriteAuthService } from '@core/appwrite/appwrite-auth.service';
 import { EventsDashboardPage } from '@features/events/events-dashboard-page';
+import { MOCK_SESSION_USER_ID } from '@mock/events.mock';
 
 type EventsDashboardHarness = EventsDashboardPage & {
   setFilter(filter: string): void;
@@ -15,17 +17,36 @@ type EventsDashboardHarness = EventsDashboardPage & {
 };
 
 describe('EventsDashboardPage', () => {
+  const authMock = {
+    getCurrentUser: vi.fn().mockResolvedValue({
+      $id: MOCK_SESSION_USER_ID,
+      name: 'Jane Doe',
+      email: 'jane@example.com',
+    }),
+  };
+
   beforeEach(async () => {
+    authMock.getCurrentUser.mockClear();
+
     await TestBed.configureTestingModule({
       imports: [EventsDashboardPage],
-      providers: [provideRouter([{ path: 'session', component: class {} }])],
+      providers: [
+        provideRouter([{ path: 'session', component: class {} }]),
+        { provide: AppwriteAuthService, useValue: authMock },
+      ],
     }).compileComponents();
   });
 
-  it('should render dashboard heading and events', async () => {
+  async function renderDashboard() {
     const fixture = TestBed.createComponent(EventsDashboardPage);
     fixture.detectChanges();
     await fixture.whenStable();
+    fixture.detectChanges();
+    return fixture;
+  }
+
+  it('should render dashboard heading and events', async () => {
+    const fixture = await renderDashboard();
 
     const compiled = fixture.nativeElement as HTMLElement;
     expect(compiled.textContent).toContain('4 total');
@@ -33,6 +54,16 @@ describe('EventsDashboardPage', () => {
     expect(compiled.textContent).toContain('(75%)');
     expect(compiled.textContent).toContain('Intro to Hand Lettering');
     expect(compiled.textContent).toContain('Create Event');
+  });
+
+  it('should show edit only on events owned by the active user', async () => {
+    const fixture = await renderDashboard();
+
+    const editButtons = Array.from(
+      (fixture.nativeElement as HTMLElement).querySelectorAll('button'),
+    ).filter((button) => button.textContent?.trim() === 'Edit');
+
+    expect(editButtons).toHaveLength(2);
   });
 
   it('should filter events by status', async () => {
@@ -103,12 +134,23 @@ describe('EventsDashboardPage', () => {
     ).find((button) => button.textContent?.trim() === 'Edit');
     editButton?.click();
 
+    expect(fixture.componentInstance).toBeTruthy();
+  });
+
+  it('should navigate to registration from attendees action', async () => {
+    const fixture = TestBed.createComponent(EventsDashboardPage);
+    const router = TestBed.inject(Router);
+    const navigateSpy = vi.spyOn(router, 'navigate').mockResolvedValue(true);
+
+    fixture.detectChanges();
+
     const attendeesButton = Array.from(
       (fixture.nativeElement as HTMLElement).querySelectorAll('button'),
     ).find((button) => button.textContent?.trim() === 'Attendees');
     attendeesButton?.click();
+    await fixture.whenStable();
 
-    expect(fixture.componentInstance).toBeTruthy();
+    expect(navigateSpy).toHaveBeenCalledWith(['/events', '1', 'register']);
   });
 
   it('should navigate to session from admin header', async () => {
@@ -120,7 +162,7 @@ describe('EventsDashboardPage', () => {
 
     const accountButton = Array.from(
       (fixture.nativeElement as HTMLElement).querySelectorAll('button'),
-    ).find((button) => button.getAttribute('aria-label') === 'Account');
+    ).find((button) => button.textContent?.trim() === 'Account');
     accountButton?.click();
     await fixture.whenStable();
 
