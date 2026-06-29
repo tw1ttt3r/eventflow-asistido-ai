@@ -1,7 +1,7 @@
 {
   "major": 0,
-  "minor": 6,
-  "patch": 12,
+  "minor": 7,
+  "patch": 26,
   "knownBranches": [
     "tailwind",
     "feat/sonarqube",
@@ -9,7 +9,8 @@
     "feat/refactor-appwrite",
     "feat/auth",
     "fix/refactor-auth",
-    "feat/event-list"
+    "feat/event-list",
+    "refactor-custom-paths"
   ],
   "history": [
     {
@@ -668,6 +669,249 @@
       "reason": "patch",
       "detail": "commit en rama (feat/event-list)",
       "sha": "16c6e7e"
+    },
+    {
+      "at": "2026-06-28T20:35:25.947Z",
+      "from": "0.6.12",
+      "to": "0.7.0",
+      "branch": "refactor-custom-paths",
+      "reason": "minor",
+      "detail": "nueva rama (refactor-custom-paths)",
+      "sha": "5d1794d"
+    },
+    {
+      "at": "2026-06-28T20:39:09.626Z",
+      "from": "0.7.0",
+      "to": "0.7.1",
+      "branch": "refactor-custom-paths",
+      "reason": "patch",
+      "detail": "commit en rama (refactor-custom-paths)",
+      "sha": "6ed7fc5"
+    },
+    {
+      "at": "2026-06-28T20:45:43.306Z",
+      "from": "0.7.1",
+      "to": "0.7.2",
+      "branch": "refactor-custom-paths",
+      "reason": "patch",
+      "detail": "commit en rama (refactor-custom-paths)",
+      "sha": "e212b7b"
+    },
+    {
+      "at": "2026-06-28T20:49:44.263Z",
+      "from": "0.7.2",
+      "to": "0.7.3",
+      "branch": "refactor-custom-paths",
+      "reason": "patch",
+      "detail": "commit en rama (refactor-custom-paths)",
+      "sha": "9c9fbf0"
+    },
+    {
+      "at": "2026-06-28T22:56:27.556Z",
+      "from": "0.7.3",
+      "to": "0.7.4",
+      "branch": "refactor-custom-paths",
+      "reason": "patch",
+      "detail": "commit en rama (refactor-custom-paths)",
+      "sha": "db1a3ac"
+    },
+    {
+      "at": "2026-06-28T22:56:48.158Z",
+      "from": "0.7.4",
+      "to": "0.7.5",
+      "branch": "refactor-custom-paths",
+      "reason": "patch",
+      "detail": "commit en rama (refactor-custom-paths)",
+      "sha": "db1a3ac"
+    },
+    {
+      "at": "2026-06-28T22:57:06.880Z",
+      "from": "0.7.5",
+      "to": "0.7.6",
+      "branch": "refactor-custom-paths",
+      "reason": "patch",
+      "detail": "commit en rama (refactor-custom-paths)",
+      "sha": "1818e3a"
+    },
+    {
+      "at": "2026-06-28T22:57:57.656Z",
+      "from": "0.7.6",
+      "to": "0.7.7",
+      "branch": "refactor-custom-paths",
+      "reason": "patch",
+      "detail": "commit en rama (refactor-custom-paths)",
+      "sha": "c36462f"
+    },
+    {
+      "at": "2026-06-28T22:58:28.569Z",
+      "from": "0.7.7",
+      "to": "0.7.8",
+      "branch": "refactor-custom-paths",
+      "reason": "patch",
+      "detail": "commit en rama (refactor-custom-paths)",
+      "sha": "000458f"
+    },
+    {
+      "at": "2026-06-28T23:01:52.280Z",
+      "from": "0.7.8",
+      "to": "0.7.9",
+      "branch": "refactor-custom-paths",
+      "reason": "patch",
+      "detail": "commit en rama (refactor-custom-paths)",
+      "sha": "d2ebd44"
+    },
+    {
+      "at": "2026-06-28T23:10:55.183Z",
+      "from": "0.7.9",
+      "to": "0.7.10",
+      "branch": "refactor-custom-paths",
+      "reason": "patch",
+      "detail": "commit en rama (refactor-custom-paths)",
+      "sha": "2841629"
+    },
+    {
+      "at": "2026-06-28T23:11:27.221Z",
+      "from": "0.7.10",
+      "to": "0.7.11",
+      "branch": "refactor-custom-paths",
+      "reason": "patch",
+      "detail": "commit en rama (refactor-custom-paths)",
+      "sha": "2841629"
+    },
+    {
+      "at": "2026-06-28T23:14:56.397Z",
+      "from": "0.7.11",
+      "to": "0.7.12",
+      "branch": "refactor-custom-paths",
+      "reason": "patch",
+      "detail": "commit en rama (refactor-custom-paths)",
+      "sha": "41cf1dc"
+    },
+    {
+      "at": "2026-06-28T23:16:18.463Z",
+      "from": "0.7.12",
+      "to": "0.7.13",
+      "branch": "refactor-custom-paths",
+      "reason": "patch",
+      "detail": "commit en rama (refactor-custom-paths)",
+      "sha": "0d78764"
+    },
+    {
+      "at": "2026-06-28T23:18:05.267Z",
+      "from": "0.7.13",
+      "to": "0.7.14",
+      "branch": "refactor-custom-paths",
+      "reason": "patch",
+      "detail": "commit en rama (refactor-custom-paths)",
+      "sha": "6d8c0cf"
+    },
+    {
+      "at": "2026-06-28T23:21:16.565Z",
+      "from": "0.7.14",
+      "to": "0.7.15",
+      "branch": "refactor-custom-paths",
+      "reason": "patch",
+      "detail": "commit en rama (refactor-custom-paths)",
+      "sha": "6d8c0cf"
+    },
+    {
+      "at": "2026-06-28T23:30:42.531Z",
+      "from": "0.7.15",
+      "to": "0.7.16",
+      "branch": "refactor-custom-paths",
+      "reason": "patch",
+      "detail": "commit en rama (refactor-custom-paths)",
+      "sha": "6d8c0cf"
+    },
+    {
+      "at": "2026-06-28T23:31:04.298Z",
+      "from": "0.7.16",
+      "to": "0.7.17",
+      "branch": "refactor-custom-paths",
+      "reason": "patch",
+      "detail": "commit en rama (refactor-custom-paths)",
+      "sha": "1cfa127"
+    },
+    {
+      "at": "2026-06-28T23:31:14.907Z",
+      "from": "0.7.17",
+      "to": "0.7.18",
+      "branch": "refactor-custom-paths",
+      "reason": "patch",
+      "detail": "commit en rama (refactor-custom-paths)",
+      "sha": "aaa4141"
+    },
+    {
+      "at": "2026-06-28T23:32:54.101Z",
+      "from": "0.7.18",
+      "to": "0.7.19",
+      "branch": "refactor-custom-paths",
+      "reason": "patch",
+      "detail": "commit en rama (refactor-custom-paths)",
+      "sha": "3de82f6"
+    },
+    {
+      "at": "2026-06-28T23:56:03.206Z",
+      "from": "0.7.19",
+      "to": "0.7.20",
+      "branch": "refactor-custom-paths",
+      "reason": "patch",
+      "detail": "commit en rama (refactor-custom-paths)",
+      "sha": "8756b13"
+    },
+    {
+      "at": "2026-06-28T23:56:57.735Z",
+      "from": "0.7.20",
+      "to": "0.7.21",
+      "branch": "refactor-custom-paths",
+      "reason": "patch",
+      "detail": "commit en rama (refactor-custom-paths)",
+      "sha": "02a1adc"
+    },
+    {
+      "at": "2026-06-28T23:57:12.710Z",
+      "from": "0.7.21",
+      "to": "0.7.22",
+      "branch": "refactor-custom-paths",
+      "reason": "patch",
+      "detail": "commit en rama (refactor-custom-paths)",
+      "sha": "a83ec91"
+    },
+    {
+      "at": "2026-06-28T23:57:31.346Z",
+      "from": "0.7.22",
+      "to": "0.7.23",
+      "branch": "refactor-custom-paths",
+      "reason": "patch",
+      "detail": "commit en rama (refactor-custom-paths)",
+      "sha": "a83ec91"
+    },
+    {
+      "at": "2026-06-28T23:57:52.455Z",
+      "from": "0.7.23",
+      "to": "0.7.24",
+      "branch": "refactor-custom-paths",
+      "reason": "patch",
+      "detail": "commit en rama (refactor-custom-paths)",
+      "sha": "a4a5aef"
+    },
+    {
+      "at": "2026-06-28T23:58:19.218Z",
+      "from": "0.7.24",
+      "to": "0.7.25",
+      "branch": "refactor-custom-paths",
+      "reason": "patch",
+      "detail": "commit en rama (refactor-custom-paths)",
+      "sha": "9f0cc55"
+    },
+    {
+      "at": "2026-06-28T23:58:56.695Z",
+      "from": "0.7.25",
+      "to": "0.7.26",
+      "branch": "refactor-custom-paths",
+      "reason": "patch",
+      "detail": "commit en rama (refactor-custom-paths)",
+      "sha": "77628e9"
     }
   ]
 }

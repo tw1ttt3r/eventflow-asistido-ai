@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { AppwriteAuthService } from '../../core/appwrite/appwrite-auth.service';
+import { AppwriteAuthService } from '@core/appwrite/appwrite-auth.service';
 
 /** Redirige rutas desconocidas según sesión activa. */
 @Component({

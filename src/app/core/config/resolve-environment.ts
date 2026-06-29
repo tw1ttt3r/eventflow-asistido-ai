@@ -1,6 +1,6 @@
-import type { Environment } from '../../../environments/environment.model';
+import type { Environment } from '@env/environment.model';
 
-import { ENV_FIELD_REGISTRY } from './env.registry';
+import { ENV_FIELD_REGISTRY } from '@core/config/env.registry';
 import {
   getValueByPath,
   parseEnvBoolean,
@@ -8,7 +8,7 @@ import {
   readNgAppVars,
   setValueByPath,
   type NgAppVars,
-} from './env-vars';
+} from '@core/config/env-vars';
 
 const SONAR_PATH_PREFIX = 'sonar.';
 

@@ -1509,4 +1509,303 @@ Condición incumplida: **`new_violations: 1`** (umbral 0) — 1 issue nuevo resp
 
 ---
 
-*Última actualización del archivo: 2026-06-28 13:24:15 CST*
+## Entrada #049 — TypeScript path aliases obligatorios
+
+| Campo | Valor |
+|-------|--------|
+| **Fecha de ejecución** | 2026-06-28 |
+| **Hora de ejecución** | 14:08:27 CST |
+| **Tiempo total** | ~120 s (estimado) |
+| **Modelo de agente** | `gpt-5.3-codex` |
+| **Nivel de complejidad** | **Media** |
+
+### Prompt
+
+> oye vamos a reemplazar el uso de relative paths por absolute pathe mediante TypeScript Path Aliases, haz las adecuaciones necesarias y coloca como regla el uso de path aliases como obligatorio
+
+### Entregables
+
+- `tsconfig.json`: `baseUrl` + aliases `@app`, `@core`, `@shared`, `@features`, `@env`, `@mock`, `@version`
+- ~49 archivos en `src/` migrados de imports relativos a aliases
+- Lazy routes en `app.routes.ts` con `@features/*`
+- Regla `.cursor/rules/path-aliases.mdc` (`alwaysApply: true`)
+- `AGENTS.md`, `mock-data.mdc` actualizados
+
+### Ajustes requeridos
+
+- [x] Aliases configurados y código migrado
+- [x] Regla de agente obligatoria
+- [ ] Validar localmente `pnpm test` y `pnpm build`
+
+---
+
+## Entrada #050 — Bitácora `.quality/tests.md`
+
+| Campo | Valor |
+|-------|--------|
+| **Fecha de ejecución** | 2026-06-28 |
+| **Hora de ejecución** | 14:16:16 CST |
+| **Tiempo total** | ~90 s |
+| **Modelo de agente** | `gpt-5.3-codex` |
+| **Nivel de complejidad** | **Media** |
+
+### Prompt
+
+> oye agrega una regla para que cada vez que se corran los tests se guarde una entrada dentro del directorio .quality, y el archivo tests.md, guarda informaxión de la fecha y hora, quien ejecuta (agente o developer), rama, razón de ejecución, guarda todo el resumen de la ejecución, y dame un resumen breve de la ejecución
+
+### Entregables
+
+- `scripts/test.mjs` + `scripts/test-bitacora.mjs`
+- `pnpm test` / `pnpm test:coverage` envueltos con logging
+- `.quality/tests.md` + regla `quality-tests.mdc`
+- `AGENTS.md`, `README.md`, `quality.mjs` (QUALITY_PIPELINE)
+
+### Ajustes requeridos
+
+- [x] Bitácora automática en cada test run
+- [x] Primera ejecución validada (entrada #002)
+
+---
+
+## Entrada #051 — `pnpm test:all` + script detonador en bitácora
+
+| Campo | Valor |
+|-------|--------|
+| **Fecha de ejecución** | 2026-06-28 |
+| **Hora de ejecución** | 14:20:44 CST |
+| **Tiempo total** | ~60 s |
+| **Modelo de agente** | `gpt-5.3-codex` |
+| **Nivel de complejidad** | **Media** |
+
+### Prompt
+
+> genera un script extra que corra test y test:coverage, y que de igual manera se guarde en bitacora, agrega dentro de la entrada que script detono los tests
+
+### Entregables
+
+- `scripts/test-all.mjs` + `pnpm test:all`
+- Campo **Script detonador** en `.quality/tests.md`
+- `TEST_TRIGGER_SCRIPT` (inferido vía `npm_lifecycle_event` o explícito)
+- `quality.mjs` marca detonador `pnpm quality`
+
+### Ajustes requeridos
+
+- [x] Suite test + test:coverage
+- [x] Bitácora con script detonador
+- [x] Validado (entradas #003–#004)
+
+---
+
+## Entrada #052 — Fix build Vercel: import duplicado `APP_VERSION`
+
+| Campo | Valor |
+|-------|--------|
+| **Fecha de ejecución** | 2026-06-28 |
+| **Hora de ejecución** | 17:09:11 CST |
+| **Tiempo total** | ~30 s |
+| **Modelo de agente** | `gpt-5.3-codex` |
+| **Nivel de complejidad** | **Baja** |
+
+### Prompt
+
+> el build de vercel reporta lo siguiente … Duplicate identifier 'APP_VERSION' … revisa el proyecto validando imports duplicados y corrige cualquier issue
+
+### Entregables
+
+- Eliminado import relativo duplicado en `environment.ts` y `environment.development.ts`
+- Solo `@version` según regla path aliases
+- `pnpm build` OK localmente
+
+### Ajustes requeridos
+
+- [x] Imports duplicados corregidos
+- [x] Build producción verificado
+
+---
+
+## Entrada #053 — Commit environments sin fix real de imports
+
+| Campo | Valor |
+|-------|--------|
+| **Fecha de ejecución** | 2026-06-28 |
+| **Hora de ejecución** | 17:12:40 CST |
+| **Tiempo total** | ~30 s |
+| **Modelo de agente** | `gpt-5.3-codex` |
+| **Nivel de complejidad** | **Baja** |
+
+### Prompt
+
+> hice commit de los cambios en environments pero los veo iguales, que paso?
+
+### Diagnóstico
+
+El commit `41cf1dc` (`fix: removed imports relatives`) **no eliminó** el import relativo: solo añadió líneas en blanco (hook de versión). Ambos archivos seguían con **dos imports** de `APP_VERSION` (`../version` + `@version`), de ahí el error en Vercel y que se vieran iguales en la parte superior.
+
+**Diferencia real** entre archivos: `environment.development.ts` incluye bloque `sonar`; `environment.ts` (prod) no.
+
+### Entregables
+
+- Eliminado `import … from '../version'` en ambos environments (solo `@version`)
+- `pnpm build` OK
+
+### Ajustes requeridos
+
+- [x] Fix aplicado en working tree
+- [ ] Usuario debe commitear el diff real en `src/environments/`
+
+---
+
+## Entrada #054 — Pre-commit reinyectaba import `../version`
+
+| Campo | Valor |
+|-------|--------|
+| **Fecha de ejecución** | 2026-06-28 |
+| **Hora de ejecución** | 17:18:02 CST |
+| **Tiempo total** | ~45 s |
+| **Modelo de agente** | `gpt-5.3-codex` |
+| **Nivel de complejidad** | **Baja** |
+
+### Prompt
+
+> sigo intentando borrar esos imports pero al momento de commitear regresan las lineas, que esta pasando y como se soluciona
+
+### Causa
+
+`.husky/pre-commit` ejecuta `scripts/version-bump.mjs`. En `syncEnvironments()` si no encontraba `from '../version'`, **añadía** ese import en cada commit — chocando con `@version` y duplicando `APP_VERSION`.
+
+### Solución
+
+- `version-bump.mjs`: usa solo `@version`; elimina import relativo legacy antes de sincronizar.
+- Environments corregidos de nuevo.
+
+### Ajustes requeridos
+
+- [x] Fix en `version-bump.mjs`
+- [x] Validado post-bump (un solo import, build OK)
+- [ ] Commitear `version-bump.mjs` + environments juntos
+
+---
+
+## Entrada #055 — Líneas vacías en environments (version-bump)
+
+| Campo | Valor |
+|-------|--------|
+| **Fecha de ejecución** | 2026-06-28 |
+| **Hora de ejecución** | 17:21:14 CST |
+| **Tiempo total** | ~40 s |
+| **Modelo de agente** | `gpt-5.3-codex` |
+| **Nivel de complejidad** | **Baja** |
+
+### Prompt
+
+> oye de igual manera he visto lineas vacias innecesarias en los archivos environments, por se estan agregando, y eliminalas por completo, que no se genere el archivo así
+
+### Causa
+
+`syncEnvironments()` editaba con regex (borrar/reinsertar `version:`) y en cada pre-commit se acumulaban líneas en blanco.
+
+### Solución
+
+- `renderEnvironmentFile()` genera el archivo completo sin huecos.
+- Environments limpiados (15 y 19 líneas vs ~75 antes).
+- Validado: post `version-bump` siguen compactos, build OK.
+
+### Ajustes requeridos
+
+- [x] Generación limpia en `version-bump.mjs`
+- [x] Archivos environments sin líneas vacías
+- [ ] Commitear cambios
+
+---
+
+## Entrada #056 — Alinear vitest y @vitest/coverage-v8
+
+| Campo | Valor |
+|-------|--------|
+| **Fecha de ejecución** | 2026-06-28 |
+| **Hora de ejecución** | 17:37:02 CST |
+| **Tiempo total** | ~30 s |
+| **Modelo de agente** | `gpt-5.3-codex` |
+| **Nivel de complejidad** | **Baja** |
+
+### Prompt
+
+> al correr los tests arroja lo siguiente … Running mixed versions is not supported … vitest@4.1.6 and @vitest/coverage-v8@4.1.8
+
+### Causa
+
+`vitest` quedó en **4.1.6** y `@vitest/coverage-v8` con `^4.1.6` resolvió a **4.1.8**. Vitest exige la misma versión exacta en el ecosistema.
+
+### Solución
+
+- Pin `vitest` y `@vitest/coverage-v8` a **4.1.8** (sin caret).
+- `pnpm install` + tests: sin warning de mixed versions; 32/32 OK.
+
+### Ajustes requeridos
+
+- [x] Versiones alineadas en `package.json` / lockfile
+- [ ] Commitear `package.json` + `pnpm-lock.yaml`
+
+---
+
+## Entrada #057 — Separar test dev vs test:coverage (umbral 80 %)
+
+| Campo | Valor |
+|-------|--------|
+| **Fecha de ejecución** | 2026-06-28 |
+| **Hora de ejecución** | 17:40:42 CST |
+| **Tiempo total** | ~45 s |
+| **Modelo de agente** | `gpt-5.3-codex` |
+| **Nivel de complejidad** | **Media** |
+
+### Prompt
+
+> hazlo (separar `pnpm test` sin gate vs `pnpm test:coverage` con umbral 80 %)
+
+### Entregables
+
+- `angular.json`: `test.options` sin cobertura; `test.configurations.coverage` con lcov + umbral 80 %
+- `test.mjs`: mapeo `--coverage` → `--configuration=coverage`
+- `package.json`, README, AGENTS, `quality-tests.mdc` actualizados
+- Validado: `pnpm test` → exit 0; `pnpm test:coverage` → exit 1 por functions 57 % (gate activo)
+
+### Ajustes requeridos
+
+- [x] Separación dev / calidad
+- [ ] Subir cobertura de functions progresivamente (fuera de este cambio)
+
+---
+
+## Entrada #058 — Cobertura de functions ≥ 80 %
+
+| Campo | Valor |
+|-------|--------|
+| **Fecha de ejecución** | 2026-06-28 |
+| **Hora de ejecución** | 17:46:34 CST |
+| **Tiempo total** | ~120 s |
+| **Modelo de agente** | `gpt-5.3-codex` |
+| **Nivel de complejidad** | **Media** |
+
+### Prompt
+
+> Mejora el coverage de funciones para cumplir con el porcentaje (umbral global 80 %).
+
+### Criterios de complejidad
+
+- 10 archivos de spec nuevos o ampliados; sin cambios de arquitectura.
+- Objetivo: pasar gate de `pnpm test:coverage` (functions 57 % → ≥ 80 %).
+
+### Entregables
+
+- Nuevos specs: `appwrite-auth-error`, `admin-navigation.service`, `auth-login-form`, `auth-sign-up-form`
+- Ampliados: `auth-page`, `events-dashboard-page`, `appwrite-auth.service`, `session-page`, `resolve-environment`
+- Validado: **123/149 functions (82.55 %)**; `pnpm test:coverage` exit 0; 63 tests OK
+
+### Ajustes requeridos
+
+- [x] Specs auth, dashboard, navegación admin y errores Appwrite
+- [x] Umbral 80 % de functions cumplido
+
+---
+
+*Última actualización del archivo: 2026-06-28 17:46:34 CST*

@@ -1,8 +1,8 @@
 import { describe, expect, it } from 'vitest';
 
-import { readNgAppVar, parseEnvBoolean, setValueByPath, getValueByPath } from './env-vars';
-import { readEnvField, resolveEnvironment } from './resolve-environment';
-import type { Environment } from '../../../environments/environment.model';
+import { readNgAppVar, parseEnvBoolean, setValueByPath, getValueByPath, getNgAppVar } from '@core/config/env-vars';
+import { readEnvField, resolveEnvironment } from '@core/config/resolve-environment';
+import type { Environment } from '@env/environment.model';
 
 const emptyBase: Environment = {
   production: false,
@@ -47,6 +47,17 @@ describe('setValueByPath / getValueByPath', () => {
     const target = { appwrite: { endpoint: '' } };
     setValueByPath(target, 'appwrite.endpoint', 'https://appwrite.io/v1');
     expect(getValueByPath(target, 'appwrite.endpoint')).toBe('https://appwrite.io/v1');
+  });
+
+  it('should return undefined for invalid paths', () => {
+    expect(getValueByPath({}, 'missing.path')).toBeUndefined();
+    expect(getValueByPath({ appwrite: null }, 'appwrite.endpoint')).toBeUndefined();
+  });
+});
+
+describe('getNgAppVar', () => {
+  it('should read from NG_APP_VARS when available', () => {
+    expect(getNgAppVar('NG_APP_API_URL', 'fallback')).toBe('fallback');
   });
 });
 

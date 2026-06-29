@@ -1,8 +1,8 @@
 import { InjectionToken } from '@angular/core';
 
-import { environment } from '../../../environments/environment';
-import type { Environment } from '../../../environments/environment.model';
-import { resolveEnvironment } from './resolve-environment';
+import { environment } from '@env/environment';
+import type { Environment } from '@env/environment.model';
+import { resolveEnvironment } from '@core/config/resolve-environment';
 
 export const APP_CONFIG = new InjectionToken<Environment>('APP_CONFIG');
 

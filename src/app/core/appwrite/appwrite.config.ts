@@ -1,4 +1,4 @@
-import type { Environment } from '../../../environments/environment.model';
+import type { Environment } from '@env/environment.model';
 
 export interface AppwriteConfig {
   endpoint: string;

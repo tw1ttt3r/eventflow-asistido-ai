@@ -184,7 +184,9 @@ Detalle: [`.cardex/VERSIONING.md`](.cardex/VERSIONING.md)
 pnpm start          # dev server (Vite) + .env
 pnpm build          # producción + service worker
 pnpm build:dev      # desarrollo
-pnpm test           # Vitest
+pnpm test           # Vitest (sin cobertura ni umbral — desarrollo)
+pnpm test:coverage  # Vitest + lcov + umbral 80 % (CI / calidad)
+pnpm test:all       # test + test:coverage en secuencia
 pnpm quality        # pipeline local: cobertura + Sonar (ver sección siguiente)
 ```
 
@@ -266,6 +268,8 @@ La bitácora se genera automáticamente consultando la API de Sonar **después**
 
 Es complementaria a [`.cardex/bitacora.md`](.cardex/bitacora.md) (metadata de prompts del agente), no la reemplaza.
 
+Cada **`pnpm test`** / **`pnpm test:coverage`** / **`pnpm test:all`** appendea **`.quality/tests.md`**: fecha, ejecutor, rama, razón, **script detonador**, resumen Vitest y salida completa. Ver [`.cursor/rules/quality-tests.mdc`](.cursor/rules/quality-tests.mdc).
+
 ### Solución de problemas
 
 | Error | Qué revisar |
@@ -273,7 +277,7 @@ Es complementaria a [`.cardex/bitacora.md`](.cardex/bitacora.md) (metadata de pr
 | `Falta SONAR_TOKEN` | `.env` existe y tiene `SONAR_TOKEN` |
 | Cobertura en 0 % en Sonar | Ejecuta primero `pnpm quality:coverage`; verifica `coverage/eventflow-asistido-ai/lcov.info` |
 | Proyecto no encontrado | `sonar.projectKey` en SonarCloud coincide con `sonar-project.properties` |
-| Umbrales de cobertura fallan | `angular.json` exige 80 %; añade tests o ajusta `coverageThresholds` |
+| Umbrales de cobertura fallan | Solo aplica en `pnpm test:coverage` / `pnpm quality`; añade tests o ajusta `coverageThresholds` en `angular.json` → `test.configurations.coverage` |
 
 ## Angular CLI
 
@@ -292,9 +296,11 @@ Documentación: [angular.dev](https://angular.dev)
 | [`.cursor/rules/agent-model.mdc`](.cursor/rules/agent-model.mdc) | Regla persistente del modelo |
 | [`.cardex/bitacora.md`](.cardex/bitacora.md) | Metadata por prompt |
 | [`.quality/bitacora.md`](.quality/bitacora.md) | Historial de scans Sonar |
+| [`.quality/tests.md`](.quality/tests.md) | Historial de ejecuciones de tests |
 | [`.cardex/VERSIONING.md`](.cardex/VERSIONING.md) | Reglas SemVer del proyecto |
 | [`.cursor/rules/bitacora.mdc`](.cursor/rules/bitacora.mdc) | Regla de bitacoreo |
 | [`.cursor/rules/quality-bitacora.mdc`](.cursor/rules/quality-bitacora.mdc) | Regla de bitácora Sonar |
+| [`.cursor/rules/quality-tests.mdc`](.cursor/rules/quality-tests.mdc) | Regla de bitácora tests |
 | [`.cursor/rules/readme-badges.mdc`](.cursor/rules/readme-badges.mdc) | Badges shields.io en README |
 
 Tras clonar en otro equipo: `git pull`, abre el proyecto en Cursor, selecciona **GPT-5.3 Codex** en el selector del Agent (una vez por máquina). Haz commit de `.cardex/`, `.quality/`, `AGENTS.md` y `.cursor/rules/` para conservar historial y convenciones.

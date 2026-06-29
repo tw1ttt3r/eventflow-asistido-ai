@@ -2,11 +2,11 @@ import { ApplicationConfig, provideBrowserGlobalErrorListeners, isDevMode } from
 import { provideRouter } from '@angular/router';
 import { provideServiceWorker } from '@angular/service-worker';
 
-import { createAppwriteClient } from './core/appwrite/appwrite.client';
-import { resolveAppwriteConfig } from './core/appwrite/appwrite.config';
-import { APPWRITE_CLIENT, APPWRITE_CONFIG } from './core/appwrite/appwrite.tokens';
-import { APP_CONFIG, createAppConfig } from './core/config/app-config';
-import { routes } from './app.routes';
+import { createAppwriteClient } from '@core/appwrite/appwrite.client';
+import { resolveAppwriteConfig } from '@core/appwrite/appwrite.config';
+import { APPWRITE_CLIENT, APPWRITE_CONFIG } from '@core/appwrite/appwrite.tokens';
+import { APP_CONFIG, createAppConfig } from '@core/config/app-config';
+import { routes } from '@app/app.routes';
 
 export const appConfig: ApplicationConfig = {
   providers: [

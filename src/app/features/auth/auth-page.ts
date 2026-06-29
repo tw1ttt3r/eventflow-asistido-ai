@@ -1,18 +1,18 @@
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { toAuthErrorMessage } from '../../core/appwrite/appwrite-auth-error';
-import { AppwriteAuthService } from '../../core/appwrite/appwrite-auth.service';
-import { AuthLayout } from '../../shared/ui/templates/auth-layout/auth-layout';
-import { AuthCard } from '../../shared/ui/organisms/auth-card/auth-card';
+import { toAuthErrorMessage } from '@core/appwrite/appwrite-auth-error';
+import { AppwriteAuthService } from '@core/appwrite/appwrite-auth.service';
+import { AuthLayout } from '@shared/ui/templates/auth-layout/auth-layout';
+import { AuthCard } from '@shared/ui/organisms/auth-card/auth-card';
 import {
   AuthLoginForm,
   type LoginFormValue,
-} from '../../shared/ui/organisms/auth-login-form/auth-login-form';
+} from '@shared/ui/organisms/auth-login-form/auth-login-form';
 import {
   AuthSignUpForm,
   type SignUpFormValue,
-} from '../../shared/ui/organisms/auth-sign-up-form/auth-sign-up-form';
+} from '@shared/ui/organisms/auth-sign-up-form/auth-sign-up-form';
 
 export type AuthTab = 'sign-up' | 'login';
 

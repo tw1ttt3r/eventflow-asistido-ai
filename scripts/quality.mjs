@@ -31,12 +31,12 @@ if (!process.env['SONAR_HOST_URL']) {
   console.log('SONAR_HOST_URL no definido; usando http://localhost:9000/');
 }
 
-function run(command, args, label) {
+function run(command, args, label, extraEnv = {}) {
   console.log(`\n▶ ${label}\n`);
   const result = spawnSync(command, args, {
     cwd: root,
     stdio: 'inherit',
-    env: process.env,
+    env: { ...process.env, ...extraEnv },
     shell: process.platform === 'win32',
   });
 
@@ -45,7 +45,10 @@ function run(command, args, label) {
   }
 }
 
-run('pnpm', ['test:coverage'], 'Paso 1/2 — tests con cobertura (Vitest + lcov)');
+run('pnpm', ['test:coverage'], 'Paso 1/2 — tests con cobertura (Vitest + lcov)', {
+  QUALITY_PIPELINE: '1',
+  TEST_TRIGGER_SCRIPT: 'pnpm quality',
+});
 run('pnpm', ['sonar'], 'Paso 2/2 — análisis Sonar');
 
 console.log('\n✓ Pipeline de calidad completado\n');
