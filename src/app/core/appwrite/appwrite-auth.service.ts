@@ -4,6 +4,8 @@ import { ID, type Models } from 'appwrite';
 import { isAppwriteConfigured } from '@core/appwrite/appwrite.config';
 import { APPWRITE_CONFIG } from '@core/appwrite/appwrite.tokens';
 import { AppwriteService } from '@core/appwrite/appwrite.service';
+import { APP_CONFIG } from '@core/config/app-config';
+import { MOCK_SESSION_USER } from '@mock/session.mock';
 
 export interface RegisterWithEmailParams {
   name: string;
@@ -20,6 +22,7 @@ export interface LoginWithEmailParams {
 export class AppwriteAuthService {
   private readonly appwrite = inject(AppwriteService);
   private readonly config = inject(APPWRITE_CONFIG);
+  private readonly appConfig = inject(APP_CONFIG);
 
   isConfigured(): boolean {
     return isAppwriteConfigured(this.config);
@@ -55,6 +58,10 @@ export class AppwriteAuthService {
   }
 
   async getCurrentUser(): Promise<Models.User<Models.Preferences> | null> {
+    if (this.appConfig.mockSessionUser && !this.appConfig.production) {
+      return MOCK_SESSION_USER;
+    }
+
     if (!this.isConfigured()) {
       return null;
     }
