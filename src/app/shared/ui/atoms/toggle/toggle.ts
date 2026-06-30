@@ -1,5 +1,7 @@
 import { ChangeDetectionStrategy, Component, input, model } from '@angular/core';
 
+export type EfToggleTone = 'purple' | 'success';
+
 @Component({
   selector: 'ef-toggle',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -10,7 +12,8 @@ import { ChangeDetectionStrategy, Component, input, model } from '@angular/core'
       [attr.aria-checked]="checked()"
       [attr.aria-label]="ariaLabel()"
       class="relative inline-flex h-6 w-11 shrink-0 rounded-full transition"
-      [class.bg-ef-purple]="checked()"
+      [class.bg-ef-purple]="checked() && tone() === 'purple'"
+      [class.bg-emerald-500]="checked() && tone() === 'success'"
       [class.bg-slate-200]="!checked()"
       (click)="checked.set(!checked())"
     >
@@ -25,4 +28,5 @@ import { ChangeDetectionStrategy, Component, input, model } from '@angular/core'
 export class EfToggle {
   readonly checked = model(false);
   readonly ariaLabel = input('Toggle');
+  readonly tone = input<EfToggleTone>('purple');
 }

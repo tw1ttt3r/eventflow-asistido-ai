@@ -1,6 +1,6 @@
 {
   "major": 0,
-  "minor": 10,
+  "minor": 11,
   "patch": 6,
   "knownBranches": [
     "tailwind",
@@ -13,72 +13,10 @@
     "refactor-custom-paths",
     "feat/event-register",
     "feat/refactor-events",
-    "feat/event-detail"
+    "feat/event-detail",
+    "feat/attendee-list"
   ],
   "history": [
-    {
-      "at": "2026-06-09T05:49:43.255Z",
-      "from": "0.1.2",
-      "to": "0.1.3",
-      "branch": "feat/sonarqube",
-      "reason": "patch",
-      "detail": "commit en rama (feat/sonarqube)",
-      "sha": "ae93de7"
-    },
-    {
-      "at": "2026-06-09T05:50:12.558Z",
-      "from": "0.1.3",
-      "to": "0.1.4",
-      "branch": "feat/sonarqube",
-      "reason": "patch",
-      "detail": "commit en rama (feat/sonarqube)",
-      "sha": "b411d67"
-    },
-    {
-      "at": "2026-06-15T04:42:26.491Z",
-      "from": "0.1.4",
-      "to": "0.1.5",
-      "branch": "feat/sonarqube",
-      "reason": "patch",
-      "detail": "commit en rama (feat/sonarqube)",
-      "sha": "f860950"
-    },
-    {
-      "at": "2026-06-15T04:45:05.225Z",
-      "from": "0.1.5",
-      "to": "0.1.6",
-      "branch": "feat/sonarqube",
-      "reason": "patch",
-      "detail": "commit en rama (feat/sonarqube)",
-      "sha": "82fb28d"
-    },
-    {
-      "at": "2026-06-15T05:16:27.218Z",
-      "from": "0.1.6",
-      "to": "0.1.7",
-      "branch": "feat/sonarqube",
-      "reason": "patch",
-      "detail": "commit en rama (feat/sonarqube)",
-      "sha": "4463fa1"
-    },
-    {
-      "at": "2026-06-15T05:22:20.144Z",
-      "from": "0.1.7",
-      "to": "0.1.8",
-      "branch": "feat/sonarqube",
-      "reason": "patch",
-      "detail": "commit en rama (feat/sonarqube)",
-      "sha": "3755413"
-    },
-    {
-      "at": "2026-06-18T18:12:37.888Z",
-      "from": "0.1.8",
-      "to": "0.2.0",
-      "branch": "feat/check-status-infra",
-      "reason": "minor",
-      "detail": "nueva rama (feat/check-status-infra)",
-      "sha": "d400fe4"
-    },
     {
       "at": "2026-06-19T04:28:36.764Z",
       "from": "0.2.0",
@@ -915,6 +853,69 @@
       "reason": "patch",
       "detail": "commit en rama (feat/event-detail)",
       "sha": "97b9bbe"
+    },
+    {
+      "at": "2026-06-30T16:05:31.372Z",
+      "from": "0.10.6",
+      "to": "0.11.0",
+      "branch": "feat/attendee-list",
+      "reason": "minor",
+      "detail": "nueva rama (feat/attendee-list)",
+      "sha": "b609aa4"
+    },
+    {
+      "at": "2026-06-30T16:05:52.672Z",
+      "from": "0.11.0",
+      "to": "0.11.1",
+      "branch": "feat/attendee-list",
+      "reason": "patch",
+      "detail": "commit en rama (feat/attendee-list)",
+      "sha": "7fff578"
+    },
+    {
+      "at": "2026-06-30T16:06:14.223Z",
+      "from": "0.11.1",
+      "to": "0.11.2",
+      "branch": "feat/attendee-list",
+      "reason": "patch",
+      "detail": "commit en rama (feat/attendee-list)",
+      "sha": "4ad6529"
+    },
+    {
+      "at": "2026-06-30T16:06:38.726Z",
+      "from": "0.11.2",
+      "to": "0.11.3",
+      "branch": "feat/attendee-list",
+      "reason": "patch",
+      "detail": "commit en rama (feat/attendee-list)",
+      "sha": "0cae1ba"
+    },
+    {
+      "at": "2026-06-30T16:06:48.944Z",
+      "from": "0.11.3",
+      "to": "0.11.4",
+      "branch": "feat/attendee-list",
+      "reason": "patch",
+      "detail": "commit en rama (feat/attendee-list)",
+      "sha": "6a3bcd7"
+    },
+    {
+      "at": "2026-06-30T18:27:53.130Z",
+      "from": "0.11.4",
+      "to": "0.11.5",
+      "branch": "feat/attendee-list",
+      "reason": "patch",
+      "detail": "commit en rama (feat/attendee-list)",
+      "sha": "647e439"
+    },
+    {
+      "at": "2026-06-30T18:28:09.234Z",
+      "from": "0.11.5",
+      "to": "0.11.6",
+      "branch": "feat/attendee-list",
+      "reason": "patch",
+      "detail": "commit en rama (feat/attendee-list)",
+      "sha": "77b66bc"
     }
   ]
 }

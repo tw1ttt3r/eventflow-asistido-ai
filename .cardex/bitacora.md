@@ -1972,4 +1972,178 @@ El commit `41cf1dc` (`fix: removed imports relatives`) **no eliminó** el import
 
 ---
 
-*Última actualización del archivo: 2026-06-29 09:09:19 CST*
+## Entrada #065 — Vista lista de asistentes
+
+| Campo | Valor |
+|-------|--------|
+| **Fecha de ejecución** | 2026-06-30 |
+| **Hora de ejecución** | 09:36:00 CST |
+| **Tiempo total** | ~300 s |
+| **Modelo de agente** | `gpt-5.3-codex` |
+| **Nivel de complejidad** | **Alta** |
+
+### Prompt
+
+> Desarrollar la vista de lista de asistentes según mockup EventFlow.
+
+### Entregables
+
+- Ruta `/events/:id/attendees` (solo organizador / dueño del evento)
+- Modelo `attendees.model.ts`, mock `attendees.mock.ts` (evento 1 = Design Systems Workshop)
+- UI: header, búsqueda + add, filtros, cards con toggle check-in, resumen Export/Manage
+- Dashboard: botón **Attendees** en eventos propios; **View** → detalle
+- Badge/toggle extendidos para estados checked-in
+- 99 tests OK, cobertura ≥ 80 %
+
+### Ajustes requeridos
+
+- [x] Vista asistentes según mockup
+- [x] Acceso restringido al dueño del evento
+
+---
+
+## Entrada #066 — Mock de usuario de sesión para desarrollo
+
+| Campo | Valor |
+|-------|--------|
+| **Fecha de ejecución** | 2026-06-30 |
+| **Hora de ejecución** | 09:43:46 CST – 09:45:00 CST |
+| **Tiempo total** | ~75 s |
+| **Modelo de agente** | `gpt-5.3-codex` |
+| **Nivel de complejidad** | **Media** |
+
+### Prompt
+
+> Necesito un mock con el usuario actual para probar la lista de asistentes.
+
+### Criterios de complejidad
+
+- 6 archivos (mock session, auth service, environment, specs, index)
+- Impacto en autenticación local y acceso a `/events/:id/attendees`
+- Sin cambio de arquitectura; flag `mockSessionUser` en dev
+
+### Entregables
+
+- `src/mock/session.mock.ts`: `MOCK_SESSION_USER_ID` (`user-1`) y `MOCK_SESSION_USER` (Jane Doe)
+- `AppwriteAuthService.getCurrentUser()` devuelve el mock si `mockSessionUser: true` y no es producción
+- `environment.development.ts` con `mockSessionUser: true` por defecto
+- Spec de auth actualizado; 100 tests OK
+
+### Ajustes requeridos
+
+- [x] Usuario mock alineado con dueña de eventos 1 y 3
+- [x] Probar asistentes sin Appwrite real en dev
+
+---
+
+## Entrada #067 — Check-in de solo lectura en lista de asistentes
+
+| Campo | Valor |
+|-------|--------|
+| **Fecha de ejecución** | 2026-06-30 |
+| **Hora de ejecución** | 09:47:41 CST – 09:48:30 CST |
+| **Tiempo total** | ~50 s |
+| **Modelo de agente** | `gpt-5.3-codex` |
+| **Nivel de complejidad** | **Baja** |
+
+### Prompt
+
+> El admin del evento no puede modificar el status de check-in, solo puede ver si el asistente ya hizo check-in.
+
+### Entregables
+
+- `AttendeeCard`: eliminado toggle; badge de estado solo lectura
+- `EventAttendeesPage`: eliminado `setCheckedIn` y binding `checkInChange`
+- Spec actualizado; 100 tests OK
+
+### Ajustes requeridos
+
+- [x] Estado check-in visible pero no editable por el organizador
+
+---
+
+## Entrada #068 — Manage redirige a edición del evento
+
+| Campo | Valor |
+|-------|--------|
+| **Fecha de ejecución** | 2026-06-30 |
+| **Hora de ejecución** | 09:51:54 CST – 09:53:00 CST |
+| **Tiempo total** | ~70 s |
+| **Modelo de agente** | `gpt-5.3-codex` |
+| **Nivel de complejidad** | **Media** |
+
+### Prompt
+
+> Ocupar el CTA Manage para redireccionar hacia la edición del evento.
+
+### Entregables
+
+- Ruta `/events/:id/edit` con `EventEditPage` (placeholder, solo dueño)
+- `onManage()` en asistentes → navegación a edición
+- `onEditEvent()` en dashboard → misma ruta
+- Specs actualizados; 105 tests OK
+
+### Ajustes requeridos
+
+- [x] Manage enlaza a edición del evento
+- [x] Edit del dashboard usa la misma ruta
+
+---
+
+## Entrada #069 — Interfaz de edición de eventos
+
+| Campo | Valor |
+|-------|--------|
+| **Fecha de ejecución** | 2026-06-30 |
+| **Hora de ejecución** | 09:55:00 CST – 09:57:01 CST |
+| **Tiempo total** | ~120 s |
+| **Modelo de agente** | `gpt-5.3-codex` |
+| **Nivel de complejidad** | **Alta** |
+
+### Prompt
+
+> Mejorar la interfaz de edit (eventos).
+
+### Entregables
+
+- Modelo `event-edit.model.ts` con validación y mapeo
+- UI: `event-edit-header`, `event-edit-preview-card`, `event-edit-form`
+- `EventEditPage` con layout admin, preview en vivo, atajos Attendees/View page, toast de guardado
+- Specs; 111 tests OK
+
+### Ajustes requeridos
+
+- [x] Formulario editable con preview en tiempo real
+- [x] Flujo de guardado local y feedback visual
+
+---
+
+## Entrada #070 — Edit: placeholder “coming soon” (sin mockup)
+
+| Campo | Valor |
+|-------|--------|
+| **Fecha de ejecución** | 2026-06-30 |
+| **Hora de ejecución** | 09:59:13 CST – 10:00:10 CST |
+| **Tiempo total** | ~60 s |
+| **Modelo de agente** | `gpt-5.3-codex` |
+| **Nivel de complejidad** | **Media** |
+
+### Prompt
+
+> Solo mejorar la interfaz del edit (disponible después); aún no hay mockup de edición.
+
+### Entregables
+
+- Eliminado formulario funcional prematuro (`event-edit-form`, modelo, preview editable)
+- `event-edit-coming-soon-card`: estado visual pulido con evento seleccionado y mensaje
+- Atajos Attendees / View page / Back to events
+- 106 tests OK
+
+### Ajustes requeridos
+
+- [x] UI de placeholder alineada al diseño EventFlow
+- [x] Sin edición real hasta mockup del usuario
+
+---
+
+*Última actualización del archivo: 2026-06-30 10:00:10 CST*

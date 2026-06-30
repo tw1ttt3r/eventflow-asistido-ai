@@ -12,7 +12,8 @@ type EventsDashboardHarness = EventsDashboardPage & {
   onNavigate(tabId: string): void;
   onCreateEvent(): void;
   onEditEvent(eventId: string): void;
-  onViewAttendees(eventId: string): void;
+  onViewEvent(eventId: string): void;
+  onManageAttendees(eventId: string): void;
   searchQuery: { set(value: string): void };
 };
 
@@ -109,7 +110,8 @@ describe('EventsDashboardPage', () => {
 
     expect(() => page.onCreateEvent()).not.toThrow();
     expect(() => page.onEditEvent('evt-1')).not.toThrow();
-    expect(() => page.onViewAttendees('evt-1')).not.toThrow();
+    expect(() => page.onViewEvent('evt-1')).not.toThrow();
+    expect(() => page.onManageAttendees('evt-1')).not.toThrow();
     expect(() => page.setFilter('invalid')).not.toThrow();
   });
 
@@ -135,6 +137,44 @@ describe('EventsDashboardPage', () => {
     editButton?.click();
 
     expect(fixture.componentInstance).toBeTruthy();
+  });
+
+  it('should show attendees action only on owned events', async () => {
+    const fixture = await renderDashboard();
+
+    const attendeesButtons = Array.from(
+      (fixture.nativeElement as HTMLElement).querySelectorAll('button'),
+    ).filter((button) => button.textContent?.trim() === 'Attendees');
+
+    expect(attendeesButtons).toHaveLength(2);
+  });
+
+  it('should navigate to attendees list for owned events', async () => {
+    const fixture = await renderDashboard();
+    const router = TestBed.inject(Router);
+    const navigateSpy = vi.spyOn(router, 'navigate').mockResolvedValue(true);
+
+    const attendeesButton = Array.from(
+      (fixture.nativeElement as HTMLElement).querySelectorAll('button'),
+    ).find((button) => button.textContent?.trim() === 'Attendees');
+    attendeesButton?.click();
+    await fixture.whenStable();
+
+    expect(navigateSpy).toHaveBeenCalledWith(['/events', '1', 'attendees']);
+  });
+
+  it('should navigate to edit page from dashboard edit action', async () => {
+    const fixture = await renderDashboard();
+    const router = TestBed.inject(Router);
+    const navigateSpy = vi.spyOn(router, 'navigate').mockResolvedValue(true);
+
+    const editButton = Array.from(
+      (fixture.nativeElement as HTMLElement).querySelectorAll('button'),
+    ).find((button) => button.textContent?.trim() === 'Edit');
+    editButton?.click();
+    await fixture.whenStable();
+
+    expect(navigateSpy).toHaveBeenCalledWith(['/events', '1', 'edit']);
   });
 
   it('should navigate to detail from view action', async () => {

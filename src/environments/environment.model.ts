@@ -9,6 +9,8 @@ export interface Environment {
     projectId: string;
     projectName: string;
   };
+  /** Solo desarrollo: sesión mock (`user-1`) alineada con mocks de eventos. */
+  mockSessionUser?: boolean;
   /** Solo desarrollo: Sonar no aplica en producción. */
   sonar?: {
     hostUrl: string;
