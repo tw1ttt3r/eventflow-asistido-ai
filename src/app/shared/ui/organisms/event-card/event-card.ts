@@ -38,8 +38,11 @@ import type { EventItem } from '@features/events/events.model';
           <ef-button variant="soft" [fullWidth]="false" size="sm" (pressed)="editEvent.emit(event().id)">
             Edit
           </ef-button>
+          <ef-button variant="soft" [fullWidth]="false" size="sm" (pressed)="manageAttendees.emit(event().id)">
+            Attendees
+          </ef-button>
         }
-        <ef-button variant="blue" [fullWidth]="false" size="sm" (pressed)="viewAttendees.emit(event().id)">
+        <ef-button variant="blue" [fullWidth]="false" size="sm" (pressed)="viewEvent.emit(event().id)">
           View
         </ef-button>
       </div>
@@ -51,7 +54,8 @@ export class EventCard {
   readonly canEdit = input(false);
 
   readonly editEvent = output<string>();
-  readonly viewAttendees = output<string>();
+  readonly manageAttendees = output<string>();
+  readonly viewEvent = output<string>();
 
   protected thumbnailGradient(): string {
     const hue = this.event().imageHue;

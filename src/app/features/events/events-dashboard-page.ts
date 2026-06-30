@@ -49,7 +49,8 @@ const FILTER_OPTIONS = [
             [event]="event"
             [canEdit]="canEditEvent(event)"
             (editEvent)="onEditEvent($event)"
-            (viewAttendees)="onViewAttendees($event)"
+            (manageAttendees)="onManageAttendees($event)"
+            (viewEvent)="onViewEvent($event)"
           />
         } @empty {
           <p class="rounded-3xl bg-white p-6 text-center text-sm text-slate-500 ring-1 ring-slate-100">
@@ -103,11 +104,15 @@ export class EventsDashboardPage implements OnInit {
     // Placeholder: flujo de creación en otro paso
   }
 
-  protected onEditEvent(_eventId: string): void {
-    // Placeholder: edición de evento
+  protected onEditEvent(eventId: string): void {
+    void this.router.navigate(['/events', eventId, 'edit']);
   }
 
-  protected onViewAttendees(eventId: string): void {
+  protected onViewEvent(eventId: string): void {
     void this.router.navigate(['/events', eventId]);
+  }
+
+  protected onManageAttendees(eventId: string): void {
+    void this.router.navigate(['/events', eventId, 'attendees']);
   }
 }

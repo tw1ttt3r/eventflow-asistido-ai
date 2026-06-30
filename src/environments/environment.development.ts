@@ -16,4 +16,5 @@ export const environment: Environment = {
     hostUrl: '',
     projectKey: '',
   },
+  mockSessionUser: true,
 };

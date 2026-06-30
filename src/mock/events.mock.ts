@@ -1,8 +1,8 @@
 import type { EventItem, EventsSparkline, EventsSummary } from '@features/events/events.model';
 import { buildEventsSparkline, summarizeEvents } from '@features/events/events.model';
+import { MOCK_SESSION_USER_ID } from '@mock/session.mock';
 
-/** Usuario de sesión mock (alineado con Appwrite en tests y session page). */
-export const MOCK_SESSION_USER_ID = 'user-1';
+export { MOCK_SESSION_USER_ID };
 
 export const MOCK_EVENTS: EventItem[] = [
   {
