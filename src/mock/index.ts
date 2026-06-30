@@ -3,3 +3,4 @@ export {
   MOCK_EVENT_REGISTRATIONS,
   findEventRegistration,
 } from '@mock/event-registration.mock';
+export { MOCK_EVENT_DETAILS, findEventDetail } from '@mock/event-detail.mock';
