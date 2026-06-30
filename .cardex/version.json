@@ -1,7 +1,7 @@
 {
   "major": 0,
   "minor": 10,
-  "patch": 3,
+  "patch": 4,
   "knownBranches": [
     "tailwind",
     "feat/sonarqube",
@@ -16,15 +16,6 @@
     "feat/event-detail"
   ],
   "history": [
-    {
-      "at": "2026-06-09T05:48:06.207Z",
-      "from": "0.0.13",
-      "to": "0.1.0",
-      "branch": "feat/sonarqube",
-      "reason": "minor",
-      "detail": "nueva rama (feat/sonarqube)",
-      "sha": "310bbdd"
-    },
     {
       "at": "2026-06-09T05:48:47.502Z",
       "from": "0.1.0",
@@ -915,6 +906,15 @@
       "reason": "patch",
       "detail": "commit en rama (feat/event-detail)",
       "sha": "e610cea"
+    },
+    {
+      "at": "2026-06-30T05:02:32.370Z",
+      "from": "0.10.3",
+      "to": "0.10.4",
+      "branch": "feat/event-detail",
+      "reason": "patch",
+      "detail": "commit en rama (feat/event-detail)",
+      "sha": "8fc0630"
     }
   ]
 }
