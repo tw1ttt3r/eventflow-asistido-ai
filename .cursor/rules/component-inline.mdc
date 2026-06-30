@@ -50,3 +50,6 @@ El `angular.json` del proyecto ya define `inlineTemplate` e `inlineStyle` por de
 
 - `src/styles.scss` global (Tailwind / estilos de aplicación).
 - Librerías o assets que no sean plantilla de un `@Component`.
+- **Iconos UI:** usar `<ef-icon name="…" />` con registry en `src/app/shared/ui/atoms/icon/` (definiciones en `defs/*.icons.ts`). No duplicar SVG inline en organismos/moléculas.
+- **Ilustraciones complejas:** componente dedicado (p. ej. `ef-auth-illustration`, `ef-logo-mark`) o asset estático en `public/illustrations/`.
+- **SVG dinámico** (p. ej. sparklines): puede permanecer inline en el componente que lo calcula.
