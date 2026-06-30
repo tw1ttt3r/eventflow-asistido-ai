@@ -1,10 +1,12 @@
 import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
 
 import type { EventRegistrationDetail } from '@features/events/event-registration.model';
+import { EfIcon } from '@shared/ui/atoms/icon/icon';
 
 @Component({
   selector: 'ef-event-summary-card',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [EfIcon],
   template: `
     <article class="rounded-3xl bg-white p-5 shadow-sm ring-1 ring-slate-100">
       <div class="flex gap-4">
@@ -16,27 +18,11 @@ import type { EventRegistrationDetail } from '@features/events/event-registratio
 
           <ul class="space-y-2 text-sm text-slate-500">
             <li class="flex items-center gap-2">
-              <svg viewBox="0 0 20 20" class="size-4 shrink-0 text-ef-blue" aria-hidden="true">
-                <rect x="3" y="4" width="14" height="13" rx="2" fill="currentColor" opacity="0.15" />
-                <path
-                  d="M6 3v2M14 3v2M3 8h14"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="1.4"
-                  stroke-linecap="round"
-                />
-              </svg>
+              <ef-icon name="calendar" size="sm" iconClass="text-ef-blue" />
               {{ event().dateLabel }} · {{ event().timeLabel }}
             </li>
             <li class="flex items-center gap-2">
-              <svg viewBox="0 0 20 20" class="size-4 shrink-0 text-ef-blue" aria-hidden="true">
-                <path
-                  d="M10 4.5c-2.2 0-4 1.6-4 3.6 0 2.8 4 7.4 4 7.4s4-4.6 4-7.4c0-2-1.8-3.6-4-3.6Z"
-                  fill="currentColor"
-                  opacity="0.2"
-                />
-                <circle cx="10" cy="8" r="1.5" fill="currentColor" />
-              </svg>
+              <ef-icon name="map-pin" size="sm" iconClass="text-ef-blue" />
               {{ event().venue }}
             </li>
           </ul>

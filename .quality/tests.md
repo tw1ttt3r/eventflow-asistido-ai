@@ -3665,3 +3665,485 @@ Application bundle generation complete. [5.358 seconds] - 2026-06-30T16:00:01.38
 
 ---
 
+
+## Entrada #043 — Tests Vitest
+
+| Campo | Valor |
+|-------|-------|
+| **Fecha y hora de ejecución** | 2026-06-30 13:22:36 UTC-06:00 |
+| **Inicio** | 2026-06-30 13:22:20 UTC-06:00 |
+| **Ejecutor** | 🤖 Agent (`agent`) |
+| **Rama** | `refactor-svg-images` |
+| **Razón de ejecución** | Tests con cobertura y umbral 80 % (`pnpm test:coverage` / `--configuration=coverage`) |
+| **Script detonador** | `pnpm test:coverage` |
+| **Comando** | `ng test --configuration=coverage --watch=false` |
+| **Status** | **OK** |
+| **Exit code** | 0 |
+
+### Resumen breve
+
+Test Files  26 passed (26) · Tests  109 passed (109) · Duration  6.08s (transform 1.18s, setup 4.88s, import 2.82s, tests 7.06s, environment 45.05s)
+
+### Salida completa
+
+```text
+❯ Building...
+✔ Building...
+Initial chunk files                                                             | Names                                                                        |  Raw size
+spec-app-features-events-event-detail-page.js                                   | spec-app-features-events-event-detail-page                                   |  56.11 kB | 
+styles.css                                                                      | styles                                                                       |  50.74 kB | 
+spec-app-features-events-event-attendees-page.js                                | spec-app-features-events-event-attendees-page                                |  48.33 kB | 
+spec-app-features-events-events-dashboard-page.js                               | spec-app-features-events-events-dashboard-page                               |  39.55 kB | 
+spec-app-features-auth-auth-page.js                                             | spec-app-features-auth-auth-page                                             |  34.12 kB | 
+spec-app-features-events-event-registration-page.js                             | spec-app-features-events-event-registration-page                             |  30.74 kB | 
+spec-app-features-events-event-edit-page.js                                     | spec-app-features-events-event-edit-page                                     |  26.02 kB | 
+chunk-GXHPJ6JH.js                                                               | -                                                                            |  21.23 kB | 
+chunk-OV4XMKSD.js                                                               | -                                                                            |  20.59 kB | 
+spec-app-features-session-session-page.js                                       | spec-app-features-session-session-page                                       |  12.14 kB | 
+chunk-SIT3L5DU.js                                                               | -                                                                            |  10.98 kB | 
+chunk-VWVPCGND.js                                                               | -                                                                            |  10.06 kB | 
+chunk-64TBRVIX.js                                                               | -                                                                            |   9.50 kB | 
+chunk-S3CWT2RD.js                                                               | -                                                                            |   8.21 kB | 
+chunk-GK3HSQDH.js                                                               | -                                                                            |   6.56 kB | 
+chunk-EIEOZBFV.js                                                               | -                                                                            |   6.26 kB | 
+chunk-NMOTKRLY.js                                                               | -                                                                            |   6.05 kB | 
+spec-app-core-appwrite-appwrite-auth.service.js                                 | spec-app-core-appwrite-appwrite-auth.service                                 |   5.89 kB | 
+chunk-EYREIOUK.js                                                               | -                                                                            |   5.34 kB | 
+chunk-RSTWSNOR.js                                                               | -                                                                            |   4.75 kB | 
+chunk-UJCHV22L.js                                                               | -                                                                            |   4.51 kB | 
+spec-app-core-config-resolve-environment.js                                     | spec-app-core-config-resolve-environment                                     |   4.09 kB | 
+chunk-HI7Y6J7K.js                                                               | -                                                                            |   3.92 kB | 
+chunk-AK544H3O.js                                                               | -                                                                            |   3.85 kB | 
+chunk-ERTP6FUW.js                                                               | -                                                                            |   3.35 kB | 
+spec-app-features-fallback-fallback-redirect-page.js                            | spec-app-features-fallback-fallback-redirect-page                            |   3.30 kB | 
+chunk-B45NHUNC.js                                                               | -                                                                            |   3.23 kB | 
+chunk-M6633B2W.js                                                               | -                                                                            |   2.79 kB | 
+chunk-3CILTWPH.js                                                               | -                                                                            |   2.62 kB | 
+chunk-22JDNN2H.js                                                               | -                                                                            |   2.46 kB | 
+chunk-STQC3UUX.js                                                               | -                                                                            |   2.45 kB | 
+spec-app-shared-ui-organisms-auth-login-form-auth-login-form.js                 | spec-app-shared-ui-organisms-auth-login-form-auth-login-form                 |   2.44 kB | 
+spec-app-shared-ui-organisms-event-registration-form-event-registration-form.js | spec-app-shared-ui-organisms-event-registration-form-event-registration-form |   2.33 kB | 
+chunk-NSZB3PAA.js                                                               | -                                                                            |   2.03 kB | 
+chunk-TYEPQGER.js                                                               | -                                                                            |   2.02 kB | 
+spec-app-shared-ui-organisms-auth-sign-up-form-auth-sign-up-form.js             | spec-app-shared-ui-organisms-auth-sign-up-form-auth-sign-up-form             |   1.96 kB | 
+spec-app-features-events-event-registration.model.js                            | spec-app-features-events-event-registration.model                            |   1.92 kB | 
+spec-app-core-appwrite-appwrite.service.js                                      | spec-app-core-appwrite-appwrite.service                                      |   1.90 kB | 
+spec-app-features-events-events.model.js                                        | spec-app-features-events-events.model                                        |   1.82 kB | 
+spec-app-core-auth-guest.guard.js                                               | spec-app-core-auth-guest.guard                                               |   1.81 kB | 
+chunk-HDPX4BTV.js                                                               | -                                                                            |   1.79 kB | 
+spec-app-core-auth-auth.guard.js                                                | spec-app-core-auth-auth.guard                                                |   1.76 kB | 
+spec-app-app.js                                                                 | spec-app-app                                                                 |   1.73 kB | 
+chunk-J4FHUBTC.js                                                               | -                                                                            |   1.69 kB | 
+chunk-ESJ6SOP5.js                                                               | -                                                                            |   1.46 kB | 
+spec-app-features-admin-admin-navigation.service.js                             | spec-app-features-admin-admin-navigation.service                             |   1.41 kB | 
+spec-app-shared-ui-atoms-icon-icon.js                                           | spec-app-shared-ui-atoms-icon-icon                                           |   1.30 kB | 
+init-testbed.js                                                                 | init-testbed                                                                 |   1.21 kB | 
+spec-app-core-appwrite-appwrite-auth-error.js                                   | spec-app-core-appwrite-appwrite-auth-error                                   |   1.13 kB | 
+chunk-RBN4S7O6.js                                                               | -                                                                            |   1.10 kB | 
+chunk-SACBZIG5.js                                                               | -                                                                            |   1.06 kB | 
+spec-app-features-events-attendees.model.js                                     | spec-app-features-events-attendees.model                                     |   1.04 kB | 
+chunk-BO3UIMU6.js                                                               | -                                                                            | 974 bytes | 
+vitest-mock-patch.js                                                            | vitest-mock-patch                                                            | 969 bytes | 
+chunk-QJQ2R3K6.js                                                               | -                                                                            | 909 bytes | 
+spec-app-shared-ui-atoms-icon-icon.registry.js                                  | spec-app-shared-ui-atoms-icon-icon.registry                                  | 888 bytes | 
+spec-app-shared-ui-password-strength.util.js                                    | spec-app-shared-ui-password-strength.util                                    | 878 bytes | 
+chunk-RDSJJ3EL.js                                                               | -                                                                            | 859 bytes | 
+spec-app-features-events-event-detail.model.js                                  | spec-app-features-events-event-detail.model                                  | 774 bytes | 
+chunk-OWTV64UV.js                                                               | -                                                                            | 627 bytes | 
+
+                                                                                | Initial total                                                                | 491.52 kB
+
+Application bundle generation complete. [5.975 seconds] - 2026-06-30T19:22:28.786Z
+
+
+ RUN  v4.1.8 /Users/tw1ttt3r/tw1ttt3r/own/eventflow-asistido-ai
+      Coverage enabled with v8
+
+
+ Test Files  26 passed (26)
+      Tests  109 passed (109)
+   Start at  13:22:29
+   Duration  6.08s (transform 1.18s, setup 4.88s, import 2.82s, tests 7.06s, environment 45.05s)
+```
+
+---
+
+
+## Entrada #044 — Tests Vitest
+
+| Campo | Valor |
+|-------|-------|
+| **Fecha y hora de ejecución** | 2026-06-30 13:46:07 UTC-06:00 |
+| **Inicio** | 2026-06-30 13:45:53 UTC-06:00 |
+| **Ejecutor** | 🤖 Agent (`agent`) |
+| **Rama** | `refactor-svg-images` |
+| **Razón de ejecución** | Tests con cobertura y umbral 80 % (`pnpm test:coverage` / `--configuration=coverage`) |
+| **Script detonador** | `pnpm test:coverage` |
+| **Comando** | `ng test --configuration=coverage --watch=false` |
+| **Status** | **OK** |
+| **Exit code** | 0 |
+
+### Resumen breve
+
+Test Files  26 passed (26) · Tests  109 passed (109) · Duration  6.61s (transform 1.24s, setup 3.94s, import 3.45s, tests 10.17s, environment 40.94s)
+
+### Salida completa
+
+```text
+❯ Building...
+✔ Building...
+Initial chunk files                                                             | Names                                                                        |  Raw size
+spec-app-features-events-event-detail-page.js                                   | spec-app-features-events-event-detail-page                                   |  56.13 kB | 
+styles.css                                                                      | styles                                                                       |  50.74 kB | 
+spec-app-features-events-event-attendees-page.js                                | spec-app-features-events-event-attendees-page                                |  48.33 kB | 
+spec-app-features-events-events-dashboard-page.js                               | spec-app-features-events-events-dashboard-page                               |  39.55 kB | 
+spec-app-features-auth-auth-page.js                                             | spec-app-features-auth-auth-page                                             |  34.12 kB | 
+spec-app-features-events-event-registration-page.js                             | spec-app-features-events-event-registration-page                             |  30.76 kB | 
+spec-app-features-events-event-edit-page.js                                     | spec-app-features-events-event-edit-page                                     |  26.04 kB | 
+chunk-M4NA7FM4.js                                                               | -                                                                            |  21.23 kB | 
+chunk-OV4XMKSD.js                                                               | -                                                                            |  20.59 kB | 
+chunk-SY2DJPKE.js                                                               | -                                                                            |  20.20 kB | 
+spec-app-features-session-session-page.js                                       | spec-app-features-session-session-page                                       |  12.14 kB | 
+chunk-G6DA2RXW.js                                                               | -                                                                            |  10.99 kB | 
+chunk-L5CZELUP.js                                                               | -                                                                            |  10.06 kB | 
+chunk-POLWSX2A.js                                                               | -                                                                            |   9.51 kB | 
+chunk-S3CWT2RD.js                                                               | -                                                                            |   8.21 kB | 
+chunk-GK3HSQDH.js                                                               | -                                                                            |   6.56 kB | 
+chunk-NMOTKRLY.js                                                               | -                                                                            |   6.05 kB | 
+spec-app-core-appwrite-appwrite-auth.service.js                                 | spec-app-core-appwrite-appwrite-auth.service                                 |   5.89 kB | 
+chunk-EYREIOUK.js                                                               | -                                                                            |   5.34 kB | 
+chunk-RSTWSNOR.js                                                               | -                                                                            |   4.75 kB | 
+chunk-UJCHV22L.js                                                               | -                                                                            |   4.51 kB | 
+spec-app-core-config-resolve-environment.js                                     | spec-app-core-config-resolve-environment                                     |   4.09 kB | 
+chunk-AK544H3O.js                                                               | -                                                                            |   3.85 kB | 
+chunk-ERTP6FUW.js                                                               | -                                                                            |   3.35 kB | 
+spec-app-features-fallback-fallback-redirect-page.js                            | spec-app-features-fallback-fallback-redirect-page                            |   3.30 kB | 
+chunk-B45NHUNC.js                                                               | -                                                                            |   3.23 kB | 
+chunk-M6633B2W.js                                                               | -                                                                            |   2.79 kB | 
+chunk-3CILTWPH.js                                                               | -                                                                            |   2.62 kB | 
+chunk-22JDNN2H.js                                                               | -                                                                            |   2.46 kB | 
+chunk-STQC3UUX.js                                                               | -                                                                            |   2.45 kB | 
+spec-app-shared-ui-organisms-auth-login-form-auth-login-form.js                 | spec-app-shared-ui-organisms-auth-login-form-auth-login-form                 |   2.44 kB | 
+spec-app-shared-ui-organisms-event-registration-form-event-registration-form.js | spec-app-shared-ui-organisms-event-registration-form-event-registration-form |   2.33 kB | 
+chunk-NSZB3PAA.js                                                               | -                                                                            |   2.03 kB | 
+chunk-TYEPQGER.js                                                               | -                                                                            |   2.02 kB | 
+spec-app-shared-ui-organisms-auth-sign-up-form-auth-sign-up-form.js             | spec-app-shared-ui-organisms-auth-sign-up-form-auth-sign-up-form             |   1.96 kB | 
+spec-app-features-events-event-registration.model.js                            | spec-app-features-events-event-registration.model                            |   1.92 kB | 
+spec-app-core-appwrite-appwrite.service.js                                      | spec-app-core-appwrite-appwrite.service                                      |   1.90 kB | 
+spec-app-features-events-events.model.js                                        | spec-app-features-events-events.model                                        |   1.82 kB | 
+spec-app-core-auth-guest.guard.js                                               | spec-app-core-auth-guest.guard                                               |   1.81 kB | 
+chunk-HDPX4BTV.js                                                               | -                                                                            |   1.79 kB | 
+spec-app-core-auth-auth.guard.js                                                | spec-app-core-auth-auth.guard                                                |   1.76 kB | 
+spec-app-app.js                                                                 | spec-app-app                                                                 |   1.73 kB | 
+chunk-J4FHUBTC.js                                                               | -                                                                            |   1.69 kB | 
+chunk-FZ3EFD3P.js                                                               | -                                                                            |   1.64 kB | 
+chunk-ESJ6SOP5.js                                                               | -                                                                            |   1.46 kB | 
+spec-app-features-admin-admin-navigation.service.js                             | spec-app-features-admin-admin-navigation.service                             |   1.41 kB | 
+spec-app-shared-ui-atoms-icon-icon.js                                           | spec-app-shared-ui-atoms-icon-icon                                           |   1.30 kB | 
+init-testbed.js                                                                 | init-testbed                                                                 |   1.21 kB | 
+spec-app-core-appwrite-appwrite-auth-error.js                                   | spec-app-core-appwrite-appwrite-auth-error                                   |   1.13 kB | 
+chunk-RBN4S7O6.js                                                               | -                                                                            |   1.10 kB | 
+chunk-SACBZIG5.js                                                               | -                                                                            |   1.06 kB | 
+spec-app-features-events-attendees.model.js                                     | spec-app-features-events-attendees.model                                     |   1.04 kB | 
+chunk-BO3UIMU6.js                                                               | -                                                                            | 974 bytes | 
+vitest-mock-patch.js                                                            | vitest-mock-patch                                                            | 969 bytes | 
+chunk-QJQ2R3K6.js                                                               | -                                                                            | 909 bytes | 
+spec-app-shared-ui-password-strength.util.js                                    | spec-app-shared-ui-password-strength.util                                    | 878 bytes | 
+chunk-RDSJJ3EL.js                                                               | -                                                                            | 859 bytes | 
+spec-app-shared-ui-atoms-icon-icon.registry.js                                  | spec-app-shared-ui-atoms-icon-icon.registry                                  | 821 bytes | 
+spec-app-features-events-event-detail.model.js                                  | spec-app-features-events-event-detail.model                                  | 774 bytes | 
+chunk-OWTV64UV.js                                                               | -                                                                            | 627 bytes | 
+
+                                                                                | Initial total                                                                | 503.22 kB
+
+Application bundle generation complete. [4.985 seconds] - 2026-06-30T19:45:59.880Z
+
+
+ RUN  v4.1.8 /Users/tw1ttt3r/tw1ttt3r/own/eventflow-asistido-ai
+      Coverage enabled with v8
+
+
+ Test Files  26 passed (26)
+      Tests  109 passed (109)
+   Start at  13:46:00
+   Duration  6.61s (transform 1.24s, setup 3.94s, import 3.45s, tests 10.17s, environment 40.94s)
+```
+
+---
+
+
+## Entrada #045 — Tests Vitest
+
+| Campo | Valor |
+|-------|-------|
+| **Fecha y hora de ejecución** | 2026-06-30 13:57:56 UTC-06:00 |
+| **Inicio** | 2026-06-30 13:57:43 UTC-06:00 |
+| **Ejecutor** | 👤 Developer (`developer`) |
+| **Rama** | `refactor-svg-images` |
+| **Razón de ejecución** | Suite `pnpm test:all` — ejecución base de tests |
+| **Script detonador** | `pnpm test:all` |
+| **Comando** | `ng test --watch=false` |
+| **Status** | **OK** |
+| **Exit code** | 0 |
+
+### Resumen breve
+
+Sin resumen parseable; ver salida completa.
+
+### Salida completa
+
+```text
+❯ Building...
+✔ Building...
+Initial chunk files                                                             | Names                                                                        |  Raw size
+spec-app-features-events-event-detail-page.js                                   | spec-app-features-events-event-detail-page                                   |  56.13 kB | 
+styles.css                                                                      | styles                                                                       |  50.74 kB | 
+spec-app-features-events-event-attendees-page.js                                | spec-app-features-events-event-attendees-page                                |  48.33 kB | 
+spec-app-features-events-events-dashboard-page.js                               | spec-app-features-events-events-dashboard-page                               |  39.55 kB | 
+spec-app-features-auth-auth-page.js                                             | spec-app-features-auth-auth-page                                             |  34.12 kB | 
+spec-app-features-events-event-registration-page.js                             | spec-app-features-events-event-registration-page                             |  30.76 kB | 
+spec-app-features-events-event-edit-page.js                                     | spec-app-features-events-event-edit-page                                     |  26.04 kB | 
+chunk-FKIDV2R7.js                                                               | -                                                                            |  21.23 kB | 
+chunk-AOGWZJQX.js                                                               | -                                                                            |  20.59 kB | 
+chunk-SY2DJPKE.js                                                               | -                                                                            |  20.20 kB | 
+spec-app-features-session-session-page.js                                       | spec-app-features-session-session-page                                       |  12.14 kB | 
+chunk-OQXNHDIK.js                                                               | -                                                                            |  10.99 kB | 
+chunk-OS4HLB6F.js                                                               | -                                                                            |  10.06 kB | 
+chunk-POLWSX2A.js                                                               | -                                                                            |   9.51 kB | 
+chunk-OHV7HR47.js                                                               | -                                                                            |   8.21 kB | 
+chunk-GK3HSQDH.js                                                               | -                                                                            |   6.56 kB | 
+chunk-NMOTKRLY.js                                                               | -                                                                            |   6.05 kB | 
+spec-app-core-appwrite-appwrite-auth.service.js                                 | spec-app-core-appwrite-appwrite-auth.service                                 |   5.89 kB | 
+chunk-EYREIOUK.js                                                               | -                                                                            |   5.34 kB | 
+chunk-RSTWSNOR.js                                                               | -                                                                            |   4.75 kB | 
+chunk-UJCHV22L.js                                                               | -                                                                            |   4.51 kB | 
+spec-app-core-config-resolve-environment.js                                     | spec-app-core-config-resolve-environment                                     |   4.09 kB | 
+chunk-AK544H3O.js                                                               | -                                                                            |   3.85 kB | 
+chunk-ERTP6FUW.js                                                               | -                                                                            |   3.35 kB | 
+spec-app-features-fallback-fallback-redirect-page.js                            | spec-app-features-fallback-fallback-redirect-page                            |   3.30 kB | 
+chunk-B45NHUNC.js                                                               | -                                                                            |   3.23 kB | 
+chunk-M6633B2W.js                                                               | -                                                                            |   2.79 kB | 
+chunk-3CILTWPH.js                                                               | -                                                                            |   2.62 kB | 
+chunk-22JDNN2H.js                                                               | -                                                                            |   2.46 kB | 
+chunk-STQC3UUX.js                                                               | -                                                                            |   2.45 kB | 
+spec-app-shared-ui-organisms-auth-login-form-auth-login-form.js                 | spec-app-shared-ui-organisms-auth-login-form-auth-login-form                 |   2.44 kB | 
+spec-app-shared-ui-organisms-event-registration-form-event-registration-form.js | spec-app-shared-ui-organisms-event-registration-form-event-registration-form |   2.33 kB | 
+chunk-NSZB3PAA.js                                                               | -                                                                            |   2.03 kB | 
+chunk-TYEPQGER.js                                                               | -                                                                            |   2.02 kB | 
+spec-app-shared-ui-organisms-auth-sign-up-form-auth-sign-up-form.js             | spec-app-shared-ui-organisms-auth-sign-up-form-auth-sign-up-form             |   1.96 kB | 
+spec-app-features-events-event-registration.model.js                            | spec-app-features-events-event-registration.model                            |   1.92 kB | 
+spec-app-core-appwrite-appwrite.service.js                                      | spec-app-core-appwrite-appwrite.service                                      |   1.90 kB | 
+spec-app-features-events-events.model.js                                        | spec-app-features-events-events.model                                        |   1.82 kB | 
+spec-app-core-auth-guest.guard.js                                               | spec-app-core-auth-guest.guard                                               |   1.81 kB | 
+chunk-HDPX4BTV.js                                                               | -                                                                            |   1.79 kB | 
+spec-app-core-auth-auth.guard.js                                                | spec-app-core-auth-auth.guard                                                |   1.76 kB | 
+spec-app-app.js                                                                 | spec-app-app                                                                 |   1.73 kB | 
+chunk-J4FHUBTC.js                                                               | -                                                                            |   1.69 kB | 
+chunk-FZ3EFD3P.js                                                               | -                                                                            |   1.64 kB | 
+chunk-ESJ6SOP5.js                                                               | -                                                                            |   1.46 kB | 
+spec-app-features-admin-admin-navigation.service.js                             | spec-app-features-admin-admin-navigation.service                             |   1.41 kB | 
+spec-app-shared-ui-atoms-icon-icon.js                                           | spec-app-shared-ui-atoms-icon-icon                                           |   1.30 kB | 
+init-testbed.js                                                                 | init-testbed                                                                 |   1.21 kB | 
+spec-app-core-appwrite-appwrite-auth-error.js                                   | spec-app-core-appwrite-appwrite-auth-error                                   |   1.13 kB | 
+chunk-RBN4S7O6.js                                                               | -                                                                            |   1.10 kB | 
+chunk-SACBZIG5.js                                                               | -                                                                            |   1.06 kB | 
+spec-app-features-events-attendees.model.js                                     | spec-app-features-events-attendees.model                                     |   1.04 kB | 
+chunk-BO3UIMU6.js                                                               | -                                                                            | 974 bytes | 
+vitest-mock-patch.js                                                            | vitest-mock-patch                                                            | 969 bytes | 
+chunk-QJQ2R3K6.js                                                               | -                                                                            | 909 bytes | 
+spec-app-shared-ui-password-strength.util.js                                    | spec-app-shared-ui-password-strength.util                                    | 878 bytes | 
+chunk-RDSJJ3EL.js                                                               | -                                                                            | 859 bytes | 
+spec-app-shared-ui-atoms-icon-icon.registry.js                                  | spec-app-shared-ui-atoms-icon-icon.registry                                  | 821 bytes | 
+spec-app-features-events-event-detail.model.js                                  | spec-app-features-events-event-detail.model                                  | 774 bytes | 
+chunk-OWTV64UV.js                                                               | -                                                                            | 627 bytes | 
+
+                                                                                | Initial total                                                                | 503.22 kB
+
+Application bundle generation complete. [4.639 seconds] - 2026-06-30T19:57:49.607Z
+
+
+[1m[30m[46m RUN [49m[39m[22m [36mv4.1.8 [39m[90m/Users/tw1ttt3r/tw1ttt3r/own/eventflow-asistido-ai[39m
+
+ [32m✓[39m [30m[43m eventflow-asistido-ai [49m[39m src/app/features/events/event-detail-page.spec.ts [2m([22m[2m7 tests[22m[2m)[22m[33m 1198[2mms[22m[39m
+     [33m[2m✓[22m[39m should render event detail for a known event [33m 389[2mms[22m[39m
+     [33m[2m✓[22m[39m should navigate to registration from action bar [33m 380[2mms[22m[39m
+ [32m✓[39m [30m[43m eventflow-asistido-ai [49m[39m src/app/features/auth/auth-page.spec.ts [2m([22m[2m9 tests[22m[2m)[22m[33m 1583[2mms[22m[39m
+     [33m[2m✓[22m[39m should validate sign up fields [33m 390[2mms[22m[39m
+     [33m[2m✓[22m[39m should ignore invalid tab ids [33m 322[2mms[22m[39m
+ [32m✓[39m [30m[43m eventflow-asistido-ai [49m[39m src/app/features/events/event-registration-page.spec.ts [2m([22m[2m7 tests[22m[2m)[22m[33m 1652[2mms[22m[39m
+     [33m[2m✓[22m[39m should render registration details for a known event [33m 414[2mms[22m[39m
+     [33m[2m✓[22m[39m should navigate back to events from header back button [33m 450[2mms[22m[39m
+     [33m[2m✓[22m[39m should register successfully and show confirmation [33m 521[2mms[22m[39m
+ [32m✓[39m [30m[43m eventflow-asistido-ai [49m[39m src/app/shared/ui/organisms/auth-login-form/auth-login-form.spec.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 255[2mms[22m[39m
+ [32m✓[39m [30m[43m eventflow-asistido-ai [49m[39m src/app/shared/ui/organisms/auth-sign-up-form/auth-sign-up-form.spec.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 124[2mms[22m[39m
+ [32m✓[39m [30m[43m eventflow-asistido-ai [49m[39m src/app/shared/ui/organisms/event-registration-form/event-registration-form.spec.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 186[2mms[22m[39m
+ [32m✓[39m [30m[43m eventflow-asistido-ai [49m[39m src/app/core/appwrite/appwrite-auth.service.spec.ts [2m([22m[2m8 tests[22m[2m)[22m[32m 69[2mms[22m[39m
+ [32m✓[39m [30m[43m eventflow-asistido-ai [49m[39m src/app/features/fallback/fallback-redirect-page.spec.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 27[2mms[22m[39m
+ [32m✓[39m [30m[43m eventflow-asistido-ai [49m[39m src/app/core/auth/guest.guard.spec.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 15[2mms[22m[39m
+ [32m✓[39m [30m[43m eventflow-asistido-ai [49m[39m src/app/core/appwrite/appwrite.service.spec.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 16[2mms[22m[39m
+ [32m✓[39m [30m[43m eventflow-asistido-ai [49m[39m src/app/features/admin/admin-navigation.service.spec.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 5[2mms[22m[39m
+ [32m✓[39m [30m[43m eventflow-asistido-ai [49m[39m src/app/features/session/session-page.spec.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 183[2mms[22m[39m
+ [32m✓[39m [30m[43m eventflow-asistido-ai [49m[39m src/app/core/auth/auth.guard.spec.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 5[2mms[22m[39m
+ [32m✓[39m [30m[43m eventflow-asistido-ai [49m[39m src/app/app.spec.ts [2m([22m[2m1 test[22m[2m)[22m[32m 8[2mms[22m[39m
+ [32m✓[39m [30m[43m eventflow-asistido-ai [49m[39m src/app/core/config/resolve-environment.spec.ts [2m([22m[2m10 tests[22m[2m)[22m[32m 4[2mms[22m[39m
+ [32m✓[39m [30m[43m eventflow-asistido-ai [49m[39m src/app/features/events/event-registration.model.spec.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 4[2mms[22m[39m
+ [32m✓[39m [30m[43m eventflow-asistido-ai [49m[39m src/app/features/events/events.model.spec.ts [2m([22m[2m5 tests[22m[2m)[22m[32m 9[2mms[22m[39m
+ [32m✓[39m [30m[43m eventflow-asistido-ai [49m[39m src/app/core/appwrite/appwrite-auth-error.spec.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 1[2mms[22m[39m
+ [32m✓[39m [30m[43m eventflow-asistido-ai [49m[39m src/app/features/events/attendees.model.spec.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 3[2mms[22m[39m
+ [32m✓[39m [30m[43m eventflow-asistido-ai [49m[39m src/app/shared/ui/atoms/icon/icon.registry.spec.ts [2m([22m[2m1 test[22m[2m)[22m[32m 2[2mms[22m[39m
+ [32m✓[39m [30m[43m eventflow-asistido-ai [49m[39m src/app/shared/ui/password-strength.util.spec.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 1[2mms[22m[39m
+ [32m✓[39m [30m[43m eventflow-asistido-ai [49m[39m src/app/features/events/events-dashboard-page.spec.ts [2m([22m[2m12 tests[22m[2m)[22m[33m 2156[2mms[22m[39m
+     [33m[2m✓[22m[39m should render dashboard heading and events [33m 386[2mms[22m[39m
+     [33m[2m✓[22m[39m should show edit only on events owned by the active user [33m 460[2mms[22m[39m
+     [33m[2m✓[22m[39m should react to filter chip clicks and create event button [33m 401[2mms[22m[39m
+ [32m✓[39m [30m[43m eventflow-asistido-ai [49m[39m src/app/features/events/event-detail.model.spec.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 1[2mms[22m[39m
+ [32m✓[39m [30m[43m eventflow-asistido-ai [49m[39m src/app/features/events/event-attendees-page.spec.ts [2m([22m[2m8 tests[22m[2m)[22m[33m 2103[2mms[22m[39m
+     [33m[2m✓[22m[39m should render attendees for an owned event [33m 871[2mms[22m[39m
+     [33m[2m✓[22m[39m should show read-only check-in status badges [33m 337[2mms[22m[39m
+ [32m✓[39m [30m[43m eventflow-asistido-ai [49m[39m src/app/shared/ui/atoms/icon/icon.spec.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 98[2mms[22m[39m
+ [32m✓[39m [30m[43m eventflow-asistido-ai [49m[39m src/app/features/events/event-edit-page.spec.ts [2m([22m[2m4 tests[22m[2m)[22m[33m 438[2mms[22m[39m
+
+[2m Test Files [22m [1m[32m26 passed[39m[22m[90m (26)[39m
+[2m      Tests [22m [1m[32m109 passed[39m[22m[90m (109)[39m
+[2m   Start at [22m 13:57:50
+[2m   Duration [22m 6.29s[2m (transform 1.56s, setup 2.83s, import 3.42s, tests 10.15s, environment 66.80s)[22m
+```
+
+---
+
+
+## Entrada #046 — Tests Vitest
+
+| Campo | Valor |
+|-------|-------|
+| **Fecha y hora de ejecución** | 2026-06-30 13:58:14 UTC-06:00 |
+| **Inicio** | 2026-06-30 13:57:57 UTC-06:00 |
+| **Ejecutor** | 👤 Developer (`developer`) |
+| **Rama** | `refactor-svg-images` |
+| **Razón de ejecución** | Suite `pnpm test:all` — cobertura + lcov |
+| **Script detonador** | `pnpm test:all` |
+| **Comando** | `ng test --configuration=coverage --watch=false` |
+| **Status** | **OK** |
+| **Exit code** | 0 |
+
+### Resumen breve
+
+Sin resumen parseable; ver salida completa.
+
+### Salida completa
+
+```text
+❯ Building...
+✔ Building...
+Initial chunk files                                                             | Names                                                                        |  Raw size
+spec-app-features-events-event-detail-page.js                                   | spec-app-features-events-event-detail-page                                   |  56.13 kB | 
+styles.css                                                                      | styles                                                                       |  50.74 kB | 
+spec-app-features-events-event-attendees-page.js                                | spec-app-features-events-event-attendees-page                                |  48.33 kB | 
+spec-app-features-events-events-dashboard-page.js                               | spec-app-features-events-events-dashboard-page                               |  39.55 kB | 
+spec-app-features-auth-auth-page.js                                             | spec-app-features-auth-auth-page                                             |  34.12 kB | 
+spec-app-features-events-event-registration-page.js                             | spec-app-features-events-event-registration-page                             |  30.76 kB | 
+spec-app-features-events-event-edit-page.js                                     | spec-app-features-events-event-edit-page                                     |  26.04 kB | 
+chunk-M4NA7FM4.js                                                               | -                                                                            |  21.23 kB | 
+chunk-OV4XMKSD.js                                                               | -                                                                            |  20.59 kB | 
+chunk-SY2DJPKE.js                                                               | -                                                                            |  20.20 kB | 
+spec-app-features-session-session-page.js                                       | spec-app-features-session-session-page                                       |  12.14 kB | 
+chunk-G6DA2RXW.js                                                               | -                                                                            |  10.99 kB | 
+chunk-VWVPCGND.js                                                               | -                                                                            |  10.06 kB | 
+chunk-POLWSX2A.js                                                               | -                                                                            |   9.51 kB | 
+chunk-OFDMRNWT.js                                                               | -                                                                            |   8.21 kB | 
+chunk-GK3HSQDH.js                                                               | -                                                                            |   6.56 kB | 
+chunk-NMOTKRLY.js                                                               | -                                                                            |   6.05 kB | 
+spec-app-core-appwrite-appwrite-auth.service.js                                 | spec-app-core-appwrite-appwrite-auth.service                                 |   5.89 kB | 
+chunk-EYREIOUK.js                                                               | -                                                                            |   5.34 kB | 
+chunk-RSTWSNOR.js                                                               | -                                                                            |   4.75 kB | 
+chunk-UJCHV22L.js                                                               | -                                                                            |   4.51 kB | 
+spec-app-core-config-resolve-environment.js                                     | spec-app-core-config-resolve-environment                                     |   4.09 kB | 
+chunk-AK544H3O.js                                                               | -                                                                            |   3.85 kB | 
+chunk-ERTP6FUW.js                                                               | -                                                                            |   3.35 kB | 
+spec-app-features-fallback-fallback-redirect-page.js                            | spec-app-features-fallback-fallback-redirect-page                            |   3.30 kB | 
+chunk-B45NHUNC.js                                                               | -                                                                            |   3.23 kB | 
+chunk-M6633B2W.js                                                               | -                                                                            |   2.79 kB | 
+chunk-3CILTWPH.js                                                               | -                                                                            |   2.62 kB | 
+chunk-22JDNN2H.js                                                               | -                                                                            |   2.46 kB | 
+chunk-STQC3UUX.js                                                               | -                                                                            |   2.45 kB | 
+spec-app-shared-ui-organisms-auth-login-form-auth-login-form.js                 | spec-app-shared-ui-organisms-auth-login-form-auth-login-form                 |   2.44 kB | 
+spec-app-shared-ui-organisms-event-registration-form-event-registration-form.js | spec-app-shared-ui-organisms-event-registration-form-event-registration-form |   2.33 kB | 
+chunk-NSZB3PAA.js                                                               | -                                                                            |   2.03 kB | 
+chunk-TYEPQGER.js                                                               | -                                                                            |   2.02 kB | 
+spec-app-shared-ui-organisms-auth-sign-up-form-auth-sign-up-form.js             | spec-app-shared-ui-organisms-auth-sign-up-form-auth-sign-up-form             |   1.96 kB | 
+spec-app-features-events-event-registration.model.js                            | spec-app-features-events-event-registration.model                            |   1.92 kB | 
+spec-app-core-appwrite-appwrite.service.js                                      | spec-app-core-appwrite-appwrite.service                                      |   1.90 kB | 
+spec-app-features-events-events.model.js                                        | spec-app-features-events-events.model                                        |   1.82 kB | 
+spec-app-core-auth-guest.guard.js                                               | spec-app-core-auth-guest.guard                                               |   1.81 kB | 
+chunk-HDPX4BTV.js                                                               | -                                                                            |   1.79 kB | 
+spec-app-core-auth-auth.guard.js                                                | spec-app-core-auth-auth.guard                                                |   1.76 kB | 
+spec-app-app.js                                                                 | spec-app-app                                                                 |   1.73 kB | 
+chunk-J4FHUBTC.js                                                               | -                                                                            |   1.69 kB | 
+chunk-FZ3EFD3P.js                                                               | -                                                                            |   1.64 kB | 
+chunk-ESJ6SOP5.js                                                               | -                                                                            |   1.46 kB | 
+spec-app-features-admin-admin-navigation.service.js                             | spec-app-features-admin-admin-navigation.service                             |   1.41 kB | 
+spec-app-shared-ui-atoms-icon-icon.js                                           | spec-app-shared-ui-atoms-icon-icon                                           |   1.30 kB | 
+init-testbed.js                                                                 | init-testbed                                                                 |   1.21 kB | 
+spec-app-core-appwrite-appwrite-auth-error.js                                   | spec-app-core-appwrite-appwrite-auth-error                                   |   1.13 kB | 
+chunk-RBN4S7O6.js                                                               | -                                                                            |   1.10 kB | 
+chunk-SACBZIG5.js                                                               | -                                                                            |   1.06 kB | 
+spec-app-features-events-attendees.model.js                                     | spec-app-features-events-attendees.model                                     |   1.04 kB | 
+chunk-BO3UIMU6.js                                                               | -                                                                            | 974 bytes | 
+vitest-mock-patch.js                                                            | vitest-mock-patch                                                            | 969 bytes | 
+chunk-QJQ2R3K6.js                                                               | -                                                                            | 909 bytes | 
+spec-app-shared-ui-password-strength.util.js                                    | spec-app-shared-ui-password-strength.util                                    | 878 bytes | 
+chunk-RDSJJ3EL.js                                                               | -                                                                            | 859 bytes | 
+spec-app-shared-ui-atoms-icon-icon.registry.js                                  | spec-app-shared-ui-atoms-icon-icon.registry                                  | 821 bytes | 
+spec-app-features-events-event-detail.model.js                                  | spec-app-features-events-event-detail.model                                  | 774 bytes | 
+chunk-OWTV64UV.js                                                               | -                                                                            | 627 bytes | 
+
+                                                                                | Initial total                                                                | 503.22 kB
+
+Application bundle generation complete. [6.141 seconds] - 2026-06-30T19:58:05.465Z
+
+
+[1m[30m[46m RUN [49m[39m[22m [36mv4.1.8 [39m[90m/Users/tw1ttt3r/tw1ttt3r/own/eventflow-asistido-ai[39m
+      [2mCoverage enabled with [22m[33mv8[39m
+
+ [32m✓[39m [30m[43m eventflow-asistido-ai [49m[39m src/app/features/events/event-detail-page.spec.ts [2m([22m[2m7 tests[22m[2m)[22m[33m 1420[2mms[22m[39m
+     [33m[2m✓[22m[39m should render event detail for a known event [33m 566[2mms[22m[39m
+ [32m✓[39m [30m[43m eventflow-asistido-ai [49m[39m src/app/features/events/event-registration-page.spec.ts [2m([22m[2m7 tests[22m[2m)[22m[33m 1746[2mms[22m[39m
+     [33m[2m✓[22m[39m should render registration details for a known event [33m 673[2mms[22m[39m
+     [33m[2m✓[22m[39m should register successfully and show confirmation [33m 542[2mms[22m[39m
+ [32m✓[39m [30m[43m eventflow-asistido-ai [49m[39m src/app/features/auth/auth-page.spec.ts [2m([22m[2m9 tests[22m[2m)[22m[33m 1601[2mms[22m[39m
+     [33m[2m✓[22m[39m should render sign up by default [33m 406[2mms[22m[39m
+     [33m[2m✓[22m[39m should switch to login tab [33m 309[2mms[22m[39m
+ [32m✓[39m [30m[43m eventflow-asistido-ai [49m[39m src/app/shared/ui/organisms/auth-login-form/auth-login-form.spec.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 164[2mms[22m[39m
+ [32m✓[39m [30m[43m eventflow-asistido-ai [49m[39m src/app/shared/ui/organisms/event-registration-form/event-registration-form.spec.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 177[2mms[22m[39m
+ [32m✓[39m [30m[43m eventflow-asistido-ai [49m[39m src/app/features/events/event-edit-page.spec.ts [2m([22m[2m4 tests[22m[2m)[22m[33m 520[2mms[22m[39m
+ [32m✓[39m [30m[43m eventflow-asistido-ai [49m[39m src/app/shared/ui/atoms/icon/icon.spec.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 36[2mms[22m[39m
+ [32m✓[39m [30m[43m eventflow-asistido-ai [49m[39m src/app/features/events/events-dashboard-page.spec.ts [2m([22m[2m12 tests[22m[2m)[22m[33m 1957[2mms[22m[39m
+     [33m[2m✓[22m[39m should render dashboard heading and events [33m 602[2mms[22m[39m
+ [32m✓[39m [30m[43m eventflow-asistido-ai [49m[39m src/app/features/events/event-attendees-page.spec.ts [2m([22m[2m8 tests[22m[2m)[22m[33m 1986[2mms[22m[39m
+     [33m[2m✓[22m[39m should render attendees for an owned event [33m 730[2mms[22m[39m
+ [32m✓[39m [30m[43m eventflow-asistido-ai [49m[39m src/app/shared/ui/organisms/auth-sign-up-form/auth-sign-up-form.spec.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 106[2mms[22m[39m
+ [32m✓[39m [30m[43m eventflow-asistido-ai [49m[39m src/app/core/appwrite/appwrite-auth.service.spec.ts [2m([22m[2m8 tests[22m[2m)[22m[32m 64[2mms[22m[39m
+ [32m✓[39m [30m[43m eventflow-asistido-ai [49m[39m src/app/features/fallback/fallback-redirect-page.spec.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 25[2mms[22m[39m
+ [32m✓[39m [30m[43m eventflow-asistido-ai [49m[39m src/app/features/events/events.model.spec.ts [2m([22m[2m5 tests[22m[2m)[22m[32m 7[2mms[22m[39m
+ [32m✓[39m [30m[43m eventflow-asistido-ai [49m[39m src/app/core/auth/guest.guard.spec.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 18[2mms[22m[39m
+ [32m✓[39m [30m[43m eventflow-asistido-ai [49m[39m src/app/app.spec.ts [2m([22m[2m1 test[22m[2m)[22m[32m 13[2mms[22m[39m
+ [32m✓[39m [30m[43m eventflow-asistido-ai [49m[39m src/app/features/session/session-page.spec.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 211[2mms[22m[39m
+ [32m✓[39m [30m[43m eventflow-asistido-ai [49m[39m src/app/core/appwrite/appwrite.service.spec.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 103[2mms[22m[39m
+ [32m✓[39m [30m[43m eventflow-asistido-ai [49m[39m src/app/features/admin/admin-navigation.service.spec.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 11[2mms[22m[39m
+ [32m✓[39m [30m[43m eventflow-asistido-ai [49m[39m src/app/features/events/attendees.model.spec.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 1[2mms[22m[39m
+ [32m✓[39m [30m[43m eventflow-asistido-ai [49m[39m src/app/features/events/event-registration.model.spec.ts [2m([22m[2m3 tests[22m[2m)[22m[32m 4[2mms[22m[39m
+ [32m✓[39m [30m[43m eventflow-asistido-ai [49m[39m src/app/core/config/resolve-environment.spec.ts [2m([22m[2m10 tests[22m[2m)[22m[32m 10[2mms[22m[39m
+ [32m✓[39m [30m[43m eventflow-asistido-ai [49m[39m src/app/core/auth/auth.guard.spec.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 9[2mms[22m[39m
+ [32m✓[39m [30m[43m eventflow-asistido-ai [49m[39m src/app/shared/ui/atoms/icon/icon.registry.spec.ts [2m([22m[2m1 test[22m[2m)[22m[32m 3[2mms[22m[39m
+ [32m✓[39m [30m[43m eventflow-asistido-ai [49m[39m src/app/core/appwrite/appwrite-auth-error.spec.ts [2m([22m[2m4 tests[22m[2m)[22m[32m 3[2mms[22m[39m
+ [32m✓[39m [30m[43m eventflow-asistido-ai [49m[39m src/app/shared/ui/password-strength.util.spec.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 2[2mms[22m[39m
+ [32m✓[39m [30m[43m eventflow-asistido-ai [49m[39m src/app/features/events/event-detail.model.spec.ts [2m([22m[2m2 tests[22m[2m)[22m[32m 1[2mms[22m[39m
+
+[2m Test Files [22m [1m[32m26 passed[39m[22m[90m (26)[39m
+[2m      Tests [22m [1m[32m109 passed[39m[22m[90m (109)[39m
+[2m   Start at [22m 13:58:06
+[2m   Duration [22m 7.46s[2m (transform 1.65s, setup 5.69s, import 3.44s, tests 10.20s, environment 53.02s)[22m
+```
+
+---
+

@@ -1,13 +1,14 @@
 import { ChangeDetectionStrategy, Component, output } from '@angular/core';
 
 import { EfButton } from '@shared/ui/atoms/button/button';
+import { EfIcon } from '@shared/ui/atoms/icon/icon';
 import { Subheading } from '@shared/ui/atoms/subheading/subheading';
 import { InfoNoticeRow } from '@shared/ui/molecules/info-notice-row/info-notice-row';
 
 @Component({
   selector: 'ef-event-unavailable-card',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [Subheading, EfButton, InfoNoticeRow],
+  imports: [Subheading, EfButton, EfIcon, InfoNoticeRow],
   template: `
     <section
       class="overflow-hidden rounded-3xl bg-white shadow-sm ring-1 ring-slate-100"
@@ -29,23 +30,7 @@ import { InfoNoticeRow } from '@shared/ui/molecules/info-notice-row/info-notice-
           class="relative mx-auto flex size-20 items-center justify-center rounded-3xl bg-white shadow-md ring-1 ring-slate-100"
           aria-hidden="true"
         >
-          <svg viewBox="0 0 48 48" class="size-10 text-ef-purple">
-            <rect x="8" y="12" width="32" height="28" rx="4" fill="currentColor" opacity="0.15" />
-            <path
-              d="M16 8v6M32 8v6M8 20h32"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-            />
-            <path
-              d="M18 30l12 12M30 30 18 42"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2.5"
-              stroke-linecap="round"
-            />
-          </svg>
+          <ef-icon name="calendar-x" size="xl" iconClass="text-ef-purple" />
         </div>
 
         <h1
