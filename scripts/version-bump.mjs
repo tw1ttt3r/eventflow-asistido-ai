@@ -154,7 +154,8 @@ function renderEnvironmentFile({ includeSonar }) {
   sonar: {
     hostUrl: '',
     projectKey: '',
-  },`
+  },
+  mockSessionUser: true,`
     : '';
 
   return `import type { Environment } from '@env/environment.model';
