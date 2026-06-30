@@ -1943,4 +1943,33 @@ El commit `41cf1dc` (`fix: removed imports relatives`) **no eliminó** el import
 
 ---
 
-*Última actualización del archivo: 2026-06-28 20:53:05 CST*
+## Entrada #064 — Vista detalle del evento
+
+| Campo | Valor |
+|-------|--------|
+| **Fecha de ejecución** | 2026-06-29 |
+| **Hora de ejecución** | 09:09:19 CST |
+| **Tiempo total** | ~240 s |
+| **Modelo de agente** | `gpt-5.3-codex` |
+| **Nivel de complejidad** | **Alta** |
+
+### Prompt
+
+> Desarrollar la vista de detalle del evento según mockup EventFlow.
+
+### Entregables
+
+- Ruta `/events/:id` con `EventDetailPage`
+- Modelo `event-detail.model.ts`, mock `event-detail.mock.ts` (evento 2 = Rooftop Mixer)
+- UI: hero, disponibilidad, host banner, about, similar events, perfil host, action bar sticky
+- Listado: botón **View** → detalle; **Register** en detalle → `/events/:id/register`
+- 88 tests OK, cobertura ≥ 80 %
+
+### Ajustes requeridos
+
+- [x] Vista detalle según mockup
+- [x] Navegación lista → detalle → registro
+
+---
+
+*Última actualización del archivo: 2026-06-29 09:09:19 CST*
