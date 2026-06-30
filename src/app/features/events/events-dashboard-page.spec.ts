@@ -137,20 +137,22 @@ describe('EventsDashboardPage', () => {
     expect(fixture.componentInstance).toBeTruthy();
   });
 
-  it('should navigate to registration from attendees action', async () => {
+  it('should navigate to detail from view action', async () => {
     const fixture = TestBed.createComponent(EventsDashboardPage);
     const router = TestBed.inject(Router);
     const navigateSpy = vi.spyOn(router, 'navigate').mockResolvedValue(true);
 
     fixture.detectChanges();
+    await fixture.whenStable();
+    fixture.detectChanges();
 
-    const attendeesButton = Array.from(
+    const viewButton = Array.from(
       (fixture.nativeElement as HTMLElement).querySelectorAll('button'),
-    ).find((button) => button.textContent?.trim() === 'Attendees');
-    attendeesButton?.click();
+    ).find((button) => button.textContent?.trim() === 'View');
+    viewButton?.click();
     await fixture.whenStable();
 
-    expect(navigateSpy).toHaveBeenCalledWith(['/events', '1', 'register']);
+    expect(navigateSpy).toHaveBeenCalledWith(['/events', '1']);
   });
 
   it('should navigate to session from admin header', async () => {

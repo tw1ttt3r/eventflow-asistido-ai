@@ -108,6 +108,6 @@ export class EventsDashboardPage implements OnInit {
   }
 
   protected onViewAttendees(eventId: string): void {
-    void this.router.navigate(['/events', eventId, 'register']);
+    void this.router.navigate(['/events', eventId]);
   }
 }

@@ -40,7 +40,7 @@ import type { EventItem } from '@features/events/events.model';
           </ef-button>
         }
         <ef-button variant="blue" [fullWidth]="false" size="sm" (pressed)="viewAttendees.emit(event().id)">
-          Attendees
+          View
         </ef-button>
       </div>
     </article>
