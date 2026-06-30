@@ -1,22 +1,21 @@
 import { ChangeDetectionStrategy, Component, model, output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
+import { EfIcon } from '@shared/ui/atoms/icon/icon';
+
 @Component({
   selector: 'ef-attendees-search-bar',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [FormsModule],
+  imports: [FormsModule, EfIcon],
   template: `
     <div class="flex items-center gap-3">
       <label class="relative min-w-0 flex-1">
         <span class="sr-only">Search name or email</span>
-        <svg
-          viewBox="0 0 20 20"
-          class="pointer-events-none absolute left-4 top-1/2 size-4 -translate-y-1/2 text-slate-400"
-          aria-hidden="true"
-        >
-          <circle cx="9" cy="9" r="5.5" fill="none" stroke="currentColor" stroke-width="1.5" />
-          <path d="M13.5 13.5 17 17" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
-        </svg>
+        <ef-icon
+          name="search"
+          size="sm"
+          iconClass="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 text-slate-400"
+        />
         <input
           type="search"
           placeholder="Search name or email"
@@ -31,9 +30,7 @@ import { FormsModule } from '@angular/forms';
         aria-label="Add attendee"
         (click)="addPress.emit()"
       >
-        <svg viewBox="0 0 20 20" class="size-5" aria-hidden="true">
-          <path d="M10 5v10M5 10h10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-        </svg>
+        <ef-icon name="plus" size="md" />
       </button>
     </div>
   `,

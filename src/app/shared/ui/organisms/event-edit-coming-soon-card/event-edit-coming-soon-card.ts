@@ -2,6 +2,7 @@ import { ChangeDetectionStrategy, Component, computed, input, output } from '@an
 
 import type { EventItem } from '@features/events/events.model';
 import { EfBadge } from '@shared/ui/atoms/badge/badge';
+import { EfIcon } from '@shared/ui/atoms/icon/icon';
 import { EfButton } from '@shared/ui/atoms/button/button';
 import { Subheading } from '@shared/ui/atoms/subheading/subheading';
 import { InfoNoticeRow } from '@shared/ui/molecules/info-notice-row/info-notice-row';
@@ -9,7 +10,7 @@ import { InfoNoticeRow } from '@shared/ui/molecules/info-notice-row/info-notice-
 @Component({
   selector: 'ef-event-edit-coming-soon-card',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [EfBadge, EfButton, Subheading, InfoNoticeRow],
+  imports: [EfBadge, EfButton, EfIcon, Subheading, InfoNoticeRow],
   template: `
     <section
       class="overflow-hidden rounded-3xl bg-white shadow-sm ring-1 ring-slate-100"
@@ -31,24 +32,7 @@ import { InfoNoticeRow } from '@shared/ui/molecules/info-notice-row/info-notice-
           class="relative mx-auto flex size-20 items-center justify-center rounded-3xl bg-white shadow-md ring-1 ring-slate-100"
           aria-hidden="true"
         >
-          <svg viewBox="0 0 48 48" class="size-10 text-ef-purple">
-            <rect x="10" y="10" width="28" height="28" rx="4" fill="currentColor" opacity="0.15" />
-            <path
-              d="M18 30h16M18 24h10M18 18h14"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-            />
-            <path
-              d="M32 14l4 4-4 4"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            />
-          </svg>
+          <ef-icon name="edit-document" size="xl" iconClass="text-ef-purple" />
         </div>
 
         <h2

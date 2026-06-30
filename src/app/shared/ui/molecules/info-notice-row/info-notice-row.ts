@@ -1,10 +1,20 @@
 import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 
+import { EfIcon } from '@shared/ui/atoms/icon/icon';
+import type { IconName } from '@shared/ui/atoms/icon/icon.types';
+
 export type InfoNoticeVariant = 'info' | 'host' | 'duration';
+
+const NOTICE_ICONS: Record<InfoNoticeVariant, IconName> = {
+  info: 'info-circle',
+  host: 'user-verified',
+  duration: 'clock',
+};
 
 @Component({
   selector: 'ef-info-notice-row',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [EfIcon],
   template: `
     <div class="flex items-start gap-3 rounded-2xl bg-white px-4 py-3.5 ring-1 ring-slate-100">
       <span
@@ -15,53 +25,7 @@ export type InfoNoticeVariant = 'info' | 'host' | 'duration';
         [class.text-ef-purple]="variant() === 'host'"
         aria-hidden="true"
       >
-        @switch (variant()) {
-          @case ('info') {
-            <svg viewBox="0 0 20 20" class="size-4">
-              <circle cx="10" cy="10" r="8" fill="currentColor" opacity="0.2" />
-              <path
-                d="M10 6v1M10 9v5"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.6"
-                stroke-linecap="round"
-              />
-            </svg>
-          }
-          @case ('host') {
-            <svg viewBox="0 0 20 20" class="size-4">
-              <circle cx="10" cy="7" r="3" fill="currentColor" opacity="0.25" />
-              <path
-                d="M4.5 16c.8-2.5 2.8-4 5.5-4s4.7 1.5 5.5 4"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.5"
-                stroke-linecap="round"
-              />
-              <path
-                d="M14.5 6.5l1 1 2.5-2.5"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.4"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-            </svg>
-          }
-          @case ('duration') {
-            <svg viewBox="0 0 20 20" class="size-4">
-              <circle cx="10" cy="10" r="7" fill="none" stroke="currentColor" stroke-width="1.5" />
-              <path
-                d="M10 6v4l2.5 2.5"
-                fill="none"
-                stroke="currentColor"
-                stroke-width="1.5"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              />
-            </svg>
-          }
-        }
+        <ef-icon [name]="iconName()" size="sm" />
       </span>
       <p class="text-sm leading-relaxed text-slate-600">{{ text() }}</p>
     </div>
@@ -70,4 +34,8 @@ export type InfoNoticeVariant = 'info' | 'host' | 'duration';
 export class InfoNoticeRow {
   readonly variant = input.required<InfoNoticeVariant>();
   readonly text = input.required<string>();
+
+  protected iconName(): IconName {
+    return NOTICE_ICONS[this.variant()];
+  }
 }

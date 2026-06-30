@@ -1,7 +1,7 @@
 {
   "major": 0,
-  "minor": 11,
-  "patch": 6,
+  "minor": 12,
+  "patch": 4,
   "knownBranches": [
     "tailwind",
     "feat/sonarqube",
@@ -14,54 +14,10 @@
     "feat/event-register",
     "feat/refactor-events",
     "feat/event-detail",
-    "feat/attendee-list"
+    "feat/attendee-list",
+    "refactor-svg-images"
   ],
   "history": [
-    {
-      "at": "2026-06-19T04:28:36.764Z",
-      "from": "0.2.0",
-      "to": "0.2.1",
-      "branch": "feat/check-status-infra",
-      "reason": "patch",
-      "detail": "commit en rama (feat/check-status-infra)",
-      "sha": "a4faccf"
-    },
-    {
-      "at": "2026-06-19T04:29:49.705Z",
-      "from": "0.2.1",
-      "to": "0.2.2",
-      "branch": "feat/check-status-infra",
-      "reason": "patch",
-      "detail": "commit en rama (feat/check-status-infra)",
-      "sha": "a4faccf"
-    },
-    {
-      "at": "2026-06-19T04:30:15.439Z",
-      "from": "0.2.2",
-      "to": "0.2.3",
-      "branch": "feat/check-status-infra",
-      "reason": "patch",
-      "detail": "commit en rama (feat/check-status-infra)",
-      "sha": "a08a409"
-    },
-    {
-      "at": "2026-06-19T04:34:09.266Z",
-      "from": "0.2.3",
-      "to": "0.2.4",
-      "branch": "feat/check-status-infra",
-      "reason": "patch",
-      "detail": "commit en rama (feat/check-status-infra)",
-      "sha": "a5467ba"
-    },
-    {
-      "at": "2026-06-19T04:36:06.814Z",
-      "from": "0.2.4",
-      "to": "0.2.5",
-      "branch": "feat/check-status-infra",
-      "reason": "patch",
-      "detail": "commit en rama (feat/check-status-infra)",
-      "sha": "ccc42a4"
-    },
     {
       "at": "2026-06-19T04:38:30.545Z",
       "from": "0.2.5",
@@ -916,6 +872,51 @@
       "reason": "patch",
       "detail": "commit en rama (feat/attendee-list)",
       "sha": "77b66bc"
+    },
+    {
+      "at": "2026-06-30T19:57:02.050Z",
+      "from": "0.11.6",
+      "to": "0.12.0",
+      "branch": "refactor-svg-images",
+      "reason": "minor",
+      "detail": "nueva rama (refactor-svg-images)",
+      "sha": "09fb24c"
+    },
+    {
+      "at": "2026-06-30T20:01:03.997Z",
+      "from": "0.12.0",
+      "to": "0.12.1",
+      "branch": "refactor-svg-images",
+      "reason": "patch",
+      "detail": "commit en rama (refactor-svg-images)",
+      "sha": "cf48132"
+    },
+    {
+      "at": "2026-06-30T20:01:36.443Z",
+      "from": "0.12.1",
+      "to": "0.12.2",
+      "branch": "refactor-svg-images",
+      "reason": "patch",
+      "detail": "commit en rama (refactor-svg-images)",
+      "sha": "dddac04"
+    },
+    {
+      "at": "2026-06-30T20:01:51.415Z",
+      "from": "0.12.2",
+      "to": "0.12.3",
+      "branch": "refactor-svg-images",
+      "reason": "patch",
+      "detail": "commit en rama (refactor-svg-images)",
+      "sha": "3e215df"
+    },
+    {
+      "at": "2026-06-30T20:02:11.138Z",
+      "from": "0.12.3",
+      "to": "0.12.4",
+      "branch": "refactor-svg-images",
+      "reason": "patch",
+      "detail": "commit en rama (refactor-svg-images)",
+      "sha": "8b8bc59"
     }
   ]
 }
