@@ -2146,4 +2146,184 @@ El commit `41cf1dc` (`fix: removed imports relatives`) **no eliminó** el import
 
 ---
 
-*Última actualización del archivo: 2026-06-30 10:00:10 CST*
+## Entrada #071 — Análisis: SVG inline en componentes
+
+| Campo | Valor |
+|-------|--------|
+| **Fecha de ejecución** | 2026-06-30 |
+| **Hora de ejecución** | 13:14:35 CST |
+| **Tiempo total** | ~120 s (análisis, sin cambios de código) |
+| **Modelo de agente** | `gpt-5.3-codex` |
+| **Nivel de complejidad** | **Media** (decisión de arquitectura UI) |
+
+### Prompt
+
+> Explicar por qué hay SVG inline, evaluar approaches (componente por SVG, assets, renderer) y proponer alternativa si aplica. Sin implementación aún.
+
+### Contexto medido en el repo
+
+- **17 archivos** en `src/app/shared/ui/` contienen `<svg>` inline (átomos, moléculas, organismos).
+- **0 archivos `.svg`** referenciados en `src/`; assets actuales solo en `public/`.
+- Precedente parcial: `ef-logo-mark` ya encapsula un SVG como átomo reutilizable.
+- `ef-icon-button` proyecta SVG vía `<ng-content>`; cada consumidor duplica el markup del icono.
+
+---
+
+### 1. ¿Por qué se generaron así?
+
+| Causa | Detalle |
+|-------|---------|
+| **Regla de proyecto** | `.cursor/rules/component-inline.mdc` (entrada bitácora **#010**) exige `template` inline en `@Component`. Los agentes y el CLI (`inlineTemplate: true` en `angular.json`) generan UI completa dentro del decorador, SVG incluido. |
+| **Velocidad de scaffold** | Al implementar mockups vista por vista, pegar SVG en la plantilla es el camino más rápido: sin pipeline de assets, sin imports extra, sin convención de iconos definida aún. |
+| **Ventajas técnicas inmediatas** | `currentColor` + clases Tailwind (`text-ef-purple`, `size-4`) colorean el trazo/fill; tamaño dinámico (`[attr.width]` en `LogoMark`); sin petición HTTP adicional; compatible con PWA/offline. |
+| **Patrón UI actual** | Iconografía decorativa mezclada con ilustraciones (`auth-illustration`, estados vacíos). No se diseñó una capa de iconos antes de las primeras vistas. |
+| **Duplicación emergente** | Mismo chevron “volver”, tres puntos “more”, lupa “search”, etc. copiados en headers distintos (`attendees-header`, `registration-header`, `event-edit-header`…). |
+
+**Conclusión:** no fue una decisión explícita “SVG inline como estrategia de iconos”, sino consecuencia de la regla de plantillas inline + desarrollo iterativo por feature sin librería de iconos.
+
+---
+
+### 2. Comparativa de approaches
+
+#### A) Un componente Angular por cada SVG
+
+| Pros | Contras |
+|------|---------|
+| Alineado con atomic design (`ef-icon-chevron-left`) | Muchos archivos pequeños (20–40 iconos → 20–40 componentes) |
+| Tipado, tree-shaking, OnPush, testeable | Migración archivo por archivo |
+| Mantiene `currentColor` y Tailwind | Sin catálogo central, el descubrimiento de “¿ya existe este icono?” es difícil |
+| Encaja con la regla inline (cada icono = su propio `@Component`) | Riesgo de proliferar variantes casi iguales |
+
+**Impacto:** medio-alto (refactor gradual, ~17 archivos actuales + extraer duplicados). Mantenimiento **mejor que hoy**, pero escala mal si no hay índice/registry.
+
+#### B) Assets SVG independientes (`public/icons/*.svg` + `<img>` / `background`)
+
+| Pros | Contras |
+|------|---------|
+| Diseñadores reemplazan archivo sin tocar TS | Pierde `currentColor`; colorear con CSS es incómodo (`mask`, filtros) |
+| Familiar para equipos de diseño | `<img>` no hereda `text-ef-purple` del botón |
+| Un solo archivo fuente por icono | Más difícil variar `stroke-width` o estado hover por contexto |
+| | Angular no estiliza paths internos del SVG externo |
+| | Ilustraciones grandes OK; iconos UI de 16–20 px **peor DX** en este stack Tailwind |
+
+**Impacto:** bajo en build config (ya hay `public/`), alto en **regresión visual** si el design system depende de tokens de color en trazo. Recomendable solo para **ilustraciones** (`auth-illustration`, empty states grandes), no para iconografía de UI.
+
+#### C) Componente renderer genérico (`<ef-icon name="chevron-left" />`)
+
+| Pros | Contras |
+|------|---------|
+| API única; reemplazo centralizado | Registry que mantener (`Record<IconName, string \| Component>`) |
+| Migración por nombre, no por markup | Si el registry es un objeto gigante inline, el problema de mantenimiento se mueve, no desaparece |
+| Facilita auditoría de iconos usados | Carga: hay que definir estrategia (todos en bundle vs lazy) |
+| Compatible con design system | Sin tipos estrictos de `name`, errores en runtime |
+
+**Impacto:** medio (1 átomo + 1 registry + migración progresiva). **Mejor ROI** para iconos repetidos si el registry está tipado (`type IconName = 'chevron-left' | ...`).
+
+---
+
+### 3. ¿Cuál es mejor para EventFlow?
+
+**Recomendación: approach híbrido (C + A acotado), no un solo approach puro.**
+
+```
+src/app/shared/ui/atoms/icon/
+  icon.ts              → <ef-icon name="chevron-left" [size]="20" />
+  icon.registry.ts     → mapa tipado nombre → template SVG (string o mini-componente)
+  icons/               → solo ilustraciones complejas o SVG > ~2 KB como componente dedicado
+src/assets/illustrations/  → SVG estáticos grandes (auth, empty states) si el diseño lo entrega así
+```
+
+| Capa | Qué va | Por qué |
+|------|--------|---------|
+| **`ef-icon` + registry tipado** | Iconos UI 16–24 px (flechas, search, more, calendar, pin…) | Elimina duplicación; un cambio actualiza todos los headers; mantiene `currentColor` |
+| **Componente dedicado** | `LogoMark`, ilustraciones con lógica (`SparklineChart` ya es caso especial) | Cuando hay inputs/behavior propios, no solo dibujo |
+| **Asset estático** | Ilustraciones de marketing/auth exportadas del mockup | El diseñador sustituye archivo; no necesitan theming dinámico |
+
+**Por qué no solo A, B o C**
+
+- **Solo A:** demasiados archivos y duplicación de convenciones sin registry.
+- **Solo B:** rompe el theming Tailwind/token que ya usa el proyecto.
+- **Solo C:** registry monolítico difícil de revisar en PR; mejor dividir definiciones en `icons/*.ts` importadas al registry.
+
+**Impacto estimado del híbrido recomendado**
+
+| Área | Impacto |
+|------|---------|
+| Archivos nuevos | ~5–8 (icon atom, registry, 3–5 icon defs iniciales, regla cursor actualizada) |
+| Archivos a migrar | ~17 con SVG inline (prioridad: headers, `field-feedback`, `info-notice-row`, search bars) |
+| Reglas | Ampliar `component-inline.mdc`: plantilla inline sigue obligatoria; **excepción** para átomos de icono/ilustración y assets en `public/` o `src/assets/illustrations/` |
+| Tests | Specs de `ef-icon` (render por nombre, tamaño, aria-hidden); snapshots opcionales |
+| Build/bundle | Neutral o ligera mejora (menos markup duplicado en templates compilados) |
+| Riesgo | Bajo si migración incremental (icono por icono, no big bang) |
+
+**Pros del híbrido:** mantenimiento centralizado, theming preservado, compatible con regla inline, diseño puede entregar ilustraciones como archivos.
+
+**Contras:** inversión inicial en registry + migración; requiere disciplina de nombres (`kebab-case`, sin sinónimos `back`/`chevron-left` duplicados).
+
+---
+
+### Ajustes requeridos
+
+- [ ] Decisión del equipo sobre approach (pendiente usuario)
+- [ ] Si se aprueba híbrido: definir lista inicial de `IconName` y orden de migración
+- [ ] Actualizar regla `component-inline.mdc` con excepción documentada para iconos/ilustraciones
+
+---
+
+## Entrada #072 — Approach híbrido de iconos (`ef-icon`)
+
+| Campo | Valor |
+|-------|--------|
+| **Fecha de ejecución** | 2026-06-30 |
+| **Hora de ejecución** | 13:14:00 CST – 13:22:30 CST |
+| **Tiempo total** | ~510 s |
+| **Modelo de agente** | `gpt-5.3-codex` |
+| **Nivel de complejidad** | **Alta** |
+
+### Prompt
+
+> Aplicar la opción híbrida para centralizar SVG inline.
+
+### Entregables
+
+- Átomo `ef-icon` + `icon.registry.ts` + defs (`navigation`, `action`, `event`, `status`, `user`) — 20 iconos tipados
+- Migrados 14 componentes UI a `<ef-icon>`; sin SVG duplicado en organismos/moléculas
+- Excepciones conservadas: `logo-mark`, `auth-illustration`, `sparkline-chart`
+- Reglas actualizadas: `component-inline.mdc`, `AGENTS.md`
+- Specs `icon.spec.ts`, `icon.registry.spec.ts`; 109 tests OK
+
+### Ajustes requeridos
+
+- [x] Registry tipado y migración incremental
+- [x] Documentar convención en reglas del proyecto
+- [ ] Ilustraciones grandes a `public/illustrations/` cuando diseño entregue assets finales
+
+---
+
+## Entrada #073 — Sonar: `ef-icon` sin alias ni bypass de sanitización
+
+| Campo | Valor |
+|-------|--------|
+| **Fecha de ejecución** | 2026-06-30 |
+| **Hora de ejecución** | 13:45:49 CST – 13:46:10 CST |
+| **Tiempo total** | ~90 s |
+| **Modelo de agente** | `gpt-5.3-codex` |
+| **Nivel de complejidad** | **Media** |
+
+### Prompt
+
+> Corregir codesmells Sonar S7649 (input alias `class`) y S6268 (`bypassSecurityTrustHtml`) en `icon.ts`.
+
+### Entregables
+
+- `ef-icon`: paths en plantilla `@switch` (sin `innerHTML` ni `DomSanitizer`)
+- Input renombrado a `iconClass` (consumidores actualizados)
+- Registry `defs/` conserva solo `viewBox`; 109 tests OK
+
+### Ajustes requeridos
+
+- [x] S7649 y S6268 resueltos en `icon.ts`
+
+---
+
+*Última actualización del archivo: 2026-06-30 13:46:10 CST*

@@ -1,7 +1,7 @@
 {
   "major": 0,
   "minor": 12,
-  "patch": 3,
+  "patch": 4,
   "knownBranches": [
     "tailwind",
     "feat/sonarqube",
@@ -18,15 +18,6 @@
     "refactor-svg-images"
   ],
   "history": [
-    {
-      "at": "2026-06-19T04:36:06.814Z",
-      "from": "0.2.4",
-      "to": "0.2.5",
-      "branch": "feat/check-status-infra",
-      "reason": "patch",
-      "detail": "commit en rama (feat/check-status-infra)",
-      "sha": "ccc42a4"
-    },
     {
       "at": "2026-06-19T04:38:30.545Z",
       "from": "0.2.5",
@@ -917,6 +908,15 @@
       "reason": "patch",
       "detail": "commit en rama (refactor-svg-images)",
       "sha": "3e215df"
+    },
+    {
+      "at": "2026-06-30T20:02:11.138Z",
+      "from": "0.12.3",
+      "to": "0.12.4",
+      "branch": "refactor-svg-images",
+      "reason": "patch",
+      "detail": "commit en rama (refactor-svg-images)",
+      "sha": "8b8bc59"
     }
   ]
 }
