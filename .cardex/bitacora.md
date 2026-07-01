@@ -2326,4 +2326,38 @@ src/assets/illustrations/  → SVG estáticos grandes (auth, empty states) si el
 
 ---
 
-*Última actualización del archivo: 2026-06-30 13:46:10 CST*
+## Entrada #074 — Vista Profile (Jane Doe, dashboard + edit + change password)
+
+| Campo | Valor |
+|-------|--------|
+| **Fecha de ejecución** | 2026-06-30 |
+| **Hora de ejecución** | 17:43:17 CST – 17:45:51 CST |
+| **Tiempo total** | ~154 s |
+| **Modelo de agente** | `gpt-5.3-codex` |
+| **Nivel de complejidad** | **Alta** |
+
+### Prompt
+
+> Vista Profile según mock (inglés): Jane Doe; avatar gradiente + iniciales con subida de foto (preview); Edit Profile y Change Password con vistas propias; resto placeholders hasta mocks.
+
+### Entregables
+
+- Modelo `profile.model.ts`, mock `MOCK_USER_PROFILE_DASHBOARD`, `ProfileStateService`
+- Átomos `ef-avatar`, `ef-count-badge`; iconos `chevron-right`, `edit`, `qr-code`, `presentation`
+- Organismos: `profile-hero-card`, `upcoming-events-card`, `attended-events-card`, `digital-tickets-card`, `profile-edit-form`, `change-password-form`
+- Rutas `/session`, `/session/edit`, `/session/change-password` con `AdminLayout`
+- Placeholders: View Ticket, Open ticket, see all upcoming
+- Specs ampliados (`profile-edit-form`, páginas profile, session); **135 tests OK**, cobertura functions ≥ 80%
+
+### Ajustes requeridos
+
+- [x] Idioma inglés alineado al mock
+- [x] Avatar gradiente + iniciales; Change photo con preview local
+- [x] Edit Profile y Change Password funcionales (mock)
+- [x] Usuario Jane Doe
+- [ ] Conectar change password y avatar storage a Appwrite
+- [ ] Flujos reales View Ticket / Open ticket cuando lleguen mocks
+
+---
+
+*Última actualización del archivo: 2026-06-30 17:45:51 CST*

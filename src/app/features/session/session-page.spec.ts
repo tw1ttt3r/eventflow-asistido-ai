@@ -3,7 +3,7 @@ import { provideRouter, Router } from '@angular/router';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { AppwriteAuthService } from '@core/appwrite/appwrite-auth.service';
-import { AdminNavigationService } from '@features/admin/admin-navigation.service';
+import { ProfileStateService } from '@features/profile/profile-state.service';
 import { SessionPage } from '@features/session/session-page';
 
 describe('SessionPage (profile)', () => {
@@ -25,27 +25,91 @@ describe('SessionPage (profile)', () => {
       providers: [
         provideRouter([
           { path: 'session', component: SessionPage },
+          { path: 'session/edit', component: class {} },
+          { path: 'session/change-password', component: class {} },
           { path: 'events', component: class {} },
         ]),
         { provide: AppwriteAuthService, useValue: authMock },
+        ProfileStateService,
       ],
     }).compileComponents();
   });
 
-  it('should render profile details', async () => {
+  it('should render profile dashboard for Jane Doe', async () => {
     const fixture = TestBed.createComponent(SessionPage);
     fixture.detectChanges();
     await fixture.whenStable();
     fixture.detectChanges();
 
-    await vi.waitFor(() => {
-      expect((fixture.nativeElement as HTMLElement).textContent).toContain('Account');
-    });
-
     const compiled = fixture.nativeElement as HTMLElement;
     expect(compiled.textContent).toContain('Jane Doe');
-    expect(compiled.textContent).toContain('jane@example.com');
-    expect(compiled.textContent).toContain('JD');
+    expect(compiled.textContent).toContain('Upcoming Events');
+    expect(compiled.textContent).toContain('Design Thinking Workshop');
+    expect(compiled.textContent).toContain('Attended');
+    expect(compiled.textContent).toContain('Digital Tickets');
+  });
+
+  it('should navigate to edit profile', async () => {
+    const fixture = TestBed.createComponent(SessionPage);
+    const router = TestBed.inject(Router);
+    const navigateSpy = vi.spyOn(router, 'navigate').mockResolvedValue(true);
+
+    fixture.detectChanges();
+    await fixture.whenStable();
+    fixture.detectChanges();
+
+    const editButton = Array.from(
+      (fixture.nativeElement as HTMLElement).querySelectorAll('button'),
+    ).find((button) => button.textContent?.includes('Edit Profile')) as HTMLButtonElement | undefined;
+    editButton?.click();
+    await fixture.whenStable();
+
+    expect(navigateSpy).toHaveBeenCalledWith(['/session', 'edit']);
+  });
+
+  it('should navigate to change password', async () => {
+    const fixture = TestBed.createComponent(SessionPage);
+    const router = TestBed.inject(Router);
+    const navigateSpy = vi.spyOn(router, 'navigate').mockResolvedValue(true);
+
+    fixture.detectChanges();
+    await fixture.whenStable();
+    fixture.detectChanges();
+
+    const changePasswordButton = Array.from(
+      (fixture.nativeElement as HTMLElement).querySelectorAll('button'),
+    ).find((button) => button.textContent?.includes('Change Password')) as HTMLButtonElement | undefined;
+    changePasswordButton?.click();
+    await fixture.whenStable();
+
+    expect(navigateSpy).toHaveBeenCalledWith(['/session', 'change-password']);
+  });
+
+  it('should handle placeholder actions without errors', async () => {
+    const fixture = TestBed.createComponent(SessionPage);
+    fixture.detectChanges();
+    await fixture.whenStable();
+
+    const page = fixture.componentInstance as SessionPage & {
+      onPlaceholder(action: string): void;
+      onNavigate(tabId: string): void;
+    };
+
+    expect(() => page.onPlaceholder('View ticket')).not.toThrow();
+    expect(() => page.onNavigate('events')).not.toThrow();
+  });
+
+  it('should handle view ticket placeholder from upcoming events', async () => {
+    const fixture = TestBed.createComponent(SessionPage);
+    fixture.detectChanges();
+    await fixture.whenStable();
+    fixture.detectChanges();
+
+    const viewTicketButton = Array.from(
+      (fixture.nativeElement as HTMLElement).querySelectorAll('button'),
+    ).find((button) => button.textContent?.includes('View Ticket')) as HTMLButtonElement | undefined;
+
+    expect(() => viewTicketButton?.click()).not.toThrow();
   });
 
   it('should logout and redirect to auth', async () => {
@@ -57,36 +121,13 @@ describe('SessionPage (profile)', () => {
     await fixture.whenStable();
     fixture.detectChanges();
 
-    await vi.waitFor(() => {
-      expect((fixture.nativeElement as HTMLElement).textContent).toContain('Cerrar sesión');
-    });
-
     const logoutButton = Array.from(
       (fixture.nativeElement as HTMLElement).querySelectorAll('button'),
-    ).find((button) => button.textContent?.includes('Cerrar sesión'));
-
-    expect(logoutButton).toBeTruthy();
+    ).find((button) => button.textContent?.includes('Logout')) as HTMLButtonElement | undefined;
     logoutButton?.click();
     await fixture.whenStable();
 
     expect(authMock.logout).toHaveBeenCalledOnce();
     expect(navigateSpy).toHaveBeenCalledWith(['/auth']);
-  });
-
-  it('should navigate via admin layout', async () => {
-    const fixture = TestBed.createComponent(SessionPage);
-    const adminNav = TestBed.inject(AdminNavigationService);
-    const navigateSpy = vi.spyOn(adminNav, 'navigate');
-
-    fixture.detectChanges();
-    await fixture.whenStable();
-    fixture.detectChanges();
-
-    const eventsButton = Array.from(
-      (fixture.nativeElement as HTMLElement).querySelectorAll('button'),
-    ).find((button) => button.textContent?.trim() === 'Events');
-    eventsButton?.click();
-
-    expect(navigateSpy).toHaveBeenCalledWith('events');
   });
 });

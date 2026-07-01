@@ -20,7 +20,11 @@ export type IconName =
   | 'users-group'
   | 'calendar-brand'
   | 'bell'
-  | 'user';
+  | 'user'
+  | 'chevron-right'
+  | 'edit'
+  | 'qr-code'
+  | 'presentation';
 
 export interface IconDefinition {
   viewBox: string;

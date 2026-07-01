@@ -48,7 +48,18 @@ export const routes: Routes = [
     path: 'session',
     canActivate: [authGuard],
     loadComponent: () => import('@features/session/session-page').then((m) => m.SessionPage),
-    data: { profile: true },
+  },
+  {
+    path: 'session/edit',
+    canActivate: [authGuard],
+    loadComponent: () =>
+      import('@features/profile/profile-edit-page').then((m) => m.ProfileEditPage),
+  },
+  {
+    path: 'session/change-password',
+    canActivate: [authGuard],
+    loadComponent: () =>
+      import('@features/profile/profile-change-password-page').then((m) => m.ProfileChangePasswordPage),
   },
   {
     path: '**',
