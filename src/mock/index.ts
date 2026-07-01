@@ -6,3 +6,4 @@ export {
 } from '@mock/event-registration.mock';
 export { MOCK_EVENT_DETAILS, findEventDetail } from '@mock/event-detail.mock';
 export { findEventAttendees, findEventAttendeesContext } from '@mock/attendees.mock';
+export { MOCK_USER_PROFILE_DASHBOARD } from '@mock/profile.mock';
