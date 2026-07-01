@@ -6,4 +6,7 @@ export const ACTION_ICONS = {
   search: { viewBox: '0 0 20 20' },
   plus: { viewBox: '0 0 20 20' },
   share: { viewBox: '0 0 20 20' },
+  edit: { viewBox: '0 0 20 20' },
+  'qr-code': { viewBox: '0 0 24 24' },
+  presentation: { viewBox: '0 0 20 20' },
 } satisfies Record<string, IconDefinition>;

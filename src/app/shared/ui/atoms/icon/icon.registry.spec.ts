@@ -25,6 +25,10 @@ describe('icon.registry', () => {
     'calendar-brand',
     'bell',
     'user',
+    'chevron-right',
+    'edit',
+    'qr-code',
+    'presentation',
   ];
 
   it('should define every icon name', () => {

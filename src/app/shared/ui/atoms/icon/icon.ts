@@ -34,6 +34,16 @@ const SIZE_CLASSES: Record<IconSize, string> = {
             stroke-linejoin="round"
           />
         }
+        @case ('chevron-right') {
+          <path
+            d="M7.5 4.5 13 10l-5.5 5.5"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        }
         @case ('more-horizontal') {
           <circle cx="5" cy="10" r="1.2" fill="currentColor" />
           <circle cx="10" cy="10" r="1.2" fill="currentColor" />
@@ -246,6 +256,28 @@ const SIZE_CLASSES: Record<IconSize, string> = {
             stroke-width="1.8"
             stroke-linecap="round"
           />
+        }
+        @case ('edit') {
+          <rect x="4" y="4" width="12" height="12" rx="2" fill="currentColor" opacity="0.15" />
+          <path
+            d="M12.5 5.5l2 2M7 11l-3 3 2 2 3-3 5.5-5.5-2-2L7 11z"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.4"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        }
+        @case ('qr-code') {
+          <rect x="4" y="4" width="7" height="7" rx="1" fill="none" stroke="currentColor" stroke-width="1.5" />
+          <rect x="13" y="4" width="7" height="7" rx="1" fill="none" stroke="currentColor" stroke-width="1.5" />
+          <rect x="4" y="13" width="7" height="7" rx="1" fill="none" stroke="currentColor" stroke-width="1.5" />
+          <path d="M13 13h2v2h-2zM17 13h3v3h-3zM13 17h3v3h-3zM17 17v3" fill="currentColor" opacity="0.4" />
+        }
+        @case ('presentation') {
+          <rect x="3" y="5" width="14" height="9" rx="1.5" fill="currentColor" opacity="0.15" />
+          <path d="M3 8h14M7 12h6" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" />
+          <path d="M10 14v3M6 17h8" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" />
         }
         @case ('user') {
           <circle cx="12" cy="8" r="3.5" fill="none" stroke="currentColor" stroke-width="1.8" />
