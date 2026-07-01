@@ -1,91 +1,74 @@
-import { ChangeDetectionStrategy, Component, computed, inject, OnInit, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { AdminNavigationService } from '@features/admin/admin-navigation.service';
 import { AppwriteAuthService } from '@core/appwrite/appwrite-auth.service';
-import { EfButton } from '@shared/ui/atoms/button/button';
-import { Heading } from '@shared/ui/atoms/heading/heading';
-import { Subheading } from '@shared/ui/atoms/subheading/subheading';
+import { ProfileStateService } from '@features/profile/profile-state.service';
+import { AttendedEventsCard } from '@shared/ui/organisms/attended-events-card/attended-events-card';
+import { DigitalTicketsCard } from '@shared/ui/organisms/digital-tickets-card/digital-tickets-card';
+import { ProfileHeroCard } from '@shared/ui/organisms/profile-hero-card/profile-hero-card';
+import { UpcomingEventsCard } from '@shared/ui/organisms/upcoming-events-card/upcoming-events-card';
 import { AdminLayout } from '@shared/ui/templates/admin-layout/admin-layout';
 
 @Component({
   selector: 'app-session-page',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [AdminLayout, Heading, Subheading, EfButton],
+  imports: [
+    AdminLayout,
+    ProfileHeroCard,
+    UpcomingEventsCard,
+    AttendedEventsCard,
+    DigitalTicketsCard,
+  ],
   template: `
     <ef-admin-layout activeNav="account" (navigate)="onNavigate($event)">
-      <section class="rounded-3xl bg-white p-6 shadow-sm ring-1 ring-slate-100">
-        @if (loading()) {
-          <p class="text-center text-sm text-slate-500">Cargando perfil…</p>
-        } @else if (user(); as currentUser) {
-          <div class="space-y-6">
-            <div class="flex flex-col items-center gap-4 text-center">
-              <div
-                class="flex size-20 items-center justify-center rounded-full bg-ef-lavender text-2xl font-bold text-ef-purple"
-                aria-hidden="true"
-              >
-                {{ initials() }}
-              </div>
-              <div class="space-y-1">
-                <ef-heading>Account</ef-heading>
-                <ef-subheading>{{ currentUser.name || currentUser.email }}</ef-subheading>
-              </div>
-            </div>
+      <ef-profile-hero-card
+        [profile]="dashboard().profile"
+        [loggingOut]="loggingOut()"
+        (editPress)="goToEdit()"
+        (changePasswordPress)="goToChangePassword()"
+        (logoutPress)="logout()"
+      />
 
-            <dl class="space-y-4 rounded-2xl bg-ef-surface px-5 py-4 text-sm text-slate-600">
-              <div>
-                <dt class="text-xs font-semibold uppercase tracking-wide text-slate-400">Nombre</dt>
-                <dd class="mt-1 font-medium text-slate-900">{{ currentUser.name || '—' }}</dd>
-              </div>
-              <div>
-                <dt class="text-xs font-semibold uppercase tracking-wide text-slate-400">Correo</dt>
-                <dd class="mt-1 font-medium text-slate-900">{{ currentUser.email }}</dd>
-              </div>
-              <div>
-                <dt class="text-xs font-semibold uppercase tracking-wide text-slate-400">User ID</dt>
-                <dd class="mt-1 break-all font-mono text-xs text-slate-500">{{ currentUser.$id }}</dd>
-              </div>
-            </dl>
+      <ef-upcoming-events-card
+        [events]="dashboard().upcoming"
+        (seeAllPress)="onPlaceholder('Upcoming events')"
+        (viewTicketPress)="onPlaceholder('View ticket')"
+      />
 
-            <ef-button variant="blue" [disabled]="loggingOut()" (pressed)="logout()">
-              {{ loggingOut() ? 'Cerrando sesión…' : 'Cerrar sesión' }}
-            </ef-button>
-          </div>
-        }
-      </section>
+      <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
+        <ef-attended-events-card [events]="dashboard().attended" />
+        <ef-digital-tickets-card
+          [tickets]="dashboard().tickets"
+          (openPress)="onPlaceholder('Open ticket')"
+        />
+      </div>
     </ef-admin-layout>
   `,
 })
-export class SessionPage implements OnInit {
+export class SessionPage {
   private readonly auth = inject(AppwriteAuthService);
   private readonly router = inject(Router);
   private readonly adminNav = inject(AdminNavigationService);
+  private readonly profileState = inject(ProfileStateService);
 
-  protected readonly loading = signal(true);
+  protected readonly dashboard = this.profileState.dashboard;
   protected readonly loggingOut = signal(false);
-  protected readonly user = signal<Awaited<ReturnType<AppwriteAuthService['getCurrentUser']>>>(null);
-
-  protected readonly initials = computed(() => {
-    const name = this.user()?.name?.trim() || this.user()?.email || '?';
-    const parts = name.split(/\s+/).filter(Boolean);
-    if (parts.length >= 2) {
-      return `${parts[0]?.[0] ?? ''}${parts[1]?.[0] ?? ''}`.toUpperCase();
-    }
-    return name.slice(0, 2).toUpperCase();
-  });
-
-  ngOnInit(): void {
-    void this.bootstrap();
-  }
-
-  private async bootstrap(): Promise<void> {
-    const currentUser = await this.auth.getCurrentUser();
-    this.user.set(currentUser);
-    this.loading.set(false);
-  }
 
   protected onNavigate(tabId: string): void {
     this.adminNav.navigate(tabId);
+  }
+
+  protected goToEdit(): void {
+    void this.router.navigate(['/session', 'edit']);
+  }
+
+  protected goToChangePassword(): void {
+    void this.router.navigate(['/session', 'change-password']);
+  }
+
+  protected onPlaceholder(_action: string): void {
+    // Placeholder until dedicated mocks/flows arrive
   }
 
   protected async logout(): Promise<void> {
