@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AdminNavigationService } from '@features/admin/admin-navigation.service';
 import { AppwriteAuthService } from '@core/appwrite/appwrite-auth.service';
 import { ProfileStateService } from '@features/profile/profile-state.service';
+import { resolveTicketId } from '@mock/digital-ticket.mock';
 import { AttendedEventsCard } from '@shared/ui/organisms/attended-events-card/attended-events-card';
 import { DigitalTicketsCard } from '@shared/ui/organisms/digital-tickets-card/digital-tickets-card';
 import { ProfileHeroCard } from '@shared/ui/organisms/profile-hero-card/profile-hero-card';
@@ -33,14 +34,14 @@ import { AdminLayout } from '@shared/ui/templates/admin-layout/admin-layout';
       <ef-upcoming-events-card
         [events]="dashboard().upcoming"
         (seeAllPress)="onPlaceholder('Upcoming events')"
-        (viewTicketPress)="onPlaceholder('View ticket')"
+        (viewTicketPress)="openTicket($event)"
       />
 
       <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
         <ef-attended-events-card [events]="dashboard().attended" />
         <ef-digital-tickets-card
           [tickets]="dashboard().tickets"
-          (openPress)="onPlaceholder('Open ticket')"
+          (openPress)="openTicket($event)"
         />
       </div>
     </ef-admin-layout>
@@ -65,6 +66,10 @@ export class SessionPage {
 
   protected goToChangePassword(): void {
     void this.router.navigate(['/session', 'change-password']);
+  }
+
+  protected openTicket(id: string): void {
+    void this.router.navigate(['/session', 'tickets', resolveTicketId(id)]);
   }
 
   protected onPlaceholder(_action: string): void {

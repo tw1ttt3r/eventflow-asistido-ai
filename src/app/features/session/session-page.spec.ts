@@ -27,6 +27,7 @@ describe('SessionPage (profile)', () => {
           { path: 'session', component: SessionPage },
           { path: 'session/edit', component: class {} },
           { path: 'session/change-password', component: class {} },
+          { path: 'session/tickets/:ticketId', component: class {} },
           { path: 'events', component: class {} },
         ]),
         { provide: AppwriteAuthService, useValue: authMock },
@@ -47,6 +48,23 @@ describe('SessionPage (profile)', () => {
     expect(compiled.textContent).toContain('Design Thinking Workshop');
     expect(compiled.textContent).toContain('Attended');
     expect(compiled.textContent).toContain('Digital Tickets');
+  });
+
+  it('should navigate home when header logo is pressed', async () => {
+    const fixture = TestBed.createComponent(SessionPage);
+    const router = TestBed.inject(Router);
+    const navigateSpy = vi.spyOn(router, 'navigateByUrl').mockResolvedValue(true);
+
+    fixture.detectChanges();
+    await fixture.whenStable();
+
+    const logoLink = (fixture.nativeElement as HTMLElement).querySelector(
+      'a[aria-label="Go to home"]',
+    ) as HTMLAnchorElement;
+    logoLink.click();
+    await fixture.whenStable();
+
+    expect(navigateSpy).toHaveBeenCalledOnce();
   });
 
   it('should navigate to edit profile', async () => {
@@ -85,6 +103,42 @@ describe('SessionPage (profile)', () => {
     expect(navigateSpy).toHaveBeenCalledWith(['/session', 'change-password']);
   });
 
+  it('should navigate to digital ticket from upcoming events', async () => {
+    const fixture = TestBed.createComponent(SessionPage);
+    const router = TestBed.inject(Router);
+    const navigateSpy = vi.spyOn(router, 'navigate').mockResolvedValue(true);
+
+    fixture.detectChanges();
+    await fixture.whenStable();
+    fixture.detectChanges();
+
+    const viewTicketButton = Array.from(
+      (fixture.nativeElement as HTMLElement).querySelectorAll('button'),
+    ).find((button) => button.textContent?.includes('View Ticket')) as HTMLButtonElement | undefined;
+    viewTicketButton?.click();
+    await fixture.whenStable();
+
+    expect(navigateSpy).toHaveBeenCalledWith(['/session', 'tickets', 'tkt-1']);
+  });
+
+  it('should navigate to digital ticket from open button', async () => {
+    const fixture = TestBed.createComponent(SessionPage);
+    const router = TestBed.inject(Router);
+    const navigateSpy = vi.spyOn(router, 'navigate').mockResolvedValue(true);
+
+    fixture.detectChanges();
+    await fixture.whenStable();
+    fixture.detectChanges();
+
+    const openButton = Array.from(
+      (fixture.nativeElement as HTMLElement).querySelectorAll('button'),
+    ).find((button) => button.textContent?.includes('Open')) as HTMLButtonElement | undefined;
+    openButton?.click();
+    await fixture.whenStable();
+
+    expect(navigateSpy).toHaveBeenCalledWith(['/session', 'tickets', 'tkt-1']);
+  });
+
   it('should handle placeholder actions without errors', async () => {
     const fixture = TestBed.createComponent(SessionPage);
     fixture.detectChanges();
@@ -95,21 +149,7 @@ describe('SessionPage (profile)', () => {
       onNavigate(tabId: string): void;
     };
 
-    expect(() => page.onPlaceholder('View ticket')).not.toThrow();
     expect(() => page.onNavigate('events')).not.toThrow();
-  });
-
-  it('should handle view ticket placeholder from upcoming events', async () => {
-    const fixture = TestBed.createComponent(SessionPage);
-    fixture.detectChanges();
-    await fixture.whenStable();
-    fixture.detectChanges();
-
-    const viewTicketButton = Array.from(
-      (fixture.nativeElement as HTMLElement).querySelectorAll('button'),
-    ).find((button) => button.textContent?.includes('View Ticket')) as HTMLButtonElement | undefined;
-
-    expect(() => viewTicketButton?.click()).not.toThrow();
   });
 
   it('should logout and redirect to auth', async () => {

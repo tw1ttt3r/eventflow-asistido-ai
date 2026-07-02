@@ -62,6 +62,12 @@ export const routes: Routes = [
       import('@features/profile/profile-change-password-page').then((m) => m.ProfileChangePasswordPage),
   },
   {
+    path: 'session/tickets/:ticketId',
+    canActivate: [authGuard],
+    loadComponent: () =>
+      import('@features/tickets/digital-ticket-page').then((m) => m.DigitalTicketPage),
+  },
+  {
     path: '**',
     loadComponent: () =>
       import('@features/fallback/fallback-redirect-page').then((m) => m.FallbackRedirectPage),

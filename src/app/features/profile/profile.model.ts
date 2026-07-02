@@ -17,6 +17,7 @@ export interface ProfileUpcomingEvent {
   dateLabel: string;
   timeLabel: string;
   imageHue: number;
+  ticketId?: string;
 }
 
 export interface ProfileAttendedEvent {
