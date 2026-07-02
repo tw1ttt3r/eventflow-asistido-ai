@@ -21,6 +21,7 @@ export const MOCK_USER_PROFILE_DASHBOARD: UserProfileDashboard = {
       dateLabel: 'Sat, Jul 10',
       timeLabel: '10:00 AM',
       imageHue: 210,
+      ticketId: 'tkt-1',
     },
   ],
   attended: [
@@ -42,9 +43,9 @@ export const MOCK_USER_PROFILE_DASHBOARD: UserProfileDashboard = {
   tickets: [
     {
       id: 'tkt-1',
-      label: 'Conference Pass',
+      label: 'General',
       quantityLabel: '1x',
-      validUntilLabel: 'Jul 10, 2026',
+      validUntilLabel: 'Apr 23, 2026',
     },
     {
       id: 'tkt-2',
