@@ -1,6 +1,6 @@
 {
   "name": "eventflow-asistido-ai",
-  "version": "0.14.6",
+  "version": "0.14.7",
   "scripts": {
     "ng": "ng",
     "start": "node scripts/with-env.mjs serve",
@@ -32,6 +32,8 @@
     "@fontsource/dm-sans": "^5.2.8",
     "@fontsource/playfair-display": "^5.2.8",
     "appwrite": "^26.0.0",
+    "jspdf": "^4.2.1",
+    "qrcode": "^1.5.4",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0"
   },
