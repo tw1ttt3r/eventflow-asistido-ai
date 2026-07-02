@@ -1,6 +1,6 @@
 {
   "major": 0,
-  "minor": 13,
+  "minor": 14,
   "patch": 6,
   "knownBranches": [
     "tailwind",
@@ -16,72 +16,10 @@
     "feat/event-detail",
     "feat/attendee-list",
     "refactor-svg-images",
-    "feat/user-profile"
+    "feat/user-profile",
+    "feat/edit-event"
   ],
   "history": [
-    {
-      "at": "2026-06-20T15:15:09.769Z",
-      "from": "0.2.12",
-      "to": "0.2.13",
-      "branch": "feat/check-status-infra",
-      "reason": "patch",
-      "detail": "commit en rama (feat/check-status-infra)",
-      "sha": "97a522c"
-    },
-    {
-      "at": "2026-06-20T15:15:25.467Z",
-      "from": "0.2.13",
-      "to": "0.2.14",
-      "branch": "feat/check-status-infra",
-      "reason": "patch",
-      "detail": "commit en rama (feat/check-status-infra)",
-      "sha": "816496e"
-    },
-    {
-      "at": "2026-06-20T15:15:44.989Z",
-      "from": "0.2.14",
-      "to": "0.2.15",
-      "branch": "feat/check-status-infra",
-      "reason": "patch",
-      "detail": "commit en rama (feat/check-status-infra)",
-      "sha": "d8d0463"
-    },
-    {
-      "at": "2026-06-20T15:16:01.140Z",
-      "from": "0.2.15",
-      "to": "0.2.16",
-      "branch": "feat/check-status-infra",
-      "reason": "patch",
-      "detail": "commit en rama (feat/check-status-infra)",
-      "sha": "9debb23"
-    },
-    {
-      "at": "2026-06-20T16:00:56.831Z",
-      "from": "0.2.16",
-      "to": "0.3.0",
-      "branch": "feat/refactor-appwrite",
-      "reason": "minor",
-      "detail": "nueva rama (feat/refactor-appwrite)",
-      "sha": "2927d7c"
-    },
-    {
-      "at": "2026-06-20T16:01:05.748Z",
-      "from": "0.3.0",
-      "to": "0.3.1",
-      "branch": "feat/refactor-appwrite",
-      "reason": "patch",
-      "detail": "commit en rama (feat/refactor-appwrite)",
-      "sha": "57a542d"
-    },
-    {
-      "at": "2026-06-20T16:01:23.277Z",
-      "from": "0.3.1",
-      "to": "0.3.2",
-      "branch": "feat/refactor-appwrite",
-      "reason": "patch",
-      "detail": "commit en rama (feat/refactor-appwrite)",
-      "sha": "3d443fc"
-    },
     {
       "at": "2026-06-28T15:41:02.861Z",
       "from": "0.3.2",
@@ -918,6 +856,69 @@
       "reason": "patch",
       "detail": "commit en rama (feat/user-profile)",
       "sha": "d037da0"
+    },
+    {
+      "at": "2026-07-02T02:45:32.725Z",
+      "from": "0.13.6",
+      "to": "0.14.0",
+      "branch": "feat/edit-event",
+      "reason": "minor",
+      "detail": "nueva rama (feat/edit-event)",
+      "sha": "d51940e"
+    },
+    {
+      "at": "2026-07-02T02:46:04.456Z",
+      "from": "0.14.0",
+      "to": "0.14.1",
+      "branch": "feat/edit-event",
+      "reason": "patch",
+      "detail": "commit en rama (feat/edit-event)",
+      "sha": "5961e85"
+    },
+    {
+      "at": "2026-07-02T02:46:32.529Z",
+      "from": "0.14.1",
+      "to": "0.14.2",
+      "branch": "feat/edit-event",
+      "reason": "patch",
+      "detail": "commit en rama (feat/edit-event)",
+      "sha": "3037f6d"
+    },
+    {
+      "at": "2026-07-02T02:46:51.603Z",
+      "from": "0.14.2",
+      "to": "0.14.3",
+      "branch": "feat/edit-event",
+      "reason": "patch",
+      "detail": "commit en rama (feat/edit-event)",
+      "sha": "292b69e"
+    },
+    {
+      "at": "2026-07-02T02:48:24.030Z",
+      "from": "0.14.3",
+      "to": "0.14.4",
+      "branch": "feat/edit-event",
+      "reason": "patch",
+      "detail": "commit en rama (feat/edit-event)",
+      "sha": "1ea15e9"
+    },
+    {
+      "at": "2026-07-02T02:48:48.025Z",
+      "from": "0.14.4",
+      "to": "0.14.5",
+      "branch": "feat/edit-event",
+      "reason": "patch",
+      "detail": "commit en rama (feat/edit-event)",
+      "sha": "19f1b1f"
+    },
+    {
+      "at": "2026-07-02T02:54:15.838Z",
+      "from": "0.14.5",
+      "to": "0.14.6",
+      "branch": "feat/edit-event",
+      "reason": "patch",
+      "detail": "commit en rama (feat/edit-event)",
+      "sha": "6373f91"
     }
   ]
 }

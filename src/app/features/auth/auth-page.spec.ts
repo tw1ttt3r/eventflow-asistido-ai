@@ -46,9 +46,9 @@ describe('AuthPage', () => {
     const fixture = TestBed.createComponent(AuthPage);
     fixture.detectChanges();
 
-    const loginTab = (fixture.nativeElement as HTMLElement).querySelector(
-      '[role="tab"][aria-selected="false"]',
-    ) as HTMLButtonElement;
+    const loginTab = Array.from(
+      (fixture.nativeElement as HTMLElement).querySelectorAll('[role="radio"]'),
+    ).find((button) => button.textContent?.includes('Login')) as HTMLButtonElement;
     loginTab.click();
     fixture.detectChanges();
     await fixture.whenStable();

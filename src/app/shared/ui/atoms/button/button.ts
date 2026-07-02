@@ -1,6 +1,6 @@
 import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
 
-export type EfButtonVariant = 'purple' | 'blue' | 'outline' | 'soft';
+export type EfButtonVariant = 'purple' | 'blue' | 'outline' | 'soft' | 'destructive';
 
 @Component({
   selector: 'ef-button',
@@ -14,10 +14,12 @@ export type EfButtonVariant = 'purple' | 'blue' | 'outline' | 'soft';
       [class.bg-ef-purple]="variant() === 'purple'"
       [class.text-white]="variant() === 'purple' || variant() === 'blue'"
       [class.bg-ef-blue]="variant() === 'blue'"
-      [class.border]="variant() === 'outline'"
+      [class.border]="variant() === 'outline' || variant() === 'destructive'"
       [class.border-ef-blue/30]="variant() === 'outline'"
-      [class.bg-white]="variant() === 'outline'"
+      [class.bg-white]="variant() === 'outline' || variant() === 'destructive'"
       [class.text-ef-blue]="variant() === 'outline'"
+      [class.border-rose-200]="variant() === 'destructive'"
+      [class.text-rose-600]="variant() === 'destructive'"
       [class.bg-ef-lavender]="variant() === 'soft'"
       [class.text-ef-purple]="variant() === 'soft'"
       [class.px-4]="size() === 'sm'"

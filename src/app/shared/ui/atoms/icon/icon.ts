@@ -289,6 +289,56 @@ const SIZE_CLASSES: Record<IconSize, string> = {
             stroke-linecap="round"
           />
         }
+        @case ('eye') {
+          <path
+            d="M2.5 10s3-5.5 7.5-5.5S17.5 10 17.5 10s-3 5.5-7.5 5.5S2.5 10 2.5 10Z"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linejoin="round"
+          />
+          <circle cx="10" cy="10" r="2" fill="currentColor" />
+        }
+        @case ('camera') {
+          <rect x="3" y="6" width="14" height="10" rx="2" fill="currentColor" opacity="0.15" />
+          <path
+            d="M7 6l1.5-2h3L13 6M3 9h14"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.4"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+          <circle cx="10" cy="11" r="2.5" fill="none" stroke="currentColor" stroke-width="1.4" />
+        }
+        @case ('image') {
+          <rect x="3" y="5" width="14" height="10" rx="2" fill="currentColor" opacity="0.15" />
+          <circle cx="7.5" cy="9" r="1.2" fill="currentColor" />
+          <path
+            d="M3 13l3.5-3.5 2.5 2.5L13 8l4 4"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.4"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        }
+        @case ('trash') {
+          <path
+            d="M5 6h10M8 6V4.5h4V6M7 6v8.5h6V6"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.4"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+          <path d="M8.5 9v4M11.5 9v4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" />
+        }
+        @case ('more-vertical') {
+          <circle cx="10" cy="5" r="1.2" fill="currentColor" />
+          <circle cx="10" cy="10" r="1.2" fill="currentColor" />
+          <circle cx="10" cy="15" r="1.2" fill="currentColor" />
+        }
       }
     </svg>
   `,

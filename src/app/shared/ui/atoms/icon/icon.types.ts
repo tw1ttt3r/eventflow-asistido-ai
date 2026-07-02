@@ -24,7 +24,12 @@ export type IconName =
   | 'chevron-right'
   | 'edit'
   | 'qr-code'
-  | 'presentation';
+  | 'presentation'
+  | 'eye'
+  | 'camera'
+  | 'image'
+  | 'trash'
+  | 'more-vertical';
 
 export interface IconDefinition {
   viewBox: string;
