@@ -6,6 +6,7 @@ import { of } from 'rxjs';
 
 import { AppwriteAuthService } from '@core/appwrite/appwrite-auth.service';
 import { EventEditPage } from '@features/events/event-edit-page';
+import { EventEditStateService } from '@features/events/event-edit-state.service';
 import { MOCK_SESSION_USER_ID } from '@mock/events.mock';
 
 function provideActivatedRoute(eventId: string) {
@@ -41,10 +42,10 @@ describe('EventEditPage', () => {
         provideRouter([
           { path: 'events', component: class {} },
           { path: 'events/:id', component: class {} },
-          { path: 'events/:id/attendees', component: class {} },
         ]),
         provideActivatedRoute(eventId),
         { provide: AppwriteAuthService, useValue: authMock },
+        EventEditStateService,
       ],
     }).compileComponents();
 
@@ -55,14 +56,17 @@ describe('EventEditPage', () => {
     return fixture;
   }
 
-  it('should render coming soon state for an owned event', async () => {
+  it('should render edit form for an owned event', async () => {
     const fixture = await createPage('1');
     const compiled = fixture.nativeElement as HTMLElement;
 
-    expect(compiled.textContent).toContain('Edit event');
-    expect(compiled.textContent).toContain('Editing coming soon');
-    expect(compiled.textContent).toContain('Intro to Hand Lettering');
-    expect(compiled.querySelector('#event-edit-title')).toBeNull();
+    expect(compiled.textContent).toContain('Edit Event');
+    expect(compiled.textContent).toContain('Event details');
+    expect(compiled.textContent).toContain('Save changes');
+    expect((compiled.querySelector('#event-edit-title') as HTMLInputElement).value).toContain(
+      'Design Systems Workshop',
+    );
+    expect(compiled.querySelector('#event-edit-title')).toBeTruthy();
   });
 
   it('should deny access for events not owned by the user', async () => {
@@ -77,7 +81,7 @@ describe('EventEditPage', () => {
     const navigateSpy = vi.spyOn(router, 'navigate').mockResolvedValue(true);
 
     const backButton = (fixture.nativeElement as HTMLElement).querySelector(
-      'button[aria-label="Volver a eventos"]',
+      'button[aria-label="Back to events"]',
     ) as HTMLButtonElement;
     backButton.click();
     await fixture.whenStable();
@@ -85,24 +89,65 @@ describe('EventEditPage', () => {
     expect(navigateSpy).toHaveBeenCalledWith(['/events']);
   });
 
-  it('should navigate to attendees and public page shortcuts', async () => {
+  it('should save changes locally', async () => {
+    const fixture = await createPage('1');
+    const editState = TestBed.inject(EventEditStateService);
+    const compiled = fixture.nativeElement as HTMLElement;
+
+    const titleInput = compiled.querySelector('#event-edit-title') as HTMLInputElement;
+    titleInput.value = 'Updated Workshop Title';
+    titleInput.dispatchEvent(new Event('input'));
+    fixture.detectChanges();
+
+    const saveButton = Array.from(compiled.querySelectorAll('button')).find((button) =>
+      button.textContent?.includes('Save changes'),
+    ) as HTMLButtonElement;
+    saveButton.click();
+    await fixture.whenStable();
+    fixture.detectChanges();
+
+    expect(editState.getEditData('1')?.title).toBe('Updated Workshop Title');
+    expect(compiled.textContent).toContain('Changes saved locally');
+  });
+
+  it('should navigate to public page from preview header action', async () => {
     const fixture = await createPage('1');
     const router = TestBed.inject(Router);
     const navigateSpy = vi.spyOn(router, 'navigate').mockResolvedValue(true);
-    const compiled = fixture.nativeElement as HTMLElement;
 
-    const attendeesButton = Array.from(compiled.querySelectorAll('button')).find((button) =>
-      button.textContent?.includes('Attendees'),
-    );
-    attendeesButton?.click();
+    const previewButton = (fixture.nativeElement as HTMLElement).querySelector(
+      'button[aria-label="Preview event"]',
+    ) as HTMLButtonElement;
+    previewButton.click();
     await fixture.whenStable();
-    expect(navigateSpy).toHaveBeenCalledWith(['/events', '1', 'attendees']);
 
-    const viewButton = Array.from(compiled.querySelectorAll('button')).find((button) =>
-      button.textContent?.includes('View page'),
-    );
-    viewButton?.click();
-    await fixture.whenStable();
     expect(navigateSpy).toHaveBeenCalledWith(['/events', '1']);
+  });
+
+  it('should cancel back to events from form', async () => {
+    const fixture = await createPage('1');
+    const router = TestBed.inject(Router);
+    const navigateSpy = vi.spyOn(router, 'navigate').mockResolvedValue(true);
+
+    const cancelButton = Array.from(
+      (fixture.nativeElement as HTMLElement).querySelectorAll('button'),
+    ).find((button) => button.textContent?.includes('Cancel')) as HTMLButtonElement;
+    cancelButton.click();
+    await fixture.whenStable();
+
+    expect(navigateSpy).toHaveBeenCalledWith(['/events']);
+  });
+
+  it('should handle placeholder actions without errors', async () => {
+    const fixture = await createPage('1');
+    const page = fixture.componentInstance as EventEditPage & {
+      onDelete(): void;
+      onMoreOptions(): void;
+      onDescriptionPreview(): void;
+    };
+
+    expect(() => page.onDelete()).not.toThrow();
+    expect(() => page.onMoreOptions()).not.toThrow();
+    expect(() => page.onDescriptionPreview()).not.toThrow();
   });
 });
