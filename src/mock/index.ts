@@ -8,3 +8,8 @@ export { MOCK_EVENT_DETAILS, findEventDetail } from '@mock/event-detail.mock';
 export { findEventAttendees, findEventAttendeesContext } from '@mock/attendees.mock';
 export { MOCK_USER_PROFILE_DASHBOARD } from '@mock/profile.mock';
 export { findEventEdit, isEventEditOwned, MOCK_EVENT_EDIT } from '@mock/event-edit.mock';
+export {
+  findDigitalTicket,
+  resolveTicketId,
+  MOCK_DIGITAL_TICKETS,
+} from '@mock/digital-ticket.mock';

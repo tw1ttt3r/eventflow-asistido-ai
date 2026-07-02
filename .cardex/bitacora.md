@@ -2395,4 +2395,161 @@ src/assets/illustrations/  → SVG estáticos grandes (auth, empty states) si el
 
 ---
 
-*Última actualización del archivo: 2026-07-01 10:59:10 CST*
+## Entrada #076 — Vista Digital Ticket (boleto digital)
+
+| Campo | Valor |
+|-------|--------|
+| **Fecha de ejecución** | 2026-07-01 |
+| **Hora de ejecución** | 21:13:55 CST – 21:17:30 CST |
+| **Tiempo total** | ~215 s |
+| **Modelo de agente** | `gpt-5.3-codex` |
+| **Nivel de complejidad** | **Alta** |
+
+### Prompt
+
+> Generar la siguiente vista: boleto digital (mock Digital Ticket EventFlow).
+
+### Entregables
+
+- `digital-ticket.model.ts`, `digital-ticket.mock.ts` (tkt-1/2/3, mapa up-1 → tkt-1)
+- `ef-ticket-layout`: header EventFlow + avatar → sesión
+- `ef-digital-ticket-card`: banner, attendee, when/where, QR, ticket ID
+- `ef-qr-code-display`: patrón SVG determinista por seed
+- `ef-digital-ticket-help-card` + botón Download Ticket (mock)
+- Ruta `/session/tickets/:ticketId`
+- Navegación desde profile: View Ticket y Open
+- Attendee **Jane Doe** (sesión mock)
+- Specs; **156 tests OK**, cobertura functions ≥ 80%
+
+### Ajustes requeridos
+
+- [x] UI alineada al mock (inglés)
+- [x] QR visual + ticket ID truncado
+- [x] Enlace desde dashboard de perfil
+- [x] PDF backup, Wallet stub, contacto host, emisión tras registro
+- [ ] `.pkpass` firmado real y PDF server-side
+
+---
+
+## Entrada #077 — Digital Ticket: pendientes (PDF, Wallet, host, emisión)
+
+| Campo | Valor |
+|-------|--------|
+| **Fecha de ejecución** | 2026-07-01 |
+| **Hora de ejecución** | 21:19:56 CST – 21:22:00 CST |
+| **Tiempo total** | ~124 s |
+| **Modelo de agente** | `gpt-5.3-codex` |
+| **Nivel de complejidad** | **Alta** |
+
+### Prompt
+
+> Genera el pendiente (PDF/Wallet, contacto host, emisión tras registro).
+
+### Entregables
+
+- `DigitalTicketStateService`: emisión `tkt-reg-{eventId}` desde registro
+- `digital-ticket-download.util`: HTML imprimible + stub JSON Wallet
+- Descarga **Download Ticket** y **Add to Wallet (stub)** con feedback
+- Panel de contacto host (email mailto, refunds & policies)
+- `ProfileStateService.addIssuedTicket`: sincroniza tickets y upcoming en perfil
+- Registro: mensaje + botón **View your ticket** → `/session/tickets/tkt-reg-{id}`
+- Specs ampliados; **167 tests OK**, cobertura functions ≥ 80%
+
+### Ajustes requeridos
+
+- [x] PDF backup vía PDF real en cliente (jsPDF + QR)
+- [x] Wallet stub JSON con metadata PassKit
+- [x] Contacto al host expandible
+- [x] Emisión de ticket tras registro
+- [ ] `.pkpass` firmado real y PDF server-side
+- [ ] Email transaccional post-registro
+
+---
+
+## Entrada #078 — Descarga de ticket en PDF real (jsPDF + QR)
+
+| Campo | Valor |
+|-------|--------|
+| **Fecha de ejecución** | 2026-07-01 |
+| **Hora de ejecución** | 23:35:00 CST – 23:41:15 CST |
+| **Tiempo total** | ~375 s |
+| **Modelo de agente** | `gpt-5.3-codex` |
+| **Nivel de complejidad** | **Media** |
+
+### Prompt
+
+> La generación del ticket en HTML no es óptima; generarlo en PDF.
+
+### Entregables
+
+- Dependencias `jspdf` y `qrcode` para PDF con QR escaneable
+- `buildTicketPdfBlob` / `downloadTicketPdf`: archivo `.pdf` real con layout del mock
+- Tipos locales `src/types/qrcode.d.ts`
+- Mensaje UI: *Ticket PDF downloaded*
+- Specs actualizados; **167 tests OK**
+
+### Ajustes requeridos
+
+- [x] PDF nativo en cliente (sin HTML intermedio)
+- [x] QR embebido en el PDF
+- [ ] PDF server-side con branding/fonts embebidas
+
+---
+
+## Entrada #079 — Ticket: CTA View event page
+
+| Campo | Valor |
+|-------|--------|
+| **Fecha de ejecución** | 2026-07-01 |
+| **Hora de ejecución** | 23:49:40 CST – 23:50:05 CST |
+| **Tiempo total** | ~25 s |
+| **Modelo de agente** | `gpt-5.3-codex` |
+| **Nivel de complejidad** | **Baja** |
+
+### Prompt
+
+> En la vista del ticket no hay CTA para regresar a la vista del evento.
+
+### Entregables
+
+- `resolveEventRouteId()` para tickets mock, perfil (`up-*`) y registro (`tkt-reg-*`)
+- Botón **View event page** en `DigitalTicketPage` → `/events/:id`
+- `eventId` en mocks `tkt-2` / `tkt-3`; specs actualizados (**169 tests OK**)
+
+### Ajustes requeridos
+
+- [x] CTA visible cuando el ticket tiene evento asociado
+
+---
+
+*Última actualización del archivo: 2026-07-01 23:50:05 CST*
+
+---
+
+## Entrada #080 — Logo EventFlow navega a home
+
+| Campo | Valor |
+|-------|--------|
+| **Fecha de ejecución** | 2026-07-02 |
+| **Hora de ejecución** | 00:01:16 CST – 00:05:09 CST |
+| **Tiempo total** | ~233 s |
+| **Modelo de agente** | `gpt-5.3-codex` |
+| **Nivel de complejidad** | **Media** |
+
+### Prompt
+
+> necesito que el logo de eventflow navegue a home siempre
+
+### Entregables
+
+- Logo/brand ahora enlaza a `/events` en `app-header`, `admin-header`, `registration-header`, `event-detail-header` y `ticket-layout`
+- CTA de cuenta en `admin-header` mantiene navegación a `/session` por `routerLink`
+- Specs ampliados en auth, session, registration, event detail y ticket; **174 tests OK**
+
+### Ajustes requeridos
+
+- [x] Logo EventFlow navega siempre a home (`/events`)
+
+---
+
+*Última actualización del archivo: 2026-07-02 00:05:09 CST*

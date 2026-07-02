@@ -42,6 +42,23 @@ describe('AuthPage', () => {
     expect(compiled.textContent).toContain('Sign Up');
   });
 
+  it('should navigate home when logo is pressed', async () => {
+    const fixture = TestBed.createComponent(AuthPage);
+    const router = TestBed.inject(Router);
+    const navigateSpy = vi.spyOn(router, 'navigateByUrl').mockResolvedValue(true);
+
+    fixture.detectChanges();
+    await fixture.whenStable();
+
+    const logoLink = (fixture.nativeElement as HTMLElement).querySelector(
+      'a[aria-label="Go to home"]',
+    ) as HTMLAnchorElement;
+    logoLink.click();
+    await fixture.whenStable();
+
+    expect(navigateSpy).toHaveBeenCalledOnce();
+  });
+
   it('should switch to login tab', async () => {
     const fixture = TestBed.createComponent(AuthPage);
     fixture.detectChanges();
