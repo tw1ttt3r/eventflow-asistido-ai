@@ -10,9 +10,9 @@ import { SegmentedControl, type SegmentedOption } from '@shared/ui/molecules/seg
     <section class="w-full max-w-xl rounded-3xl bg-white p-6 shadow-xl shadow-slate-200/60 sm:p-8">
       <ef-segmented-control
         [options]="tabs()"
-        [activeId]="activeTab()"
+        [value]="activeTab()"
+        (valueChange)="activeTabChange.emit($event)"
         ariaLabel="Authentication mode"
-        (activeChange)="activeTabChange.emit($event)"
       />
 
       <div class="mt-8">
@@ -28,9 +28,9 @@ import { SegmentedControl, type SegmentedOption } from '@shared/ui/molecules/seg
   `,
 })
 export class AuthCard {
-  readonly tabs = input<SegmentedOption[]>([
-    { id: 'sign-up', label: 'Sign Up' },
-    { id: 'login', label: 'Login' },
+  readonly tabs = input<SegmentedOption<string>[]>([
+    { value: 'sign-up', label: 'Sign Up' },
+    { value: 'login', label: 'Login' },
   ]);
   readonly activeTab = input.required<string>();
 
