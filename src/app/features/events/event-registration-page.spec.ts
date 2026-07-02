@@ -5,6 +5,8 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { of } from 'rxjs';
 
 import { EventRegistrationPage } from '@features/events/event-registration-page';
+import { DigitalTicketStateService } from '@features/tickets/digital-ticket-state.service';
+import { ProfileStateService } from '@features/profile/profile-state.service';
 
 function provideActivatedRoute(eventId: string) {
   const paramMap = convertToParamMap({ id: eventId });
@@ -27,8 +29,13 @@ describe('EventRegistrationPage', () => {
     await TestBed.configureTestingModule({
       imports: [EventRegistrationPage],
       providers: [
-        provideRouter([{ path: 'events', component: class {} }]),
+        provideRouter([
+          { path: 'events', component: class {} },
+          { path: 'session/tickets/:ticketId', component: class {} },
+        ]),
         provideActivatedRoute(eventId),
+        DigitalTicketStateService,
+        ProfileStateService,
       ],
     }).compileComponents();
 
@@ -47,6 +54,20 @@ describe('EventRegistrationPage', () => {
     expect(compiled.textContent).toContain('Register for this event');
     expect(compiled.textContent).toContain('5 spots left');
     expect(compiled.textContent).toContain('Yoga mat, water bottle');
+  });
+
+  it('should navigate home when logo is pressed', async () => {
+    const fixture = await createPage('5');
+    const router = TestBed.inject(Router);
+    const navigateSpy = vi.spyOn(router, 'navigateByUrl').mockResolvedValue(true);
+
+    const logoLink = (fixture.nativeElement as HTMLElement).querySelector(
+      'a[aria-label="Go to home"]',
+    ) as HTMLAnchorElement;
+    logoLink.click();
+    await fixture.whenStable();
+
+    expect(navigateSpy).toHaveBeenCalledOnce();
   });
 
   it('should show not found for unknown events', async () => {
@@ -84,7 +105,7 @@ describe('EventRegistrationPage', () => {
     expect(navigateSpy).toHaveBeenCalledWith(['/events']);
   });
 
-  it('should register successfully and show confirmation', async () => {
+  it('should register successfully, issue ticket and show confirmation', async () => {
     const fixture = await createPage('5');
     const cmp = fixture.componentInstance as EventRegistrationPage & {
       onSubmit(value: {
@@ -103,7 +124,40 @@ describe('EventRegistrationPage', () => {
     });
     fixture.detectChanges();
 
-    expect((fixture.nativeElement as HTMLElement).textContent).toContain("You're registered, Alexandra!");
+    const compiled = fixture.nativeElement as HTMLElement;
+    expect(compiled.textContent).toContain("You're registered, Alexandra!");
+    expect(compiled.textContent).toContain('Your digital ticket is ready');
+    expect(compiled.textContent).toContain('View your ticket');
+  });
+
+  it('should navigate to issued ticket after registration', async () => {
+    const fixture = await createPage('5');
+    const router = TestBed.inject(Router);
+    const navigateSpy = vi.spyOn(router, 'navigate').mockResolvedValue(true);
+    const cmp = fixture.componentInstance as EventRegistrationPage & {
+      onSubmit(value: {
+        fullName: string;
+        email: string;
+        phone: string;
+        termsAccepted: boolean;
+      }): Promise<void>;
+    };
+
+    await cmp.onSubmit({
+      fullName: 'Alexandra Rivera',
+      email: 'alex@example.com',
+      phone: '',
+      termsAccepted: true,
+    });
+    fixture.detectChanges();
+
+    const viewTicketButton = Array.from(
+      (fixture.nativeElement as HTMLElement).querySelectorAll('button'),
+    ).find((button) => button.textContent?.includes('View your ticket')) as HTMLButtonElement;
+    viewTicketButton.click();
+    await fixture.whenStable();
+
+    expect(navigateSpy).toHaveBeenCalledWith(['/session', 'tickets', 'tkt-reg-5']);
   });
 
   it('should navigate back from unavailable card actions', async () => {

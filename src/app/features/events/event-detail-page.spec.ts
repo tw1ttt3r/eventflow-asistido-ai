@@ -53,6 +53,20 @@ describe('EventDetailPage', () => {
     expect(compiled.textContent).toContain('Register — Reserve Spot');
   });
 
+  it('should navigate home when logo is pressed', async () => {
+    const fixture = await createPage('2');
+    const router = TestBed.inject(Router);
+    const navigateSpy = vi.spyOn(router, 'navigateByUrl').mockResolvedValue(true);
+
+    const logoLink = (fixture.nativeElement as HTMLElement).querySelector(
+      'a[aria-label="Go to home"]',
+    ) as HTMLAnchorElement;
+    logoLink.click();
+    await fixture.whenStable();
+
+    expect(navigateSpy).toHaveBeenCalledOnce();
+  });
+
   it('should show unavailable state for unknown events', async () => {
     const fixture = await createPage('unknown');
 

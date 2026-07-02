@@ -3,10 +3,11 @@ import { toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, Router } from '@angular/router';
 import { map } from 'rxjs';
 
-import type {
-  RegistrationFormValue,
-} from '@features/events/event-registration.model';
+import type { RegistrationFormValue } from '@features/events/event-registration.model';
+import { ProfileStateService } from '@features/profile/profile-state.service';
+import { DigitalTicketStateService } from '@features/tickets/digital-ticket-state.service';
 import { findEventRegistration } from '@mock/event-registration.mock';
+import { EfButton } from '@shared/ui/atoms/button/button';
 import { EventUnavailableCard } from '@shared/ui/organisms/event-unavailable-card/event-unavailable-card';
 import { EventRegistrationForm } from '@shared/ui/organisms/event-registration-form/event-registration-form';
 import { EventSummaryCard } from '@shared/ui/organisms/event-summary-card/event-summary-card';
@@ -22,6 +23,7 @@ import { RegistrationLayout } from '@shared/ui/templates/registration-layout/reg
     EventUnavailableCard,
     EventRegistrationForm,
     InfoNoticeRow,
+    EfButton,
   ],
   template: `
     @if (event(); as currentEvent) {
@@ -46,12 +48,17 @@ import { RegistrationLayout } from '@shared/ui/templates/registration-layout/reg
         />
 
         @if (successMessage(); as message) {
-          <p
-            class="rounded-2xl bg-emerald-50 px-4 py-3 text-center text-sm font-medium text-emerald-700"
-            role="status"
-          >
-            {{ message }}
-          </p>
+          <div class="space-y-3">
+            <p
+              class="rounded-2xl bg-emerald-50 px-4 py-3 text-center text-sm font-medium text-emerald-700"
+              role="status"
+            >
+              {{ message }}
+            </p>
+            @if (issuedTicketId(); as ticketId) {
+              <ef-button variant="purple" (pressed)="viewTicket(ticketId)">View your ticket</ef-button>
+            }
+          </div>
         }
       </ef-registration-layout>
     } @else {
@@ -64,6 +71,8 @@ import { RegistrationLayout } from '@shared/ui/templates/registration-layout/reg
 export class EventRegistrationPage {
   private readonly route = inject(ActivatedRoute);
   private readonly router = inject(Router);
+  private readonly ticketState = inject(DigitalTicketStateService);
+  private readonly profileState = inject(ProfileStateService);
 
   private readonly eventId = toSignal(
     this.route.paramMap.pipe(map((params) => params.get('id') ?? '')),
@@ -76,17 +85,32 @@ export class EventRegistrationPage {
   });
   protected readonly submitting = signal(false);
   protected readonly successMessage = signal<string | null>(null);
+  protected readonly issuedTicketId = signal<string | null>(null);
 
   protected async onSubmit(value: RegistrationFormValue): Promise<void> {
+    const currentEvent = this.event();
+    if (!currentEvent) {
+      return;
+    }
+
     this.submitting.set(true);
     this.successMessage.set(null);
+    this.issuedTicketId.set(null);
 
     try {
       await new Promise((resolve) => setTimeout(resolve, 400));
-      this.successMessage.set(`You're registered, ${value.fullName.trim().split(/\s+/)[0]}! Check your email for the ticket.`);
+      const ticket = this.ticketState.issueFromRegistration(currentEvent, value);
+      this.profileState.addIssuedTicket(ticket);
+      this.issuedTicketId.set(ticket.id);
+      const firstName = value.fullName.trim().split(/\s+/)[0];
+      this.successMessage.set(`You're registered, ${firstName}! Your digital ticket is ready.`);
     } finally {
       this.submitting.set(false);
     }
+  }
+
+  protected viewTicket(ticketId: string): void {
+    void this.router.navigate(['/session', 'tickets', ticketId]);
   }
 
   protected onSaveForLater(): void {
