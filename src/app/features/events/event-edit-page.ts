@@ -5,9 +5,10 @@ import { map } from 'rxjs';
 
 import { AdminNavigationService } from '@features/admin/admin-navigation.service';
 import { AppwriteAuthService } from '@core/appwrite/appwrite-auth.service';
-import { isEventOwnedByUser, type EventItem } from '@features/events/events.model';
-import { MOCK_EVENTS } from '@mock/events.mock';
-import { EventEditComingSoonCard } from '@shared/ui/organisms/event-edit-coming-soon-card/event-edit-coming-soon-card';
+import { EventEditStateService } from '@features/events/event-edit-state.service';
+import type { EventEditFormValue } from '@features/events/event-edit.model';
+import { isEventEditOwned } from '@mock/event-edit.mock';
+import { EventEditForm } from '@shared/ui/organisms/event-edit-form/event-edit-form';
 import { EventEditHeader } from '@shared/ui/organisms/event-edit-header/event-edit-header';
 import { EventUnavailableCard } from '@shared/ui/organisms/event-unavailable-card/event-unavailable-card';
 import { AdminLayout } from '@shared/ui/templates/admin-layout/admin-layout';
@@ -15,22 +16,23 @@ import { AdminLayout } from '@shared/ui/templates/admin-layout/admin-layout';
 @Component({
   selector: 'app-event-edit-page',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [
-    AdminLayout,
-    EventEditHeader,
-    EventEditComingSoonCard,
-    EventUnavailableCard,
-  ],
+  imports: [AdminLayout, EventEditHeader, EventEditForm, EventUnavailableCard],
   template: `
-    @if (canAccess() && event(); as currentEvent) {
+    @if (canAccess() && editData(); as currentEdit) {
       <ef-admin-layout activeNav="events" (navigate)="onNavigate($event)">
-        <ef-event-edit-header [status]="currentEvent.status" (backPress)="backToEvents()" />
-
-        <ef-event-edit-coming-soon-card
-          [event]="currentEvent"
+        <ef-event-edit-header
           (backPress)="backToEvents()"
-          (attendeesPress)="goToAttendees()"
-          (viewPagePress)="viewPublicPage()"
+          (previewPress)="viewPublicPage()"
+          (morePress)="onMoreOptions()"
+        />
+
+        <ef-event-edit-form
+          [editData]="currentEdit"
+          [submitting]="saving()"
+          (submitted)="onSave($event)"
+          (cancelled)="backToEvents()"
+          (deletePress)="onDelete()"
+          (previewPress)="onDescriptionPreview()"
         />
       </ef-admin-layout>
     } @else {
@@ -45,6 +47,7 @@ export class EventEditPage implements OnInit {
   private readonly router = inject(Router);
   private readonly auth = inject(AppwriteAuthService);
   private readonly adminNav = inject(AdminNavigationService);
+  private readonly editState = inject(EventEditStateService);
 
   private readonly eventId = toSignal(
     this.route.paramMap.pipe(map((params) => params.get('id') ?? '')),
@@ -52,15 +55,18 @@ export class EventEditPage implements OnInit {
   );
 
   protected readonly currentUserId = signal<string | null>(null);
+  protected readonly saving = signal(false);
+  private readonly refreshTick = signal(0);
 
-  protected readonly event = computed((): EventItem | undefined => {
+  protected readonly editData = computed(() => {
+    this.refreshTick();
     const id = this.eventId();
-    return MOCK_EVENTS.find((item) => item.id === id);
+    return id ? this.editState.getEditData(id) : undefined;
   });
 
   protected readonly canAccess = computed(() => {
-    const currentEvent = this.event();
-    return Boolean(currentEvent && isEventOwnedByUser(currentEvent, this.currentUserId()));
+    const id = this.eventId();
+    return Boolean(id && isEventEditOwned(id, this.currentUserId()) && this.editData());
   });
 
   ngOnInit(): void {
@@ -80,17 +86,34 @@ export class EventEditPage implements OnInit {
     void this.router.navigate(['/events']);
   }
 
-  protected goToAttendees(): void {
-    const id = this.eventId();
-    if (id) {
-      void this.router.navigate(['/events', id, 'attendees']);
-    }
-  }
-
   protected viewPublicPage(): void {
     const id = this.eventId();
     if (id) {
       void this.router.navigate(['/events', id]);
     }
+  }
+
+  protected onSave(value: EventEditFormValue): void {
+    const id = this.eventId();
+    if (!id) {
+      return;
+    }
+
+    this.saving.set(true);
+    this.editState.updateEdit(id, value);
+    this.refreshTick.update((tick) => tick + 1);
+    this.saving.set(false);
+  }
+
+  protected onDelete(): void {
+    // Placeholder until delete flow and confirmation modal arrive
+  }
+
+  protected onMoreOptions(): void {
+    // Placeholder until overflow menu mock arrives
+  }
+
+  protected onDescriptionPreview(): void {
+    // Placeholder until markdown preview mock arrives
   }
 }

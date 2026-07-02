@@ -9,4 +9,9 @@ export const ACTION_ICONS = {
   edit: { viewBox: '0 0 20 20' },
   'qr-code': { viewBox: '0 0 24 24' },
   presentation: { viewBox: '0 0 20 20' },
+  eye: { viewBox: '0 0 20 20' },
+  camera: { viewBox: '0 0 20 20' },
+  image: { viewBox: '0 0 20 20' },
+  trash: { viewBox: '0 0 20 20' },
+  'more-vertical': { viewBox: '0 0 20 20' },
 } satisfies Record<string, IconDefinition>;

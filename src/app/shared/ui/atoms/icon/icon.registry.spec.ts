@@ -29,6 +29,11 @@ describe('icon.registry', () => {
     'edit',
     'qr-code',
     'presentation',
+    'eye',
+    'camera',
+    'image',
+    'trash',
+    'more-vertical',
   ];
 
   it('should define every icon name', () => {
