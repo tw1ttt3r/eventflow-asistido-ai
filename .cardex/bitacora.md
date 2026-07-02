@@ -2360,4 +2360,39 @@ src/assets/illustrations/  → SVG estáticos grandes (auth, empty states) si el
 
 ---
 
-*Última actualización del archivo: 2026-06-30 17:45:51 CST*
+## Entrada #075 — Vista Edit Event (formulario completo según mockup)
+
+| Campo | Valor |
+|-------|--------|
+| **Fecha de ejecución** | 2026-07-01 |
+| **Hora de ejecución** | 10:54:20 CST – 10:59:10 CST |
+| **Tiempo total** | ~290 s |
+| **Modelo de agente** | `gpt-5.3-codex` |
+| **Nivel de complejidad** | **Alta** |
+
+### Prompt
+
+> Implementar la siguiente vista: Edición de evento (mockup Edit Event).
+
+### Entregables
+
+- `event-edit.model.ts`, `event-edit.mock.ts`, `EventEditStateService`
+- `ef-event-edit-form`: banner, details, schedule (Published/Draft/Closed), location & capacity, registration summary + sparkline, audit, acciones
+- Header actualizado: Edit Event, preview (ojo), menú overflow
+- Iconos nuevos: `eye`, `camera`, `image`, `trash`, `more-vertical`
+- `ef-segmented-control` unificado (auth + edit status)
+- Variante `destructive` en `ef-button`
+- Ruta `/events/:id/edit` con guard de ownership; guardado local
+- Placeholders: delete, overflow menu, markdown preview, map picker
+- Specs; **149 tests OK**, cobertura functions ≥ 80%
+
+### Ajustes requeridos
+
+- [x] UI alineada al mock (inglés)
+- [x] Formulario editable con validación y feedback
+- [ ] Persistencia Appwrite y confirmación de borrado
+- [ ] Date/time pickers reales y preview markdown
+
+---
+
+*Última actualización del archivo: 2026-07-01 10:59:10 CST*
