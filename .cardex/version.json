@@ -1,7 +1,7 @@
 {
   "major": 0,
-  "minor": 14,
-  "patch": 17,
+  "minor": 15,
+  "patch": 4,
   "knownBranches": [
     "tailwind",
     "feat/sonarqube",
@@ -17,54 +17,10 @@
     "feat/attendee-list",
     "refactor-svg-images",
     "feat/user-profile",
-    "feat/edit-event"
+    "feat/edit-event",
+    "feat/refactor-ticket"
   ],
   "history": [
-    {
-      "at": "2026-06-28T15:45:17.287Z",
-      "from": "0.4.10",
-      "to": "0.4.11",
-      "branch": "feat/auth",
-      "reason": "patch",
-      "detail": "commit en rama (feat/auth)",
-      "sha": "4f1496b"
-    },
-    {
-      "at": "2026-06-28T15:45:31.559Z",
-      "from": "0.4.11",
-      "to": "0.4.12",
-      "branch": "feat/auth",
-      "reason": "patch",
-      "detail": "commit en rama (feat/auth)",
-      "sha": "cf84372"
-    },
-    {
-      "at": "2026-06-28T16:15:33.184Z",
-      "from": "0.4.12",
-      "to": "0.5.0",
-      "branch": "fix/refactor-auth",
-      "reason": "minor",
-      "detail": "nueva rama (fix/refactor-auth)",
-      "sha": "ae51d78"
-    },
-    {
-      "at": "2026-06-28T16:15:50.692Z",
-      "from": "0.5.0",
-      "to": "0.5.1",
-      "branch": "fix/refactor-auth",
-      "reason": "patch",
-      "detail": "commit en rama (fix/refactor-auth)",
-      "sha": "0f4b023"
-    },
-    {
-      "at": "2026-06-28T16:16:07.907Z",
-      "from": "0.5.1",
-      "to": "0.5.2",
-      "branch": "fix/refactor-auth",
-      "reason": "patch",
-      "detail": "commit en rama (fix/refactor-auth)",
-      "sha": "7f1a8fc"
-    },
     {
       "at": "2026-06-28T16:17:14.841Z",
       "from": "0.5.2",
@@ -919,6 +875,51 @@
       "reason": "patch",
       "detail": "commit en rama (feat/edit-event)",
       "sha": "9805fe3"
+    },
+    {
+      "at": "2026-07-03T04:58:57.929Z",
+      "from": "0.14.17",
+      "to": "0.15.0",
+      "branch": "feat/refactor-ticket",
+      "reason": "minor",
+      "detail": "nueva rama (feat/refactor-ticket)",
+      "sha": "7551b6e"
+    },
+    {
+      "at": "2026-07-03T05:00:37.428Z",
+      "from": "0.15.0",
+      "to": "0.15.1",
+      "branch": "feat/refactor-ticket",
+      "reason": "patch",
+      "detail": "commit en rama (feat/refactor-ticket)",
+      "sha": "ac642e5"
+    },
+    {
+      "at": "2026-07-03T05:01:08.656Z",
+      "from": "0.15.1",
+      "to": "0.15.2",
+      "branch": "feat/refactor-ticket",
+      "reason": "patch",
+      "detail": "commit en rama (feat/refactor-ticket)",
+      "sha": "a26cee6"
+    },
+    {
+      "at": "2026-07-03T05:05:57.988Z",
+      "from": "0.15.2",
+      "to": "0.15.3",
+      "branch": "feat/refactor-ticket",
+      "reason": "patch",
+      "detail": "commit en rama (feat/refactor-ticket)",
+      "sha": "3734e4a"
+    },
+    {
+      "at": "2026-07-03T05:08:32.275Z",
+      "from": "0.15.3",
+      "to": "0.15.4",
+      "branch": "feat/refactor-ticket",
+      "reason": "patch",
+      "detail": "commit en rama (feat/refactor-ticket)",
+      "sha": "49b5cce"
     }
   ]
 }
