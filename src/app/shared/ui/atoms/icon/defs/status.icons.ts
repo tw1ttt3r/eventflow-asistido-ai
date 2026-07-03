@@ -7,4 +7,5 @@ export const STATUS_ICONS = {
   'info-circle': { viewBox: '0 0 20 20' },
   'user-verified': { viewBox: '0 0 20 20' },
   clock: { viewBox: '0 0 20 20' },
+  'wifi-off': { viewBox: '0 0 24 24' },
 } satisfies Record<string, IconDefinition>;

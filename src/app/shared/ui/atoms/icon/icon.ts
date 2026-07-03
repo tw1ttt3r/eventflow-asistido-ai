@@ -339,6 +339,62 @@ const SIZE_CLASSES: Record<IconSize, string> = {
           <circle cx="10" cy="10" r="1.2" fill="currentColor" />
           <circle cx="10" cy="15" r="1.2" fill="currentColor" />
         }
+        @case ('wifi-off') {
+          <path
+            d="M2.5 8.5 6 12M6 8.5 9.5 12M9.5 8.5 13 12M13 8.5 16.5 12M16.5 8.5 20 12"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.6"
+            stroke-linecap="round"
+          />
+          <path
+            d="M4 16.5 20 2.5"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+            stroke-linecap="round"
+          />
+        }
+        @case ('home') {
+          <path
+            d="M4 10.5 12 4l8 6.5V19a1.5 1.5 0 0 1-1.5 1.5H5.5A1.5 1.5 0 0 1 4 19v-8.5Z"
+            fill="currentColor"
+            opacity="0.15"
+          />
+          <path
+            d="M9.5 20.5V14a2.5 2.5 0 0 1 5 0v6.5"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.6"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          />
+        }
+        @case ('settings') {
+          <circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" stroke-width="1.6" />
+          <path
+            d="M12 3v2.2M12 18.8V21M3 12h2.2M18.8 12H21M5.6 5.6l1.6 1.6M16.8 16.8l1.6 1.6M5.6 18.4l1.6-1.6M16.8 7.2l1.6-1.6"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.6"
+            stroke-linecap="round"
+          />
+        }
+        @case ('ticket') {
+          <path
+            d="M5 7.5A2.5 2.5 0 0 1 7.5 5h9A2.5 2.5 0 0 1 19 7.5V10a2 2 0 0 0 0 4v2.5A2.5 2.5 0 0 1 16.5 19h-9A2.5 2.5 0 0 1 5 16.5V14a2 2 0 0 0 0-4V7.5Z"
+            fill="currentColor"
+            opacity="0.15"
+          />
+          <path
+            d="M5 7.5A2.5 2.5 0 0 1 7.5 5h9A2.5 2.5 0 0 1 19 7.5V10a2 2 0 0 0 0 4v2.5A2.5 2.5 0 0 1 16.5 19h-9A2.5 2.5 0 0 1 5 16.5V14a2 2 0 0 0 0-4V7.5Z"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+            stroke-linejoin="round"
+          />
+          <path d="M12 8v8" stroke="currentColor" stroke-width="1.4" stroke-dasharray="2 2" />
+        }
       }
     </svg>
   `,

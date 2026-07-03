@@ -6,4 +6,5 @@ export const EVENT_ICONS = {
   'calendar-x': { viewBox: '0 0 48 48' },
   'edit-document': { viewBox: '0 0 48 48' },
   'calendar-brand': { viewBox: '0 0 24 24' },
+  ticket: { viewBox: '0 0 24 24' },
 } satisfies Record<string, IconDefinition>;
