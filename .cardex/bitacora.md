@@ -2653,3 +2653,107 @@ src/assets/illustrations/  → SVG estáticos grandes (auth, empty states) si el
 ---
 
 *Última actualización del archivo: 2026-07-02 10:56:55 CST*
+
+---
+
+## Entrada #084 — Vista offline / no conexión
+
+| Campo | Valor |
+|-------|--------|
+| **Fecha de ejecución** | 2026-07-02 |
+| **Hora de ejecución** | 23:22:00 CST – 23:23:07 CST |
+| **Tiempo total** | ~180 s |
+| **Modelo de agente** | `gpt-5.3-codex` |
+| **Nivel de complejidad** | **Media** |
+
+### Prompt
+
+> Ahora implementa la vista de no conexión
+
+### Criterios de complejidad
+
+- Feature nueva con página, layout, organismos, mock y ruta `/offline`
+- Iconos nuevos: `wifi-off`, `home`, `settings`, `ticket`
+- Servicio de conectividad con retry y navegación a contenido guardado
+
+### Entregables
+
+- Ruta `/offline` (authGuard) con `OfflinePage`
+- UI: `ef-offline-layout`, header con badge Offline, tarjeta de estado, lista «Saved for offline», bottom bar
+- Mock `offline.mock.ts`; `OfflineConnectivityService`
+- Tests: `offline-page.spec.ts`, `offline-connectivity.service.spec.ts`
+- **178 tests OK**
+
+### Ajustes requeridos
+
+- [x] Vista offline según mockup
+- [x] Retry connection, saved tickets y navegación inferior
+- [ ] Redirección automática a `/offline` cuando `navigator.onLine === false` (pendiente si se desea)
+
+---
+
+*Última actualización del archivo: 2026-07-02 23:23:07 CST*
+
+---
+
+## Entrada #085 — Redirección automática a vista offline
+
+| Campo | Valor |
+|-------|--------|
+| **Fecha de ejecución** | 2026-07-02 |
+| **Hora de ejecución** | 23:34:00 CST |
+| **Tiempo total** | ~45 s |
+| **Modelo de agente** | `gpt-5.3-codex` |
+| **Nivel de complejidad** | **Baja** |
+
+### Prompt
+
+> al apagar el wifi del equipo no esta navegando o detectado el corte de conexión, mejora el funcionamiento para que la momento de no detectar conexión activa navegue a la vista de offline
+
+### Entregables
+
+- `OfflineConnectivityService`: listeners `online`/`offline`, evaluación al arranque, guarda `lastOnlineUrl` y redirige a `/offline` en rutas monitoreadas
+- `App`: inyecta el servicio para activar listeners globales
+- Retry en `OfflinePage` restaura la ruta previa con `returnUrl()`
+- Tests ampliados en `offline-connectivity.service.spec.ts`; **181 tests OK**
+
+### Ajustes requeridos
+
+- [x] Detección de corte de conexión y navegación a `/offline`
+- [x] Excluye `/auth` y `/offline` de redirección automática
+
+---
+
+*Última actualización del archivo: 2026-07-02 23:34:07 CST*
+
+---
+
+## Entrada #086 — Offline robusto: sin navegación ni contenido guardado
+
+| Campo | Valor |
+|-------|--------|
+| **Fecha de ejecución** | 2026-07-02 |
+| **Hora de ejecución** | 23:53:00 CST |
+| **Tiempo total** | ~60 s |
+| **Modelo de agente** | `gpt-5.3-codex` |
+| **Nivel de complejidad** | **Media** |
+
+### Prompt
+
+> robustece la funcionalidad del offline, si no hay conexión no debería permitir navegar a ninguna ruta … view saved tickets y open network settings se van … saved for offline nunca existirá
+
+### Entregables
+
+- `connectivityGuard` en todas las rutas excepto `/offline`; redirección incluye `/auth`
+- Vista offline simplificada: solo «Retry connection»; sin logo clicable ni bottom nav interactivo
+- Eliminados `offline-saved-list`, `offline-saved-item-row` y mock de ítems guardados
+- `connectivity.guard.spec.ts`; **182 tests OK**
+
+### Ajustes requeridos
+
+- [x] Bloqueo de rutas sin conexión
+- [x] UI offline sin navegación secundaria ni sección guardada
+
+---
+
+*Última actualización del archivo: 2026-07-02 23:53:14 CST*
