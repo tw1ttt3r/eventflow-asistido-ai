@@ -2553,3 +2553,103 @@ src/assets/illustrations/  → SVG estáticos grandes (auth, empty states) si el
 ---
 
 *Última actualización del archivo: 2026-07-02 00:05:09 CST*
+
+---
+
+## Entrada #081 — Warnings CommonJS en build Vercel
+
+| Campo | Valor |
+|-------|--------|
+| **Fecha de ejecución** | 2026-07-02 |
+| **Hora de ejecución** | 00:59:39 CST |
+| **Tiempo total** | ~120 s |
+| **Modelo de agente** | `gpt-5.3-codex` |
+| **Nivel de complejidad** | **Baja** |
+
+### Prompt
+
+> el despliegue de vercel arrojo los siguientes warnings … Module 'qrcode' … Module 'dijkstrajs' …
+
+### Criterios de complejidad
+
+- 1 archivo (`angular.json`); sin cambio de lógica ni dependencias
+- Objetivo: silenciar bailouts CommonJS documentados en build de producción
+
+### Entregables
+
+- `allowedCommonJsDependencies` ampliado con `qrcode`, `dijkstrajs` y transitivas de `jspdf` (`html2canvas`, `raf`, `rgbcolor`, submódulos `core-js`)
+- `pnpm build` local sin warnings CommonJS
+
+### Ajustes requeridos
+
+- [x] Warnings `qrcode` / `dijkstrajs` resueltos en build
+- [x] Warnings transitivos de `jspdf` cubiertos en el mismo ajuste
+
+---
+
+*Última actualización del archivo: 2026-07-02 00:59:39 CST*
+
+---
+
+## Entrada #082 — Issues Sonar digital ticket y QR display
+
+| Campo | Valor |
+|-------|--------|
+| **Fecha de ejecución** | 2026-07-02 |
+| **Hora de ejecución** | 01:11:17 CST – 01:11:30 CST |
+| **Tiempo total** | ~30 s |
+| **Modelo de agente** | `gpt-5.3-codex` |
+| **Nivel de complejidad** | **Baja** |
+
+### Prompt
+
+> tenemos los siguientes issues de sonar … digital-ticket-state.service.ts, digital-ticket.model.ts, qr-code-display.ts
+
+### Entregables
+
+- `digital-ticket-state.service.ts`: imports de `event-registration.model` fusionados (S3863)
+- `digital-ticket.model.ts`: `RegExp.exec()`, `codePointAt()`, `resolveEventRouteId` refactorizado en helpers (S6594, S7758, S3776)
+- `qr-code-display.ts`: lógica de finder patterns y hash extraída a funciones puras; `codePointAt()` (S3776, S7758)
+- **174 tests OK**
+
+### Ajustes requeridos
+
+- [x] Imports duplicados fusionados
+- [x] `match` → `RegExp.exec`
+- [x] `charCodeAt` → `codePointAt`
+- [x] Complejidad cognitiva reducida en model y QR display
+
+---
+
+*Última actualización del archivo: 2026-07-02 01:11:30 CST*
+
+---
+
+## Entrada #083 — Hotspots Sonar ReDoS (S5852)
+
+| Campo | Valor |
+|-------|--------|
+| **Fecha de ejecución** | 2026-07-02 |
+| **Hora de ejecución** | 10:56:41 CST – 10:56:55 CST |
+| **Tiempo total** | ~35 s |
+| **Modelo de agente** | `gpt-5.3-codex` |
+| **Nivel de complejidad** | **Baja** |
+
+### Prompt
+
+> ahora revisa los hotspots … event-registration.model.ts, digital-ticket.model.ts … S5852
+
+### Entregables
+
+- `event-registration.model.ts`: `isValidEmail` e `isValidPhone` sin regex; validación lineal con límites de longitud
+- `digital-ticket.model.ts`: `parseRegistrationHost` y `slugifyHostName` con `indexOf`/`slice` en lugar de patrones con backtracking
+- **174 tests OK**
+
+### Ajustes requeridos
+
+- [x] Hotspot email/phone sin regex vulnerable
+- [x] Hotspot host parsing sin regex vulnerable
+
+---
+
+*Última actualización del archivo: 2026-07-02 10:56:55 CST*
