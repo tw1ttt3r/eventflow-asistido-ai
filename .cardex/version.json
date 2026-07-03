@@ -1,7 +1,7 @@
 {
   "major": 0,
   "minor": 15,
-  "patch": 1,
+  "patch": 2,
   "knownBranches": [
     "tailwind",
     "feat/sonarqube",
@@ -21,15 +21,6 @@
     "feat/refactor-ticket"
   ],
   "history": [
-    {
-      "at": "2026-06-28T16:15:33.184Z",
-      "from": "0.4.12",
-      "to": "0.5.0",
-      "branch": "fix/refactor-auth",
-      "reason": "minor",
-      "detail": "nueva rama (fix/refactor-auth)",
-      "sha": "ae51d78"
-    },
     {
       "at": "2026-06-28T16:15:50.692Z",
       "from": "0.5.0",
@@ -920,6 +911,15 @@
       "reason": "patch",
       "detail": "commit en rama (feat/refactor-ticket)",
       "sha": "ac642e5"
+    },
+    {
+      "at": "2026-07-03T05:01:08.656Z",
+      "from": "0.15.1",
+      "to": "0.15.2",
+      "branch": "feat/refactor-ticket",
+      "reason": "patch",
+      "detail": "commit en rama (feat/refactor-ticket)",
+      "sha": "a26cee6"
     }
   ]
 }
