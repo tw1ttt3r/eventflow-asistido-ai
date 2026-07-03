@@ -2,6 +2,57 @@ import { ChangeDetectionStrategy, Component, computed, input } from '@angular/co
 
 const GRID_SIZE = 21;
 
+function isTopLeftFinderBorder(x: number, y: number): boolean {
+  return x < 7 && y < 7 && (x === 0 || y === 0 || x === 6 || y === 6);
+}
+
+function isTopRightFinderBorder(x: number, y: number, gridSize: number): boolean {
+  return (
+    x >= gridSize - 7 &&
+    y < 7 &&
+    (x === gridSize - 7 || y === 0 || x === gridSize - 1 || y === 6)
+  );
+}
+
+function isBottomLeftFinderBorder(x: number, y: number, gridSize: number): boolean {
+  return (
+    x < 7 &&
+    y >= gridSize - 7 &&
+    (x === 0 || y === gridSize - 7 || x === 6 || y === gridSize - 1)
+  );
+}
+
+function isFinderCore(x: number, y: number, gridSize: number): boolean {
+  return (
+    (x >= 2 && x <= 4 && y >= 2 && y <= 4) ||
+    (x >= gridSize - 5 && x <= gridSize - 3 && y >= 2 && y <= 4) ||
+    (x >= 2 && x <= 4 && y >= gridSize - 5 && y <= gridSize - 3)
+  );
+}
+
+function shouldFillFinderCell(x: number, y: number, gridSize: number): boolean {
+  return (
+    isTopLeftFinderBorder(x, y) ||
+    isTopRightFinderBorder(x, y, gridSize) ||
+    isBottomLeftFinderBorder(x, y, gridSize) ||
+    isFinderCore(x, y, gridSize)
+  );
+}
+
+function hashSeed(seed: string, x: number, y: number): number {
+  let value = x * 374761 + y * 668265;
+
+  for (let index = 0; index < seed.length; index++) {
+    const codePoint = seed.codePointAt(index) ?? 0;
+    value = (value + codePoint * (index + 11)) % 1_000_003;
+    if (codePoint > 0xffff) {
+      index++;
+    }
+  }
+
+  return value;
+}
+
 @Component({
   selector: 'ef-qr-code-display',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -27,47 +78,15 @@ export class QrCodeDisplay {
 
     for (let y = 0; y < GRID_SIZE; y++) {
       for (let x = 0; x < GRID_SIZE; x++) {
-        const inFinder =
-          (x < 7 && y < 7) ||
-          (x >= GRID_SIZE - 7 && y < 7) ||
-          (x < 7 && y >= GRID_SIZE - 7);
-        const onFinderBorder =
-          inFinder &&
-          (x === 0 ||
-            y === 0 ||
-            x === GRID_SIZE - 1 ||
-            y === GRID_SIZE - 1 ||
-            x === 6 ||
-            y === 6 ||
-            (x < 7 && y === 6) ||
-            (y < 7 && x === 6) ||
-            (x >= GRID_SIZE - 7 && y === 6) ||
-            (y < 7 && x === GRID_SIZE - 7) ||
-            (x < 7 && y === GRID_SIZE - 7));
-        const inFinderCore =
-          inFinder &&
-          ((x >= 2 && x <= 4 && y >= 2 && y <= 4) ||
-            (x >= GRID_SIZE - 5 && x <= GRID_SIZE - 3 && y >= 2 && y <= 4) ||
-            (x >= 2 && x <= 4 && y >= GRID_SIZE - 5 && y <= GRID_SIZE - 3));
-
-        if (onFinderBorder || inFinderCore) {
+        if (shouldFillFinderCell(x, y, GRID_SIZE)) {
           cells.push({ x, y });
           continue;
         }
 
-        const hash = this.hash(seed, x, y);
-        cells.push(hash % 3 === 0 ? { x, y } : null);
+        cells.push(hashSeed(seed, x, y) % 3 === 0 ? { x, y } : null);
       }
     }
 
     return cells;
   });
-
-  private hash(seed: string, x: number, y: number): number {
-    let value = x * 374761 + y * 668265;
-    for (let index = 0; index < seed.length; index++) {
-      value = (value + seed.charCodeAt(index) * (index + 11)) % 1000003;
-    }
-    return value;
-  }
 }
