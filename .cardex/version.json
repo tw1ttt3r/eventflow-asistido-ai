@@ -1,7 +1,7 @@
 {
   "major": 0,
   "minor": 16,
-  "patch": 0,
+  "patch": 1,
   "knownBranches": [
     "tailwind",
     "feat/sonarqube",
@@ -22,15 +22,6 @@
     "feat/no-connection"
   ],
   "history": [
-    {
-      "at": "2026-06-28T16:17:55.225Z",
-      "from": "0.5.3",
-      "to": "0.5.4",
-      "branch": "fix/refactor-auth",
-      "reason": "patch",
-      "detail": "commit en rama (fix/refactor-auth)",
-      "sha": "68b7d16"
-    },
     {
       "at": "2026-06-28T19:27:15.157Z",
       "from": "0.5.4",
@@ -921,6 +912,15 @@
       "reason": "minor",
       "detail": "nueva rama (feat/no-connection)",
       "sha": "6523dd2"
+    },
+    {
+      "at": "2026-07-03T06:09:56.361Z",
+      "from": "0.16.0",
+      "to": "0.16.1",
+      "branch": "feat/no-connection",
+      "reason": "patch",
+      "detail": "commit en rama (feat/no-connection)",
+      "sha": "1459018"
     }
   ]
 }
