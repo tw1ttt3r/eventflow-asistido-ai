@@ -1,7 +1,9 @@
 import { Injectable, signal } from '@angular/core';
 
-import type { EventRegistrationDetail } from '@features/events/event-registration.model';
-import type { RegistrationFormValue } from '@features/events/event-registration.model';
+import type {
+  EventRegistrationDetail,
+  RegistrationFormValue,
+} from '@features/events/event-registration.model';
 import {
   generateTicketCode,
   parseRegistrationHost,
