@@ -4,7 +4,8 @@ import {
   buildTicketPdfBlob,
   buildWalletPassStub,
 } from '@features/tickets/digital-ticket-download.util';
-import { MOCK_DIGITAL_TICKETS } from '@mock/digital-ticket.mock';
+import { MOCK_DIGITAL_TICKETS, resolveTicketId } from '@mock/digital-ticket.mock';
+
 
 describe('digital-ticket-download.util', () => {
   const ticket = MOCK_DIGITAL_TICKETS['tkt-1']!;
@@ -25,4 +26,11 @@ describe('digital-ticket-download.util', () => {
     expect(stub['disclaimer']).toContain('Development stub');
     expect((stub['eventTicket'] as { primaryFields: unknown[] }).primaryFields).toHaveLength(1);
   });
+
+  it('should resolve ticket ids from upcoming registration ids', () => {
+    expect(resolveTicketId('up-reg-5')).toBe('tkt-reg-5');
+    expect(resolveTicketId('up-1')).toBe('tkt-1');
+    expect(resolveTicketId('tkt-2')).toBe('tkt-2');
+  });
 });
+
