@@ -73,6 +73,14 @@ export const routes: Routes = [
     loadComponent: () => import('@features/offline/offline-page').then((m) => m.OfflinePage),
   },
   {
+    path: 'content-unavailable',
+    canActivate: [connectivityGuard, authGuard],
+    loadComponent: () =>
+      import('@features/content-unavailable/content-unavailable-page').then(
+        (m) => m.ContentUnavailablePage,
+      ),
+  },
+  {
     path: '**',
     canActivate: [connectivityGuard],
     loadComponent: () =>
