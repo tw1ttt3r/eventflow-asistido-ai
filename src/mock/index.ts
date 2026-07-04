@@ -13,3 +13,4 @@ export {
   resolveTicketId,
   MOCK_DIGITAL_TICKETS,
 } from '@mock/digital-ticket.mock';
+export { MOCK_OFFLINE_STATUS } from '@mock/offline.mock';
