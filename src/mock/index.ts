@@ -14,3 +14,4 @@ export {
   MOCK_DIGITAL_TICKETS,
 } from '@mock/digital-ticket.mock';
 export { MOCK_OFFLINE_STATUS } from '@mock/offline.mock';
+export { MOCK_CONTENT_UNAVAILABLE } from '@mock/content-unavailable.mock';
