@@ -17,19 +17,29 @@ describe('event-edit.model', () => {
   });
 
   it('should validate required fields', () => {
-    expect(
-      validateEventEditForm({
-        title: '',
-        description: 'Desc',
-        bannerUrl: null,
-        dateLabel: 'Tue',
-        timeRangeLabel: '6 PM',
-        status: 'published',
-        location: 'Studio',
-        capacity: 10,
-      }),
-    ).toBe('Title is required');
+    const valid = {
+      title: 'Title',
+      description: 'Desc',
+      bannerUrl: null,
+      dateLabel: 'Tue',
+      timeRangeLabel: '6 PM',
+      status: 'published' as const,
+      location: 'Studio',
+      capacity: 10,
+    };
+
+    expect(validateEventEditForm({ ...valid, title: '' })).toBe('Title is required');
+    expect(validateEventEditForm({ ...valid, description: '' })).toBe('Description is required');
+    expect(validateEventEditForm({ ...valid, description: 'x'.repeat(1501) })).toBe(
+      'Description must be 1500 characters or fewer',
+    );
+    expect(validateEventEditForm({ ...valid, dateLabel: '' })).toBe('Date is required');
+    expect(validateEventEditForm({ ...valid, timeRangeLabel: '' })).toBe('Time is required');
+    expect(validateEventEditForm({ ...valid, location: '' })).toBe('Location is required');
+    expect(validateEventEditForm({ ...valid, capacity: 0 })).toBe('Capacity must be at least 1');
+    expect(validateEventEditForm(valid)).toBeNull();
   });
+
 
   it('should apply form and recalculate spots left', () => {
     const form = eventEditToFormValue(base);
