@@ -1,7 +1,7 @@
 {
   "major": 0,
   "minor": 18,
-  "patch": 4,
+  "patch": 5,
   "knownBranches": [
     "tailwind",
     "feat/sonarqube",
@@ -24,15 +24,6 @@
     "feat/fallouts"
   ],
   "history": [
-    {
-      "at": "2026-06-28T20:39:09.626Z",
-      "from": "0.7.0",
-      "to": "0.7.1",
-      "branch": "refactor-custom-paths",
-      "reason": "patch",
-      "detail": "commit en rama (refactor-custom-paths)",
-      "sha": "6ed7fc5"
-    },
     {
       "at": "2026-06-28T20:45:43.306Z",
       "from": "0.7.1",
@@ -923,6 +914,15 @@
       "reason": "patch",
       "detail": "commit en rama (feat/fallouts)",
       "sha": "d8f52a4"
+    },
+    {
+      "at": "2026-07-04T20:24:36.322Z",
+      "from": "0.18.4",
+      "to": "0.18.5",
+      "branch": "feat/fallouts",
+      "reason": "patch",
+      "detail": "commit en rama (feat/fallouts)",
+      "sha": "0271dae"
     }
   ]
 }
