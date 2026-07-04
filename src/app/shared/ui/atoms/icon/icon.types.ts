@@ -29,7 +29,11 @@ export type IconName =
   | 'camera'
   | 'image'
   | 'trash'
-  | 'more-vertical';
+  | 'more-vertical'
+  | 'wifi-off'
+  | 'home'
+  | 'settings'
+  | 'ticket';
 
 export interface IconDefinition {
   viewBox: string;
