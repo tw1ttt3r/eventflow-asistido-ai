@@ -1,7 +1,7 @@
 {
   "major": 0,
-  "minor": 17,
-  "patch": 3,
+  "minor": 18,
+  "patch": 5,
   "knownBranches": [
     "tailwind",
     "feat/sonarqube",
@@ -20,63 +20,10 @@
     "feat/edit-event",
     "feat/refactor-ticket",
     "feat/no-connection",
-    "feat/refactor-no-connection"
+    "feat/refactor-no-connection",
+    "feat/fallouts"
   ],
   "history": [
-    {
-      "at": "2026-06-28T19:32:57.506Z",
-      "from": "0.6.8",
-      "to": "0.6.9",
-      "branch": "feat/event-list",
-      "reason": "patch",
-      "detail": "commit en rama (feat/event-list)",
-      "sha": "5366a7c"
-    },
-    {
-      "at": "2026-06-28T19:34:02.841Z",
-      "from": "0.6.9",
-      "to": "0.6.10",
-      "branch": "feat/event-list",
-      "reason": "patch",
-      "detail": "commit en rama (feat/event-list)",
-      "sha": "4ac5b78"
-    },
-    {
-      "at": "2026-06-28T19:34:30.412Z",
-      "from": "0.6.10",
-      "to": "0.6.11",
-      "branch": "feat/event-list",
-      "reason": "patch",
-      "detail": "commit en rama (feat/event-list)",
-      "sha": "ba3eccd"
-    },
-    {
-      "at": "2026-06-28T19:34:41.892Z",
-      "from": "0.6.11",
-      "to": "0.6.12",
-      "branch": "feat/event-list",
-      "reason": "patch",
-      "detail": "commit en rama (feat/event-list)",
-      "sha": "16c6e7e"
-    },
-    {
-      "at": "2026-06-28T20:35:25.947Z",
-      "from": "0.6.12",
-      "to": "0.7.0",
-      "branch": "refactor-custom-paths",
-      "reason": "minor",
-      "detail": "nueva rama (refactor-custom-paths)",
-      "sha": "5d1794d"
-    },
-    {
-      "at": "2026-06-28T20:39:09.626Z",
-      "from": "0.7.0",
-      "to": "0.7.1",
-      "branch": "refactor-custom-paths",
-      "reason": "patch",
-      "detail": "commit en rama (refactor-custom-paths)",
-      "sha": "6ed7fc5"
-    },
     {
       "at": "2026-06-28T20:45:43.306Z",
       "from": "0.7.1",
@@ -922,6 +869,60 @@
       "reason": "patch",
       "detail": "commit en rama (feat/refactor-no-connection)",
       "sha": "954ef68"
+    },
+    {
+      "at": "2026-07-04T20:18:58.390Z",
+      "from": "0.17.3",
+      "to": "0.18.0",
+      "branch": "feat/fallouts",
+      "reason": "minor",
+      "detail": "nueva rama (feat/fallouts)",
+      "sha": "bad0878"
+    },
+    {
+      "at": "2026-07-04T20:20:05.549Z",
+      "from": "0.18.0",
+      "to": "0.18.1",
+      "branch": "feat/fallouts",
+      "reason": "patch",
+      "detail": "commit en rama (feat/fallouts)",
+      "sha": "192cd76"
+    },
+    {
+      "at": "2026-07-04T20:20:28.584Z",
+      "from": "0.18.1",
+      "to": "0.18.2",
+      "branch": "feat/fallouts",
+      "reason": "patch",
+      "detail": "commit en rama (feat/fallouts)",
+      "sha": "bb3032b"
+    },
+    {
+      "at": "2026-07-04T20:20:41.703Z",
+      "from": "0.18.2",
+      "to": "0.18.3",
+      "branch": "feat/fallouts",
+      "reason": "patch",
+      "detail": "commit en rama (feat/fallouts)",
+      "sha": "e52ceb5"
+    },
+    {
+      "at": "2026-07-04T20:23:14.163Z",
+      "from": "0.18.3",
+      "to": "0.18.4",
+      "branch": "feat/fallouts",
+      "reason": "patch",
+      "detail": "commit en rama (feat/fallouts)",
+      "sha": "d8f52a4"
+    },
+    {
+      "at": "2026-07-04T20:24:36.322Z",
+      "from": "0.18.4",
+      "to": "0.18.5",
+      "branch": "feat/fallouts",
+      "reason": "patch",
+      "detail": "commit en rama (feat/fallouts)",
+      "sha": "0271dae"
     }
   ]
 }
