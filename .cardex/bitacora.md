@@ -2757,3 +2757,91 @@ src/assets/illustrations/  → SVG estáticos grandes (auth, empty states) si el
 ---
 
 *Última actualización del archivo: 2026-07-02 23:53:14 CST*
+
+---
+
+## Entrada #087 — Sonar S7764 globalThis.window
+
+| Campo | Valor |
+|-------|--------|
+| **Fecha de ejecución** | 2026-07-03 |
+| **Hora de ejecución** | 22:30:34 CST – 22:31:15 CST |
+| **Tiempo total** | ~41 s |
+| **Modelo de agente** | `gpt-5.3-codex` |
+| **Nivel de complejidad** | **Baja** |
+
+### Prompt
+
+> sonar marca 3 issues … Prefer `globalThis.window` over `window` … typescript:S7764
+
+### Entregables
+
+- `offline-connectivity.service.ts`: listeners online/offline vía `globalThis.window` (sin identificador bare `window`)
+- Specs offline/connectivity: **8 tests OK**
+
+### Ajustes requeridos
+
+- [x] Tres usos de `window` reemplazados por `globalThis.window`
+
+---
+
+*Última actualización del archivo: 2026-07-03 22:31:15 CST*
+
+---
+
+## Entrada #088 — Coverage on New Code ≥ 80 %
+
+| Campo | Valor |
+|-------|--------|
+| **Fecha de ejecución** | 2026-07-03 |
+| **Hora de ejecución** | 22:34:59 CST – 22:39:23 CST |
+| **Tiempo total** | ~264 s |
+| **Modelo de agente** | `gpt-5.3-codex` |
+| **Nivel de complejidad** | **Media** |
+
+### Prompt
+
+> ahora, sonar manda esto. Coverage on New Code 73.7%
+
+### Entregables
+
+- Specs ampliados: `offline-connectivity.service`, `offline-page`, `connectivity.util`, `digital-ticket.model`, `event-edit.model`, `profile.model`, `digital-ticket.mock` (`resolveTicketId`)
+- Cobertura local del bloque offline/connectivity/modelos recientes ~**98 %**; overall **97.6 %**
+- **193 tests OK** (`pnpm test:coverage`)
+
+### Ajustes requeridos
+
+- [x] Subir Coverage on New Code por encima del umbral 80 %
+
+---
+
+*Última actualización del archivo: 2026-07-03 22:39:23 CST*
+
+---
+
+## Entrada #089 — Sonar S7741 comparación con undefined
+
+| Campo | Valor |
+|-------|--------|
+| **Fecha de ejecución** | 2026-07-03 |
+| **Hora de ejecución** | 22:47:21 CST – 22:47:40 CST |
+| **Tiempo total** | ~19 s |
+| **Modelo de agente** | `gpt-5.3-codex` |
+| **Nivel de complejidad** | **Baja** |
+
+### Prompt
+
+> sonar lanza nuevo issue … Compare with `undefined` directly instead of using `typeof` … typescript:S7741
+
+### Entregables
+
+- `offline-connectivity.service.ts`: `browserWindow === undefined` en lugar de `typeof … === 'undefined'`
+- Specs: **9 tests OK**
+
+### Ajustes requeridos
+
+- [x] Issue S7741 resuelto
+
+---
+
+*Última actualización del archivo: 2026-07-03 22:47:40 CST*
