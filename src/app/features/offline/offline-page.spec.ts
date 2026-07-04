@@ -60,4 +60,37 @@ describe('OfflinePage', () => {
     expect(connectivity.returnUrl).toHaveBeenCalled();
     expect(navigateSpy).toHaveBeenCalledWith('/events');
   });
+
+  it('should stay on offline page when retry still finds no connection', async () => {
+    const connectivity = {
+      lastCheckedLabel: () => 'Last checked 1m ago',
+      tickLastCheckedLabel: vi.fn(),
+      refreshStatus: vi.fn().mockReturnValue(false),
+      returnUrl: vi.fn().mockReturnValue('/events'),
+    };
+
+    TestBed.configureTestingModule({
+      imports: [OfflinePage],
+      providers: [
+        provideRouter([{ path: 'offline', component: OfflinePage }]),
+        { provide: OfflineConnectivityService, useValue: connectivity },
+      ],
+    });
+
+    const router = TestBed.inject(Router);
+    const navigateSpy = vi.spyOn(router, 'navigateByUrl');
+
+    const fixture = TestBed.createComponent(OfflinePage);
+    fixture.detectChanges();
+
+    const button = (fixture.nativeElement as HTMLElement).querySelector('button');
+    expect(button).toBeTruthy();
+    button?.click();
+    await vi.waitFor(() => expect(connectivity.refreshStatus).toHaveBeenCalled());
+
+    expect(connectivity.tickLastCheckedLabel).toHaveBeenCalled();
+    expect(navigateSpy).not.toHaveBeenCalled();
+    expect((fixture.nativeElement as HTMLElement).textContent).toContain('Retry connection');
+  });
 });
+

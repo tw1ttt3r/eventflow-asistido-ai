@@ -50,14 +50,15 @@ export class OfflineConnectivityService {
   }
 
   private registerListeners(): void {
-    if (typeof window === 'undefined' || this.listenersRegistered) {
+    const browserWindow = globalThis.window;
+    if (browserWindow === undefined || this.listenersRegistered) {
       return;
     }
 
     const { signal: abortSignal } = this.teardown;
 
-    window.addEventListener('offline', () => this.handleOffline(), { signal: abortSignal });
-    window.addEventListener('online', () => this.handleOnline(), { signal: abortSignal });
+    browserWindow.addEventListener('offline', () => this.handleOffline(), { signal: abortSignal });
+    browserWindow.addEventListener('online', () => this.handleOnline(), { signal: abortSignal });
 
     this.listenersRegistered = true;
   }

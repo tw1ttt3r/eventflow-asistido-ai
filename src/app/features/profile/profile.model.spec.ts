@@ -15,19 +15,32 @@ describe('profile.model', () => {
   });
 
   it('should validate profile edit form', () => {
-    expect(
-      validateProfileEditForm({
-        fullName: '',
-        email: 'jane@example.com',
-        phone: '',
-        role: '',
-        location: '',
-        avatarUrl: null,
-      }),
-    ).toBe('Full name is required');
+    const valid = {
+      fullName: 'Jane Doe',
+      email: 'jane@example.com',
+      phone: '',
+      role: '',
+      location: '',
+      avatarUrl: null,
+    };
+
+    expect(validateProfileEditForm({ ...valid, fullName: '' })).toBe('Full name is required');
+    expect(validateProfileEditForm({ ...valid, email: '' })).toBe('Enter a valid email address');
+    expect(validateProfileEditForm({ ...valid, email: 'invalid' })).toBe(
+      'Enter a valid email address',
+    );
+    expect(validateProfileEditForm(valid)).toBeNull();
   });
 
   it('should validate change password form', () => {
+    expect(
+      validateChangePasswordForm({
+        currentPassword: '',
+        newPassword: 'long-enough',
+        confirmPassword: 'long-enough',
+      }),
+    ).toBe('Current password is required');
+
     expect(
       validateChangePasswordForm({
         currentPassword: 'old-pass',
@@ -38,12 +51,29 @@ describe('profile.model', () => {
 
     expect(
       validateChangePasswordForm({
+        currentPassword: 'old-pass',
+        newPassword: 'long-enough',
+        confirmPassword: 'different',
+      }),
+    ).toBe('Passwords do not match');
+
+    expect(
+      validateChangePasswordForm({
         currentPassword: 'same-pass',
         newPassword: 'same-pass',
         confirmPassword: 'same-pass',
       }),
     ).toBe('New password must differ from current password');
+
+    expect(
+      validateChangePasswordForm({
+        currentPassword: 'old-pass',
+        newPassword: 'new-password',
+        confirmPassword: 'new-password',
+      }),
+    ).toBeNull();
   });
+
 
   it('should map and apply profile edit form', () => {
     const profile = MOCK_USER_PROFILE_DASHBOARD.profile;
