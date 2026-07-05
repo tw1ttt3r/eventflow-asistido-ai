@@ -2845,3 +2845,94 @@ src/assets/illustrations/  → SVG estáticos grandes (auth, empty states) si el
 ---
 
 *Última actualización del archivo: 2026-07-03 22:47:40 CST*
+
+---
+
+## Entrada #090 — Vista content unavailable
+
+| Campo | Valor |
+|-------|--------|
+| **Fecha de ejecución** | 2026-07-04 |
+| **Hora de ejecución** | 14:02:49 CST – 14:03:03 CST |
+| **Tiempo total** | ~180 s |
+| **Modelo de agente** | `gpt-5.3-codex` |
+| **Nivel de complejidad** | **Media** |
+
+### Prompt
+
+> ahora genera la vista de contenido no disponible
+
+### Entregables
+
+- Ruta `/content-unavailable` con `ContentUnavailablePage` (auth + connectivity guards)
+- UI: header (logo + Explore), tarjeta con ilustración, Try again / Go back home, cached content, ayuda y footer
+- Mock `content-unavailable.mock.ts`
+- **197 tests OK**
+
+### Ajustes requeridos
+
+- [x] Vista según mockup Content unavailable
+- [x] Try again respeta `?returnUrl=` (default `/events`)
+
+---
+
+*Última actualización del archivo: 2026-07-04 14:03:03 CST*
+
+---
+
+## Entrada #091 — Content unavailable sin cached/ayuda
+
+| Campo | Valor |
+|-------|--------|
+| **Fecha de ejecución** | 2026-07-04 |
+| **Hora de ejecución** | 14:10:00 CST |
+| **Tiempo total** | ~20 s |
+| **Modelo de agente** | `gpt-5.3-codex` |
+| **Nivel de complejidad** | **Baja** |
+
+### Prompt
+
+> de la vista content-unavailable, el CTA cachedcontent no lo veo necesario, ni tampoco la sección de ayuda
+
+### Entregables
+
+- Eliminados **View cached content**, Help Center y Contact support
+- Modelo/mock simplificados; specs actualizados
+
+### Ajustes requeridos
+
+- [x] Vista solo con Try again y Go back home (+ Explore en header)
+
+---
+
+*Última actualización del archivo: 2026-07-04 14:10:00 CST*
+
+---
+
+## Entrada #092 — Content unavailable sin Try again
+
+| Campo | Valor |
+|-------|--------|
+| **Fecha de ejecución** | 2026-07-04 |
+| **Hora de ejecución** | 14:13:00 CST |
+| **Tiempo total** | ~15 s |
+| **Modelo de agente** | `gpt-5.3-codex` |
+| **Nivel de complejidad** | **Baja** |
+
+### Prompt
+
+> ahora, para que me sirve el CTA de retry, no es necesario
+
+### Entregables
+
+- Eliminado **Try again**, `returnUrl`, estado `retrying` y lógica de retry
+- Única acción en tarjeta: **Go back home** (primary); **Explore** en header sigue a `/events`
+- Copy actualizado; specs reducidos a 2 casos
+
+### Ajustes requeridos
+
+- [x] Vista sin CTA de retry
+
+---
+
+*Última actualización del archivo: 2026-07-04 14:13:00 CST*

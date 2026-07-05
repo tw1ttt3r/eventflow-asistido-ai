@@ -8874,3 +8874,336 @@ Not implemented: navigation to another Document
 
 ---
 
+
+## Entrada #084 — Tests Vitest
+
+| Campo | Valor |
+|-------|-------|
+| **Fecha y hora de ejecución** | 2026-07-04 14:03:12 UTC-06:00 |
+| **Inicio** | 2026-07-04 14:02:54 UTC-06:00 |
+| **Ejecutor** | 🤖 Agent (`agent`) |
+| **Rama** | `feat/fallouts` |
+| **Razón de ejecución** | Vista content unavailable |
+| **Script detonador** | `pnpm test` |
+| **Comando** | `ng test` |
+| **Status** | **OK** |
+| **Exit code** | 0 |
+
+### Resumen breve
+
+Test Files  45 passed (45) · Tests  197 passed (197) · Duration  8.94s (transform 2.83s, setup 7.29s, import 6.30s, tests 15.49s, environment 105.81s)
+
+### Salida completa
+
+```text
+❯ Building...
+✔ Building...
+Initial chunk files                                                             | Names                                                                        |  Raw size
+styles.css                                                                      | styles                                                                       |  58.84 kB | 
+spec-app-features-events-event-detail-page.js                                   | spec-app-features-events-event-detail-page                                   |  56.73 kB | 
+spec-app-features-session-session-page.js                                       | spec-app-features-session-session-page                                       |  53.41 kB | 
+spec-app-features-events-event-attendees-page.js                                | spec-app-features-events-event-attendees-page                                |  48.33 kB | 
+spec-app-features-tickets-digital-ticket-page.js                                | spec-app-features-tickets-digital-ticket-page                                |  41.27 kB | 
+chunk-5QBYT2BY.js                                                               | -                                                                            |  37.08 kB | 
+spec-app-features-events-events-dashboard-page.js                               | spec-app-features-events-events-dashboard-page                               |  36.88 kB | 
+chunk-FGR2UUFK.js                                                               | -                                                                            |  32.64 kB | 
+spec-app-features-events-event-registration-page.js                             | spec-app-features-events-event-registration-page                             |  32.39 kB | 
+spec-app-features-auth-auth-page.js                                             | spec-app-features-auth-auth-page                                             |  29.92 kB | 
+spec-app-features-content-unavailable-content-unavailable-page.js               | spec-app-features-content-unavailable-content-unavailable-page               |  29.89 kB | 
+spec-app-features-offline-offline-page.js                                       | spec-app-features-offline-offline-page                                       |  23.75 kB | 
+chunk-5RPJ7EU5.js                                                               | -                                                                            |  21.23 kB | 
+spec-app-features-events-event-edit-page.js                                     | spec-app-features-events-event-edit-page                                     |  18.49 kB | 
+chunk-P5XWQ3KA.js                                                               | -                                                                            |  13.47 kB | 
+chunk-7EPJADES.js                                                               | -                                                                            |  12.85 kB | 
+chunk-OYV66DFO.js                                                               | -                                                                            |  10.87 kB | 
+chunk-PYFFYDHN.js                                                               | -                                                                            |  10.53 kB | 
+chunk-PPRIP7JR.js                                                               | -                                                                            |  10.37 kB | 
+chunk-SPITYNZ5.js                                                               | -                                                                            |  10.14 kB | 
+chunk-4EABBEJQ.js                                                               | -                                                                            |   9.51 kB | 
+spec-app-features-profile-profile-edit-page.js                                  | spec-app-features-profile-profile-edit-page                                  |   9.29 kB | 
+spec-app-features-profile-profile-change-password-page.js                       | spec-app-features-profile-profile-change-password-page                       |   7.60 kB | 
+chunk-GK3HSQDH.js                                                               | -                                                                            |   6.56 kB | 
+chunk-NMOTKRLY.js                                                               | -                                                                            |   6.05 kB | 
+spec-app-core-appwrite-appwrite-auth.service.js                                 | spec-app-core-appwrite-appwrite-auth.service                                 |   5.89 kB | 
+spec-app-features-offline-offline-connectivity.service.js                       | spec-app-features-offline-offline-connectivity.service                       |   5.80 kB | 
+chunk-YXM23J6R.js                                                               | -                                                                            |   5.69 kB | 
+chunk-EYREIOUK.js                                                               | -                                                                            |   5.34 kB | 
+chunk-G7756IGY.js                                                               | -                                                                            |   5.14 kB | 
+chunk-UAAQ3VF7.js                                                               | -                                                                            |   4.88 kB | 
+chunk-XX7HZUMK.js                                                               | -                                                                            |   4.86 kB | 
+chunk-RSTWSNOR.js                                                               | -                                                                            |   4.75 kB | 
+chunk-4QWNIFGE.js                                                               | -                                                                            |   4.70 kB | 
+chunk-3HIPXRDB.js                                                               | -                                                                            |   4.44 kB | 
+spec-app-shared-ui-organisms-profile-edit-form-profile-edit-form.js             | spec-app-shared-ui-organisms-profile-edit-form-profile-edit-form             |   4.17 kB | 
+spec-app-core-config-resolve-environment.js                                     | spec-app-core-config-resolve-environment                                     |   4.09 kB | 
+chunk-EKV3QFBV.js                                                               | -                                                                            |   4.06 kB | 
+spec-app-shared-ui-organisms-event-edit-form-event-edit-form.js                 | spec-app-shared-ui-organisms-event-edit-form-event-edit-form                 |   4.01 kB | 
+chunk-AK544H3O.js                                                               | -                                                                            |   3.85 kB | 
+chunk-SLYSOJKC.js                                                               | -                                                                            |   3.48 kB | 
+chunk-ZOHUOCKC.js                                                               | -                                                                            |   3.38 kB | 
+chunk-ERTP6FUW.js                                                               | -                                                                            |   3.35 kB | 
+spec-app-features-fallback-fallback-redirect-page.js                            | spec-app-features-fallback-fallback-redirect-page                            |   3.30 kB | 
+chunk-B45NHUNC.js                                                               | -                                                                            |   3.23 kB | 
+spec-app-features-tickets-digital-ticket.model.js                               | spec-app-features-tickets-digital-ticket.model                               |   3.19 kB | 
+chunk-M6633B2W.js                                                               | -                                                                            |   2.79 kB | 
+chunk-54DL4LMV.js                                                               | -                                                                            |   2.71 kB | 
+spec-app-features-profile-profile.model.js                                      | spec-app-features-profile-profile.model                                      |   2.66 kB | 
+chunk-2GSKHIVY.js                                                               | -                                                                            |   2.65 kB | 
+chunk-3CILTWPH.js                                                               | -                                                                            |   2.62 kB | 
+chunk-CSN4J2T7.js                                                               | -                                                                            |   2.60 kB | 
+chunk-RN2Z4L5N.js                                                               | -                                                                            |   2.54 kB | 
+spec-app-shared-ui-organisms-auth-login-form-auth-login-form.js                 | spec-app-shared-ui-organisms-auth-login-form-auth-login-form                 |   2.50 kB | 
+chunk-22JDNN2H.js                                                               | -                                                                            |   2.46 kB | 
+chunk-STQC3UUX.js                                                               | -                                                                            |   2.45 kB | 
+spec-app-shared-ui-organisms-change-password-form-change-password-form.js       | spec-app-shared-ui-organisms-change-password-form-change-password-form       |   2.38 kB | 
+spec-app-shared-ui-organisms-event-registration-form-event-registration-form.js | spec-app-shared-ui-organisms-event-registration-form-event-registration-form |   2.33 kB | 
+spec-app-features-events-event-edit.model.js                                    | spec-app-features-events-event-edit.model                                    |   2.29 kB | 
+chunk-WKQQD222.js                                                               | -                                                                            |   2.25 kB | 
+chunk-7ZASAAB2.js                                                               | -                                                                            |   2.25 kB | 
+chunk-6BUTF54W.js                                                               | -                                                                            |   2.15 kB | 
+chunk-V7HHSJIR.js                                                               | -                                                                            |   2.13 kB | 
+chunk-NSZB3PAA.js                                                               | -                                                                            |   2.03 kB | 
+spec-app-shared-ui-organisms-auth-sign-up-form-auth-sign-up-form.js             | spec-app-shared-ui-organisms-auth-sign-up-form-auth-sign-up-form             |   1.99 kB | 
+spec-app-features-tickets-digital-ticket-state.service.js                       | spec-app-features-tickets-digital-ticket-state.service                       |   1.94 kB | 
+spec-app-features-events-event-registration.model.js                            | spec-app-features-events-event-registration.model                            |   1.92 kB | 
+spec-app-core-appwrite-appwrite.service.js                                      | spec-app-core-appwrite-appwrite.service                                      |   1.90 kB | 
+spec-app-features-events-events.model.js                                        | spec-app-features-events-events.model                                        |   1.82 kB | 
+spec-app-core-auth-guest.guard.js                                               | spec-app-core-auth-guest.guard                                               |   1.81 kB | 
+chunk-HDPX4BTV.js                                                               | -                                                                            |   1.79 kB | 
+chunk-JY2THURK.js                                                               | -                                                                            |   1.78 kB | 
+spec-app-core-auth-auth.guard.js                                                | spec-app-core-auth-auth.guard                                                |   1.76 kB | 
+spec-app-core-connectivity-connectivity.guard.js                                | spec-app-core-connectivity-connectivity.guard                                |   1.74 kB | 
+chunk-LOWEHMO5.js                                                               | -                                                                            |   1.72 kB | 
+chunk-J4FHUBTC.js                                                               | -                                                                            |   1.69 kB | 
+spec-app-features-events-event-edit-state.service.js                            | spec-app-features-events-event-edit-state.service                            |   1.66 kB | 
+spec-app-core-connectivity-connectivity.util.js                                 | spec-app-core-connectivity-connectivity.util                                 |   1.52 kB | 
+chunk-ESJ6SOP5.js                                                               | -                                                                            |   1.46 kB | 
+chunk-RSBXS5DE.js                                                               | -                                                                            |   1.45 kB | 
+spec-app-features-admin-admin-navigation.service.js                             | spec-app-features-admin-admin-navigation.service                             |   1.41 kB | 
+spec-app-features-tickets-digital-ticket-download.util.js                       | spec-app-features-tickets-digital-ticket-download.util                       |   1.39 kB | 
+chunk-TGT7RZOQ.js                                                               | -                                                                            |   1.37 kB | 
+spec-app-shared-ui-atoms-icon-icon.js                                           | spec-app-shared-ui-atoms-icon-icon                                           |   1.30 kB | 
+spec-app-shared-ui-atoms-avatar-avatar.js                                       | spec-app-shared-ui-atoms-avatar-avatar                                       |   1.25 kB | 
+init-testbed.js                                                                 | init-testbed                                                                 |   1.21 kB | 
+spec-app-core-appwrite-appwrite-auth-error.js                                   | spec-app-core-appwrite-appwrite-auth-error                                   |   1.13 kB | 
+chunk-RBN4S7O6.js                                                               | -                                                                            |   1.10 kB | 
+spec-app-features-events-attendees.model.js                                     | spec-app-features-events-attendees.model                                     |   1.04 kB | 
+chunk-BO3UIMU6.js                                                               | -                                                                            | 974 bytes | 
+vitest-mock-patch.js                                                            | vitest-mock-patch                                                            | 969 bytes | 
+spec-app-shared-ui-atoms-icon-icon.registry.js                                  | spec-app-shared-ui-atoms-icon-icon.registry                                  | 961 bytes | 
+chunk-QJQ2R3K6.js                                                               | -                                                                            | 909 bytes | 
+spec-app-shared-ui-password-strength.util.js                                    | spec-app-shared-ui-password-strength.util                                    | 878 bytes | 
+chunk-RDSJJ3EL.js                                                               | -                                                                            | 859 bytes | 
+spec-app-features-events-event-detail.model.js                                  | spec-app-features-events-event-detail.model                                  | 774 bytes | 
+spec-app-shared-ui-atoms-qr-code-display-qr-code-display.js                     | spec-app-shared-ui-atoms-qr-code-display-qr-code-display                     | 734 bytes | 
+spec-app-app.js                                                                 | spec-app-app                                                                 | 700 bytes | 
+chunk-OWTV64UV.js                                                               | -                                                                            | 627 bytes | 
+chunk-IL4J6Y4R.js                                                               | -                                                                            | 507 bytes | 
+
+                                                                                | Initial total                                                                | 811.52 kB
+
+Application bundle generation complete. [5.634 seconds] - 2026-07-04T20:03:02.774Z
+
+
+ RUN  v4.1.8 /Users/tw1ttt3r/tw1ttt3r/own/eventflow-asistido-ai
+
+
+ Test Files  45 passed (45)
+      Tests  197 passed (197)
+   Start at  14:03:03
+   Duration  8.94s (transform 2.83s, setup 7.29s, import 6.30s, tests 15.49s, environment 105.81s)
+
+
+Not implemented: navigation to another Document
+```
+
+---
+
+
+## Entrada #085 — Tests Vitest
+
+| Campo | Valor |
+|-------|-------|
+| **Fecha y hora de ejecución** | 2026-07-04 14:07:28 UTC-06:00 |
+| **Inicio** | 2026-07-04 14:07:18 UTC-06:00 |
+| **Ejecutor** | 🤖 Agent (`agent`) |
+| **Rama** | `feat/fallouts` |
+| **Razón de ejecución** | Verificar implementación content-unavailable intacta |
+| **Script detonador** | `pnpm test` |
+| **Comando** | `ng test --include=**/content-unavailable*.spec.ts` |
+| **Status** | **OK** |
+| **Exit code** | 0 |
+
+### Resumen breve
+
+Test Files  1 passed (1) · Tests  4 passed (4) · Duration  2.35s (transform 118ms, setup 345ms, import 136ms, tests 740ms, environment 940ms)
+
+### Salida completa
+
+```text
+❯ Building...
+✔ Building...
+Initial chunk files                                               | Names                                                          |  Raw size
+spec-app-features-content-unavailable-content-unavailable-page.js | spec-app-features-content-unavailable-content-unavailable-page |  72.58 kB | 
+styles.css                                                        | styles                                                         |  58.84 kB | 
+chunk-SHTMZ5XJ.js                                                 | -                                                              |   4.57 kB | 
+init-testbed.js                                                   | init-testbed                                                   |   1.21 kB | 
+vitest-mock-patch.js                                              | vitest-mock-patch                                              | 969 bytes | 
+
+                                                                  | Initial total                                                  | 138.16 kB
+
+Application bundle generation complete. [5.588 seconds] - 2026-07-04T20:07:25.411Z
+
+
+ RUN  v4.1.8 /Users/tw1ttt3r/tw1ttt3r/own/eventflow-asistido-ai
+
+
+ Test Files  1 passed (1)
+      Tests  4 passed (4)
+   Start at  14:07:25
+   Duration  2.35s (transform 118ms, setup 345ms, import 136ms, tests 740ms, environment 940ms)
+```
+
+---
+
+
+## Entrada #086 — Tests Vitest
+
+| Campo | Valor |
+|-------|-------|
+| **Fecha y hora de ejecución** | 2026-07-04 14:12:36 UTC-06:00 |
+| **Inicio** | 2026-07-04 14:12:25 UTC-06:00 |
+| **Ejecutor** | 🤖 Agent (`agent`) |
+| **Rama** | `feat/fallouts` |
+| **Razón de ejecución** | Quitar cached content y ayuda de content-unavailable |
+| **Script detonador** | `pnpm test` |
+| **Comando** | `ng test --include=**/content-unavailable*.spec.ts` |
+| **Status** | **OK** |
+| **Exit code** | 0 |
+
+### Resumen breve
+
+Test Files  1 passed (1) · Tests  3 passed (3) · Duration  2.53s (transform 123ms, setup 370ms, import 144ms, tests 725ms, environment 1.10s)
+
+### Salida completa
+
+```text
+❯ Building...
+✔ Building...
+Initial chunk files                                               | Names                                                          |  Raw size
+spec-app-features-content-unavailable-content-unavailable-page.js | spec-app-features-content-unavailable-content-unavailable-page |  67.39 kB | 
+styles.css                                                        | styles                                                         |  58.75 kB | 
+chunk-SHTMZ5XJ.js                                                 | -                                                              |   4.57 kB | 
+init-testbed.js                                                   | init-testbed                                                   |   1.21 kB | 
+vitest-mock-patch.js                                              | vitest-mock-patch                                              | 969 bytes | 
+
+                                                                  | Initial total                                                  | 132.89 kB
+
+Application bundle generation complete. [5.885 seconds] - 2026-07-04T20:12:33.220Z
+
+
+ RUN  v4.1.8 /Users/tw1ttt3r/tw1ttt3r/own/eventflow-asistido-ai
+
+
+ Test Files  1 passed (1)
+      Tests  3 passed (3)
+   Start at  14:12:33
+   Duration  2.53s (transform 123ms, setup 370ms, import 144ms, tests 725ms, environment 1.10s)
+```
+
+---
+
+
+## Entrada #087 — Tests Vitest
+
+| Campo | Valor |
+|-------|-------|
+| **Fecha y hora de ejecución** | 2026-07-04 14:13:44 UTC-06:00 |
+| **Inicio** | 2026-07-04 14:13:34 UTC-06:00 |
+| **Ejecutor** | 🤖 Agent (`agent`) |
+| **Rama** | `feat/fallouts` |
+| **Razón de ejecución** | Quitar Try again de content-unavailable |
+| **Script detonador** | `pnpm test` |
+| **Comando** | `ng test --include=**/content-unavailable*.spec.ts` |
+| **Status** | **OK** |
+| **Exit code** | 0 |
+
+### Resumen breve
+
+Test Files  1 passed (1) · Tests  2 passed (2) · Duration  1.80s (transform 148ms, setup 371ms, import 163ms, tests 118ms, environment 967ms)
+
+### Salida completa
+
+```text
+❯ Building...
+✔ Building...
+Initial chunk files                                               | Names                                                          |  Raw size
+spec-app-features-content-unavailable-content-unavailable-page.js | spec-app-features-content-unavailable-content-unavailable-page |  64.29 kB | 
+styles.css                                                        | styles                                                         |  58.75 kB | 
+chunk-SHTMZ5XJ.js                                                 | -                                                              |   4.57 kB | 
+init-testbed.js                                                   | init-testbed                                                   |   1.21 kB | 
+vitest-mock-patch.js                                              | vitest-mock-patch                                              | 969 bytes | 
+
+                                                                  | Initial total                                                  | 129.79 kB
+
+Application bundle generation complete. [6.043 seconds] - 2026-07-04T20:13:41.940Z
+
+
+ RUN  v4.1.8 /Users/tw1ttt3r/tw1ttt3r/own/eventflow-asistido-ai
+
+
+ Test Files  1 passed (1)
+      Tests  2 passed (2)
+   Start at  14:13:42
+   Duration  1.80s (transform 148ms, setup 371ms, import 163ms, tests 118ms, environment 967ms)
+```
+
+---
+
+
+## Entrada #088 — Tests Vitest
+
+| Campo | Valor |
+|-------|-------|
+| **Fecha y hora de ejecución** | 2026-07-04 14:17:16 UTC-06:00 |
+| **Inicio** | 2026-07-04 14:17:05 UTC-06:00 |
+| **Ejecutor** | 🤖 Agent (`agent`) |
+| **Rama** | `feat/fallouts` |
+| **Razón de ejecución** | Validar content-unavailable tras posible edición manual |
+| **Script detonador** | `pnpm test` |
+| **Comando** | `ng test --include=**/content-unavailable*.spec.ts` |
+| **Status** | **OK** |
+| **Exit code** | 0 |
+
+### Resumen breve
+
+Test Files  1 passed (1) · Tests  2 passed (2) · Duration  1.80s (transform 112ms, setup 349ms, import 132ms, tests 108ms, environment 1.02s)
+
+### Salida completa
+
+```text
+❯ Building...
+✔ Building...
+Initial chunk files                                               | Names                                                          |  Raw size
+spec-app-features-content-unavailable-content-unavailable-page.js | spec-app-features-content-unavailable-content-unavailable-page |  64.29 kB | 
+styles.css                                                        | styles                                                         |  58.75 kB | 
+chunk-SHTMZ5XJ.js                                                 | -                                                              |   4.57 kB | 
+init-testbed.js                                                   | init-testbed                                                   |   1.21 kB | 
+vitest-mock-patch.js                                              | vitest-mock-patch                                              | 969 bytes | 
+
+                                                                  | Initial total                                                  | 129.79 kB
+
+Application bundle generation complete. [5.861 seconds] - 2026-07-04T20:17:13.896Z
+
+
+ RUN  v4.1.8 /Users/tw1ttt3r/tw1ttt3r/own/eventflow-asistido-ai
+
+
+ Test Files  1 passed (1)
+      Tests  2 passed (2)
+   Start at  14:17:14
+   Duration  1.80s (transform 112ms, setup 349ms, import 132ms, tests 108ms, environment 1.02s)
+```
+
+---
+
