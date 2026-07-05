@@ -44,10 +44,12 @@ describe('SessionPage (profile)', () => {
 
     const compiled = fixture.nativeElement as HTMLElement;
     expect(compiled.textContent).toContain('Jane Doe');
-    expect(compiled.textContent).toContain('Upcoming Events');
-    expect(compiled.textContent).toContain('Design Thinking Workshop');
-    expect(compiled.textContent).toContain('Attended');
-    expect(compiled.textContent).toContain('Digital Tickets');
+    expect(compiled.textContent).toContain('My Events');
+    expect(compiled.textContent).toContain('Product Design Workshop');
+    expect(compiled.textContent).toContain('Registered');
+    expect(compiled.textContent).toContain('Golden Hour Photo Walk');
+    expect(compiled.textContent).not.toContain('Digital Tickets');
+    expect(compiled.textContent).not.toContain('Upcoming Events');
   });
 
   it('should navigate home when header logo is pressed', async () => {
@@ -118,25 +120,25 @@ describe('SessionPage (profile)', () => {
     viewTicketButton?.click();
     await fixture.whenStable();
 
-    expect(navigateSpy).toHaveBeenCalledWith(['/session', 'tickets', 'tkt-1']);
+    expect(navigateSpy).toHaveBeenCalledWith(['/session', 'tickets', 'tkt-2']);
   });
 
-  it('should navigate to digital ticket from open button', async () => {
+  it('should switch to attended tab and show past events', async () => {
     const fixture = TestBed.createComponent(SessionPage);
-    const router = TestBed.inject(Router);
-    const navigateSpy = vi.spyOn(router, 'navigate').mockResolvedValue(true);
 
     fixture.detectChanges();
     await fixture.whenStable();
     fixture.detectChanges();
 
-    const openButton = Array.from(
+    const attendedTab = Array.from(
       (fixture.nativeElement as HTMLElement).querySelectorAll('button'),
-    ).find((button) => button.textContent?.includes('Open')) as HTMLButtonElement | undefined;
-    openButton?.click();
-    await fixture.whenStable();
+    ).find((button) => button.textContent?.trim() === 'Attended') as HTMLButtonElement | undefined;
+    attendedTab?.click();
+    fixture.detectChanges();
 
-    expect(navigateSpy).toHaveBeenCalledWith(['/session', 'tickets', 'tkt-1']);
+    const compiled = fixture.nativeElement as HTMLElement;
+    expect(compiled.textContent).toContain('Community Pottery Class');
+    expect(compiled.textContent).toContain('Intro to Python: Mini Lab');
   });
 
   it('should handle placeholder actions without errors', async () => {
@@ -150,6 +152,7 @@ describe('SessionPage (profile)', () => {
     };
 
     expect(() => page.onNavigate('events')).not.toThrow();
+    expect(() => page.onPlaceholder('View summary')).not.toThrow();
   });
 
   it('should logout and redirect to auth', async () => {

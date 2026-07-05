@@ -2936,3 +2936,45 @@ src/assets/illustrations/  → SVG estáticos grandes (auth, empty states) si el
 ---
 
 *Última actualización del archivo: 2026-07-04 14:13:00 CST*
+
+---
+
+## Entrada #093 — My Events en /session
+
+| Campo | Valor |
+|-------|--------|
+| **Fecha de ejecución** | 2026-07-05 |
+| **Hora de ejecución** | 09:14:10 – 09:15:20 CST |
+| **Tiempo total** | ~70 s |
+| **Modelo de agente** | `gpt-5.3-codex` |
+| **Nivel de complejidad** | **Media** |
+
+### Prompt
+
+> ahora necesito que en la vista se session, reemplaces la sección de Upcoming Events, attended y Digital Tickets por la siguiente vista
+
+### Criterios de complejidad
+
+- 8+ archivos (modelo, mock, 2 componentes UI, session-page, profile-state, specs)
+- Sustituye 3 organismos por vista unificada con tabs y cards según mockup
+- Impacto en perfil mock y sincronización `addIssuedTicket`
+
+### Entregables
+
+- Tipos `ProfileMyEvent`, `filterMyEventsByTab` en `profile.model.ts`
+- Mock `MOCK_MY_EVENTS` (4 eventos del diseño) en `my-events.mock.ts`
+- Molécula `ef-my-event-card` y organismo `ef-my-events-section` (tabs Upcoming/Attended)
+- `session-page`: hero de perfil + My Events; eliminadas cards upcoming/attended/tickets
+- `ProfileStateService.addIssuedTicket` también añade entrada en `myEvents`
+- Tests actualizados: 196 OK
+
+### Ajustes requeridos
+
+- [x] Vista My Events según mockup
+- [x] View Ticket navega a `/session/tickets/:id`
+- [x] Tab Attended muestra eventos pasados
+- [x] Suite de tests verde
+
+---
+
+*Última actualización del archivo: 2026-07-05 09:15:20 CST*

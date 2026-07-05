@@ -5,10 +5,8 @@ import { AdminNavigationService } from '@features/admin/admin-navigation.service
 import { AppwriteAuthService } from '@core/appwrite/appwrite-auth.service';
 import { ProfileStateService } from '@features/profile/profile-state.service';
 import { resolveTicketId } from '@mock/digital-ticket.mock';
-import { AttendedEventsCard } from '@shared/ui/organisms/attended-events-card/attended-events-card';
-import { DigitalTicketsCard } from '@shared/ui/organisms/digital-tickets-card/digital-tickets-card';
+import { MyEventsSection } from '@shared/ui/organisms/my-events-section/my-events-section';
 import { ProfileHeroCard } from '@shared/ui/organisms/profile-hero-card/profile-hero-card';
-import { UpcomingEventsCard } from '@shared/ui/organisms/upcoming-events-card/upcoming-events-card';
 import { AdminLayout } from '@shared/ui/templates/admin-layout/admin-layout';
 
 @Component({
@@ -17,9 +15,7 @@ import { AdminLayout } from '@shared/ui/templates/admin-layout/admin-layout';
   imports: [
     AdminLayout,
     ProfileHeroCard,
-    UpcomingEventsCard,
-    AttendedEventsCard,
-    DigitalTicketsCard,
+    MyEventsSection,
   ],
   template: `
     <ef-admin-layout activeNav="account" (navigate)="onNavigate($event)">
@@ -31,19 +27,11 @@ import { AdminLayout } from '@shared/ui/templates/admin-layout/admin-layout';
         (logoutPress)="logout()"
       />
 
-      <ef-upcoming-events-card
-        [events]="dashboard().upcoming"
-        (seeAllPress)="onPlaceholder('Upcoming events')"
+      <ef-my-events-section
+        [events]="dashboard().myEvents"
         (viewTicketPress)="openTicket($event)"
+        (viewSummaryPress)="onPlaceholder('View summary')"
       />
-
-      <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
-        <ef-attended-events-card [events]="dashboard().attended" />
-        <ef-digital-tickets-card
-          [tickets]="dashboard().tickets"
-          (openPress)="openTicket($event)"
-        />
-      </div>
     </ef-admin-layout>
   `,
 })
