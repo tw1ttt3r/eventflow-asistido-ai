@@ -1,4 +1,5 @@
 import type { UserProfileDashboard } from '@features/profile/profile.model';
+import { MOCK_MY_EVENTS } from '@mock/my-events.mock';
 import { MOCK_SESSION_USER_ID } from '@mock/session.mock';
 
 export const MOCK_USER_PROFILE_DASHBOARD: UserProfileDashboard = {
@@ -60,4 +61,5 @@ export const MOCK_USER_PROFILE_DASHBOARD: UserProfileDashboard = {
       validUntilLabel: 'Jul 10, 2026',
     },
   ],
+  myEvents: MOCK_MY_EVENTS,
 };

@@ -35,11 +35,42 @@ export interface ProfileDigitalTicket {
   validUntilLabel: string;
 }
 
+export type MyEventsTab = 'upcoming' | 'attended';
+
+export type MyEventStatusBadge = 'registered' | 'attended';
+
+export type MyEventActionKind = 'view-ticket' | 'view-summary' | 'label';
+
+export interface ProfileMyEvent {
+  id: string;
+  tab: MyEventsTab;
+  title: string;
+  dateLabel: string;
+  timeLabel: string;
+  venueLabel: string;
+  imageHue: number;
+  status: MyEventStatusBadge;
+  rolePrefix: string;
+  roleName: string;
+  roleHighlight: boolean;
+  actionKind: MyEventActionKind;
+  actionLabel: string;
+  ticketId?: string;
+}
+
 export interface UserProfileDashboard {
   profile: UserProfile;
   upcoming: ProfileUpcomingEvent[];
   attended: ProfileAttendedEvent[];
   tickets: ProfileDigitalTicket[];
+  myEvents: ProfileMyEvent[];
+}
+
+export function filterMyEventsByTab(
+  events: ProfileMyEvent[],
+  tab: MyEventsTab,
+): ProfileMyEvent[] {
+  return events.filter((event) => event.tab === tab);
 }
 
 export interface ProfileEditFormValue {
