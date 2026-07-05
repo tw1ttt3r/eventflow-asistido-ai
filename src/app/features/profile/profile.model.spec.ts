@@ -2,11 +2,13 @@ import { describe, expect, it } from 'vitest';
 
 import {
   applyEditFormToProfile,
+  filterMyEventsByTab,
   getProfileInitials,
   profileToEditForm,
   validateChangePasswordForm,
   validateProfileEditForm,
 } from '@features/profile/profile.model';
+import { MOCK_MY_EVENTS } from '@mock/my-events.mock';
 import { MOCK_USER_PROFILE_DASHBOARD } from '@mock/profile.mock';
 
 describe('profile.model', () => {
@@ -81,5 +83,15 @@ describe('profile.model', () => {
     const updated = applyEditFormToProfile(profile, { ...form, fullName: 'Jane Updated' });
 
     expect(updated.fullName).toBe('Jane Updated');
+  });
+
+  it('should filter my events by tab', () => {
+    const upcoming = filterMyEventsByTab(MOCK_MY_EVENTS, 'upcoming');
+    const attended = filterMyEventsByTab(MOCK_MY_EVENTS, 'attended');
+
+    expect(upcoming).toHaveLength(2);
+    expect(attended).toHaveLength(2);
+    expect(upcoming.every((event) => event.tab === 'upcoming')).toBe(true);
+    expect(attended.every((event) => event.tab === 'attended')).toBe(true);
   });
 });

@@ -4,6 +4,7 @@ import {
   applyEditFormToProfile,
   type ProfileEditFormValue,
   type ProfileDigitalTicket,
+  type ProfileMyEvent,
   type ProfileUpcomingEvent,
   type UserProfile,
   type UserProfileDashboard,
@@ -55,10 +56,31 @@ export class ProfileStateService {
     const hasUpcoming = current.upcoming.some((item) => item.id === upcomingId);
     const upcoming = hasUpcoming ? current.upcoming : [upcomingEvent, ...current.upcoming];
 
+    const myEvent: ProfileMyEvent = {
+      id: upcomingId,
+      tab: 'upcoming',
+      title: ticket.eventTitle,
+      dateLabel: datePart ?? ticket.whenLabel,
+      timeLabel: timePart ?? '',
+      venueLabel: ticket.whereLabel,
+      imageHue: ticket.imageHue,
+      status: 'registered',
+      rolePrefix: 'Host',
+      roleName: ticket.host.name,
+      roleHighlight: false,
+      actionKind: 'view-ticket',
+      actionLabel: 'View Ticket',
+      ticketId: ticket.id,
+    };
+
+    const hasMyEvent = current.myEvents.some((item) => item.id === upcomingId);
+    const myEvents = hasMyEvent ? current.myEvents : [myEvent, ...current.myEvents];
+
     this.dashboardState.set({
       ...current,
       tickets,
       upcoming,
+      myEvents,
     });
   }
 }
