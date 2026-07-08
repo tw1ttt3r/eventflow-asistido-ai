@@ -3048,3 +3048,45 @@ src/assets/illustrations/  → SVG estáticos grandes (auth, empty states) si el
 ---
 
 *Última actualización del archivo: 2026-07-07 23:38:35 CST*
+
+---
+
+## Entrada #096 — Flujo Create Event (/events/new)
+
+| Campo | Valor |
+|-------|--------|
+| **Fecha de ejecución** | 2026-07-08 |
+| **Hora de ejecución** | 00:07:59 – 00:12:20 CST |
+| **Tiempo total** | ~260 s |
+| **Modelo de agente** | `gpt-5.3-codex` |
+| **Nivel de complejidad** | **Media** |
+
+### Prompt
+
+> hazlo
+
+### Criterios de complejidad
+
+- 12+ archivos: ruta, página create, EventsStateService, modelo, form/header, dashboard, edit sync, specs
+- Reutiliza formulario de edición en modo create
+- Impacto en listado y permisos de edición
+
+### Entregables
+
+- Ruta `/events/new` → `EventCreatePage` con formulario reutilizado (`createMode`)
+- CTA **Create Event** navega a `/events/new`
+- `EventsStateService`: lista mutable + summary/sparkline; eventos creados aparecen en dashboard
+- `EventEditStateService.createEvent`, helpers `createEventEditDraft`, `mapEventEditToEventItem`
+- Edición posterior de eventos creados vía ownership en lista
+- Header/form adaptados (sin delete ni preview en create)
+- 205 tests OK
+
+### Ajustes requeridos
+
+- [x] Vista y ruta de creación
+- [x] CTA conectado
+- [x] Persistencia local mock en dashboard
+
+---
+
+*Última actualización del archivo: 2026-07-08 00:12:20 CST*
