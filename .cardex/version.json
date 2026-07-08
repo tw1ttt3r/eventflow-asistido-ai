@@ -1,7 +1,7 @@
 {
   "major": 0,
   "minor": 20,
-  "patch": 0,
+  "patch": 1,
   "knownBranches": [
     "tailwind",
     "feat/sonarqube",
@@ -26,15 +26,6 @@
     "fix/download-ticket"
   ],
   "history": [
-    {
-      "at": "2026-06-28T23:01:52.280Z",
-      "from": "0.7.8",
-      "to": "0.7.9",
-      "branch": "refactor-custom-paths",
-      "reason": "patch",
-      "detail": "commit en rama (refactor-custom-paths)",
-      "sha": "d2ebd44"
-    },
     {
       "at": "2026-06-28T23:10:55.183Z",
       "from": "0.7.9",
@@ -925,6 +916,15 @@
       "reason": "minor",
       "detail": "nueva rama (fix/download-ticket)",
       "sha": "0aceb38"
+    },
+    {
+      "at": "2026-07-08T05:50:18.845Z",
+      "from": "0.20.0",
+      "to": "0.20.1",
+      "branch": "fix/download-ticket",
+      "reason": "patch",
+      "detail": "commit en rama (fix/download-ticket)",
+      "sha": "dc14865"
     }
   ]
 }
