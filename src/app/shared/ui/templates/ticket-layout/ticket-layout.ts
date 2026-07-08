@@ -37,12 +37,7 @@ import { EfIcon } from '@shared/ui/atoms/icon/icon';
           <ng-content />
         </main>
 
-        <footer class="flex items-center justify-between gap-3 pb-2 text-xs text-slate-400">
-          <div class="flex items-center gap-2" aria-hidden="true">
-            <span class="size-2 rounded-full bg-slate-300"></span>
-            <span class="size-2 rounded-full bg-slate-300"></span>
-            <span class="size-2 rounded-full bg-slate-300"></span>
-          </div>
+        <footer class="pb-2 text-center text-xs text-slate-400">
           <p>EventFlow · Secure Checkout</p>
         </footer>
       </div>

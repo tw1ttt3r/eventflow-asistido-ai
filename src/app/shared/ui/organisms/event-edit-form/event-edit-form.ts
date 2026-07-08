@@ -11,7 +11,6 @@ import {
 } from '@features/events/event-edit.model';
 import { EfButton } from '@shared/ui/atoms/button/button';
 import { EfIcon } from '@shared/ui/atoms/icon/icon';
-import { EfIconButton } from '@shared/ui/atoms/icon-button/icon-button';
 import { Label } from '@shared/ui/atoms/label/label';
 import { FormField } from '@shared/ui/molecules/form-field/form-field';
 import { SegmentedControl, type SegmentedOption } from '@shared/ui/molecules/segmented-control/segmented-control';
@@ -32,7 +31,6 @@ const STATUS_OPTIONS: SegmentedOption<EventEditStatus>[] = [
     FormField,
     EfButton,
     EfIcon,
-    EfIconButton,
     SegmentedControl,
     SparklineChart,
   ],
@@ -60,9 +58,6 @@ const STATUS_OPTIONS: SegmentedOption<EventEditStatus>[] = [
               Replace
               <input type="file" accept="image/*" class="sr-only" (change)="onBannerSelected($event)" />
             </label>
-            <ef-icon-button ariaLabel="Capture banner">
-              <ef-icon name="camera" size="sm" />
-            </ef-icon-button>
           </div>
         </div>
       </section>
@@ -83,7 +78,6 @@ const STATUS_OPTIONS: SegmentedOption<EventEditStatus>[] = [
           ></textarea>
           <div class="flex items-center justify-between text-xs text-slate-500">
             <span>Supports Markdown · {{ description().length }}/{{ descriptionMax }}</span>
-            <button type="button" class="font-semibold text-ef-blue" (click)="previewPress.emit()">Preview</button>
           </div>
         </div>
       </section>
@@ -94,31 +88,21 @@ const STATUS_OPTIONS: SegmentedOption<EventEditStatus>[] = [
         <div class="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <div class="space-y-2">
             <ef-label htmlFor="event-edit-date">Date</ef-label>
-            <div class="flex items-center gap-2">
               <input
                 id="event-edit-date"
-                class="min-w-0 flex-1 rounded-full border border-slate-200 bg-white px-5 py-3.5 text-sm text-slate-900 focus:border-ef-purple focus:outline-none focus:ring-2 focus:ring-ef-purple/20"
+                class="w-full rounded-full border border-slate-200 bg-white px-5 py-3.5 text-sm text-slate-900 focus:border-ef-purple focus:outline-none focus:ring-2 focus:ring-ef-purple/20"
                 [(ngModel)]="dateLabel"
                 name="dateLabel"
               />
-              <ef-icon-button ariaLabel="Pick date">
-                <ef-icon name="calendar" size="sm" />
-              </ef-icon-button>
-            </div>
           </div>
           <div class="space-y-2">
             <ef-label htmlFor="event-edit-time">Time</ef-label>
-            <div class="flex items-center gap-2">
               <input
                 id="event-edit-time"
-                class="min-w-0 flex-1 rounded-full border border-slate-200 bg-white px-5 py-3.5 text-sm text-slate-900 focus:border-ef-purple focus:outline-none focus:ring-2 focus:ring-ef-purple/20"
+                class="w-full rounded-full border border-slate-200 bg-white px-5 py-3.5 text-sm text-slate-900 focus:border-ef-purple focus:outline-none focus:ring-2 focus:ring-ef-purple/20"
                 [(ngModel)]="timeRangeLabel"
                 name="timeRangeLabel"
               />
-              <ef-icon-button ariaLabel="Pick time">
-                <ef-icon name="clock" size="sm" />
-              </ef-icon-button>
-            </div>
           </div>
         </div>
         <div class="space-y-2">
@@ -136,17 +120,12 @@ const STATUS_OPTIONS: SegmentedOption<EventEditStatus>[] = [
         <h2 class="text-base font-bold text-slate-900">Location &amp; capacity</h2>
         <div class="space-y-2">
           <ef-label htmlFor="event-edit-location">Location</ef-label>
-          <div class="flex items-center gap-2">
             <input
               id="event-edit-location"
-              class="min-w-0 flex-1 rounded-full border border-slate-200 bg-white px-5 py-3.5 text-sm text-slate-900 focus:border-ef-purple focus:outline-none focus:ring-2 focus:ring-ef-purple/20"
+              class="w-full rounded-full border border-slate-200 bg-white px-5 py-3.5 text-sm text-slate-900 focus:border-ef-purple focus:outline-none focus:ring-2 focus:ring-ef-purple/20"
               [(ngModel)]="location"
               name="location"
             />
-            <ef-icon-button ariaLabel="Open map">
-              <ef-icon name="map-pin" size="sm" />
-            </ef-icon-button>
-          </div>
         </div>
         <div class="grid grid-cols-2 gap-4">
           <div class="space-y-2">
@@ -249,14 +228,6 @@ const STATUS_OPTIONS: SegmentedOption<EventEditStatus>[] = [
           {{ createMode() ? 'Create event' : 'Save changes' }}
         </ef-button>
         <ef-button type="button" variant="outline" (pressed)="cancelled.emit()">Cancel</ef-button>
-        @if (!createMode()) {
-          <ef-button type="button" variant="destructive" (pressed)="deletePress.emit()">
-            <span class="inline-flex items-center justify-center gap-2">
-              <ef-icon name="trash" size="sm" />
-              Delete event
-            </span>
-          </ef-button>
-        }
       </div>
 
       <p class="text-center text-xs leading-relaxed text-slate-400">
@@ -288,8 +259,6 @@ export class EventEditForm {
 
   readonly submitted = output<EventEditFormValue>();
   readonly cancelled = output<void>();
-  readonly deletePress = output<void>();
-  readonly previewPress = output<void>();
 
   protected readonly spotsLeft = computed(() => {
     const registered = this.editData().registrationStats.registered;

@@ -10,10 +10,7 @@ import { EfButton } from '@shared/ui/atoms/button/button';
     <div
       class="fixed inset-x-0 bottom-0 z-20 border-t border-slate-200 bg-white/95 px-4 py-3 backdrop-blur"
     >
-      <div class="mx-auto flex w-full max-w-lg items-center gap-3">
-        <ef-button variant="soft" [fullWidth]="false" (pressed)="savePress.emit()">
-          Save
-        </ef-button>
+      <div class="mx-auto w-full max-w-lg">
         <ef-button variant="purple" (pressed)="registerPress.emit()">
           Register — Reserve Spot
         </ef-button>
@@ -22,6 +19,5 @@ import { EfButton } from '@shared/ui/atoms/button/button';
   `,
 })
 export class EventDetailActionBar {
-  readonly savePress = output<void>();
   readonly registerPress = output<void>();
 }

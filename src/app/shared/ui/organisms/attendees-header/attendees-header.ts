@@ -9,20 +9,9 @@ import { EfIconButton } from '@shared/ui/atoms/icon-button/icon-button';
   imports: [EfIcon, EfIconButton],
   template: `
     <header class="space-y-3">
-      <div class="grid grid-cols-[2.5rem_1fr_5rem] items-center gap-3">
-        <ef-icon-button ariaLabel="Volver al evento" (pressed)="backPress.emit()">
-          <ef-icon name="chevron-left" size="md" />
-        </ef-icon-button>
-
-        <div class="flex items-center justify-end gap-1">
-          <ef-icon-button ariaLabel="Filtrar asistentes" (pressed)="filterPress.emit()">
-            <ef-icon name="filter-lines" size="sm" />
-          </ef-icon-button>
-          <ef-icon-button ariaLabel="Más opciones" (pressed)="morePress.emit()">
-            <ef-icon name="more-horizontal" size="sm" />
-          </ef-icon-button>
-        </div>
-      </div>
+      <ef-icon-button ariaLabel="Volver al evento" (pressed)="backPress.emit()">
+        <ef-icon name="chevron-left" size="md" />
+      </ef-icon-button>
 
       <div>
         <h1 class="text-2xl font-bold text-slate-900">Attendees</h1>
@@ -38,6 +27,4 @@ export class AttendeesHeader {
   readonly eventDateLabel = input.required<string>();
 
   readonly backPress = output<void>();
-  readonly filterPress = output<void>();
-  readonly morePress = output<void>();
 }

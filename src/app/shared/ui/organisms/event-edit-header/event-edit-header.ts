@@ -20,14 +20,9 @@ import { EfIconButton } from '@shared/ui/atoms/icon-button/icon-button';
         </div>
 
         @if (showToolbar()) {
-          <div class="flex shrink-0 items-center gap-1">
-            <ef-icon-button ariaLabel="Preview event" (pressed)="previewPress.emit()">
-              <ef-icon name="eye" size="sm" />
-            </ef-icon-button>
-            <ef-icon-button ariaLabel="More options" (pressed)="morePress.emit()">
-              <ef-icon name="more-vertical" size="sm" />
-            </ef-icon-button>
-          </div>
+          <ef-icon-button ariaLabel="Preview event" (pressed)="previewPress.emit()">
+            <ef-icon name="eye" size="sm" />
+          </ef-icon-button>
         }
       </div>
     </header>
@@ -40,5 +35,4 @@ export class EventEditHeader {
 
   readonly backPress = output<void>();
   readonly previewPress = output<void>();
-  readonly morePress = output<void>();
 }
