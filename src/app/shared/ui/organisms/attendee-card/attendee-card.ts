@@ -1,15 +1,13 @@
-import { ChangeDetectionStrategy, Component, input, output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, input } from '@angular/core';
 
 import { EfBadge } from '@shared/ui/atoms/badge/badge';
-import { EfIcon } from '@shared/ui/atoms/icon/icon';
-import { EfIconButton } from '@shared/ui/atoms/icon-button/icon-button';
 import { EfLink } from '@shared/ui/atoms/link/link';
 import type { Attendee } from '@features/events/attendees.model';
 
 @Component({
   selector: 'ef-attendee-card',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [EfBadge, EfLink, EfIcon, EfIconButton],
+  imports: [EfBadge, EfLink],
   template: `
     <article class="rounded-3xl bg-white p-4 shadow-sm ring-1 ring-slate-100">
       <div class="flex items-start gap-3">
@@ -31,9 +29,6 @@ import type { Attendee } from '@features/events/attendees.model';
               <ef-badge [tone]="checkedIn() ? 'checked-in' : 'not-checked-in'">
                 {{ checkedIn() ? 'Checked-in' : 'Not checked-in' }}
               </ef-badge>
-              <ef-icon-button ariaLabel="More actions" (pressed)="morePress.emit(attendee().id)">
-                <ef-icon name="more-horizontal" size="sm" />
-              </ef-icon-button>
             </div>
           </div>
         </div>
@@ -44,8 +39,6 @@ import type { Attendee } from '@features/events/attendees.model';
 export class AttendeeCard {
   readonly attendee = input.required<Attendee>();
   readonly checkedIn = input(false);
-
-  readonly morePress = output<string>();
 
   protected avatarGradient(): string {
     const hue = this.attendee().avatarHue;

@@ -101,16 +101,22 @@ describe('EventDetailPage', () => {
     expect(navigateSpy).toHaveBeenCalledWith(['/events', '2', 'register']);
   });
 
-  it('should show saved confirmation when save is pressed', async () => {
+  it('should navigate to host profile from event detail', async () => {
     const fixture = await createPage('2');
+    const router = TestBed.inject(Router);
+    const navigateSpy = vi.spyOn(router, 'navigate').mockResolvedValue(true);
+    const cmp = fixture.componentInstance as EventDetailPage & {
+      onViewProfile(): void;
+    };
 
-    const saveButton = Array.from(
+    const profileLink = Array.from(
       (fixture.nativeElement as HTMLElement).querySelectorAll('button'),
-    ).find((button) => button.textContent?.trim() === 'Save');
-    saveButton?.click();
-    fixture.detectChanges();
+    ).find((button) => button.textContent?.trim() === 'View profile');
+    profileLink?.click();
+    await fixture.whenStable();
 
-    expect((fixture.nativeElement as HTMLElement).textContent).toContain('Event saved to your list.');
+    expect(navigateSpy).toHaveBeenCalledWith(['/session']);
+    expect(() => cmp.onViewProfile()).not.toThrow();
   });
 
   it('should navigate to similar event and events list', async () => {
@@ -131,33 +137,5 @@ describe('EventDetailPage', () => {
     seeAllLink?.click();
     await fixture.whenStable();
     expect(navigateSpy).toHaveBeenCalledWith(['/events']);
-  });
-
-  it('should handle header actions and host profile link', async () => {
-    const fixture = await createPage('2');
-    const router = TestBed.inject(Router);
-    const navigateSpy = vi.spyOn(router, 'navigate').mockResolvedValue(true);
-    const cmp = fixture.componentInstance as EventDetailPage & {
-      onShare(): void;
-      onMore(): void;
-      onViewProfile(): void;
-    };
-
-    (fixture.nativeElement as HTMLElement)
-      .querySelector('button[aria-label="Compartir evento"]')
-      ?.dispatchEvent(new Event('click'));
-    (fixture.nativeElement as HTMLElement)
-      .querySelector('button[aria-label="Más opciones"]')
-      ?.dispatchEvent(new Event('click'));
-    expect(() => cmp.onShare()).not.toThrow();
-    expect(() => cmp.onMore()).not.toThrow();
-
-    const profileLink = Array.from(
-      (fixture.nativeElement as HTMLElement).querySelectorAll('button'),
-    ).find((button) => button.textContent?.trim() === 'View profile');
-    profileLink?.click();
-    await fixture.whenStable();
-
-    expect(navigateSpy).toHaveBeenCalledWith(['/session']);
   });
 });

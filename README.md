@@ -149,6 +149,7 @@ Tras cambiar estilos o clases Tailwind, reinicia `pnpm start` si no ves los camb
 ## PWA
 
 - Manifest: `public/manifest.webmanifest`
+- Icono de marca: `calendar-brand` (`public/icons/calendar-brand.svg` → PNGs y `favicon.ico` vía `pnpm icons:generate`)
 - Service worker: `ngsw-config.json` (activo en build de producción)
 - Registro en `src/app/app.config.ts`
 

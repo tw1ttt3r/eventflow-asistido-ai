@@ -140,16 +140,70 @@ describe('EventEditPage', () => {
     expect(navigateSpy).toHaveBeenCalledWith(['/events']);
   });
 
-  it('should handle placeholder actions without errors', async () => {
-    const fixture = await createPage('1');
-    const page = fixture.componentInstance as EventEditPage & {
-      onDelete(): void;
-      onMoreOptions(): void;
-      onDescriptionPreview(): void;
-    };
+  it('should allow editing events created by the current user', async () => {
+    await TestBed.configureTestingModule({
+      imports: [EventEditPage],
+      providers: [
+        provideRouter([
+          { path: 'events', component: class {} },
+          { path: 'events/:id', component: class {} },
+        ]),
+        provideActivatedRoute('evt-owned-1'),
+        { provide: AppwriteAuthService, useValue: authMock },
+        EventEditStateService,
+        EventsStateService,
+      ],
+    }).compileComponents();
 
-    expect(() => page.onDelete()).not.toThrow();
-    expect(() => page.onMoreOptions()).not.toThrow();
-    expect(() => page.onDescriptionPreview()).not.toThrow();
+    const eventsState = TestBed.inject(EventsStateService);
+    const editState = TestBed.inject(EventEditStateService);
+    const created = editState.createEvent(
+      'evt-owned-1',
+      {
+        eventId: 'evt-owned-1',
+        title: 'Owned Event',
+        description: 'Created in tests',
+        bannerHue: 120,
+        bannerUrl: null,
+        dateLabel: 'Sep 10, 2026',
+        timeRangeLabel: '4:00 PM – 6:00 PM',
+        status: 'published',
+        location: 'Room C',
+        capacity: 12,
+        spotsLeft: 12,
+        registrationStats: {
+          registered: 0,
+          available: 12,
+          capacity: 12,
+          sparkline: { totalsLine: '0,70 320,70', publishedLine: '0,70 320,70' },
+        },
+        audit: {
+          updatedBy: 'Jane Doe',
+          updatedAtLabel: 'Now',
+          version: 1,
+        },
+      },
+      {
+        title: 'Owned Event',
+        description: 'Created in tests',
+        bannerUrl: null,
+        dateLabel: 'Sep 10, 2026',
+        timeRangeLabel: '4:00 PM – 6:00 PM',
+        status: 'published',
+        location: 'Room C',
+        capacity: 12,
+      },
+    );
+    eventsState.syncFromEdit(created, MOCK_SESSION_USER_ID);
+
+    const fixture = TestBed.createComponent(EventEditPage);
+    fixture.detectChanges();
+    await fixture.whenStable();
+    fixture.detectChanges();
+
+    const compiled = fixture.nativeElement as HTMLElement;
+    expect(compiled.textContent).toContain('Edit Event');
+    expect(compiled.textContent).not.toContain('Evento no disponible');
+    expect(editState.getEditData('evt-owned-1')?.title).toBe('Owned Event');
   });
 });

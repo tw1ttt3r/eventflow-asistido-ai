@@ -17,9 +17,6 @@ import { EfIconButton } from '@shared/ui/atoms/icon-button/icon-button';
       </a>
 
       <div class="flex items-center gap-2">
-        <ef-icon-button ariaLabel="Notifications">
-          <ef-icon name="bell" size="md" />
-        </ef-icon-button>
         <ef-icon-button ariaLabel="Account" routerLink="/session">
           <ef-icon name="user" size="md" />
         </ef-icon-button>

@@ -62,16 +62,6 @@ import { EfButton } from '@shared/ui/atoms/button/button';
               {{ event().actionLabel }}
             </ef-button>
           }
-          @case ('view-summary') {
-            <ef-button
-              variant="soft"
-              size="sm"
-              [fullWidth]="false"
-              (pressed)="viewSummaryPress.emit(event().id)"
-            >
-              {{ event().actionLabel }}
-            </ef-button>
-          }
           @case ('label') {
             <span class="shrink-0 text-xs text-slate-500">{{ event().actionLabel }}</span>
           }
@@ -89,7 +79,6 @@ export class MyEventCard {
   readonly event = input.required<ProfileMyEvent>();
 
   readonly viewTicketPress = output<string>();
-  readonly viewSummaryPress = output<string>();
 
   protected statusLabel(): string {
     return this.event().status === 'registered' ? 'Registered' : 'Attended';

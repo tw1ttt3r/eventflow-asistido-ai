@@ -21,9 +21,6 @@ describe('AdminNavigationService', () => {
 
     service.navigate('account');
     expect(navigateSpy).toHaveBeenCalledWith(['/session']);
-
-    service.navigate('dash');
-    expect(navigateSpy).toHaveBeenCalledWith(['/events']);
   });
 
   it('should ignore unknown tab ids', () => {

@@ -13,7 +13,7 @@ export interface BottomNavItem {
       class="fixed inset-x-0 bottom-0 z-10 border-t border-slate-200 bg-white/95 backdrop-blur"
       aria-label="Main navigation"
     >
-      <div class="mx-auto grid max-w-lg grid-cols-3 px-4 py-3">
+      <div class="mx-auto grid max-w-lg grid-cols-2 px-4 py-3">
         @for (item of items(); track item.id) {
           <button
             type="button"

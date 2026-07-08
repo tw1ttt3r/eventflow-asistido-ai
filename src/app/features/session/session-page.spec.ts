@@ -138,21 +138,20 @@ describe('SessionPage (profile)', () => {
 
     const compiled = fixture.nativeElement as HTMLElement;
     expect(compiled.textContent).toContain('Community Pottery Class');
+    expect(compiled.textContent).toContain('Summary');
     expect(compiled.textContent).toContain('Intro to Python: Mini Lab');
   });
 
-  it('should handle placeholder actions without errors', async () => {
+  it('should handle navigation without errors', async () => {
     const fixture = TestBed.createComponent(SessionPage);
     fixture.detectChanges();
     await fixture.whenStable();
 
     const page = fixture.componentInstance as SessionPage & {
-      onPlaceholder(action: string): void;
       onNavigate(tabId: string): void;
     };
 
     expect(() => page.onNavigate('events')).not.toThrow();
-    expect(() => page.onPlaceholder('View summary')).not.toThrow();
   });
 
   it('should logout and redirect to auth', async () => {

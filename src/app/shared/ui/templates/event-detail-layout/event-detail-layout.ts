@@ -9,11 +9,7 @@ import { EventDetailHeader } from '@shared/ui/organisms/event-detail-header/even
   template: `
     <div class="min-h-screen bg-ef-surface pb-28">
       <div class="mx-auto w-full max-w-lg space-y-4 px-4 py-4">
-        <ef-event-detail-header
-          (backPress)="backPress.emit()"
-          (sharePress)="sharePress.emit()"
-          (morePress)="morePress.emit()"
-        />
+        <ef-event-detail-header (backPress)="backPress.emit()" />
 
         <main class="space-y-4">
           <ng-content />
@@ -24,6 +20,4 @@ import { EventDetailHeader } from '@shared/ui/organisms/event-detail-header/even
 })
 export class EventDetailLayout {
   readonly backPress = output<void>();
-  readonly sharePress = output<void>();
-  readonly morePress = output<void>();
 }
