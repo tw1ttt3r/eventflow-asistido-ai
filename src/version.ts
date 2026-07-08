@@ -1,2 +1,2 @@
 /** Generado por scripts/version-bump.mjs — no editar a mano */
-export const APP_VERSION = '0.21.4';
+export const APP_VERSION = '0.22.0';
