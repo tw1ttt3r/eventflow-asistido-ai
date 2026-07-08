@@ -239,20 +239,24 @@ const STATUS_OPTIONS: SegmentedOption<EventEditStatus>[] = [
 
       @if (saved()) {
         <p class="rounded-2xl bg-emerald-50 px-4 py-3 text-sm font-medium text-emerald-700" role="status">
-          Changes saved locally.
+          {{ createMode() ? 'Event created.' : 'Changes saved locally.' }}
         </p>
       }
 
       <!-- Actions -->
       <div class="space-y-3">
-        <ef-button type="submit" variant="blue" [disabled]="submitting()">Save changes</ef-button>
-        <ef-button type="button" variant="outline" (pressed)="cancelled.emit()">Cancel</ef-button>
-        <ef-button type="button" variant="destructive" (pressed)="deletePress.emit()">
-          <span class="inline-flex items-center justify-center gap-2">
-            <ef-icon name="trash" size="sm" />
-            Delete event
-          </span>
+        <ef-button type="submit" variant="blue" [disabled]="submitting()">
+          {{ createMode() ? 'Create event' : 'Save changes' }}
         </ef-button>
+        <ef-button type="button" variant="outline" (pressed)="cancelled.emit()">Cancel</ef-button>
+        @if (!createMode()) {
+          <ef-button type="button" variant="destructive" (pressed)="deletePress.emit()">
+            <span class="inline-flex items-center justify-center gap-2">
+              <ef-icon name="trash" size="sm" />
+              Delete event
+            </span>
+          </ef-button>
+        }
       </div>
 
       <p class="text-center text-xs leading-relaxed text-slate-400">
@@ -265,6 +269,7 @@ const STATUS_OPTIONS: SegmentedOption<EventEditStatus>[] = [
 export class EventEditForm {
   readonly editData = input.required<EventEditData>();
   readonly submitting = input(false);
+  readonly createMode = input(false);
 
   protected readonly descriptionMax = EVENT_EDIT_DESCRIPTION_MAX;
   protected readonly statusOptions = STATUS_OPTIONS;
