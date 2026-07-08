@@ -7,6 +7,8 @@ import { AdminNavigationService } from '@features/admin/admin-navigation.service
 import { AppwriteAuthService } from '@core/appwrite/appwrite-auth.service';
 import { EventEditStateService } from '@features/events/event-edit-state.service';
 import type { EventEditFormValue } from '@features/events/event-edit.model';
+import { isEventOwnedByUser } from '@features/events/events.model';
+import { EventsStateService } from '@features/events/events-state.service';
 import { isEventEditOwned } from '@mock/event-edit.mock';
 import { EventEditForm } from '@shared/ui/organisms/event-edit-form/event-edit-form';
 import { EventEditHeader } from '@shared/ui/organisms/event-edit-header/event-edit-header';
@@ -48,6 +50,7 @@ export class EventEditPage implements OnInit {
   private readonly auth = inject(AppwriteAuthService);
   private readonly adminNav = inject(AdminNavigationService);
   private readonly editState = inject(EventEditStateService);
+  private readonly eventsState = inject(EventsStateService);
 
   private readonly eventId = toSignal(
     this.route.paramMap.pipe(map((params) => params.get('id') ?? '')),
@@ -66,7 +69,17 @@ export class EventEditPage implements OnInit {
 
   protected readonly canAccess = computed(() => {
     const id = this.eventId();
-    return Boolean(id && isEventEditOwned(id, this.currentUserId()) && this.editData());
+    const userId = this.currentUserId();
+    if (!id || !userId || !this.editData()) {
+      return false;
+    }
+
+    if (isEventEditOwned(id, userId)) {
+      return true;
+    }
+
+    const event = this.eventsState.getEvent(id);
+    return event ? isEventOwnedByUser(event, userId) : false;
   });
 
   ngOnInit(): void {
@@ -95,12 +108,16 @@ export class EventEditPage implements OnInit {
 
   protected onSave(value: EventEditFormValue): void {
     const id = this.eventId();
-    if (!id) {
+    const userId = this.currentUserId();
+    if (!id || !userId) {
       return;
     }
 
     this.saving.set(true);
-    this.editState.updateEdit(id, value);
+    const updated = this.editState.updateEdit(id, value);
+    if (updated) {
+      this.eventsState.syncFromEdit(updated, userId);
+    }
     this.refreshTick.update((tick) => tick + 1);
     this.saving.set(false);
   }

@@ -5,6 +5,7 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { AdminNavigationService } from '@features/admin/admin-navigation.service';
 import { AppwriteAuthService } from '@core/appwrite/appwrite-auth.service';
 import { EventsDashboardPage } from '@features/events/events-dashboard-page';
+import { EventsStateService } from '@features/events/events-state.service';
 import { MOCK_SESSION_USER_ID } from '@mock/events.mock';
 
 type EventsDashboardHarness = EventsDashboardPage & {
@@ -32,8 +33,12 @@ describe('EventsDashboardPage', () => {
     await TestBed.configureTestingModule({
       imports: [EventsDashboardPage],
       providers: [
-        provideRouter([{ path: 'session', component: class {} }]),
+        provideRouter([
+          { path: 'session', component: class {} },
+          { path: 'events/new', component: class {} },
+        ]),
         { provide: AppwriteAuthService, useValue: authMock },
+        EventsStateService,
       ],
     }).compileComponents();
   });
@@ -108,11 +113,24 @@ describe('EventsDashboardPage', () => {
     const fixture = TestBed.createComponent(EventsDashboardPage);
     const page = fixture.componentInstance as EventsDashboardHarness;
 
-    expect(() => page.onCreateEvent()).not.toThrow();
     expect(() => page.onEditEvent('evt-1')).not.toThrow();
     expect(() => page.onViewEvent('evt-1')).not.toThrow();
     expect(() => page.onManageAttendees('evt-1')).not.toThrow();
     expect(() => page.setFilter('invalid')).not.toThrow();
+  });
+
+  it('should navigate to create event page', async () => {
+    const fixture = await renderDashboard();
+    const router = TestBed.inject(Router);
+    const navigateSpy = vi.spyOn(router, 'navigate').mockResolvedValue(true);
+
+    const createButton = Array.from(
+      (fixture.nativeElement as HTMLElement).querySelectorAll('button'),
+    ).find((button) => button.textContent?.includes('Create Event'));
+    createButton?.click();
+    await fixture.whenStable();
+
+    expect(navigateSpy).toHaveBeenCalledWith(['/events', 'new']);
   });
 
   it('should react to filter chip clicks and create event button', async () => {

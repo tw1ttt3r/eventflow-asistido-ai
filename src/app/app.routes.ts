@@ -22,6 +22,12 @@ export const routes: Routes = [
       import('@features/events/events-dashboard-page').then((m) => m.EventsDashboardPage),
   },
   {
+    path: 'events/new',
+    canActivate: [connectivityGuard, authGuard],
+    loadComponent: () =>
+      import('@features/events/event-create-page').then((m) => m.EventCreatePage),
+  },
+  {
     path: 'events/:id/register',
     canActivate: [connectivityGuard, authGuard],
     loadComponent: () =>

@@ -36,4 +36,24 @@ describe('EventEditStateService', () => {
 
     expect(service.getEditData('1')?.title).toBe(base.title);
   });
+
+  it('should create a new event edit record', () => {
+    TestBed.configureTestingModule({});
+    const service = TestBed.inject(EventEditStateService);
+    const draft = MOCK_EVENT_EDIT['1']!;
+
+    const created = service.createEvent('evt-new', draft, {
+      title: 'Brand New Event',
+      description: 'Fresh description',
+      bannerUrl: null,
+      dateLabel: 'Nov 01, 2026',
+      timeRangeLabel: '4:00 PM – 6:00 PM',
+      status: 'draft',
+      location: 'Room B',
+      capacity: 15,
+    });
+
+    expect(created.title).toBe('Brand New Event');
+    expect(service.getEditData('evt-new')?.location).toBe('Room B');
+  });
 });

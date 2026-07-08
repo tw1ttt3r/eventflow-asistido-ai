@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { AppwriteAuthService } from '@core/appwrite/appwrite-auth.service';
 import { AdminNavigationService } from '@features/admin/admin-navigation.service';
 import { filterEvents, isEventOwnedByUser, type EventFilter, type EventItem } from '@features/events/events.model';
-import { MOCK_EVENTS, MOCK_EVENTS_SPARKLINE, MOCK_EVENTS_SUMMARY } from '@mock/events.mock';
+import { EventsStateService } from '@features/events/events-state.service';
 import { AdminLayout } from '@shared/ui/templates/admin-layout/admin-layout';
 import { EventCard } from '@shared/ui/organisms/event-card/event-card';
 import { EventsStatsCard } from '@shared/ui/organisms/events-stats-card/events-stats-card';
@@ -24,10 +24,10 @@ const FILTER_OPTIONS = [
   template: `
     <ef-admin-layout activeNav="events" (navigate)="onNavigate($event)">
       <ef-events-stats-card
-        [total]="summary.total"
-        [published]="summary.published"
-        [publishedPercent]="summary.publishedPercent"
-        [sparkline]="sparkline"
+        [total]="summary().total"
+        [published]="summary().published"
+        [publishedPercent]="summary().publishedPercent"
+        [sparkline]="sparkline()"
       />
 
       <ef-events-toolbar
@@ -65,16 +65,17 @@ export class EventsDashboardPage implements OnInit {
   private readonly adminNav = inject(AdminNavigationService);
   private readonly router = inject(Router);
   private readonly auth = inject(AppwriteAuthService);
+  private readonly eventsState = inject(EventsStateService);
 
-  protected readonly summary = MOCK_EVENTS_SUMMARY;
-  protected readonly sparkline = MOCK_EVENTS_SPARKLINE;
+  protected readonly summary = this.eventsState.summary;
+  protected readonly sparkline = this.eventsState.sparkline;
   protected readonly filterOptions = FILTER_OPTIONS.map((option) => ({ ...option }));
   protected readonly searchQuery = signal('');
   protected readonly activeFilter = signal<EventFilter>('all');
   protected readonly currentUserId = signal<string | null>(null);
 
   protected readonly filteredEvents = computed(() =>
-    filterEvents(MOCK_EVENTS, this.activeFilter(), this.searchQuery()),
+    filterEvents(this.eventsState.events(), this.activeFilter(), this.searchQuery()),
   );
 
   ngOnInit(): void {
@@ -101,7 +102,7 @@ export class EventsDashboardPage implements OnInit {
   }
 
   protected onCreateEvent(): void {
-    // Placeholder: flujo de creación en otro paso
+    void this.router.navigate(['/events', 'new']);
   }
 
   protected onEditEvent(eventId: string): void {

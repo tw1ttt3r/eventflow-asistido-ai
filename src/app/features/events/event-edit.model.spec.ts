@@ -2,7 +2,9 @@ import { describe, expect, it } from 'vitest';
 
 import {
   applyFormToEventEdit,
+  createEventEditDraft,
   eventEditToFormValue,
+  mapEventEditToEventItem,
   validateEventEditForm,
 } from '@features/events/event-edit.model';
 import { MOCK_EVENT_EDIT } from '@mock/event-edit.mock';
@@ -48,5 +50,26 @@ describe('event-edit.model', () => {
     expect(updated.capacity).toBe(50);
     expect(updated.spotsLeft).toBe(22);
     expect(updated.registrationStats.available).toBe(22);
+  });
+
+  it('should build create draft and map to list item', () => {
+    const draft = createEventEditDraft('evt-test', 'Jane Doe');
+    const form = {
+      title: 'New Workshop',
+      description: 'Hands-on session',
+      bannerUrl: null,
+      dateLabel: 'Sep 01, 2026',
+      timeRangeLabel: '6:00 PM – 8:00 PM',
+      status: 'published' as const,
+      location: 'Studio A',
+      capacity: 30,
+    };
+    const created = applyFormToEventEdit(draft, form);
+    const item = mapEventEditToEventItem(created, 'user-1');
+
+    expect(draft.status).toBe('draft');
+    expect(created.title).toBe('New Workshop');
+    expect(item.timeLabel).toBe('6:00 PM');
+    expect(item.venue).toBe('Studio A');
   });
 });
