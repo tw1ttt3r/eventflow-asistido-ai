@@ -2,7 +2,6 @@ import { inject, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 
 const ADMIN_TAB_ROUTES: Record<string, string> = {
-  dash: '/events',
   events: '/events',
   account: '/session',
 };

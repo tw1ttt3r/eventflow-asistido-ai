@@ -108,4 +108,17 @@ describe('EventEditForm', () => {
 
     createObjectURL.mockRestore();
   });
+
+  it('should render create mode actions', async () => {
+    const fixture = TestBed.createComponent(EventEditForm);
+    fixture.componentRef.setInput('editData', MOCK_EVENT_EDIT['1']!);
+    fixture.componentRef.setInput('createMode', true);
+    fixture.detectChanges();
+    await fixture.whenStable();
+    fixture.detectChanges();
+
+    const compiled = fixture.nativeElement as HTMLElement;
+    expect(compiled.textContent).toContain('Create event');
+    expect(compiled.textContent).not.toContain('Delete event');
+  });
 });

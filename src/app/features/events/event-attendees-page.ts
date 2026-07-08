@@ -46,14 +46,11 @@ const FILTER_OPTIONS = [
           [eventTitle]="eventContext.eventTitle"
           [eventDateLabel]="eventContext.eventDateLabel"
           (backPress)="backToEvent()"
-          (filterPress)="onFilterShortcut()"
-          (morePress)="onMore()"
         />
 
         <ef-attendees-search-bar
           [query]="searchQuery()"
           (queryChange)="searchQuery.set($event)"
-          (addPress)="onAddAttendee()"
         />
 
         <ef-attendees-filter-bar
@@ -67,7 +64,6 @@ const FILTER_OPTIONS = [
             <ef-attendee-card
               [attendee]="attendee"
               [checkedIn]="attendee.checkedIn"
-              (morePress)="onAttendeeMore($event)"
             />
           } @empty {
             <p class="rounded-3xl bg-white p-6 text-center text-sm text-slate-500 ring-1 ring-slate-100">
@@ -78,7 +74,6 @@ const FILTER_OPTIONS = [
 
         <ef-attendees-summary-card
           [summary]="summary()"
-          (exportPress)="onExport()"
           (managePress)="onManage()"
         />
       </ef-attendees-layout>
@@ -161,30 +156,10 @@ export class EventAttendeesPage implements OnInit {
     void this.router.navigate(['/events']);
   }
 
-  protected onAddAttendee(): void {
-    // Placeholder: agregar asistente
-  }
-
-  protected onExport(): void {
-    // Placeholder: exportar lista
-  }
-
   protected onManage(): void {
     const id = this.eventId();
     if (id) {
       void this.router.navigate(['/events', id, 'edit']);
     }
-  }
-
-  protected onFilterShortcut(): void {
-    // Placeholder: atajos de filtro
-  }
-
-  protected onMore(): void {
-    // Placeholder: menú de opciones
-  }
-
-  protected onAttendeeMore(_attendeeId: string): void {
-    // Placeholder: acciones por asistente
   }
 }

@@ -44,8 +44,8 @@ export const MOCK_MY_EVENTS: ProfileMyEvent[] = [
     rolePrefix: 'Host',
     roleName: 'ClayWorks Collective',
     roleHighlight: false,
-    actionKind: 'view-summary',
-    actionLabel: 'View Summary',
+    actionKind: 'label',
+    actionLabel: 'Summary',
   },
   {
     id: 'my-att-2',

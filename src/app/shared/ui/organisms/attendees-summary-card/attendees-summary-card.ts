@@ -27,8 +27,7 @@ import type { AttendeesSummary } from '@features/events/attendees.model';
         </div>
       </div>
 
-      <div class="mt-4 grid grid-cols-2 gap-3">
-        <ef-button variant="blue" [fullWidth]="true" (pressed)="exportPress.emit()">Export</ef-button>
+      <div class="mt-4">
         <ef-button variant="soft" [fullWidth]="true" (pressed)="managePress.emit()">Manage</ef-button>
       </div>
     </section>
@@ -37,6 +36,5 @@ import type { AttendeesSummary } from '@features/events/attendees.model';
 export class AttendeesSummaryCard {
   readonly summary = input.required<AttendeesSummary>();
 
-  readonly exportPress = output<void>();
   readonly managePress = output<void>();
 }

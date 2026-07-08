@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, computed, inject, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, inject } from '@angular/core';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { ActivatedRoute, Router } from '@angular/router';
 import { map } from 'rxjs';
@@ -31,11 +31,7 @@ import { EventDetailLayout } from '@shared/ui/templates/event-detail-layout/even
   ],
   template: `
     @if (event(); as currentEvent) {
-      <ef-event-detail-layout
-        (backPress)="backToEvents()"
-        (sharePress)="onShare()"
-        (morePress)="onMore()"
-      >
+      <ef-event-detail-layout (backPress)="backToEvents()">
         <ef-event-detail-hero [event]="currentEvent" />
         <ef-event-availability-card [event]="currentEvent" />
         <ef-event-host-banner [event]="currentEvent" />
@@ -48,19 +44,8 @@ import { EventDetailLayout } from '@shared/ui/templates/event-detail-layout/even
         <ef-event-host-profile-card [host]="currentEvent.host" (viewProfilePress)="onViewProfile()" />
       </ef-event-detail-layout>
 
-      <ef-event-detail-action-bar
-        (savePress)="onSave()"
-        (registerPress)="onRegister(currentEvent.id)"
-      />
+      <ef-event-detail-action-bar (registerPress)="onRegister(currentEvent.id)" />
 
-      @if (saved()) {
-        <p
-          class="fixed bottom-24 inset-x-4 z-30 mx-auto max-w-lg rounded-2xl bg-emerald-50 px-4 py-3 text-center text-sm font-medium text-emerald-700 shadow-sm"
-          role="status"
-        >
-          Event saved to your list.
-        </p>
-      }
     } @else {
       <ef-event-detail-layout (backPress)="backToEvents()">
         <ef-event-unavailable-card (backPress)="backToEvents()" />
@@ -82,8 +67,6 @@ export class EventDetailPage {
     return id ? findEventDetail(id) : undefined;
   });
 
-  protected readonly saved = signal(false);
-
   protected backToEvents(): void {
     void this.router.navigate(['/events']);
   }
@@ -94,18 +77,6 @@ export class EventDetailPage {
 
   protected openEvent(eventId: string): void {
     void this.router.navigate(['/events', eventId]);
-  }
-
-  protected onSave(): void {
-    this.saved.set(true);
-  }
-
-  protected onShare(): void {
-    // Placeholder: compartir evento
-  }
-
-  protected onMore(): void {
-    // Placeholder: menú de opciones
   }
 
   protected onViewProfile(): void {

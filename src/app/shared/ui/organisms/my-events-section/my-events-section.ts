@@ -35,7 +35,6 @@ const MY_EVENTS_TABS: SegmentedOption<MyEventsTab>[] = [
           <ef-my-event-card
             [event]="event"
             (viewTicketPress)="viewTicketPress.emit($event)"
-            (viewSummaryPress)="viewSummaryPress.emit($event)"
           />
         } @empty {
           <p class="rounded-3xl bg-white p-5 text-sm text-slate-500 shadow-sm ring-1 ring-slate-100">
@@ -59,7 +58,6 @@ export class MyEventsSection {
   readonly events = input.required<ProfileMyEvent[]>();
 
   readonly viewTicketPress = output<string>();
-  readonly viewSummaryPress = output<string>();
 
   protected readonly tabOptions = MY_EVENTS_TABS;
   protected readonly activeTab = signal<MyEventsTab>('upcoming');

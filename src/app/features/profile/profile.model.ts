@@ -39,7 +39,7 @@ export type MyEventsTab = 'upcoming' | 'attended';
 
 export type MyEventStatusBadge = 'registered' | 'attended';
 
-export type MyEventActionKind = 'view-ticket' | 'view-summary' | 'label';
+export type MyEventActionKind = 'view-ticket' | 'label';
 
 export interface ProfileMyEvent {
   id: string;

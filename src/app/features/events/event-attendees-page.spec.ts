@@ -135,40 +135,4 @@ describe('EventAttendeesPage', () => {
 
     expect(navigateSpy).toHaveBeenCalledWith(['/events', '1', 'edit']);
   });
-
-  it('should handle toolbar and summary actions', async () => {
-    const fixture = await createPage('1');
-    const cmp = fixture.componentInstance as EventAttendeesPage & {
-      onAddAttendee(): void;
-      onExport(): void;
-      onManage(): void;
-      onFilterShortcut(): void;
-      onMore(): void;
-      onAttendeeMore(id: string): void;
-    };
-
-    expect(() => cmp.onAddAttendee()).not.toThrow();
-    expect(() => cmp.onExport()).not.toThrow();
-    expect(() => cmp.onManage()).not.toThrow();
-    expect(() => cmp.onFilterShortcut()).not.toThrow();
-    expect(() => cmp.onMore()).not.toThrow();
-    expect(() => cmp.onAttendeeMore('a1')).not.toThrow();
-
-    const addButton = (fixture.nativeElement as HTMLElement).querySelector(
-      'button[aria-label="Add attendee"]',
-    ) as HTMLButtonElement;
-    addButton.click();
-
-    const exportButton = Array.from(
-      (fixture.nativeElement as HTMLElement).querySelectorAll('button'),
-    ).find((button) => button.textContent?.trim() === 'Export');
-    exportButton?.click();
-
-    const manageButton = Array.from(
-      (fixture.nativeElement as HTMLElement).querySelectorAll('button'),
-    ).find((button) => button.textContent?.trim() === 'Manage');
-    manageButton?.click();
-
-    expect(fixture.componentInstance).toBeTruthy();
-  });
 });

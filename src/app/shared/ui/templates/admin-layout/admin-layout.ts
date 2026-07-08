@@ -27,7 +27,6 @@ import { BottomNav, type BottomNavItem } from '@shared/ui/organisms/bottom-nav/b
 })
 export class AdminLayout {
   readonly navItems = input<BottomNavItem[]>([
-    { id: 'dash', label: 'Dash' },
     { id: 'events', label: 'Events' },
     { id: 'account', label: 'Account' },
   ]);
