@@ -2978,3 +2978,73 @@ src/assets/illustrations/  → SVG estáticos grandes (auth, empty states) si el
 ---
 
 *Última actualización del archivo: 2026-07-05 09:15:20 CST*
+
+---
+
+## Entrada #094 — Fix descarga ticket PDF en prod
+
+| Campo | Valor |
+|-------|--------|
+| **Fecha de ejecución** | 2026-07-07 |
+| **Hora de ejecución** | 23:02:16 – 23:04:00 CST |
+| **Tiempo total** | ~105 s |
+| **Modelo de agente** | `gpt-5.3-codex` |
+| **Nivel de complejidad** | **Baja** |
+
+### Prompt
+
+> oye en prod intente hacer la descarga del ticket pero el log mando lo siguiente … `TypeError: i.toDataURL is not a function`
+
+### Criterios de complejidad
+
+- 3 archivos (util descarga, tipos qrcode, spec)
+- Bug de interop ESM/CJS en build de producción
+- Sin cambio de arquitectura
+
+### Entregables
+
+- Causa: `import('qrcode')` en prod expone solo `default`; el código llamaba `QRCode.toDataURL` en el namespace
+- `resolveQrcodeModule` / `loadQrcode`: usa `module.default ?? module` antes de invocar `toDataURL`
+- Tipos `qrcode.d.ts` actualizados con `export default`
+- Tests: 198 OK; build prod verificado
+
+### Ajustes requeridos
+
+- [x] Fix interop qrcode en descarga PDF
+- [x] Tests de regresión
+- [ ] Redesplegar en Vercel para validar en prod
+
+---
+
+*Última actualización del archivo: 2026-07-07 23:04:00 CST*
+
+---
+
+## Entrada #095 — Quitar Add to Wallet del ticket
+
+| Campo | Valor |
+|-------|--------|
+| **Fecha de ejecución** | 2026-07-07 |
+| **Hora de ejecución** | 23:37:59 – 23:38:35 CST |
+| **Tiempo total** | ~36 s |
+| **Modelo de agente** | `gpt-5.3-codex` |
+| **Nivel de complejidad** | **Baja** |
+
+### Prompt
+
+> de la vista del ticket elimina el CTA add to wallet no será necesario
+
+### Entregables
+
+- Eliminado botón **Add to Wallet (stub)** y método `downloadWalletPass` de `digital-ticket-page`
+- Vista conserva **Download Ticket**, contacto host y **View event page**
+- Util `downloadWalletPassStub` permanece en util (sin UI); spec de página actualizado
+- 197 tests OK
+
+### Ajustes requeridos
+
+- [x] CTA Wallet eliminado de la vista
+
+---
+
+*Última actualización del archivo: 2026-07-07 23:38:35 CST*
