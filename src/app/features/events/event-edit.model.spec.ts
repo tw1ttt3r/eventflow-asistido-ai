@@ -4,6 +4,7 @@ import {
   applyFormToEventEdit,
   createEventEditDraft,
   eventEditToFormValue,
+  generateEventId,
   mapEventEditToEventItem,
   validateEventEditForm,
 } from '@features/events/event-edit.model';
@@ -71,5 +72,14 @@ describe('event-edit.model', () => {
     expect(created.title).toBe('New Workshop');
     expect(item.timeLabel).toBe('6:00 PM');
     expect(item.venue).toBe('Studio A');
+  });
+
+  it('should generate unique event ids', () => {
+    const first = generateEventId();
+    const second = generateEventId();
+
+    expect(first).toMatch(/^evt-/);
+    expect(second).toMatch(/^evt-/);
+    expect(first).not.toBe(second);
   });
 });

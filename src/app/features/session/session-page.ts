@@ -30,7 +30,6 @@ import { AdminLayout } from '@shared/ui/templates/admin-layout/admin-layout';
       <ef-my-events-section
         [events]="dashboard().myEvents"
         (viewTicketPress)="openTicket($event)"
-        (viewSummaryPress)="onPlaceholder('View summary')"
       />
     </ef-admin-layout>
   `,
@@ -58,10 +57,6 @@ export class SessionPage {
 
   protected openTicket(id: string): void {
     void this.router.navigate(['/session', 'tickets', resolveTicketId(id)]);
-  }
-
-  protected onPlaceholder(_action: string): void {
-    // Placeholder until dedicated mocks/flows arrive
   }
 
   protected async logout(): Promise<void> {

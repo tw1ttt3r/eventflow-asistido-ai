@@ -1,7 +1,7 @@
 {
   "major": 0,
   "minor": 22,
-  "patch": 1,
+  "patch": 2,
   "knownBranches": [
     "tailwind",
     "feat/sonarqube",
@@ -28,15 +28,6 @@
     "feat/refactor-sonar"
   ],
   "history": [
-    {
-      "at": "2026-06-28T23:32:54.101Z",
-      "from": "0.7.18",
-      "to": "0.7.19",
-      "branch": "refactor-custom-paths",
-      "reason": "patch",
-      "detail": "commit en rama (refactor-custom-paths)",
-      "sha": "3de82f6"
-    },
     {
       "at": "2026-06-28T23:56:03.206Z",
       "from": "0.7.19",
@@ -927,6 +918,15 @@
       "reason": "patch",
       "detail": "commit en rama (feat/refactor-sonar)",
       "sha": "b9ede97"
+    },
+    {
+      "at": "2026-07-08T08:28:04.768Z",
+      "from": "0.22.1",
+      "to": "0.22.2",
+      "branch": "feat/refactor-sonar",
+      "reason": "patch",
+      "detail": "commit en rama (feat/refactor-sonar)",
+      "sha": "82a765e"
     }
   ]
 }

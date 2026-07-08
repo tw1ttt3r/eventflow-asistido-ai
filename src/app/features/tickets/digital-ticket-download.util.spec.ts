@@ -1,8 +1,9 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 
 import {
   buildTicketPdfBlob,
-  buildWalletPassStub,
+  downloadBlobFile,
+  downloadTicketPdf,
   resolveQrcodeModule,
 } from '@features/tickets/digital-ticket-download.util';
 import { MOCK_DIGITAL_TICKETS, resolveTicketId } from '@mock/digital-ticket.mock';
@@ -31,14 +32,27 @@ describe('digital-ticket-download.util', () => {
   });
 
   it('should reject qrcode modules without toDataURL', () => {
+    expect(() => resolveQrcodeModule({})).toThrow(TypeError);
     expect(() => resolveQrcodeModule({})).toThrow('qrcode module did not expose toDataURL');
   });
 
-  it('should build wallet pass stub payload', () => {
-    const stub = buildWalletPassStub(ticket);
-    expect(stub['serialNumber']).toBe('EF-4A7C-9B2F');
-    expect(stub['disclaimer']).toContain('Development stub');
-    expect((stub['eventTicket'] as { primaryFields: unknown[] }).primaryFields).toHaveLength(1);
+  it('should download blob files', () => {
+    const clickSpy = vi.spyOn(HTMLAnchorElement.prototype, 'click').mockImplementation(() => {});
+    const blob = new Blob(['pdf'], { type: 'application/pdf' });
+
+    downloadBlobFile('ticket.pdf', blob);
+
+    expect(clickSpy).toHaveBeenCalledTimes(1);
+    clickSpy.mockRestore();
+  });
+
+  it('should download ticket pdf via helper', async () => {
+    const clickSpy = vi.spyOn(HTMLAnchorElement.prototype, 'click').mockImplementation(() => {});
+
+    await downloadTicketPdf(ticket);
+
+    expect(clickSpy).toHaveBeenCalled();
+    clickSpy.mockRestore();
   });
 
   it('should resolve ticket ids from upcoming registration ids', () => {

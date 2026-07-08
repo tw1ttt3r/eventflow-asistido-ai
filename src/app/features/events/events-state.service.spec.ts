@@ -35,4 +35,27 @@ describe('EventsStateService', () => {
     expect(service.events()[0]?.title).toBe('Created Event');
     expect(service.summary().total).toBe(5);
   });
+
+  it('should get event by id and update existing entries on sync', () => {
+    TestBed.configureTestingModule({});
+    const service = TestBed.inject(EventsStateService);
+    const existing = service.getEvent('1');
+    expect(existing?.title).toContain('Hand Lettering');
+
+    const draft = createEventEditDraft('1', 'Jane Doe');
+    const updated = applyFormToEventEdit(draft, {
+      title: 'Updated listing title',
+      description: 'Updated',
+      bannerUrl: null,
+      dateLabel: 'Oct 01, 2026',
+      timeRangeLabel: '5:00 PM – 7:00 PM',
+      status: 'published',
+      location: 'Main Hall',
+      capacity: 25,
+    });
+    service.syncFromEdit(updated, MOCK_SESSION_USER_ID);
+
+    expect(service.getEvent('1')?.title).toBe('Updated listing title');
+    expect(service.events()).toHaveLength(4);
+  });
 });

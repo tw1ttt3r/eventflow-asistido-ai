@@ -13,40 +13,6 @@ const COLORS = {
   white: [255, 255, 255] as const,
 };
 
-export function buildWalletPassStub(ticket: DigitalTicketDetail): Record<string, unknown> {
-  return {
-    formatVersion: 1,
-    passTypeIdentifier: 'pass.com.eventflow.ticket',
-    serialNumber: ticket.ticketCode,
-    teamIdentifier: 'EVENTFLOW-DEV',
-    organizationName: 'EventFlow',
-    description: ticket.eventTitle,
-    logoText: 'EventFlow',
-    disclaimer:
-      'Development stub only. Apple Wallet requires a signed .pkpass from EventFlow servers.',
-    eventTicket: {
-      primaryFields: [{ key: 'event', label: 'Event', value: ticket.eventTitle }],
-      secondaryFields: [
-        { key: 'when', label: 'When', value: ticket.whenLabel },
-        { key: 'where', label: 'Where', value: ticket.whereLabel },
-      ],
-      auxiliaryFields: [
-        { key: 'attendee', label: 'Attendee', value: ticket.attendeeName },
-        { key: 'type', label: 'Ticket', value: ticket.ticketTypeLabel },
-      ],
-      backFields: [
-        { key: 'host', label: 'Host', value: ticket.host.name },
-        { key: 'support', label: 'Support', value: ticket.host.email },
-      ],
-    },
-    barcode: {
-      format: 'PKBarcodeFormatQR',
-      message: ticket.qrSeed,
-      messageEncoding: 'iso-8859-1',
-    },
-  };
-}
-
 export function downloadBlobFile(filename: string, blob: Blob): void {
   const url = URL.createObjectURL(blob);
   const anchor = document.createElement('a');
@@ -55,10 +21,6 @@ export function downloadBlobFile(filename: string, blob: Blob): void {
   anchor.rel = 'noopener';
   anchor.click();
   URL.revokeObjectURL(url);
-}
-
-export function downloadTextFile(filename: string, content: string, mimeType: string): void {
-  downloadBlobFile(filename, new Blob([content], { type: mimeType }));
 }
 
 function writeLabelValue(
@@ -83,30 +45,29 @@ function writeLabelValue(
   return y + 16 + lines.length * 14;
 }
 
-type QrcodeModule = {
-  default?: {
-    toDataURL(text: string, options?: Record<string, unknown>): Promise<string>;
-  };
-  toDataURL?(text: string, options?: Record<string, unknown>): Promise<string>;
+type QrcodeLike = {
+  toDataURL(text: string, options?: Record<string, unknown>): Promise<string>;
 };
 
-export function resolveQrcodeModule(module: QrcodeModule): {
-  toDataURL(text: string, options?: Record<string, unknown>): Promise<string>;
-} {
-  const qrcode = module.default ?? module;
-  const toDataURL = qrcode.toDataURL;
-
-  if (typeof toDataURL !== 'function') {
-    throw new Error('qrcode module did not expose toDataURL');
-  }
-
-  return { toDataURL: toDataURL.bind(qrcode) };
+function isQrcodeLike(value: unknown): value is QrcodeLike {
+  return typeof value === 'object' && value !== null && typeof (value as QrcodeLike).toDataURL === 'function';
 }
 
-async function loadQrcode(): Promise<{
-  toDataURL(text: string, options?: Record<string, unknown>): Promise<string>;
-}> {
-  return resolveQrcodeModule((await import('qrcode')) as QrcodeModule);
+export function resolveQrcodeModule(module: unknown): QrcodeLike {
+  const qrcode =
+    typeof module === 'object' && module !== null && 'default' in module
+      ? (module as { default?: unknown }).default ?? module
+      : module;
+
+  if (!isQrcodeLike(qrcode)) {
+    throw new TypeError('qrcode module did not expose toDataURL');
+  }
+
+  return { toDataURL: qrcode.toDataURL.bind(qrcode) };
+}
+
+async function loadQrcode(): Promise<QrcodeLike> {
+  return resolveQrcodeModule(await import('qrcode'));
 }
 
 export async function buildTicketPdfBlob(ticket: DigitalTicketDetail): Promise<Blob> {
@@ -204,12 +165,4 @@ export async function buildTicketPdfBlob(ticket: DigitalTicketDetail): Promise<B
 export async function downloadTicketPdf(ticket: DigitalTicketDetail): Promise<void> {
   const blob = await buildTicketPdfBlob(ticket);
   downloadBlobFile(`${ticket.ticketCode}.pdf`, blob);
-}
-
-export function downloadWalletPassStub(ticket: DigitalTicketDetail): void {
-  downloadTextFile(
-    `${ticket.ticketCode}.wallet-stub.json`,
-    `${JSON.stringify(buildWalletPassStub(ticket), null, 2)}\n`,
-    'application/json;charset=utf-8',
-  );
 }

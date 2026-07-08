@@ -25,7 +25,6 @@ import { AdminLayout } from '@shared/ui/templates/admin-layout/admin-layout';
         <ef-event-edit-header
           (backPress)="backToEvents()"
           (previewPress)="viewPublicPage()"
-          (morePress)="onMoreOptions()"
         />
 
         <ef-event-edit-form
@@ -33,8 +32,6 @@ import { AdminLayout } from '@shared/ui/templates/admin-layout/admin-layout';
           [submitting]="saving()"
           (submitted)="onSave($event)"
           (cancelled)="backToEvents()"
-          (deletePress)="onDelete()"
-          (previewPress)="onDescriptionPreview()"
         />
       </ef-admin-layout>
     } @else {
@@ -120,17 +117,5 @@ export class EventEditPage implements OnInit {
     }
     this.refreshTick.update((tick) => tick + 1);
     this.saving.set(false);
-  }
-
-  protected onDelete(): void {
-    // Placeholder until delete flow and confirmation modal arrive
-  }
-
-  protected onMoreOptions(): void {
-    // Placeholder until overflow menu mock arrives
-  }
-
-  protected onDescriptionPreview(): void {
-    // Placeholder until markdown preview mock arrives
   }
 }
