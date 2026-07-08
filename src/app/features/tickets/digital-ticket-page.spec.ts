@@ -59,7 +59,7 @@ describe('DigitalTicketPage', () => {
     expect(compiled.textContent).toContain('Ticket ID: EF-4A7C-');
     expect(compiled.textContent).toContain('Download Ticket');
     expect(compiled.textContent).toContain('View event page');
-    expect(compiled.textContent).toContain('Add to Wallet (stub)');
+    expect(compiled.textContent).not.toContain('Add to Wallet');
   });
 
   it('should navigate home when logo is pressed', async () => {
@@ -135,22 +135,5 @@ describe('DigitalTicketPage', () => {
     fixture.detectChanges();
 
     expect((fixture.nativeElement as HTMLElement).textContent).toContain('Ticket PDF downloaded');
-  });
-
-  it('should download wallet pass stub', async () => {
-    const fixture = await createPage('tkt-1');
-    const compiled = fixture.nativeElement as HTMLElement;
-    const clickSpy = vi.spyOn(HTMLAnchorElement.prototype, 'click').mockImplementation(() => {});
-
-    const walletButton = Array.from(compiled.querySelectorAll('button')).find((button) =>
-      button.textContent?.includes('Add to Wallet'),
-    ) as HTMLButtonElement;
-    walletButton.click();
-    fixture.detectChanges();
-
-    expect(clickSpy).toHaveBeenCalled();
-    expect(compiled.textContent).toContain('Wallet stub downloaded');
-
-    clickSpy.mockRestore();
   });
 });

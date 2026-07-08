@@ -83,10 +83,36 @@ function writeLabelValue(
   return y + 16 + lines.length * 14;
 }
 
+type QrcodeModule = {
+  default?: {
+    toDataURL(text: string, options?: Record<string, unknown>): Promise<string>;
+  };
+  toDataURL?(text: string, options?: Record<string, unknown>): Promise<string>;
+};
+
+export function resolveQrcodeModule(module: QrcodeModule): {
+  toDataURL(text: string, options?: Record<string, unknown>): Promise<string>;
+} {
+  const qrcode = module.default ?? module;
+  const toDataURL = qrcode.toDataURL;
+
+  if (typeof toDataURL !== 'function') {
+    throw new Error('qrcode module did not expose toDataURL');
+  }
+
+  return { toDataURL: toDataURL.bind(qrcode) };
+}
+
+async function loadQrcode(): Promise<{
+  toDataURL(text: string, options?: Record<string, unknown>): Promise<string>;
+}> {
+  return resolveQrcodeModule((await import('qrcode')) as QrcodeModule);
+}
+
 export async function buildTicketPdfBlob(ticket: DigitalTicketDetail): Promise<Blob> {
-  const [{ jsPDF }, QRCode] = await Promise.all([import('jspdf'), import('qrcode')]);
+  const [{ jsPDF }, qrcode] = await Promise.all([import('jspdf'), loadQrcode()]);
   const doc = new jsPDF({ unit: 'pt', format: 'a4' });
-  const qrDataUrl = await QRCode.toDataURL(ticket.qrSeed, {
+  const qrDataUrl = await qrcode.toDataURL(ticket.qrSeed, {
     margin: 1,
     width: 220,
     errorCorrectionLevel: 'M',
