@@ -3090,3 +3090,264 @@ src/assets/illustrations/  → SVG estáticos grandes (auth, empty states) si el
 ---
 
 *Última actualización del archivo: 2026-07-08 00:12:20 CST*
+
+---
+
+## Entrada #097 — Sonar digital-ticket-download.util
+
+| Campo | Valor |
+|-------|--------|
+| **Fecha de ejecución** | 2026-07-08 |
+| **Hora de ejecución** | 00:41:00 – 00:42:00 CST |
+| **Tiempo total** | ~60 s |
+| **Modelo de agente** | `gpt-5.3-codex` |
+| **Nivel de complejidad** | **Baja** |
+
+### Prompt
+
+> oye sonar lanzo 2 issues … `TypeError` … `S4325` cast innecesario
+
+### Entregables
+
+- `resolveQrcodeModule` acepta `unknown` con type guard `isQrcodeLike`; eliminado cast `as QrcodeModule`
+- `throw new TypeError(...)` tras comprobación de tipo (S7786)
+- Spec actualizado; 205 tests OK
+
+### Ajustes requeridos
+
+- [x] Issues S7786 y S4325 corregidos
+
+---
+
+*Última actualización del archivo: 2026-07-08 00:42:00 CST*
+
+---
+
+## Entrada #098 — Subir cobertura (new_coverage Sonar)
+
+| Campo | Valor |
+|-------|--------|
+| **Fecha de ejecución** | 2026-07-08 |
+| **Hora de ejecución** | 00:50:00 – 01:07:03 CST |
+| **Tiempo total** | ~1020 s |
+| **Modelo de agente** | `gpt-5.3-codex` |
+| **Nivel de complejidad** | **Media** |
+
+### Prompt
+
+> oye ahora, necesitamos aumentar el coverage ya que actualmente esta en 47.7%
+
+### Criterios de complejidad
+
+- Métrica Sonar `new_coverage` (código nuevo en rama), no cobertura global (~94 %)
+- 15+ archivos de tests + eliminación de componentes huérfanos
+- Impacto en calidad / Quality Gate
+
+### Entregables
+
+- Eliminados organismos/moléculas sin uso (0 %): upcoming/attended/digital-tickets cards, coming-soon, section-header, ticket-row, attended-event-row, count-badge
+- Nuevos specs: `my-event-card`, `my-events-section`, `profile-state.service`, `app.routes`
+- Ampliados: digital-ticket-download, event-edit-page/form, events-state, event-edit.model, session-page
+- **225 tests OK**; cobertura Vitest **97 %** (2482/2562 líneas)
+- Pendiente: `pnpm sonar` en CI para validar `new_coverage` ≥ 80 %
+
+### Ajustes requeridos
+
+- [x] Tests para código nuevo My Events / create event / profile state
+- [x] Limpieza de componentes muertos sin cobertura
+- [ ] Re-scan Sonar para confirmar new_coverage
+
+---
+
+*Última actualización del archivo: 2026-07-08 01:07:03 CST*
+
+---
+
+## Entrada #099 — Limpieza CTAs placeholder
+
+| Campo | Valor |
+|-------|--------|
+| **Fecha de ejecución** | 2026-07-08 |
+| **Hora de ejecución** | 01:29:25 – 01:36:30 CST |
+| **Tiempo total** | ~425 s |
+| **Modelo de agente** | `gpt-5.3-codex` |
+| **Nivel de complejidad** | **Media** |
+
+### Prompt
+
+> oye hablando de limpieza de elementos, hay que eliminar elementos innecesarios, CTA's que esten de placeholders principalmente
+
+### Criterios de complejidad
+
+- 20+ archivos en páginas, organismos, moléculas, mocks y specs
+- Eliminación de CTAs sin flujo real (share, more, save, export, add, delete, preview markdown, view-summary)
+- Sin cambio de arquitectura; impacto en UX de varias vistas
+
+### Entregables
+
+- **Session / My Events:** `View Summary` → label estático; eliminados `onPlaceholder` y `viewSummaryPress`
+- **Event edit:** quitados More, Delete event, Preview descripción e icon-buttons decorativos (cámara, calendario, reloj, mapa); se mantiene Preview del header (navega a vista pública)
+- **Event detail:** quitados Share, More y Save (falso guardado); action bar solo Register
+- **Attendees:** quitados filtro header, more, add, export y more por tarjeta; se mantiene Manage → edit
+- **Tickets:** eliminados `buildWalletPassStub`, `downloadWalletPassStub` y `downloadTextFile` (sin consumidor)
+- **220 tests OK** (`pnpm test`)
+
+### Ajustes requeridos
+
+- [x] CTAs placeholder removidos de templates y handlers
+- [x] Specs actualizados
+- [x] Suite de tests verde
+
+---
+
+*Última actualización del archivo: 2026-07-08 01:36:30 CST*
+
+---
+
+## Entrada #100 — Quitar CTA notificaciones en Events
+
+| Campo | Valor |
+|-------|--------|
+| **Fecha de ejecución** | 2026-07-08 |
+| **Hora de ejecución** | 01:54:26 – 01:54:50 CST |
+| **Tiempo total** | ~24 s |
+| **Modelo de agente** | `gpt-5.3-codex` |
+| **Nivel de complejidad** | **Baja** |
+
+### Prompt
+
+> en la vista events hay un CTA de notificación que no hace nada
+
+### Criterios de complejidad
+
+- 1 archivo (`admin-header.ts`); impacto local en header del `AdminLayout`
+- Sin cambio de arquitectura
+
+### Entregables
+
+- Eliminado botón campana **Notifications** de `ef-admin-header` (sin handler)
+- Se mantiene CTA **Account** → `/session`
+- **220 tests OK** (`pnpm test`)
+
+### Ajustes requeridos
+
+- [x] CTA placeholder removido
+- [x] Suite de tests verde
+
+---
+
+*Última actualización del archivo: 2026-07-08 01:54:50 CST*
+
+---
+
+## Entrada #101 — Quitar tab Dash del footer
+
+| Campo | Valor |
+|-------|--------|
+| **Fecha de ejecución** | 2026-07-08 |
+| **Hora de ejecución** | 01:59:42 – 02:00:35 CST |
+| **Tiempo total** | ~53 s |
+| **Modelo de agente** | `gpt-5.3-codex` |
+| **Nivel de complejidad** | **Baja** |
+
+### Prompt
+
+> igual en events en la barra footer la opciòn Dash no hace nada
+
+### Criterios de complejidad
+
+- 4 archivos (`admin-layout`, `bottom-nav`, `admin-navigation.service` + spec)
+- Tab placeholder sin ruta/vista propia (duplicaba `/events`)
+
+### Entregables
+
+- Eliminada pestaña **Dash** del `ef-bottom-nav` (footer)
+- Footer con 2 columnas: **Events** y **Account**
+- Ruta `dash` removida de `AdminNavigationService`
+- **220 tests OK** (`pnpm test`)
+
+### Ajustes requeridos
+
+- [x] Tab placeholder removida
+- [x] Spec de navegación actualizado
+- [x] Suite de tests verde
+
+---
+
+*Última actualización del archivo: 2026-07-08 02:00:35 CST*
+
+---
+
+## Entrada #102 — Quitar iconos footer en vista ticket
+
+| Campo | Valor |
+|-------|--------|
+| **Fecha de ejecución** | 2026-07-08 |
+| **Hora de ejecución** | 02:04:20 – 02:04:35 CST |
+| **Tiempo total** | ~15 s |
+| **Modelo de agente** | `gpt-5.3-codex` |
+| **Nivel de complejidad** | **Baja** |
+
+### Prompt
+
+> En la vista de ticket en el footer tenemos tres iconos que no hacen nada, quitalos
+
+### Criterios de complejidad
+
+- 1 archivo (`ticket-layout.ts`); decoración sin interacción
+- Impacto visual local en digital ticket
+
+### Entregables
+
+- Eliminados los 3 puntos decorativos del footer en `ef-ticket-layout`
+- Footer simplificado: solo texto «EventFlow · Secure Checkout» centrado
+- **220 tests OK** (`pnpm test`)
+
+### Ajustes requeridos
+
+- [x] Iconos placeholder removidos
+- [x] Suite de tests verde
+
+---
+
+*Última actualización del archivo: 2026-07-08 02:04:35 CST*
+
+---
+
+## Entrada #103 — Icono PWA calendar-brand
+
+| Campo | Valor |
+|-------|--------|
+| **Fecha de ejecución** | 2026-07-08 |
+| **Hora de ejecución** | 02:17:26 – 02:18:10 CST |
+| **Tiempo total** | ~44 s |
+| **Modelo de agente** | `gpt-5.3-codex` |
+| **Nivel de complejidad** | **Media** |
+
+### Prompt
+
+> ahora, esto es mas personalización, el aplicativo debería tener un icono personalizado, no el icono de angular, tenemos un componente llamado calendar-brand, usalo, pero recuerda que ese icono debe servir para todo lo correspondiente a la PWA
+
+### Criterios de complejidad
+
+- SVG fuente, script de generación, 8 PNGs + favicon, `index.html`, `package.json`, README
+- Impacto en instalabilidad PWA y favicon del navegador
+
+### Entregables
+
+- `public/icons/calendar-brand.svg` — mismo diseño que `ef-icon` `calendar-brand` (`#7c3aed` sobre `#020617`)
+- `scripts/generate-pwa-icons.mjs` + `pnpm icons:generate` (sharp, to-ico)
+- Regenerados `public/icons/icon-*.png` y `public/favicon.ico`
+- `index.html`: `theme-color`, `apple-touch-icon`, favicon PNG 192
+- README PWA actualizado
+- **220 tests OK**
+
+### Ajustes requeridos
+
+- [x] Icono de marca en manifest/favicon/PWA
+- [x] Script reproducible para regenerar assets
+- [ ] Validar instalación PWA en build de producción (`pnpm build`)
+
+---
+
+*Última actualización del archivo: 2026-07-08 02:18:10 CST*
