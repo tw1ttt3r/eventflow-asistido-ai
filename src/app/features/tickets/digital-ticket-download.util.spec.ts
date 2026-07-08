@@ -3,6 +3,7 @@ import { describe, expect, it } from 'vitest';
 import {
   buildTicketPdfBlob,
   buildWalletPassStub,
+  resolveQrcodeModule,
 } from '@features/tickets/digital-ticket-download.util';
 import { MOCK_DIGITAL_TICKETS, resolveTicketId } from '@mock/digital-ticket.mock';
 
@@ -18,6 +19,19 @@ describe('digital-ticket-download.util', () => {
 
     const header = new Uint8Array(await blob.arrayBuffer()).slice(0, 4);
     expect(String.fromCharCode(...header)).toBe('%PDF');
+  });
+
+  it('should resolve qrcode default export interop', () => {
+    const toDataURL = async () => 'data:image/png;base64,test';
+    const resolved = resolveQrcodeModule({
+      default: { toDataURL },
+    });
+
+    expect(resolved.toDataURL).toBeTypeOf('function');
+  });
+
+  it('should reject qrcode modules without toDataURL', () => {
+    expect(() => resolveQrcodeModule({})).toThrow('qrcode module did not expose toDataURL');
   });
 
   it('should build wallet pass stub payload', () => {

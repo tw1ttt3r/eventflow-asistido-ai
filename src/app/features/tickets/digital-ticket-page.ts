@@ -6,7 +6,6 @@ import { map } from 'rxjs';
 import { ProfileStateService } from '@features/profile/profile-state.service';
 import {
   downloadTicketPdf,
-  downloadWalletPassStub,
 } from '@features/tickets/digital-ticket-download.util';
 import { buildHostMailto, resolveEventRouteId } from '@features/tickets/digital-ticket.model';
 import { DigitalTicketStateService } from '@features/tickets/digital-ticket-state.service';
@@ -53,14 +52,9 @@ import { TicketLayout } from '@shared/ui/templates/ticket-layout/ticket-layout';
           </p>
         }
 
-        <div class="space-y-3">
-          <ef-button variant="purple" [disabled]="downloading()" (pressed)="downloadTicket()">
-            {{ downloading() ? 'Preparing download…' : 'Download Ticket' }}
-          </ef-button>
-          <ef-button variant="soft" [disabled]="downloading()" (pressed)="downloadWalletPass()">
-            Add to Wallet (stub)
-          </ef-button>
-        </div>
+        <ef-button variant="purple" [disabled]="downloading()" (pressed)="downloadTicket()">
+          {{ downloading() ? 'Preparing download…' : 'Download Ticket' }}
+        </ef-button>
       </ef-ticket-layout>
     } @else {
       <ef-ticket-layout
@@ -129,23 +123,6 @@ export class DigitalTicketPage {
     try {
       await downloadTicketPdf(currentTicket);
       this.downloadMessage.set('Ticket PDF downloaded.');
-    } finally {
-      this.downloading.set(false);
-    }
-  }
-
-  protected downloadWalletPass(): void {
-    const currentTicket = this.ticket();
-    if (!currentTicket) {
-      return;
-    }
-
-    this.downloading.set(true);
-    this.downloadMessage.set(null);
-
-    try {
-      downloadWalletPassStub(currentTicket);
-      this.downloadMessage.set('Wallet stub downloaded. A signed .pkpass will ship with backend integration.');
     } finally {
       this.downloading.set(false);
     }
