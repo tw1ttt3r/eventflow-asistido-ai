@@ -7,6 +7,7 @@ import { of } from 'rxjs';
 import { AppwriteAuthService } from '@core/appwrite/appwrite-auth.service';
 import { EventEditPage } from '@features/events/event-edit-page';
 import { EventEditStateService } from '@features/events/event-edit-state.service';
+import { EventsStateService } from '@features/events/events-state.service';
 import { MOCK_SESSION_USER_ID } from '@mock/events.mock';
 
 function provideActivatedRoute(eventId: string) {
@@ -46,6 +47,7 @@ describe('EventEditPage', () => {
         provideActivatedRoute(eventId),
         { provide: AppwriteAuthService, useValue: authMock },
         EventEditStateService,
+        EventsStateService,
       ],
     }).compileComponents();
 

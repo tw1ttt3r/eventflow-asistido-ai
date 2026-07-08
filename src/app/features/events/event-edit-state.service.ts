@@ -30,6 +30,16 @@ export class EventEditStateService {
     return updated;
   }
 
+  createEvent(
+    eventId: string,
+    draft: EventEditData,
+    value: EventEditFormValue,
+  ): EventEditData {
+    const created = applyFormToEventEdit({ ...draft, eventId }, value);
+    this.editByEventId.update((state) => ({ ...state, [eventId]: created }));
+    return created;
+  }
+
   reset(eventId: string): void {
     this.editByEventId.update((state) => {
       const next = { ...state };

@@ -1,7 +1,7 @@
 {
   "major": 0,
   "minor": 21,
-  "patch": 0,
+  "patch": 1,
   "knownBranches": [
     "tailwind",
     "feat/sonarqube",
@@ -27,15 +27,6 @@
     "feat/create-event"
   ],
   "history": [
-    {
-      "at": "2026-06-28T23:16:18.463Z",
-      "from": "0.7.12",
-      "to": "0.7.13",
-      "branch": "refactor-custom-paths",
-      "reason": "patch",
-      "detail": "commit en rama (refactor-custom-paths)",
-      "sha": "0d78764"
-    },
     {
       "at": "2026-06-28T23:18:05.267Z",
       "from": "0.7.13",
@@ -926,6 +917,15 @@
       "reason": "minor",
       "detail": "nueva rama (feat/create-event)",
       "sha": "e01805f"
+    },
+    {
+      "at": "2026-07-08T06:18:34.469Z",
+      "from": "0.21.0",
+      "to": "0.21.1",
+      "branch": "feat/create-event",
+      "reason": "patch",
+      "detail": "commit en rama (feat/create-event)",
+      "sha": "31d4f2d"
     }
   ]
 }

@@ -1,4 +1,4 @@
-import type { EventsSparkline } from '@features/events/events.model';
+import type { EventItem, EventsSparkline } from '@features/events/events.model';
 
 export type EventEditStatus = 'published' | 'draft' | 'closed';
 
@@ -108,4 +108,62 @@ export function validateEventEditForm(value: EventEditFormValue): string | null 
 
 export function mapEditStatusToListStatus(status: EventEditStatus): 'published' | 'closed' {
   return status === 'closed' ? 'closed' : 'published';
+}
+
+export const EMPTY_EVENT_REGISTRATION_SPARKLINE: EventsSparkline = {
+  totalsLine: '0,70 320,70',
+  publishedLine: '0,70 320,70',
+};
+
+export function extractTimeLabel(timeRangeLabel: string): string {
+  const parts = timeRangeLabel.split(/[–-]/);
+  return parts[0]?.trim() || timeRangeLabel.trim();
+}
+
+export function createEventEditDraft(eventId: string, organizerName: string): EventEditData {
+  return {
+    eventId,
+    title: '',
+    description: '',
+    bannerHue: 270,
+    bannerUrl: null,
+    dateLabel: '',
+    timeRangeLabel: '',
+    status: 'draft',
+    location: '',
+    capacity: 20,
+    spotsLeft: 20,
+    registrationStats: {
+      registered: 0,
+      available: 20,
+      capacity: 20,
+      sparkline: EMPTY_EVENT_REGISTRATION_SPARKLINE,
+    },
+    audit: {
+      updatedBy: organizerName,
+      updatedAtLabel: 'Unsaved draft',
+      version: 1,
+    },
+  };
+}
+
+export function mapEventEditToEventItem(data: EventEditData, createdByUserId: string): EventItem {
+  return {
+    id: data.eventId,
+    title: data.title,
+    dateLabel: data.dateLabel,
+    timeLabel: extractTimeLabel(data.timeRangeLabel),
+    venue: data.location,
+    status: mapEditStatusToListStatus(data.status),
+    ticketsLeft: data.spotsLeft,
+    imageHue: data.bannerHue,
+    createdByUserId,
+  };
+}
+
+let createEventIdCounter = 0;
+
+export function generateEventId(): string {
+  createEventIdCounter += 1;
+  return `evt-${Date.now().toString(36)}-${createEventIdCounter}`;
 }
